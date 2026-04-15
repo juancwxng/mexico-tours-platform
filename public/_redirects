@@ -1,0 +1,14 @@
+# public/_redirects
+# Cloudflare Pages — URL redirects
+# Format: /source  /destination  [status_code]
+#
+# Docs: https://developers.cloudflare.com/pages/configuration/redirects/
+
+# www → apex (also configure in Cloudflare DNS)
+# https://www.costafrancatours.com/*  https://costafrancatours.com/:splat  301
+
+# HTTP → HTTPS (handled automatically by Cloudflare, listed for documentation)
+# http://costafrancatours.com/*  https://costafrancatours.com/:splat  301
+
+# Legacy routes (add as needed)
+# /paseos  /tours?category=paseo  302
