@@ -25,10 +25,13 @@ const lato = Lato({
 function getSiteUrl(): string {
   const url = process.env.NEXT_PUBLIC_SITE_URL;
   if (!url && process.env.NODE_ENV === "production") {
-    throw new Error(
+    // During Cloudflare Pages build, env vars may not be injected yet.
+    // Fall back to a safe placeholder — the actual URL is set at runtime.
+    console.warn(
       "[layout.tsx] NEXT_PUBLIC_SITE_URL is not set. " +
-        "Set it in your deployment environment (e.g. https://costafrancatours.com)."
+        "Set it in your Cloudflare Pages environment variables (e.g. https://costafrancatours.com)."
     );
+    return "https://costafrancatours.com";
   }
   return url ?? "http://localhost:3000";
 }
