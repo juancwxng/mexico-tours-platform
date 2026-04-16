@@ -61,7 +61,7 @@ export default function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="w-11 h-11 -ml-2 text-central-blue"
+                className="w-11 h-11 -ml-2 text-central-blue focus-visible:ring-central-yellow"
                 aria-label={t("nav_menu_open")}
               >
                 <Menu className="h-6 w-6" />
@@ -85,9 +85,14 @@ export default function Navbar() {
               </nav>
               {/* Language toggle inside mobile menu */}
               <div className="mt-8 pt-6 border-t border-gray-100">
+                {/*
+                  FIX: explicit type="button" + focus-visible ring.
+                  min-h-[44px] meets Apple/Google touch-target guidelines.
+                */}
                 <button
+                  type="button"
                   onClick={toggleLang}
-                  className="flex items-center gap-2 text-sm font-bold text-central-blue/60 hover:text-central-blue transition-colors"
+                  className="flex items-center gap-2 text-sm font-bold text-central-blue/60 hover:text-central-blue transition-colors min-h-[44px] px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-central-yellow rounded-lg"
                   aria-label={lang === "es" ? "Switch to English" : "Cambiar a Español"}
                 >
                   <span className={lang === "es" ? "text-central-blue" : "text-central-blue/40"}>ES</span>
@@ -157,10 +162,14 @@ export default function Navbar() {
             </button>
           </form>
 
-          {/* Desktop language toggle */}
+          {/*
+            FIX: Desktop language toggle — enlarged to meet 44px touch-target
+            minimum (Apple HIG / Google Material). Added focus-visible ring.
+          */}
           <button
+            type="button"
             onClick={toggleLang}
-            className="hidden lg:flex items-center gap-1.5 text-xs font-bold border border-central-blue/20 rounded-full px-3 py-1.5 text-central-blue hover:border-central-yellow hover:text-central-yellow transition-colors"
+            className="hidden lg:flex items-center gap-1.5 text-xs font-bold border border-central-blue/20 rounded-full px-4 py-2.5 min-h-[44px] text-central-blue hover:border-central-yellow hover:text-central-yellow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-central-yellow focus-visible:ring-offset-2"
             aria-label={lang === "es" ? "Switch to English" : "Cambiar a Español"}
           >
             <span className={lang === "es" ? "opacity-100" : "opacity-40"}>ES</span>
@@ -196,7 +205,7 @@ export default function Navbar() {
                 type="button"
                 onClick={() => setIsSearchOpen(true)}
                 aria-label={t("nav_search_open")}
-                className="w-11 h-11 flex items-center justify-center text-central-blue hover:text-central-yellow transition-colors rounded-full"
+                className="w-11 h-11 flex items-center justify-center text-central-blue hover:text-central-yellow transition-colors rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-central-yellow"
               >
                 <Search className="w-5 h-5" />
               </button>

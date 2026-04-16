@@ -1,3 +1,4 @@
+// src/components/BookingForm.tsx
 "use client";
 
 /**
@@ -341,8 +342,10 @@ export default function BookingForm({ tourTitle, tourPrice, onSuccess }: Booking
           )}
         </div>
 
-        {/* CTA */}
+        {/* FIX: type="button" prevents Safari iOS from treating this as a form
+            submit, which would trigger a page reload instead of handleSubmit. */}
         <Button
+          type="button"
           onClick={handleSubmit}
           className="w-full h-14 bg-central-blue hover:bg-central-blue/90 text-white
                      font-display font-bold text-base uppercase tracking-wide

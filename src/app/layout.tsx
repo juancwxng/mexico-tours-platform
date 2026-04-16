@@ -129,7 +129,8 @@ export default async function RootLayout({
       </head>
       <body
         className={`${marcellus.variable} ${lato.variable} font-sans antialiased flex flex-col min-h-dvh bg-central-bg text-central-blue`}
-      >
+        suppressHydrationWarning
+       >
         {/* LangProvider wraps everything so Navbar / Footer can call useLang() */}
         <LangProvider initialLang={lang}>
           <Navbar />
