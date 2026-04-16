@@ -17,6 +17,7 @@ import {
   useContext,
   useState,
   useCallback,
+  useMemo,
   type ReactNode,
 } from "react";
 import { useRouter } from "next/navigation";
@@ -57,9 +58,7 @@ export function LangProvider({
     (newLang: Lang) => {
       if (!SUPPORTED_LANGS.includes(newLang)) return;
       setLangState(newLang);
-      // Write a 1-year cookie so the preference persists
       document.cookie = `${LANG_COOKIE}=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
-      // Re-run Server Components so RSC-rendered copy updates
       router.refresh();
     },
     [router]
@@ -69,7 +68,9 @@ export function LangProvider({
     setLang(lang === "es" ? "en" : "es");
   }, [lang, setLang]);
 
-  const t = useCallback(getT(lang), [lang]);
+  // getT(lang) returns a new function reference on every render — wrap it in
+  // useMemo so consumers only re-render when lang actually changes.
+  const t = useMemo(() => getT(lang), [lang]);
 
   return (
     <LangContext.Provider value={{ lang, setLang, toggleLang, t }}>
@@ -78,7 +79,7 @@ export function LangProvider({
   );
 }
 
-// ─── Hook ─────────────────────────────────────────────────────────────────────
+// ─── Hooks ───────────────────────────────────────────────────────────────────
 
 export function useLang(): LangContextValue {
   const ctx = useContext(LangContext);

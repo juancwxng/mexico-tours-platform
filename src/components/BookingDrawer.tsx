@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { X, ChevronUp } from "lucide-react";
 import BookingForm from "@/components/BookingForm";
-import { useT } from "@/context/LangContext";
+import { useLang } from "@/context/LangContext";
 
 interface BookingDrawerProps {
   tourTitle: string;
@@ -11,7 +11,7 @@ interface BookingDrawerProps {
 }
 
 export default function BookingDrawer({ tourTitle, tourPrice }: BookingDrawerProps) {
-  const t = useT();
+  const { t } = useLang();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -74,7 +74,7 @@ export default function BookingDrawer({ tourTitle, tourPrice }: BookingDrawerPro
             <button
               onClick={() => setIsOpen(false)}
               className="absolute right-4 top-4 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100 transition-colors"
-              aria-label="Cerrar"
+              aria-label={t("booking_close")}
             >
               <X className="w-4 h-4" />
             </button>

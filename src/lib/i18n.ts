@@ -87,8 +87,13 @@ const dict = {
     booking_wa_note:    "Serás redirigido a WhatsApp para confirmar con un asesor.",
     booking_no_date:    "Por favor selecciona una fecha.",
     booking_past_date:  "La fecha seleccionada ya pasó.",
-    booking_wa_message: "Hola, me gustaría consultar disponibilidad para:\nTour: {tour}\nFecha: {date}\nAdultos: {adults}\nNiños: {children}\n¿Me pueden ayudar? ¡Gracias!",
+    booking_wa_message: "Hola, me gustaría consultar disponibilidad para:\nTour: {tour}\nFecha: {date}\nAdultos: {adults}\nNiños: {children}\nBebés: {infants}\n¿Me pueden ayudar? ¡Gracias!",
     booking_open:       "Reservar",
+    booking_close:      "Cerrar reserva",
+    booking_per_person: "persona",
+    booking_persons:    "personas",
+    booking_infants:    "Bebés",
+    booking_infants_sub:"0–3 años (gratis)",
 
     // ── Blog ──
     blog_title:         "Blog de Viajes",
@@ -202,8 +207,13 @@ const dict = {
     booking_wa_note:    "You'll be redirected to WhatsApp to confirm with an advisor.",
     booking_no_date:    "Please select a date.",
     booking_past_date:  "The selected date has already passed.",
-    booking_wa_message: "Hi, I'd like to check availability for:\nTour: {tour}\nDate: {date}\nAdults: {adults}\nChildren: {children}\nCan you help me? Thank you!",
+    booking_wa_message: "Hi, I'd like to check availability for:\nTour: {tour}\nDate: {date}\nAdults: {adults}\nChildren: {children}\nInfants: {infants}\nCan you help me? Thank you!",
     booking_open:       "Book Now",
+    booking_close:      "Close booking",
+    booking_per_person: "person",
+    booking_persons:    "guests",
+    booking_infants:    "Infants",
+    booking_infants_sub:"0–3 years (free)",
 
     // ── Blog ──
     blog_title:         "Travel Blog",
