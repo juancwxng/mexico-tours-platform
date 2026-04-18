@@ -31,7 +31,8 @@ export default function BookingDrawer({ tourTitle, tourPrice }: BookingDrawerPro
         child opts back in with pointer-events-auto explicitly.
       */}
       <div className="lg:hidden fixed bottom-0 inset-x-0 z-50 flex flex-col-reverse pb-[env(safe-area-inset-bottom)] pointer-events-none">
-
+ 
+ 
         {/* Sticky bottom bar — always visible */}
         <div className="pointer-events-auto bg-white border-t border-gray-100 px-4 py-3 flex items-center justify-between gap-4 shadow-lg flex-shrink-0">
           <div>
