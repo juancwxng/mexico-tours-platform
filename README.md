@@ -1,6 +1,8 @@
-# Costa Franca Tours
+# Mexico Tours Platform
 
-A modern tourism platform for Mazatlán, rebuilt from a legacy system (formerly Central Tours). This project represents a complete architectural rewrite focused on performance, maintainability, and a clean user experience.
+A modern web platform developed for a Mexican tour agency, rebuilt from a legacy system. This project represents a complete architectural rewrite focused on performance, maintainability, and a clean user experience. 
+
+The application also features a dedicated, SEO-optimized blog section designed to drive organic traffic through structured travel articles and routing.
 
 Developed by Juan Wong.
 
