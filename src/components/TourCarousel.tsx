@@ -43,14 +43,14 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
             aria-label="Imagen anterior"
             className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
           >
-            <ChevronLeft className="w-5 h-5 text-central-blue" />
+            <ChevronLeft className="w-5 h-5 text-navy" />
           </button>
           <button
             onClick={next}
             aria-label="Siguiente imagen"
             className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
           >
-            <ChevronRight className="w-5 h-5 text-central-blue" />
+            <ChevronRight className="w-5 h-5 text-navy" />
           </button>
 
           <div className="absolute bottom-3 inset-x-0 flex justify-center gap-1.5">
