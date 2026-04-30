@@ -98,7 +98,7 @@ export default async function BlogPostPage({
           <div className="mb-8">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-central-blue/70 hover:text-central-blue transition-colors font-medium text-sm"
+              className="inline-flex items-center gap-2 text-navy/70 hover:text-navy transition-colors font-medium text-sm"
             >
               <ArrowLeft className="w-4 h-4" /> {t("blog_back")}
             </Link>
@@ -106,18 +106,18 @@ export default async function BlogPostPage({
 
           <article>
             <header className="text-center mb-10 lg:mb-14 space-y-4">
-              <div className="flex items-center justify-center gap-4 text-sm font-bold uppercase tracking-wider text-central-blue/50">
+              <div className="flex items-center justify-center gap-4 text-sm font-bold uppercase tracking-wider text-navy/50">
                 <span className="flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4 text-central-yellow" />
+                  <Calendar className="w-4 h-4 text-gold" />
                   {formatDate(post.date, lang)}
                 </span>
                 <span className="w-1 h-1 rounded-full bg-gray-300" />
                 <span className="flex items-center gap-1.5">
-                  <User className="w-4 h-4 text-central-yellow" />
+                  <User className="w-4 h-4 text-gold" />
                   {post.author}
                 </span>
               </div>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-central-blue leading-tight">
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-navy leading-tight">
                 {title}
               </h1>
             </header>
@@ -135,7 +135,7 @@ export default async function BlogPostPage({
             </div>
 
             {/* Body */}
-            <div className="prose prose-lg prose-headings:font-display max-w-none leading-loose text-central-blue">
+            <div className="prose prose-lg prose-headings:font-display max-w-none leading-loose text-navy">
               {content.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>
               ))}
