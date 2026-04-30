@@ -106,7 +106,7 @@ function CounterRow({
   return (
     <div className="flex justify-between items-center px-4 py-3 bg-gray-50 rounded-xl border border-gray-100">
       <div>
-        <span className="text-central-blue font-bold block text-sm">{label}</span>
+        <span className="text-navy font-bold block text-sm">{label}</span>
         <span className="text-xs text-gray-400">{sublabel}</span>
       </div>
       <div className="flex items-center gap-2" role="group" aria-labelledby={countId}>
@@ -115,17 +115,17 @@ function CounterRow({
           onClick={onDecrement}
           disabled={value <= min}
           aria-label={`${label} −`}
-          className="w-10 h-10 rounded-xl bg-white border border-gray-200 text-central-blue font-bold text-lg
-                     hover:bg-central-yellow hover:border-central-yellow hover:text-white
+          className="w-10 h-10 rounded-xl bg-white border border-gray-200 text-navy font-bold text-lg
+                     hover:bg-gold hover:border-gold hover:text-white
                      transition-colors flex items-center justify-center
                      disabled:opacity-35 disabled:cursor-not-allowed
-                     disabled:hover:bg-white disabled:hover:border-gray-200 disabled:hover:text-central-blue"
+                     disabled:hover:bg-white disabled:hover:border-gray-200 disabled:hover:text-navy"
         >
           −
         </button>
         <span
           id={countId}
-          className="w-7 text-center text-central-blue font-bold text-base tabular-nums"
+          className="w-7 text-center text-navy font-bold text-base tabular-nums"
           aria-live="polite"
           aria-atomic="true"
         >
@@ -136,11 +136,11 @@ function CounterRow({
           onClick={onIncrement}
           disabled={value >= max}
           aria-label={`${label} +`}
-          className="w-10 h-10 rounded-xl bg-white border border-gray-200 text-central-blue font-bold text-lg
-                     hover:bg-central-yellow hover:border-central-yellow hover:text-white
+          className="w-10 h-10 rounded-xl bg-white border border-gray-200 text-navy font-bold text-lg
+                     hover:bg-gold hover:border-gold hover:text-white
                      transition-colors flex items-center justify-center
                      disabled:opacity-35 disabled:cursor-not-allowed
-                     disabled:hover:bg-white disabled:hover:border-gray-200 disabled:hover:text-central-blue"
+                     disabled:hover:bg-white disabled:hover:border-gray-200 disabled:hover:text-navy"
         >
           +
         </button>
@@ -262,19 +262,19 @@ export default function BookingForm({ tourTitle, tourPrice, onSuccess }: Booking
 
       {/* Header */}
       <div className="text-center mb-6">
-        <h3 className="font-display text-2xl text-central-blue font-bold uppercase">
+        <h3 className="font-display text-2xl text-navy font-bold uppercase">
           {t("booking_title")}
         </h3>
         {tourPrice > 0 && (
           <p className="text-gray-400 text-sm mt-1">
             {t("booking_from")}{" "}
-            <span className="font-bold text-central-blue">
+            <span className="font-bold text-navy">
               ${tourPrice.toLocaleString("es-MX")} {t("tour_mxn")}
             </span>{" "}
             / {t("booking_per_person")}
           </p>
         )}
-        <div className="w-12 h-1 bg-central-yellow mx-auto rounded-full mt-3" />
+        <div className="w-12 h-1 bg-gold mx-auto rounded-full mt-3" />
       </div>
 
       <div className="space-y-3">
@@ -295,15 +295,15 @@ export default function BookingForm({ tourTitle, tourPrice, onSuccess }: Booking
         ))}
 
         {/* Live pax + price summary */}
-        <div className="flex items-center justify-between px-4 py-2.5 bg-central-blue/5 rounded-xl border border-central-blue/10">
-          <span className="flex items-center gap-1.5 text-central-blue/70 text-xs font-bold uppercase tracking-wide">
+        <div className="flex items-center justify-between px-4 py-2.5 bg-navy/5 rounded-xl border border-navy/10">
+          <span className="flex items-center gap-1.5 text-navy/70 text-xs font-bold uppercase tracking-wide">
             <Users className="w-3.5 h-3.5" />
             {totalPax} {t("booking_persons")}
           </span>
           {estimatedPrice > 0 && (
-            <span className="text-central-blue font-bold text-sm">
+            <span className="text-navy font-bold text-sm">
               ≈ ${estimatedPrice.toLocaleString("es-MX")}{" "}
-              <span className="text-xs font-normal text-central-blue/60">{t("tour_mxn")}</span>
+              <span className="text-xs font-normal text-navy/60">{t("tour_mxn")}</span>
             </span>
           )}
         </div>
@@ -312,9 +312,9 @@ export default function BookingForm({ tourTitle, tourPrice, onSuccess }: Booking
         <div>
           <label
             htmlFor={dateInputId}
-            className="flex items-center gap-2 text-central-blue font-bold text-xs uppercase tracking-wider mb-1.5"
+            className="flex items-center gap-2 text-navy font-bold text-xs uppercase tracking-wider mb-1.5"
           >
-            <CalendarIcon className="w-4 h-4 text-central-yellow" />
+            <CalendarIcon className="w-4 h-4 text-gold" />
             {t("booking_date")}
           </label>
           <input
@@ -325,11 +325,11 @@ export default function BookingForm({ tourTitle, tourPrice, onSuccess }: Booking
             onChange={(e) => handleDateChange(e.target.value)}
             aria-describedby={error ? dateErrorId : undefined}
             aria-invalid={error !== null}
-            className={`w-full p-4 rounded-xl border text-central-blue font-bold text-sm
+            className={`w-full p-4 rounded-xl border text-navy font-bold text-sm
                         focus:outline-none focus:ring-2 transition-all bg-white cursor-pointer
                         ${error
                           ? "border-red-300 focus:border-red-400 focus:ring-red-100"
-                          : "border-gray-200 focus:border-central-yellow focus:ring-central-yellow/20"
+                          : "border-gray-200 focus:border-gold focus:ring-gold/20"
                         }`}
           />
           {error === "no_date"   && <FieldError id={dateErrorId} message={t("booking_no_date")}   />}
@@ -347,7 +347,7 @@ export default function BookingForm({ tourTitle, tourPrice, onSuccess }: Booking
         <Button
           type="button"
           onClick={handleSubmit}
-          className="w-full h-14 bg-central-blue hover:bg-central-blue/90 text-white
+          className="w-full h-14 bg-navy hover:bg-navy/90 text-white
                      font-display font-bold text-base uppercase tracking-wide
                      rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
         >
