@@ -1,21 +1,4 @@
-// next.config.ts
 import type { NextConfig } from "next";
-
-/**
- * next.config.ts
- *
- * Security headers are defined here for non-Cloudflare deployments (Hetzner).
- * For Cloudflare Pages, the canonical source of truth is public/_headers —
- * both files should be kept in sync.
- *
- * CSP notes:
- * - 'unsafe-inline' in style-src is required by Tailwind CSS (inline styles).
- * - worker-src 'self' blob: is required for Next.js 15 App Router prefetch worker.
- * - wa.me and api.whatsapp.com are allowed in connect-src for the booking flow.
- * - wss:/ws: in connect-src allows webpack HMR and RSC streaming.
- * - If you add Google Analytics / GTM, add accounts.google.com to connect-src
- *   and https://www.googletagmanager.com to script-src.
- */
 
 // Helper to generate CSP value with 'unsafe-eval' only in development
 const generateCSP = (): string => {
