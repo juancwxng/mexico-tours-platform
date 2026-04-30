@@ -4,7 +4,7 @@ import nextTs from "eslint-config-next/typescript.js";
 
 // eslint-config-next may export a plain object or an array depending on version.
 // Normalise both shapes so defineConfig() receives a flat array of config objects.
-const toArray = (c: unknown) => (Array.isArray(c) ? c : [c]);
+const toArray = (c) => (Array.isArray(c) ? c : [c]);
 
 const eslintConfig = defineConfig([
   ...toArray(nextVitals),
