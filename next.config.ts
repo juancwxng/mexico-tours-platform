@@ -20,7 +20,7 @@ const generateCSP = (): string => {
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self' https://wa.me",
-    ...(isDev ? [] : ["upgrade-insecure-requests"]),
+    ...(process.env.FORCE_HTTPS === "true" ? ["upgrade-insecure-requests"] : []),
   ].join("; ");
 };
 
