@@ -4,6 +4,9 @@ import { cookies } from "next/headers";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
+import WhatsAppPill from "@/components/WhatsAppPill";
+import PageTransition from "@/components/PageTransition";
 import { LangProvider } from "@/context/LangContext";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
 import { safeJsonLd } from "@/lib/utils";
@@ -25,12 +28,6 @@ const lato = Lato({
 function getSiteUrl(): string {
   const url = process.env.NEXT_PUBLIC_SITE_URL;
   if (!url && process.env.NODE_ENV === "production") {
-    // During Cloudflare Pages build, env vars may not be injected yet.
-    // Fall back to a safe placeholder — the actual URL is set at runtime.
-    console.warn(
-      "[layout.tsx] NEXT_PUBLIC_SITE_URL is not set. " +
-        "Set it in your Cloudflare Pages environment variables (e.g. https://costafrancatours.com)."
-    );
     return "https://costafrancatours.com";
   }
   return url ?? "http://localhost:3000";
@@ -60,16 +57,14 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: { card: "summary_large_image" },
-  // Tell search engines the canonical language alternates
   alternates: {
     canonical: baseUrl,
     languages: {
       "es-MX": baseUrl,
-      "en-US": baseUrl, // same URL, lang served via cookie
+      "en-US": baseUrl,
       "x-default": baseUrl,
     },
   },
-  // robots defaults — individual pages override as needed
   robots: {
     index: true,
     follow: true,
@@ -77,7 +72,6 @@ export const metadata: Metadata = {
   },
 };
 
-// Organization JSON-LD — rendered once in <head>
 const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "TravelAgency",
@@ -110,32 +104,35 @@ const orgJsonLd = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  // Read lang preference from cookie on the server so RSC renders correct lang
   const cookieStore = await cookies();
   const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
+  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526690000000";
 
   return (
     <html lang={lang} className="scroll-smooth">
       <head>
-        {/* hreflang alternates for bilingual SEO */}
         <link rel="alternate" hrefLang="es-MX" href={baseUrl} />
         <link rel="alternate" hrefLang="en-US" href={baseUrl} />
         <link rel="alternate" hrefLang="x-default" href={baseUrl} />
-        {/* Organization structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: safeJsonLd(orgJsonLd) }}
         />
       </head>
       <body
-        className={`${marcellus.variable} ${lato.variable} font-sans antialiased flex flex-col min-h-dvh bg-central-bg text-central-blue`}
+        className={`${marcellus.variable} ${lato.variable} font-sans antialiased flex flex-col min-h-dvh bg-pearl text-ink`}
         suppressHydrationWarning
-       >
-        {/* LangProvider wraps everything so Navbar / Footer can call useLang() */}
+      >
         <LangProvider initialLang={lang}>
+          {/* Custom cursor (client) */}
+          <CustomCursor />
+          {/* Page-transition fade (client) */}
+          <PageTransition />
           <Navbar />
           <div className="flex-1 flex flex-col">{children}</div>
           <Footer />
+          {/* Floating WhatsApp */}
+          <WhatsAppPill number={waNumber} />
         </LangProvider>
       </body>
     </html>
