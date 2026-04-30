@@ -43,7 +43,7 @@ export default function ShareButton({ url, title }: ShareButtonProps) {
   return (
     <button
       onClick={handleShare}
-      className="inline-flex items-center gap-2 h-11 px-5 rounded-xl font-bold text-sm border border-gray-200 text-central-blue hover:border-central-blue transition-colors"
+      className="inline-flex items-center gap-2 h-11 px-5 rounded-xl font-bold text-sm border border-gray-200 text-navy hover:border-navy transition-colors"
       aria-live="polite"
     >
       <Share2 className="w-4 h-4" aria-hidden="true" />
