@@ -201,13 +201,13 @@ export default async function PrivacidadPage() {
       .split("\n")
       .map((line, i) => {
         if (line.startsWith("## "))
-          return <h1 key={i} className="font-display text-3xl md:text-4xl font-bold text-central-blue uppercase mb-8">{line.slice(3)}</h1>;
+          return <h1 key={i} className="font-display text-3xl md:text-4xl font-bold text-navy uppercase mb-8">{line.slice(3)}</h1>;
         if (line.startsWith("### "))
-          return <h2 key={i} className="font-display text-xl font-bold text-central-blue mt-10 mb-4">{line.slice(4)}</h2>;
+          return <h2 key={i} className="font-display text-xl font-bold text-navy mt-10 mb-4">{line.slice(4)}</h2>;
         if (line.startsWith("---"))
           return <hr key={i} className="border-gray-100 my-6" />;
         if (line.startsWith("**") && line.endsWith("**") && !line.slice(2, -2).includes("**"))
-          return <p key={i} className="font-bold text-central-blue mt-4">{line.slice(2, -2)}</p>;
+          return <p key={i} className="font-bold text-navy mt-4">{line.slice(2, -2)}</p>;
         if (/^\d+\./.test(line))
           return <li key={i} className="ml-6 text-gray-700 text-sm leading-relaxed list-decimal">{line.replace(/^\d+\.\s*/, "")}</li>;
         if (line.startsWith("- "))
@@ -223,7 +223,7 @@ export default async function PrivacidadPage() {
     const parts = text.split(/(\*\*[^*]+\*\*)/g);
     return parts.map((part, i) =>
       part.startsWith("**") && part.endsWith("**")
-        ? <strong key={i} className="text-central-blue font-bold">{part.slice(2, -2)}</strong>
+        ? <strong key={i} className="text-navy font-bold">{part.slice(2, -2)}</strong>
         : part
     );
   }
@@ -234,7 +234,7 @@ export default async function PrivacidadPage() {
     <main className="pt-16 sm:pt-[4.5rem] lg:pt-20 pb-16 lg:pb-24">
       <Container size="sm">
         <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 lg:p-12">
-          <div className="w-24 h-1.5 bg-central-yellow rounded-full mb-8" />
+          <div className="w-24 h-1.5 bg-gold rounded-full mb-8" />
           <div className="space-y-2">
             {renderContent(content)}
           </div>
