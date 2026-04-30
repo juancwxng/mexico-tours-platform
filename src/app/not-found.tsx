@@ -9,20 +9,18 @@ export default async function NotFound() {
   const t = getT(lang);
 
   return (
-    <main className="pt-16 sm:pt-[4.5rem] lg:pt-20 pb-16 flex-1 flex items-center">
+    <main className="pt-16 sm:pt-[4.5rem] lg:pt-20 pb-16 flex-1 flex items-center bg-pearl">
       <Container>
-        <div className="text-center space-y-6 py-24">
-          <p className="font-display text-8xl font-bold text-central-yellow">404</p>
-          <h1 className="font-display text-3xl font-bold text-central-blue uppercase">
+        <div className="text-center space-y-7 py-24">
+          <p className="font-display text-[8rem] leading-none text-shimmer select-none">404</p>
+          <h1 className="font-display text-3xl md:text-4xl text-navy">
             {t("not_found_title")}
           </h1>
-          <p className="text-gray-500 max-w-md mx-auto">
+          <hr className="divider-gold max-w-16 mx-auto" />
+          <p className="text-ink-muted max-w-md mx-auto text-lg leading-relaxed">
             {t("not_found_sub")}
           </p>
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 bg-central-blue text-white font-bold px-6 py-3 rounded-xl hover:bg-central-blue/90 transition-colors"
-          >
+          <Link href="/" className="btn-gold inline-flex mt-2">
             {t("not_found_back")}
           </Link>
         </div>
