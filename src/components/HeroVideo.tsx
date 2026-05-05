@@ -1,7 +1,3 @@
-/**
- * HeroVideo – Server Component
- * Reads lang cookie for SSR-correct headline. No client-side flash.
- */
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
@@ -16,7 +12,10 @@ export default async function HeroVideo() {
     <div className="absolute inset-0 w-full h-full">
       {/* Background video */}
       <video
-        autoPlay muted loop playsInline
+        autoPlay
+        muted
+        loop
+        playsInline
         className="absolute inset-0 w-full h-full object-cover"
         poster="/images/hero-poster.webp"
       >
@@ -49,7 +48,6 @@ export default async function HeroVideo() {
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-end h-full pb-20 lg:pb-28 text-white text-center px-6">
-
         {/* Pre-heading badge */}
         <div className="flex items-center gap-2 mb-4 animate-fade-up">
           <div className="h-px w-12 bg-gold/60" />
@@ -75,7 +73,11 @@ export default async function HeroVideo() {
           <Link href="/tours" className="btn-gold text-sm">
             {t("home_hero_cta")}
           </Link>
-          <Link href="/contact" className="btn-ghost text-sm" style={{ borderColor: "rgba(255,255,255,0.4)", color: "white" }}>
+          <Link
+            href="/contact"
+            className="btn-ghost text-sm"
+            style={{ borderColor: "rgba(255,255,255,0.4)", color: "white" }}
+          >
             {lang === "en" ? "Contact Us" : "Contáctanos"}
           </Link>
         </div>
@@ -83,10 +85,19 @@ export default async function HeroVideo() {
         {/* Trust signals strip */}
         <div className="flex items-center gap-5 mt-10 animate-fade-up delay-400">
           {[
-            { icon: Star, label: lang === "en" ? "Top-rated" : "Mejor valorado" },
-            { icon: Waves, label: lang === "en" ? "Pacific Coast" : "Costa Pacífico" },
+            {
+              icon: Star,
+              label: lang === "en" ? "Top-rated" : "Mejor valorado",
+            },
+            {
+              icon: Waves,
+              label: lang === "en" ? "Pacific Coast" : "Costa Pacífico",
+            },
           ].map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-1.5 text-white/70 text-xs font-sans font-bold tracking-wide">
+            <div
+              key={label}
+              className="flex items-center gap-1.5 text-white/70 text-xs font-sans font-bold tracking-wide"
+            >
               <Icon className="w-3.5 h-3.5 text-gold/80" />
               {label}
             </div>
