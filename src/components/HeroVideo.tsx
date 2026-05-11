@@ -11,15 +11,19 @@ export default async function HeroVideo() {
   return (
     <div className="absolute inset-0 w-full h-full">
       {/* Background video */}
-
       <video
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        className="absolute inset-0 w-full h-full object-cover"
         poster="/videos/hero-poster.webp"
+        className="absolute inset-0 h-full w-full object-cover bg-no-repeat sm:bg-none"
+        style={{
+          backgroundImage: "url('/videos/hero-mobile-poster.webp')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
         {/* Desktop */}
         <source
