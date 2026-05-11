@@ -11,15 +11,39 @@ export default async function HeroVideo() {
   return (
     <div className="absolute inset-0 w-full h-full">
       {/* Background video */}
+
       <video
         autoPlay
         muted
         loop
         playsInline
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover"
-        poster="/images/hero-poster.webp"
+        poster="/videos/hero-poster.webp"
       >
-        <source src="/videos/hero.mp4" type="video/mp4" />
+        {/* Desktop */}
+        <source
+          media="(min-width: 640px)"
+          src="/videos/hero.webm"
+          type="video/webm"
+        />
+        <source
+          media="(min-width: 640px)"
+          src="/videos/hero.mp4"
+          type="video/mp4"
+        />
+
+        {/* Mobile */}
+        <source
+          media="(max-width: 639px)"
+          src="/videos/hero-mobile.webm"
+          type="video/webm"
+        />
+        <source
+          media="(max-width: 639px)"
+          src="/videos/hero-mobile.mp4"
+          type="video/mp4"
+        />
       </video>
 
       {/* Multi-layer gradient for cinematic depth */}
