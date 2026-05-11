@@ -2,6 +2,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
 import { Waves, Star } from "lucide-react";
+import VideoBackground from "./VideoBackground";
 
 export default async function HeroVideo() {
   const cookieStore = await cookies();
@@ -11,44 +12,7 @@ export default async function HeroVideo() {
   return (
     <div className="absolute inset-0 w-full h-full">
       {/* Background video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        poster="/videos/hero-poster.webp"
-        className="absolute inset-0 h-full w-full object-cover bg-no-repeat sm:bg-none"
-        style={{
-          backgroundImage: "url('/videos/hero-mobile-poster.webp')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        {/* Desktop */}
-        <source
-          media="(min-width: 640px)"
-          src="/videos/hero.webm"
-          type="video/webm"
-        />
-        <source
-          media="(min-width: 640px)"
-          src="/videos/hero.mp4"
-          type="video/mp4"
-        />
-
-        {/* Mobile */}
-        <source
-          media="(max-width: 639px)"
-          src="/videos/hero-mobile.webm"
-          type="video/webm"
-        />
-        <source
-          media="(max-width: 639px)"
-          src="/videos/hero-mobile.mp4"
-          type="video/mp4"
-        />
-      </video>
+      <VideoBackground />
 
       {/* Multi-layer gradient for cinematic depth */}
       <div
