@@ -1,6 +1,7 @@
 export interface PriceItem {
   label: string;
-  price: number; // 0 = "Cotizar"
+  labelEn?: string;
+  price: number;
 }
 
 export interface Tour {
@@ -56,9 +57,9 @@ export const tours: Tour[] = [
     schedule: "Lun–Dom: 10:00 AM, 12:00 PM, 2:00 PM",
     scheduleEn: "Mon–Sun: 10:00 AM, 12:00 PM, 2:00 PM",
     priceList: [
-      { label: "Adulto (11+)", price: 680 },
-      { label: "Niño (5-10)", price: 350 },
-      { label: "Infante (0-4)", price: 0 },
+      { label: "Adulto (11+)", labelEn: "Adult (11+)", price: 680 },
+      { label: "Niño (5-10)", labelEn: "Child (5-10)", price: 350 },
+      { label: "Infante (0-4)", labelEn: "Infant (0-4)", price: 0 },
     ],
   },
 
@@ -93,9 +94,9 @@ export const tours: Tour[] = [
     schedule: "Dic–Mar: 9:00 AM",
     scheduleEn: "Dec-Mar: 9:00 AM",
     priceList: [
-      { label: "Adulto (13+)", price: 1500 },
-      { label: "Niño (4-12)", price: 1000 },
-      { label: "Infante (0-3)", price: 0 },
+      { label: "Adulto (13+)", labelEn: "Adult (13+)", price: 1500 },
+      { label: "Niño (4-12)", labelEn: "Child (4-12)", price: 1000 },
+      { label: "Infante (0-3)", labelEn: "Infant (0-3)", price: 0 },
     ],
   },
 
@@ -132,9 +133,9 @@ export const tours: Tour[] = [
     scheduleEn:
       "Mon–Sun: 9:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 1:00 PM, 2:00 PM",
     priceList: [
-      { label: "Adulto (11+)", price: 2400 },
-      { label: "Niño (4-10)", price: 1600 },
-      { label: "Infante (0-3)", price: 0 },
+      { label: "Adulto (11+)", labelEn: "Adult (11+)", price: 2400 },
+      { label: "Niño (4-10)", labelEn: "Child (4-10)", price: 1600 },
+      { label: "Infante (0-3)", labelEn: "Infant (0-3)", price: 0 },
     ],
   },
 
@@ -167,9 +168,9 @@ export const tours: Tour[] = [
     schedule: "Lun–Sáb: 9:00 AM, 11:00 AM, 1:00 PM",
     scheduleEn: "Mon–Sat: 9:00 AM, 11:00 AM, 1:00 PM",
     priceList: [
-      { label: "Adulto (13+)", price: 800 },
-      { label: "Niño (4-12)", price: 500 },
-      { label: "Infante (0-3)", price: 0 },
+      { label: "Adulto (13+)", labelEn: "Adult (13+)", price: 800 },
+      { label: "Niño (4-12)", labelEn: "Child (4-12)", price: 500 },
+      { label: "Infante (0-3)", labelEn: "Infant (0-3)", price: 0 },
     ],
   },
 
@@ -197,7 +198,8 @@ export const tours: Tour[] = [
     scheduleEn: "Mon–Sun: 9:00 AM, 11:00 AM, 1:00 PM",
     priceList: [
       {
-        label: "Precio variable (consultar) / Variable (please inquire)",
+        label: "Precio variable (consultar)",
+        labelEn: "Variable (please inquire)",
         price: 0,
       },
     ],

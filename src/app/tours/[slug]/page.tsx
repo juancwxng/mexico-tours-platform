@@ -173,8 +173,11 @@ export default async function TourDetailPage({
                         className="bg-white/8 p-5 rounded-xl border border-white/10 hover:border-gold/30 transition-colors"
                       >
                         <h3 className="font-bold text-white/60 text-xs uppercase tracking-wider mb-2">
-                          {item.label}
+                          {lang === "en"
+                            ? (item.labelEn ?? item.label)
+                            : item.label}
                         </h3>
+
                         <p className="font-display text-3xl text-gold leading-none">
                           {item.price > 0
                             ? `$${item.price.toLocaleString("es-MX")}`
