@@ -64,9 +64,15 @@ export default async function TourDetailPage({
   const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
   const t = getT(lang);
 
-  const title       = lang === "en" ? (tour.titleEn       ?? tour.title)       : tour.title;
-  const description = lang === "en" ? (tour.descriptionEn ?? tour.description) : tour.description;
-  const includes    = lang === "en" ? (tour.includesEn    ?? tour.includes)    : tour.includes;
+  const title = lang === "en" ? (tour.titleEn ?? tour.title) : tour.title;
+  const description =
+    lang === "en" ? (tour.descriptionEn ?? tour.description) : tour.description;
+  const includes =
+    lang === "en" ? (tour.includesEn ?? tour.includes) : tour.includes;
+  const schedule =
+    lang === "en" ? (tour.scheduleEn ?? tour.schedule) : tour.schedule;
+  const duration =
+    lang === "en" ? (tour.durationEn ?? tour.duration) : tour.duration;
 
   const images = getTourImages(tour.slug, tour.imageCount);
 
@@ -95,12 +101,14 @@ export default async function TourDetailPage({
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <main className="pt-16 sm:pt-[4.5rem] lg:pt-20 pb-32 lg:pb-20">
-
         {/* Breadcrumb + back */}
         <div className="bg-pearl-warm border-b border-gold/12 py-3">
           <Container>
             <div className="flex items-center gap-2 text-xs text-ink-muted font-bold uppercase tracking-wider">
-              <Link href="/tours" className="inline-flex items-center gap-1.5 hover:text-gold transition-colors">
+              <Link
+                href="/tours"
+                className="inline-flex items-center gap-1.5 hover:text-gold transition-colors"
+              >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 {t("tour_back")}
               </Link>
@@ -112,7 +120,6 @@ export default async function TourDetailPage({
 
         <Container className="mt-10 lg:mt-14">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px] gap-8 lg:gap-14 xl:gap-16 items-start">
-
             {/* ── Content column ── */}
             <div className="space-y-8 lg:space-y-10 order-2 lg:order-1">
               <div className="space-y-5">
@@ -123,11 +130,11 @@ export default async function TourDetailPage({
                 <div className="flex flex-wrap gap-2.5">
                   <div className="flex items-center gap-2 bg-pearl-warm border border-gold/20 px-4 py-2 rounded-full text-sm font-bold text-navy">
                     <Clock className="w-3.5 h-3.5 text-gold" />
-                    {tour.duration}
+                    {duration}
                   </div>
                   <div className="flex items-center gap-2 bg-pearl-warm border border-gold/20 px-4 py-2 rounded-full text-sm font-bold text-navy">
                     <CalendarCheck className="w-3.5 h-3.5 text-teal" />
-                    {tour.schedule}
+                    {schedule}
                   </div>
                 </div>
               </div>
@@ -161,7 +168,10 @@ export default async function TourDetailPage({
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {tour.priceList.map((item, i) => (
-                      <div key={i} className="bg-white/8 p-5 rounded-xl border border-white/10 hover:border-gold/30 transition-colors">
+                      <div
+                        key={i}
+                        className="bg-white/8 p-5 rounded-xl border border-white/10 hover:border-gold/30 transition-colors"
+                      >
                         <h3 className="font-bold text-white/60 text-xs uppercase tracking-wider mb-2">
                           {item.label}
                         </h3>
@@ -191,7 +201,6 @@ export default async function TourDetailPage({
                 <BookingForm tourTitle={tour.title} tourPrice={tour.price} />
               </div>
             </div>
-
           </div>
         </Container>
 

@@ -16,6 +16,7 @@ export interface Tour {
   includes: string[];
   includesEn?: string[];
   duration: string;
+  durationEn?: string;
   schedule: string;
   scheduleEn?: string;
   priceList: PriceItem[];
@@ -51,6 +52,7 @@ export const tours: Tour[] = [
       "2 activities to choose from: banana boat ride or horseback riding (children 5-10: 1 activity)",
     ],
     duration: "~5 Horas",
+    durationEn: "~5 Hours",
     schedule: "Lun–Dom: 10:00 AM, 12:00 PM, 2:00 PM",
     scheduleEn: "Mon–Sun: 10:00 AM, 12:00 PM, 2:00 PM",
     priceList: [
@@ -87,6 +89,7 @@ export const tours: Tour[] = [
       "Box lunch (ham & cheese sandwich, cookie, chips)",
     ],
     duration: "~3 Horas",
+    durationEn: "~3 Hours",
     schedule: "Dic–Mar: 9:00 AM",
     scheduleEn: "Dec-Mar: 9:00 AM",
     priceList: [
@@ -123,6 +126,7 @@ export const tours: Tour[] = [
       "Time to enjoy the ranch",
     ],
     duration: "~4 Horas",
+    durationEn: "~4 Hours",
     schedule:
       "Lun–Dom: 9:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 1:00 PM, 2:00 PM",
     scheduleEn:
@@ -159,6 +163,7 @@ export const tours: Tour[] = [
       "Refreshing drink (agua fresca or beer)",
     ],
     duration: "3 Horas",
+    durationEn: "3 Hours",
     schedule: "Lun–Sáb: 9:00 AM, 11:00 AM, 1:00 PM",
     scheduleEn: "Mon–Sat: 9:00 AM, 11:00 AM, 1:00 PM",
     priceList: [
@@ -187,9 +192,15 @@ export const tours: Tour[] = [
       "25-minute flight over Mazatlán's most iconic sights: Stone Island, the Fishing Fleet, Historic Downtown, Olas Altas, the Malecón, Golden Zone, Marina, Cerritos, the Three Islands & the Mazatlán Stadium",
     ],
     duration: "~1 Hora",
+    durationEn: "~2 Hour",
     schedule: "Lun–Dom: 9:00 AM – 5:00 PM",
-    scheduleEn: "Mon–Sun: 9:00 AM – 5:00 PM",
-    priceList: [{ label: "Precio variable (consultar)", price: 0 }],
+    scheduleEn: "Mon–Sun: 9:00 AM, 11:00 AM, 1:00 PM",
+    priceList: [
+      {
+        label: "Precio variable (consultar) / Variable (please inquire)",
+        price: 0,
+      },
+    ],
   },
 ];
 
