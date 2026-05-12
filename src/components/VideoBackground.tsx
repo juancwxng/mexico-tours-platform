@@ -23,14 +23,9 @@ export default function VideoBackground() {
       loop
       playsInline
       preload="auto"
-      poster="/videos/hero-poster.webp"
-      className="absolute inset-0 h-full w-full object-cover bg-no-repeat sm:bg-none"
-      style={{
-        backgroundImage: "url('/videos/hero-mobile-poster.webp')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="absolute inset-0 h-full w-full object-cover bg-no-repeat bg-cover bg-center bg-[url('/videos/hero-mobile-poster.webp')] sm:bg-[url('/videos/hero-poster.webp')]"
     >
+      {/* Desktop Sources */}
       <source
         media="(min-width: 640px)"
         src="/videos/hero.webm"
@@ -41,6 +36,8 @@ export default function VideoBackground() {
         src="/videos/hero.mp4"
         type="video/mp4"
       />
+
+      {/* Mobile Sources */}
       <source
         media="(max-width: 639px)"
         src="/videos/hero-mobile.webm"
