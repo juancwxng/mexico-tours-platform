@@ -17,6 +17,7 @@ export interface Tour {
   includesEn?: string[];
   duration: string;
   schedule: string;
+  scheduleEn?: string;
   priceList: PriceItem[];
 }
 
@@ -51,6 +52,7 @@ export const tours: Tour[] = [
     ],
     duration: "~5 Horas",
     schedule: "Lun–Dom: 10:00 AM, 12:00 PM, 2:00 PM",
+    scheduleEn: "Mon–Sun: 10:00 AM, 12:00 PM, 2:00 PM",
     priceList: [
       { label: "Adulto (11+)", price: 680 },
       { label: "Niño (5-10)", price: 350 },
@@ -86,6 +88,7 @@ export const tours: Tour[] = [
     ],
     duration: "~3 Horas",
     schedule: "Dic–Mar: 9:00 AM",
+    scheduleEn: "Dec-Mar: 9:00 AM",
     priceList: [
       { label: "Adulto (13+)", price: 1500 },
       { label: "Niño (4-12)", price: 1000 },
@@ -122,6 +125,8 @@ export const tours: Tour[] = [
     duration: "~4 Horas",
     schedule:
       "Lun–Dom: 9:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 1:00 PM, 2:00 PM",
+    scheduleEn:
+      "Mon–Sun: 9:00 AM, 10:00 AM, 11:00 AM, 12:00 PM, 1:00 PM, 2:00 PM",
     priceList: [
       { label: "Adulto (11+)", price: 2400 },
       { label: "Niño (4-10)", price: 1600 },
@@ -155,11 +160,36 @@ export const tours: Tour[] = [
     ],
     duration: "3 Horas",
     schedule: "Lun–Sáb: 9:00 AM, 11:00 AM, 1:00 PM",
+    scheduleEn: "Mon–Sat: 9:00 AM, 11:00 AM, 1:00 PM",
     priceList: [
       { label: "Adulto (13+)", price: 800 },
       { label: "Niño (4-12)", price: 500 },
       { label: "Infante (0-3)", price: 0 },
     ],
+  },
+
+  {
+    id: "5",
+    slug: "tour-helicoptero-mazatlan",
+    title: "Tour en Helicóptero",
+    titleEn: "Helicopter Tour",
+    category: "aereo",
+    price: 0,
+    description:
+      "Sobrevuela Mazatlán y disfruta de vistas aéreas impresionantes que pocos llegan a experimentar. Vuelo de 25 minutos sobre Isla de la Piedra, la Flota Pesquera, Centro Histórico, Olas Altas, el Malecón, Zona Dorada, Marina, Cerritos, Las Tres Islas y el Estadio de Mazatlán.\n\nPrecio: Varía mensualmente (confirme la tarifa actual).\nCapacidad máxima: 3 personas.\nRestricciones: No disponible para menores de 8 años. Peso máximo por pasajero: 120 kg (264 lbs).",
+    descriptionEn:
+      "Soar above Mazatlán for breathtaking aerial views few ever get to experience. A 25-minute flight over Stone Island, the Fishing Fleet, Historic Downtown, Olas Altas, the Malecón, Golden Zone, Marina, Cerritos, the Three Islands & the Mazatlán Stadium.\n\nPrice: Varies monthly (please confirm current rate).\nMaximum capacity: 3 people.\nRestrictions: Not available for children under 8 years old. Maximum weight per passenger: 120 kg (264 lbs).",
+    imageCount: 0,
+    includes: [
+      "Vuelo de 25 minutos sobre los sitios más emblemáticos de Mazatlán: Isla de la Piedra, Flota Pesquera, Centro Histórico, Olas Altas, Malecón, Zona Dorada, Marina, Cerritos, Las Tres Islas y el Estadio",
+    ],
+    includesEn: [
+      "25-minute flight over Mazatlán's most iconic sights: Stone Island, the Fishing Fleet, Historic Downtown, Olas Altas, the Malecón, Golden Zone, Marina, Cerritos, the Three Islands & the Mazatlán Stadium",
+    ],
+    duration: "~1 Hora",
+    schedule: "Lun–Dom: 9:00 AM – 5:00 PM",
+    scheduleEn: "Mon–Sun: 9:00 AM – 5:00 PM",
+    priceList: [{ label: "Precio variable (consultar)", price: 0 }],
   },
 ];
 

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, ArrowRight, Clock } from "lucide-react";
+import { MapPin, ArrowRight, Clock, Calendar } from "lucide-react";
 import { useState } from "react";
 import type { Tour } from "@/lib/tours";
 import { useT } from "@/context/LangContext";
@@ -14,19 +14,27 @@ interface TourCardProps {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  paseo:    "bg-teal/10 text-teal-dark",
+  paseo: "bg-teal/10 text-teal-dark",
   aventura: "bg-orange-100 text-orange-700",
   cultural: "bg-purple-100 text-purple-700",
-  aereo:    "bg-sky-100 text-sky-700",
+  aereo: "bg-sky-100 text-sky-700",
 };
 const CATEGORY_LABELS: Record<string, { es: string; en: string }> = {
-  paseo:    { es: "Paseo", en: "Maritime" },
+  paseo: { es: "Paseo", en: "Maritime" },
   aventura: { es: "Aventura", en: "Adventure" },
   cultural: { es: "Cultural", en: "Cultural" },
-  aereo:    { es: "Aéreo", en: "Aerial" },
+  aereo: { es: "Aéreo", en: "Aerial" },
 };
 
-function ImageWithFallback({ src, alt, priority }: { src: string; alt: string; priority: boolean }) {
+function ImageWithFallback({
+  src,
+  alt,
+  priority,
+}: {
+  src: string;
+  alt: string;
+  priority: boolean;
+}) {
   const [imgSrc, setImgSrc] = useState(src);
   return (
     <Image
@@ -45,8 +53,11 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
   const t = useT();
   const { lang } = useLang();
 
-  const title       = lang === "en" ? (tour.titleEn       ?? tour.title)       : tour.title;
-  const description = lang === "en" ? (tour.descriptionEn ?? tour.description) : tour.description;
+  const title = lang === "en" ? (tour.titleEn ?? tour.title) : tour.title;
+  const description =
+    lang === "en" ? (tour.descriptionEn ?? tour.description) : tour.description;
+  const schedule =
+    lang === "en" ? (tour.scheduleEn ?? tour.schedule) : tour.schedule;
 
   const initialSrc =
     tour.imageCount > 0
@@ -54,7 +65,8 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
       : "/images/placeholder.webp";
 
   const catLabel = CATEGORY_LABELS[tour.category]?.[lang] ?? tour.category;
-  const catColor = CATEGORY_COLORS[tour.category] ?? "bg-gold/10 text-gold-dark";
+  const catColor =
+    CATEGORY_COLORS[tour.category] ?? "bg-gold/10 text-gold-dark";
 
   return (
     <Link
@@ -107,6 +119,13 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
             </span>
           )}
         </div>
+
+        {/* Schedule */}
+        {tour.schedule && (
+          <div className="flex items-center gap-1 text-xs text-ink-muted">
+            <Calendar className="w-3 h-3 text-teal" /> {schedule}
+          </div>
+        )}
 
         {/* Title */}
         <h3 className="font-display text-[1.1rem] leading-snug text-navy group-hover:text-gold transition-colors duration-300">
