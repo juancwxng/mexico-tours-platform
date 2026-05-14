@@ -29,7 +29,7 @@ export default function WhatsAppPill({
       href={`https://wa.me/${number}?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%2C%20por%20favor.`}
       target="_blank"
       rel="noopener noreferrer"
-      className={`whatsapp-pill whatsapp-btn-style whatsapp-shake transition-all duration-500 ease-in-out ${
+      className={`whatsapp-pill whatsapp-btn-style animate-whatsapp-attention whatsapp-shake transition-all duration-500 ease-in-out ${
         isDocked
           ? "opacity-0 scale-75 translate-y-10 pointer-events-none"
           : "opacity-100 scale-100 translate-y-0"

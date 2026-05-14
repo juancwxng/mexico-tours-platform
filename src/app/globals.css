@@ -375,6 +375,30 @@ body {
     animation: whatsapp-shake 0.3s ease-in-out infinite;
 }
 
+/* ── Periodic Attention Shake ── */
+@keyframes attention-shake {
+    0%,
+    80%,
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+    82%,
+    86% {
+        transform: scale(1.08) rotate(3deg);
+    }
+    84%,
+    88% {
+        transform: scale(1.08) rotate(-3deg);
+    }
+    90% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.animate-whatsapp-attention {
+    animation: attention-shake 5s ease-in-out infinite;
+}
+
 /* Ensure consistent button sizing and layout */
 .whatsapp-btn-style {
     display: inline-flex;
