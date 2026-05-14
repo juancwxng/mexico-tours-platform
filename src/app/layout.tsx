@@ -123,8 +123,6 @@ export default async function RootLayout({
         suppressHydrationWarning
       >
         <LangProvider initialLang={lang}>
-          {/* Custom cursor (client) */}
-          <CustomCursor />
           {/* Page-transition fade (client) */}
           <PageTransition />
           <Navbar />
