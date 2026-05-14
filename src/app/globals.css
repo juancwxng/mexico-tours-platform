@@ -328,7 +328,7 @@ body {
 .whatsapp-pill {
     position: fixed;
     bottom: 1.75rem;
-    right: 1.75rem;
+    right: 2rem;
     z-index: 900;
     display: inline-flex;
     align-items: center;
@@ -349,6 +349,40 @@ body {
 .whatsapp-pill:hover {
     transform: translateY(-3px) scale(1.03);
     box-shadow: 0 14px 36px rgba(37, 211, 102, 0.55);
+}
+
+/* ── WhatsApp Shaking Animation ── */
+@keyframes whatsapp-shake {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(3deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    75% {
+        transform: rotate(-3deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.whatsapp-shake:hover img,
+.whatsapp-shake:hover svg {
+    animation: whatsapp-shake 0.3s ease-in-out infinite;
+}
+
+/* Ensure consistent button sizing and layout */
+.whatsapp-btn-style {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 100px;
+    transition: all 0.3s ease;
 }
 
 /* ── Hero scroll indicator ── */

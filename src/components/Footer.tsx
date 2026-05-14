@@ -14,10 +14,10 @@ export default async function Footer() {
   const footerLinks = {
     tours: [
       { label: t("footer_all_tours"), href: "/tours" },
-      { label: t("footer_catalog"),   href: "/catalog" },
+      { label: t("footer_catalog"), href: "/catalog" },
     ],
     company: [
-      { label: t("footer_blog"),    href: "/blog" },
+      { label: t("footer_blog"), href: "/blog" },
       { label: t("footer_contact"), href: "/contact" },
     ],
   };
@@ -29,12 +29,16 @@ export default async function Footer() {
 
       <Container>
         <div className="py-14 lg:py-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
-
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1 space-y-5">
             <Link href="/" className="inline-flex items-center gap-3 group">
               <div className="relative w-10 h-10">
-                <Image src="/branding/logo.svg" alt="Costa Franca Tours" fill className="object-contain" />
+                <Image
+                  src="/branding/logo.svg"
+                  alt="Costa Franca Tours"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <span className="font-display text-white text-lg tracking-wide">
                 Costa Franca Tours
@@ -47,7 +51,8 @@ export default async function Footer() {
             <div className="flex gap-3 pt-1">
               <a
                 href={`https://wa.me/${waNumber}`}
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="WhatsApp"
                 className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-[#25D366] hover:border-[#25D366]/50 transition-colors"
               >
@@ -55,7 +60,8 @@ export default async function Footer() {
               </a>
               <a
                 href="https://instagram.com/costafrancatours"
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-gold hover:border-gold/50 transition-colors"
               >
@@ -63,7 +69,8 @@ export default async function Footer() {
               </a>
               <a
                 href="https://facebook.com/costafrancatours"
-                target="_blank" rel="noopener noreferrer"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
                 className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:text-teal-light hover:border-teal-light/50 transition-colors"
               >
@@ -80,7 +87,10 @@ export default async function Footer() {
             <ul className="space-y-2.5">
               {footerLinks.tours.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-white/45 text-sm hover:text-gold transition-colors">
+                  <Link
+                    href={l.href}
+                    className="text-white/45 text-sm hover:text-gold transition-colors"
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -96,7 +106,10 @@ export default async function Footer() {
             <ul className="space-y-2.5">
               {footerLinks.company.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-white/45 text-sm hover:text-gold transition-colors">
+                  <Link
+                    href={l.href}
+                    className="text-white/45 text-sm hover:text-gold transition-colors"
+                  >
                     {l.label}
                   </Link>
                 </li>
@@ -110,15 +123,25 @@ export default async function Footer() {
               {t("footer_contact")}
             </h3>
             <a
+              id="footer-whatsapp-btn"
               href={`https://wa.me/${waNumber}`}
-              target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold text-sm px-4 py-2.5 rounded-full hover:opacity-90 transition-opacity"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whatsapp-btn-style whatsapp-shake bg-[#25D366] text-white font-bold text-sm px-6 py-2.5 hover:opacity-90 transition-opacity"
             >
-              <MessageCircle className="w-4 h-4" />
-              {t("footer_whatsapp")}
+              <span>{t("footer_whatsapp")}</span>
+              <Image
+                src="/icons/whatsapp.svg"
+                alt=""
+                width={16}
+                height={16}
+                className="flex-shrink-0 brightness-0 invert"
+              />
             </a>
             <p className="text-white/40 text-xs leading-relaxed">
-              Mazatlán, Sinaloa, México<br />
+              Mazatlán, Sinaloa, México
+              <br />
+              {/* ... */}
               Lun–Dom · 8:00–22:00
             </p>
           </div>
@@ -127,13 +150,20 @@ export default async function Footer() {
         {/* Bottom bar */}
         <div className="py-5 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-white/30">
           <p suppressHydrationWarning>
-            © {new Date().getFullYear()} Costa Franca Tours SAS. {t("footer_rights")}
+            © {new Date().getFullYear()} Costa Franca Tours SAS.{" "}
+            {t("footer_rights")}
           </p>
           <div className="flex gap-5">
-            <Link href="/privacidad" className="hover:text-gold transition-colors">
+            <Link
+              href="/privacidad"
+              className="hover:text-gold transition-colors"
+            >
               {t("footer_privacy")}
             </Link>
-            <Link href="/terminos" className="hover:text-gold transition-colors">
+            <Link
+              href="/terminos"
+              className="hover:text-gold transition-colors"
+            >
               {t("footer_terms")}
             </Link>
           </div>
