@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppPill from "@/components/WhatsAppPill";
 import PageTransition from "@/components/PageTransition";
 import { LangProvider } from "@/context/LangContext";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
@@ -105,7 +104,6 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const cookieStore = await cookies();
   const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
-  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526690000000";
 
   return (
     <html lang={lang} className="scroll-smooth">
@@ -128,8 +126,6 @@ export default async function RootLayout({
           <Navbar />
           <div className="flex-1 flex flex-col">{children}</div>
           <Footer />
-          {/* Floating WhatsApp */}
-          <WhatsAppPill number={waNumber} />
         </LangProvider>
       </body>
     </html>
