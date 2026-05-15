@@ -11,6 +11,7 @@ export default function WhatsAppPill({
 }) {
   const [isDocked, setIsDocked] = useState(false);
   const pathname = usePathname();
+
   const isTourDetail = pathname.startsWith("/tours/") && pathname !== "/tours";
 
   useEffect(() => {
@@ -18,7 +19,7 @@ export default function WhatsAppPill({
 
     const observer = new IntersectionObserver(
       ([entry]) => setIsDocked(entry.isIntersecting),
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const footerBtn = document.getElementById("footer-whatsapp-btn");
@@ -27,6 +28,8 @@ export default function WhatsAppPill({
     return () => {
       if (footerBtn) observer.unobserve(footerBtn);
     };
+  }, [isTourDetail]);
+
   if (isTourDetail) return null;
 
   return (
