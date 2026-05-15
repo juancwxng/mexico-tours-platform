@@ -21,6 +21,7 @@ export interface Tour {
   schedule: string;
   scheduleEn?: string;
   priceList: PriceItem[];
+  isFeatured?: boolean;
 }
 
 export const tours: Tour[] = [
@@ -30,6 +31,7 @@ export const tours: Tour[] = [
     title: "Isla de la Piedra Todo Incluido",
     titleEn: "Stone Island All-Inclusive Tour",
     category: "paseo",
+    isFeatured: true,
     price: 680,
     description:
       "Escápate al paraíso en un crucero panorámico en catamarán hacia Isla de la Piedra. Incluye barra libre en la isla, almuerzo a elegir y 2 actividades (paseo en banana o cabalgata). Para niños de 0–4 años, sin costo, sin alimentos ni actividades (agregar almuerzo: +$120 MXN). Avistamiento de lobos marinos en invierno. Chalecos salvavidas incluidos.",
@@ -69,6 +71,7 @@ export const tours: Tour[] = [
     title: "Avistamiento de Ballenas",
     titleEn: "Whale Watching Tour",
     category: "paseo",
+    isFeatured: true,
     price: 1500,
     description:
       "Presencia las majestuosas ballenas de Mazatlán durante su temporada de migración invernal en un tour guiado en yate. Acompañado por un biólogo bilingüe, disfruta de barra libre no alcohólica, fruta de temporada y box lunch.",
@@ -106,6 +109,7 @@ export const tours: Tour[] = [
     title: "Cuatrimotos Extreme",
     titleEn: "ATV Extreme Tour",
     category: "aventura",
+    isFeatured: true,
     price: 2400,
     description:
       "Embárcate en una emocionante aventura de 2 horas en cuatrimoto por campos de agave, senderos de tierra y la playa, seguida de una experiencia tradicional de rancho. Los conductores deben tener 16+ años.",
@@ -145,6 +149,7 @@ export const tours: Tour[] = [
     title: "Tour Centro Histórico de Mazatlán",
     titleEn: "Mazatlán Historic Center Tour",
     category: "cultural",
+    isFeatured: true,
     price: 800,
     description:
       "Descubre la historia y cultura de Mazatlán en un recorrido a pie por su centro histórico. Visita la Catedral, el Teatro Ángela Peralta, la Plazuela Machado y más, acompañado de un guía bilingüe. Incluye una bebida refrescante.",
@@ -180,6 +185,7 @@ export const tours: Tour[] = [
     title: "Tour en Helicóptero",
     titleEn: "Helicopter Tour",
     category: "aereo",
+    isFeatured: true,
     price: 0,
     description:
       "Sobrevuela Mazatlán y disfruta de vistas aéreas impresionantes que pocos llegan a experimentar. Vuelo de 25 minutos sobre Isla de la Piedra, la Flota Pesquera, Centro Histórico, Olas Altas, el Malecón, Zona Dorada, Marina, Cerritos, Las Tres Islas y el Estadio de Mazatlán.\n\nPrecio: Varía mensualmente (confirme la tarifa actual).\nCapacidad máxima: 3 personas.\nRestricciones: No disponible para menores de 8 años. Peso máximo por pasajero: 120 kg (264 lbs).",
