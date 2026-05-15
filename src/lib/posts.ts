@@ -1,10 +1,3 @@
-/**
- * src/lib/posts.ts
- *
- * Data layer for blog posts.
- * Add real posts here or replace with a CMS fetch when ready.
- */
-
 export interface BlogPost {
   id: string;
   slug: string;
@@ -12,11 +5,11 @@ export interface BlogPost {
   titleEn?: string;
   excerpt: string;
   excerptEn?: string;
-  content: string[];      // array of paragraphs (Spanish)
-  contentEn?: string[];   // array of paragraphs (English)
-  date: string;           // ISO 8601: "2026-01-27"
+  content: string[]; // array of paragraphs (Spanish)
+  contentEn?: string[]; // array of paragraphs (English)
+  date: string; // ISO 8601: "2026-01-27"
   author: string;
-  ogImage: string;        // 1200×630 px — Facebook / Twitter / LinkedIn
+  ogImage: string; // 1200×630 px — Facebook / Twitter / LinkedIn
   pinterestImage: string; // 1000×1500 px — Pinterest 2:3
 }
 
@@ -69,6 +62,6 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
 export function formatDate(isoDate: string, lang: "es" | "en" = "es"): string {
   return new Date(`${isoDate}T12:00:00`).toLocaleDateString(
     lang === "en" ? "en-US" : "es-MX",
-    { year: "numeric", month: "long", day: "numeric" }
+    { year: "numeric", month: "long", day: "numeric" },
   );
 }

@@ -37,7 +37,7 @@ export const tours: Tour[] = [
       "Escápate al paraíso en un crucero panorámico en catamarán hacia Isla de la Piedra. Incluye barra libre en la isla, almuerzo a elegir y 2 actividades (paseo en banana o cabalgata). Para niños de 0–4 años, sin costo, sin alimentos ni actividades (agregar almuerzo: +$120 MXN). Avistamiento de lobos marinos en invierno. Chalecos salvavidas incluidos.",
     descriptionEn:
       "Escape to paradise on a scenic catamaran cruise to Stone Island. Includes an open bar on the island, choice of lunch, and 2 activities (banana boat ride or horseback riding). Children 0–4 are free (no meal or activities; add lunch for +$120 MXN). Sea lion sightings in winter. Life jackets provided.",
-    imageCount: 0,
+    imageCount: 3,
     includes: [
       "Transportación redonda desde Zona Dorada, Malecón o Cerritos",
       "Crucero de 1 hora en catamarán por Cueva del Diablo, Cueva del Pirata, Rocas Blancas y (en invierno) lobos marinos",
@@ -77,7 +77,7 @@ export const tours: Tour[] = [
       "Presencia las majestuosas ballenas de Mazatlán durante su temporada de migración invernal en un tour guiado en yate. Acompañado por un biólogo bilingüe, disfruta de barra libre no alcohólica, fruta de temporada y box lunch.",
     descriptionEn:
       "Witness the majestic whales of Mazatlán during their winter migration season on a guided yacht tour. Includes a bilingual biologist guide, unlimited non-alcoholic open bar, seasonal fruit, and box lunch.",
-    imageCount: 0,
+    imageCount: 3,
     includes: [
       "Guía biólogo bilingüe",
       "Tour en yate por la bahía en búsqueda de ballenas",
@@ -115,7 +115,7 @@ export const tours: Tour[] = [
       "Embárcate en una emocionante aventura de 2 horas en cuatrimoto por campos de agave, senderos de tierra y la playa, seguida de una experiencia tradicional de rancho. Los conductores deben tener 16+ años.",
     descriptionEn:
       "Embark on a thrilling 2-hour ATV adventure through agave fields, dirt trails, and the beach, followed by a traditional ranch experience. Drivers must be 16+ years old.",
-    imageCount: 5,
+    imageCount: 3,
     includes: [
       "Transportación redonda desde tu hotel",
       "Recorrido guiado en cuatrimoto de 2 horas (campos de agave, senderos de tierra, playa)",
@@ -155,7 +155,7 @@ export const tours: Tour[] = [
       "Descubre la historia y cultura de Mazatlán en un recorrido a pie por su centro histórico. Visita la Catedral, el Teatro Ángela Peralta, la Plazuela Machado y más, acompañado de un guía bilingüe. Incluye una bebida refrescante.",
     descriptionEn:
       "Discover the history and culture of Mazatlán on a walking tour through its historic center. Visit the Cathedral, Ángela Peralta Theater, Plazuela Machado, and more, accompanied by a bilingual guide. Includes a refreshing drink.",
-    imageCount: 5,
+    imageCount: 3,
     includes: [
       "Guía bilingüe",
       "Recorrido a pie por el centro histórico",
@@ -191,7 +191,7 @@ export const tours: Tour[] = [
       "Sobrevuela Mazatlán y disfruta de vistas aéreas impresionantes que pocos llegan a experimentar. Vuelo de 25 minutos sobre Isla de la Piedra, la Flota Pesquera, Centro Histórico, Olas Altas, el Malecón, Zona Dorada, Marina, Cerritos, Las Tres Islas y el Estadio de Mazatlán.\n\nPrecio: Varía mensualmente (confirme la tarifa actual).\nCapacidad máxima: 3 personas.\nRestricciones: No disponible para menores de 8 años. Peso máximo por pasajero: 120 kg (264 lbs).",
     descriptionEn:
       "Soar above Mazatlán for breathtaking aerial views few ever get to experience. A 25-minute flight over Stone Island, the Fishing Fleet, Historic Downtown, Olas Altas, the Malecón, Golden Zone, Marina, Cerritos, the Three Islands & the Mazatlán Stadium.\n\nPrice: Varies monthly (please confirm current rate).\nMaximum capacity: 3 people.\nRestrictions: Not available for children under 8 years old. Maximum weight per passenger: 120 kg (264 lbs).",
-    imageCount: 0,
+    imageCount: 3,
     includes: [
       "Vuelo de 25 minutos sobre los sitios más emblemáticos de Mazatlán: Isla de la Piedra, Flota Pesquera, Centro Histórico, Olas Altas, Malecón, Zona Dorada, Marina, Cerritos, Las Tres Islas y el Estadio",
     ],
