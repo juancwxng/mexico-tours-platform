@@ -29,7 +29,6 @@ export default function WhatsAppPill({
       if (footerBtn) observer.unobserve(footerBtn);
     };
   }, [isTourDetail]);
-
   if (isTourDetail) return null;
 
   return (

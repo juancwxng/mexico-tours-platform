@@ -127,6 +127,7 @@ export default async function RootLayout({
           <Navbar />
           <div className="flex-1 flex flex-col">{children}</div>
           <Footer />
+          <WhatsAppPill />
         </LangProvider>
       </body>
     </html>
