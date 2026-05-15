@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import { useT } from "@/context/LangContext";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 interface TourCarouselProps {
   images: string[];
@@ -13,6 +15,7 @@ interface TourCarouselProps {
 export default function TourCarousel({ images, title }: TourCarouselProps) {
   const t = useT();
   const [current, setCurrent] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   if (images.length === 0) {
     return (
@@ -25,48 +28,102 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
   const prev = () => setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
 
+  const slides = images.map((src) => ({
+    src,
+    width: 2880,
+    height: 1516,
+  }));
+
   return (
-    <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 group">
-      <Image
-        src={images[current]}
-        alt={`${title} — ${current + 1} / ${images.length}`}
-        fill
-        className="object-cover transition-opacity duration-300"
-        sizes="(max-width: 1024px) 100vw, 420px"
-        priority={current === 0}
-      />
+    <>
+      {/* Carousel */}
+      <div
+        className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 group cursor-zoom-in"
+        onClick={() => setLightboxOpen(true)}
+      >
+        <Image
+          src={images[current]}
+          alt={`${title} — ${current + 1} / ${images.length}`}
+          fill
+          className="object-cover transition-opacity duration-300"
+          sizes="(max-width: 1024px) 100vw, 420px"
+          priority={current === 0}
+        />
 
-      {images.length > 1 && (
-        <>
-          <button
-            onClick={prev}
-            aria-label="Imagen anterior"
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
-          >
-            <ChevronLeft className="w-5 h-5 text-navy" />
-          </button>
-          <button
-            onClick={next}
-            aria-label="Siguiente imagen"
-            className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
-          >
-            <ChevronRight className="w-5 h-5 text-navy" />
-          </button>
+        {/* Zoom hint icon */}
+        <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+          <ZoomIn className="w-4 h-4 text-white" />
+        </div>
 
-          <div className="absolute bottom-3 inset-x-0 flex justify-center gap-1.5">
-            {images.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrent(i)}
-                aria-label={`Imagen ${i + 1}`}
-                className={`h-2 rounded-full transition-all ${
-                  i === current ? "bg-white w-4" : "bg-white/50 hover:bg-white/80 w-2"
-                }`}
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                prev();
+              }}
+              aria-label="Imagen anterior"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
+            >
+              <ChevronLeft className="w-5 h-5 text-navy" />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                next();
+              }}
+              aria-label="Siguiente imagen"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
+            >
+              <ChevronRight className="w-5 h-5 text-navy" />
+            </button>
+
+            <div className="absolute bottom-3 inset-x-0 flex justify-center gap-1.5">
+              {images.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrent(i);
+                  }}
+                  aria-label={`Imagen ${i + 1}`}
+                  className={`h-2 rounded-full transition-all ${
+                    i === current
+                      ? "bg-white w-4"
+                      : "bg-white/50 hover:bg-white/80 w-2"
+                  }`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Lightbox */}
+      <Lightbox
+        open={lightboxOpen}
+        close={() => setLightboxOpen(false)}
+        slides={slides}
+        index={current}
+        on={{ view: ({ index }) => setCurrent(index) }}
+        render={{
+          slide: ({ slide }) => (
+            <div className="relative w-full h-full">
+              <Image
+                src={slide.src}
+                alt={title}
+                fill
+                className="object-contain"
+                sizes="100vw"
+                quality={90}
               />
-            ))}
-          </div>
-        </>
-      )}
-    </div>
+            </div>
+          ),
+        }}
+        styles={{
+          container: { backgroundColor: "rgba(0,0,0,0.95)" },
+        }}
+      />
+    </>
   );
 }

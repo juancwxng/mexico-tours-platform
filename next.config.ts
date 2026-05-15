@@ -20,7 +20,9 @@ const generateCSP = (): string => {
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self' https://wa.me",
-    ...(process.env.FORCE_HTTPS === "true" ? ["upgrade-insecure-requests"] : []),
+    ...(process.env.FORCE_HTTPS === "true"
+      ? ["upgrade-insecure-requests"]
+      : []),
   ].join("; ");
 };
 
@@ -45,6 +47,7 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 2880, 3840],
     remotePatterns: [],
     minimumCacheTTL: 60 * 60 * 24 * 7,
   },
@@ -79,6 +82,6 @@ export default nextConfig;
 // Initialize OpenNext Cloudflare bindings only in development
 if (process.env.NODE_ENV === "development") {
   import("@opennextjs/cloudflare").then((m) =>
-    m.initOpenNextCloudflareForDev()
+    m.initOpenNextCloudflareForDev(),
   );
 }
