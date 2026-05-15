@@ -42,6 +42,7 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
         onClick={() => setLightboxOpen(true)}
       >
         <Image
+          key={current}
           src={images[current]}
           alt={`${title} — ${current + 1} / ${images.length}`}
           fill
