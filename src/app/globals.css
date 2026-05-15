@@ -440,10 +440,9 @@ body {
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #3a6878;
-    background: rgba(91, 143, 168, 0.12);
     padding: 0.25rem 0.75rem;
     border-radius: 100px;
+    backdrop-filter: blur(4px);
 }
 
 :focus-visible {
