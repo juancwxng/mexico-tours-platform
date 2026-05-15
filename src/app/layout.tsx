@@ -8,6 +8,7 @@ import PageTransition from "@/components/PageTransition";
 import { LangProvider } from "@/context/LangContext";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
 import { safeJsonLd } from "@/lib/utils";
+import WhatsAppPill from "@/components/WhatsAppPill";
 
 const marcellus = Marcellus({
   subsets: ["latin"],

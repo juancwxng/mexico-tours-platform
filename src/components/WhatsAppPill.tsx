@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function WhatsAppPill({
   number = "526690000000",
@@ -9,11 +10,15 @@ export default function WhatsAppPill({
   number?: string;
 }) {
   const [isDocked, setIsDocked] = useState(false);
+  const pathname = usePathname();
+  const isTourDetail = pathname.startsWith("/tours/") && pathname !== "/tours";
 
   useEffect(() => {
+    if (isTourDetail) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => setIsDocked(entry.isIntersecting),
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     );
 
     const footerBtn = document.getElementById("footer-whatsapp-btn");
@@ -22,7 +27,7 @@ export default function WhatsAppPill({
     return () => {
       if (footerBtn) observer.unobserve(footerBtn);
     };
-  }, []);
+  if (isTourDetail) return null;
 
   return (
     <a
