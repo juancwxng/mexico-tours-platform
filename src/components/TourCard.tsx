@@ -14,12 +14,11 @@ interface TourCardProps {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  paseo: "bg-teal-600/90 text-white",
-  aventura: "bg-orange-500/90 text-white",
-  cultural: "bg-purple-600/90 text-white",
-  aereo: "bg-sky-500/90 text-white",
+  paseo: "bg-teal/10 text-teal-dark",
+  aventura: "bg-orange-100 text-orange-700",
+  cultural: "bg-purple-100 text-purple-700",
+  aereo: "bg-sky-100 text-sky-700",
 };
-
 const CATEGORY_LABELS: Record<string, { es: string; en: string }> = {
   paseo: { es: "Paseo", en: "Maritime" },
   aventura: { es: "Aventura", en: "Adventure" },
