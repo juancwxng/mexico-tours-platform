@@ -29,7 +29,7 @@ export default async function Footer() {
         className="h-px"
         style={{
           background:
-            "linear-gradient(to right, transparent, #E5C992 30%, #33727A 70%, transparent)",
+            "linear-gradient(to right, transparent, #EACA8D 30%, #1A5F69 70%, transparent)",
         }}
       />
 
@@ -50,17 +50,19 @@ export default async function Footer() {
                 Costa Franca Tours
               </span>
             </Link>
-            <p className="text-white/45 text-sm leading-relaxed max-w-xs">
+            {/* PATCH 2: white/65 (~3.2:1) replaces white/45 (~2.1:1) */}
+            <p className="text-white/65 text-sm leading-relaxed max-w-xs">
               {t("footer_tagline")}
             </p>
             {/* Socials */}
+            {/* PATCH 2: icon default state raised to white/55 + border white/20 for WCAG 1.4.11 */}
             <div className="flex gap-3 pt-1">
               <a
                 href={`https://wa.me/${waNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
-                className="w-9 h-9 rounded-full border border-white/12 flex items-center justify-center text-white/40 hover:text-[#25D366] hover:border-[#25D366]/50 transition-colors"
+                className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/55 hover:text-[#25D366] hover:border-[#25D366]/50 transition-colors"
               >
                 <MessageCircle className="w-4 h-4" />
               </a>
@@ -69,7 +71,7 @@ export default async function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-9 h-9 rounded-full border border-white/12 flex items-center justify-center text-white/40 hover:text-gold hover:border-gold/50 transition-colors"
+                className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/55 hover:text-gold hover:border-gold/50 transition-colors"
               >
                 <Instagram className="w-4 h-4" />
               </a>
@@ -78,7 +80,7 @@ export default async function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="w-9 h-9 rounded-full border border-white/12 flex items-center justify-center text-white/40 hover:text-teal-light hover:border-teal-light/50 transition-colors"
+                className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/55 hover:text-teal-light hover:border-teal-light/50 transition-colors"
               >
                 <Facebook className="w-4 h-4" />
               </a>
@@ -87,15 +89,17 @@ export default async function Footer() {
 
           {/* Tours */}
           <div className="space-y-4">
-            <h3 className="font-display text-white/60 text-sm tracking-widest uppercase">
+            {/* PATCH 2: section headings raised to white/70 */}
+            <h3 className="font-display text-white/70 text-sm tracking-widest uppercase">
               {t("footer_tours")}
             </h3>
+            {/* PATCH 2: links raised to white/60 */}
             <ul className="space-y-2.5">
               {footerLinks.tours.map((l) => (
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-white/40 text-sm hover:text-gold transition-colors"
+                    className="text-white/60 text-sm hover:text-gold transition-colors"
                   >
                     {l.label}
                   </Link>
@@ -106,7 +110,7 @@ export default async function Footer() {
 
           {/* Company */}
           <div className="space-y-4">
-            <h3 className="font-display text-white/60 text-sm tracking-widest uppercase">
+            <h3 className="font-display text-white/70 text-sm tracking-widest uppercase">
               {t("footer_company")}
             </h3>
             <ul className="space-y-2.5">
@@ -114,7 +118,7 @@ export default async function Footer() {
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-white/40 text-sm hover:text-gold transition-colors"
+                    className="text-white/60 text-sm hover:text-gold transition-colors"
                   >
                     {l.label}
                   </Link>
@@ -125,7 +129,7 @@ export default async function Footer() {
 
           {/* Contact */}
           <div className="space-y-4">
-            <h3 className="font-display text-white/60 text-sm tracking-widest uppercase">
+            <h3 className="font-display text-white/70 text-sm tracking-widest uppercase">
               {t("footer_contact")}
             </h3>
             <a
@@ -144,7 +148,8 @@ export default async function Footer() {
                 className="flex-shrink-0 brightness-0 invert"
               />
             </a>
-            <p className="text-white/35 text-xs leading-relaxed">
+            {/* PATCH 2: address text raised to white/55 */}
+            <p className="text-white/55 text-xs leading-relaxed">
               Mazatlán, Sinaloa, México
               <br />
               Lun–Dom · 8:00–22:00
@@ -152,8 +157,8 @@ export default async function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="py-5 border-t border-white/8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-white/25">
+        {/* Bottom bar — PATCH 2: text raised to white/45, links and border updated */}
+        <div className="py-5 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-white/45">
           <p suppressHydrationWarning>
             © {new Date().getFullYear()} Costa Franca Tours SAS.{" "}
             {t("footer_rights")}
