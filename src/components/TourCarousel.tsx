@@ -15,9 +15,9 @@ interface TourCarouselProps {
   images: string[];
   title: string;
 }
-function nextImageUrl(src: string, width: number): string {
-  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=90`;
-}
+
+// Ya no necesitamos la función manual 'nextImageUrl'
+// porque usaremos el componente <Image> nativo directamente en el Lightbox.
 
 export default function TourCarousel({ images, title }: TourCarouselProps) {
   const t = useT();
@@ -35,24 +35,12 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
   const prev = () => setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
 
-  // Each slide uses srcSet so YARL's native renderer picks the right size.
-  // We provide 1200w and 2400w — the browser picks 2400w on retina screens
-  // and 1200w on standard displays. YARL handles object-contain and all
-  // the layout — no custom render.slide needed.
-  const slides = images.map((src) => ({
-    src: nextImageUrl(src, 1200),
-    width: 1200,
-    height: 900,
-    srcSet: [
-      { src: nextImageUrl(src, 1200), width: 1200, height: 900 },
-      { src: nextImageUrl(src, 2400), width: 2400, height: 1800 },
-    ],
-  }));
+  // Solo necesitamos pasar la URL original a los slides
+  const slides = images.map((src) => ({ src }));
 
   return (
     <>
-      {/* Carousel thumbnail — uses Next.js <Image> for the card, which IS
-          optimized correctly since it has a known container size */}
+      {/* Carrusel en miniatura */}
       <div
         className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 group cursor-zoom-in"
         onClick={() => setLightboxOpen(true)}
@@ -67,7 +55,7 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
           priority={current === 0}
         />
 
-        {/* Zoom hint */}
+        {/* Icono de zoom */}
         <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
           <ZoomIn className="w-4 h-4 text-white" />
         </div>
@@ -122,7 +110,20 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
         slides={slides}
         index={current}
         on={{ view: ({ index }) => setCurrent(index) }}
-        carousel={{ imageProps: { sizes: "100vw" } }}
+        // Renderizamos las imágenes nativamente con Next.js <Image> en lugar de depender del srcSet automático
+        render={{
+          slide: ({ slide }) => (
+            <div className="relative w-full h-full flex items-center justify-center">
+              <Image
+                src={slide.src}
+                alt={title || "Imagen del tour ampliada"}
+                fill
+                className="object-contain"
+                sizes="100vw"
+              />
+            </div>
+          ),
+        }}
         styles={{
           container: { backgroundColor: "rgba(0,0,0,0.95)" },
         }}
