@@ -204,15 +204,21 @@ export default function Navbar() {
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t("nav_search")}
               maxLength={100}
-              className="w-full h-9 rounded-full border pl-4 pr-10 text-sm focus:outline-none transition-all duration-300 bg-white/8 border-white/15 text-white placeholder:text-white/35 focus:bg-white/12 focus:border-gold/50"
+              autoFocus
+              className="h-9 w-full min-w-0 rounded-full border border-gold/25 bg-white/8 px-4 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-gold/50"
             />
-            <button
-              type="submit"
-              aria-label={t("nav_search_open")}
-              className="absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center text-white/50 hover:text-gold transition-colors"
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={() => {
+                setIsSearchOpen(false);
+                setSearchQuery("");
+              }}
+              className="w-7 h-7 flex-shrink-0 text-red-400 hover:text-red-300 rounded-full"
             >
-              <Search className="w-3.5 h-3.5" />
-            </button>
+              <X className="w-3.5 h-3.5" />
+            </Button>
           </form>
 
           {/* Language toggle desktop */}
