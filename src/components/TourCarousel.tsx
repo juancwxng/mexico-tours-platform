@@ -15,6 +15,9 @@ interface TourCarouselProps {
   images: string[];
   title: string;
 }
+function nextImageUrl(src: string, width: number): string {
+  return `/_next/image?url=${encodeURIComponent(src)}&w=${width}&q=90`;
+}
 
 export default function TourCarousel({ images, title }: TourCarouselProps) {
   const t = useT();
@@ -32,15 +35,24 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
   const prev = () => setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
 
+  // Each slide uses srcSet so YARL's native renderer picks the right size.
+  // We provide 1200w and 2400w — the browser picks 2400w on retina screens
+  // and 1200w on standard displays. YARL handles object-contain and all
+  // the layout — no custom render.slide needed.
   const slides = images.map((src) => ({
-    src,
-    width: 2400,
-    height: 1800,
+    src: nextImageUrl(src, 1200),
+    width: 1200,
+    height: 900,
+    srcSet: [
+      { src: nextImageUrl(src, 1200), width: 1200, height: 900 },
+      { src: nextImageUrl(src, 2400), width: 2400, height: 1800 },
+    ],
   }));
 
   return (
     <>
-      {/* Carousel thumbnail */}
+      {/* Carousel thumbnail — uses Next.js <Image> for the card, which IS
+          optimized correctly since it has a known container size */}
       <div
         className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 group cursor-zoom-in"
         onClick={() => setLightboxOpen(true)}
@@ -55,7 +67,7 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
           priority={current === 0}
         />
 
-        {/* Zoom hint icon */}
+        {/* Zoom hint */}
         <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
           <ZoomIn className="w-4 h-4 text-white" />
         </div>
@@ -103,27 +115,14 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
           </>
         )}
       </div>
+
       <Lightbox
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
         slides={slides}
         index={current}
         on={{ view: ({ index }) => setCurrent(index) }}
-        render={{
-          slide: ({ slide }) => (
-            <div className="relative w-full h-full">
-              <Image
-                src={slide.src}
-                alt={title}
-                fill
-                className="object-contain"
-                sizes="100vw"
-                quality={90}
-                priority
-              />
-            </div>
-          ),
-        }}
+        carousel={{ imageProps: { sizes: "100vw" } }}
         styles={{
           container: { backgroundColor: "rgba(0,0,0,0.95)" },
         }}
