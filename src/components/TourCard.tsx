@@ -106,11 +106,11 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
       </div>
 
       {/* Body */}
-      <div className="p-5 flex-1 flex flex-col gap-2.5 bg-navy-mid">
+      <div className="p-5 flex-1 flex flex-col gap-2.5 bg-white">
         {/* Location + duration */}
-        <div className="flex items-center justify-between text-xs font-bold text-white/40 uppercase tracking-wide">
+        <div className="flex items-center justify-between text-xs font-bold text-navy-light/60 uppercase tracking-wide">
           <span className="flex items-center gap-1">
-            <MapPin className="w-3 h-3 text-gold/70" />
+            <MapPin className="w-3 h-3 text-teal" />
             Mazatlán
           </span>
           {tour.duration && (
@@ -123,29 +123,29 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
 
         {/* Schedule */}
         {tour.schedule && (
-          <div className="flex items-center gap-1 text-xs text-white/35">
+          <div className="flex items-center gap-1 text-xs text-navy-light/60">
             <Calendar className="w-3 h-3 text-teal" /> {schedule}
           </div>
         )}
 
         {/* Title */}
-        <h3 className="font-display text-[1.1rem] leading-snug text-white group-hover:text-gold transition-colors duration-300">
+        <h3 className="font-display text-[1.15rem] leading-snug text-navy group-hover:text-teal transition-colors duration-300">
           {title}
         </h3>
 
         {/* Description */}
-        <p className="text-white/50 text-sm line-clamp-2 leading-relaxed flex-1">
+        <p className="text-navy-light/80 text-sm line-clamp-2 leading-relaxed flex-1 font-medium">
           {description}
         </p>
 
         {/* CTA row */}
-        <div className="pt-3 mt-auto border-t border-white/8 flex items-center justify-between">
-          <span className="inline-flex items-center gap-1.5 text-white/60 font-bold text-[0.72rem] uppercase tracking-wider group-hover:text-gold transition-colors duration-300">
+        <div className="pt-4 mt-auto border-t border-navy/10 flex items-center justify-between">
+          <span className="inline-flex items-center gap-1.5 text-navy font-bold text-[0.72rem] uppercase tracking-wider group-hover:text-teal transition-colors duration-300">
             {lang === "en" ? "View details" : "Ver detalles"}
             <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
           </span>
           {/* Teal dot accent */}
-          <div className="w-2 h-2 rounded-full bg-teal/30 group-hover:bg-gold transition-colors duration-300" />
+          <div className="w-2 h-2 rounded-full bg-teal/30 group-hover:bg-teal transition-colors duration-300" />
         </div>
       </div>
     </Link>

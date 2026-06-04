@@ -33,31 +33,29 @@ export default async function Home() {
       </section>
 
       {/* ── Featured Tours ── */}
-      <section className="py-20 lg:py-28 bg-[#F9F6F1]">
+      <section className="py-20 lg:py-28 bg-transparent">
         <Container>
           <div className="text-center mb-12 lg:mb-16 space-y-4">
             <div className="flex justify-center">
-              <span className="section-badge">
+              <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase text-teal px-4 py-1.5 border border-teal/20 rounded-full bg-teal/5">
                 {lang === "en"
                   ? "Featured Experiences"
                   : "Experiencias Destacadas"}
               </span>
             </div>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-none text-balance">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-none text-balance">
               {t("home_featured")}
             </h2>
             <hr className="divider-gold max-w-24 mx-auto" />
-            <p className="text-white/55 max-w-xl mx-auto text-lg leading-relaxed">
+            <p className="text-navy-light/70 max-w-xl mx-auto text-lg leading-relaxed font-medium">
               {t("home_featured_sub")}
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {featuredTours.map((tour, index) => (
               <TourCard key={tour.id} tour={tour} priority={index < 3} />
             ))}
           </div>
-
           <div className="mt-14 flex justify-center">
             <Link href="/tours" className="btn-gold">
               {t("home_see_all")}

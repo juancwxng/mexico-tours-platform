@@ -38,18 +38,17 @@
 }
 
 @theme inline {
-    /* ── New Brand Palette ── */
-    --color-navy: #0b1724; /* Primary Background – Deep Navy       */
-    --color-gold: #e5c992; /* Primary Accent – Warm Gold            */
-    --color-teal: #33727a; /* Secondary Accent – Ocean Teal         */
-    --color-white: #ffffff; /* Text / Highlight – Crisp White        */
+    --color-navy: #0b1724; /* Primary Dark */
+    --color-gold: #e5c992; /* Accent Gold */
+    --color-teal: #33727a; /* Accent Teal */
+    --color-white: #ffffff; /* Text / Highlight – Crisp White */
 
     /* Derived tints & shades */
-    --color-gold-light: #f0dab0;
+    --color-gold-light: #f5e4c3;
     --color-gold-dark: #b89b60;
     --color-teal-light: #4d9aa4;
     --color-teal-dark: #235259;
-    --color-navy-light: #142232;
+    --color-navy-light: #1c2e40;
     --color-navy-mid: #0e1e2e;
 
     /* Legacy/UI aliases – kept for components that reference them */
@@ -59,7 +58,7 @@
     --color-ink-muted: rgba(255, 255, 255, 0.55);
 
     /* Legacy brand aliases */
-    --color-central-bg: #0b1724;
+    --color-central-bg: #fafafa;
     --color-central-blue: #0b1724;
     --color-central-yellow: #e5c992;
 
@@ -92,20 +91,20 @@
 
 :root {
     --radius: 0.75rem;
-    --background: #f9f6f1;
+    --background: #fafafa;
     --foreground: #0b1724;
     --card: #ffffff;
     --card-foreground: #0b1724;
-    --secondary: #ede9e3;
+    --secondary: #f0f2f5;
     --secondary-foreground: #0b1724;
-    --muted: #ede9e3;
-    --muted-foreground: rgba(11, 23, 36, 0.5);
+    --muted: #f0f2f5;
+    --muted-foreground: #475569;
     --accent: #33727a;
     --accent-foreground: #ffffff;
     --destructive: oklch(0.577 0.245 27.325);
-    --border: rgba(229, 201, 146, 0.15);
-    --input: rgba(229, 201, 146, 0.12);
-    --ring: #e5c992;
+    --border: rgba(11, 23, 36, 0.1);
+    --input: rgba(11, 23, 36, 0.1);
+    --ring: #33727a;
 }
 
 html {
@@ -119,8 +118,8 @@ html {
 }
 
 body {
-    background-color: #f9f6f1;
-    color: #0b1724;
+    background-color: var(--background);
+    color: var(--foreground);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: "Lato", sans-serif;
