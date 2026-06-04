@@ -5,7 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import { Menu, Search, X } from "lucide-react";
-import { Sheet, SheetContent, SheetClose, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetClose,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import Container from "@/components/Container";
 import { useLang } from "@/context/LangContext";
@@ -14,24 +20,26 @@ import type { DictKey } from "@/lib/i18n";
 type NavLink = { name: DictKey; href: string };
 
 const navLinks: NavLink[] = [
-  { name: "nav_home",    href: "/" },
-  { name: "nav_tours",   href: "/tours" },
+  { name: "nav_home", href: "/" },
+  { name: "nav_tours", href: "/tours" },
   { name: "nav_catalog", href: "/catalog" },
-  { name: "nav_blog",    href: "/blog" },
+  { name: "nav_blog", href: "/blog" },
   { name: "nav_contact", href: "/contact" },
 ];
 
 export default function Navbar() {
-  const router   = useRouter();
+  const router = useRouter();
   const pathname = usePathname();
   const { t, lang, toggleLang } = useLang();
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery]   = useState("");
-  const [isScrolled, setIsScrolled]     = useState(false);
-  const [mounted, setMounted]           = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handler = () => setIsScrolled(window.scrollY > 30);
@@ -48,7 +56,7 @@ export default function Navbar() {
     setIsSearchOpen(false);
   };
 
-  const isHero      = pathname === "/";
+  const isHero = pathname === "/";
   const transparent = isHero && !isScrolled;
 
   return (
@@ -57,8 +65,10 @@ export default function Navbar() {
         transparent ? "" : "navbar-scrolled"
       }`}
     >
-      <Container as="nav" className="h-full flex items-center justify-between gap-3">
-
+      <Container
+        as="nav"
+        className="h-full flex items-center justify-between gap-3"
+      >
         {/* ── Mobile hamburger ── */}
         <div className="flex items-center lg:hidden flex-shrink-0">
           <Sheet>
@@ -72,10 +82,18 @@ export default function Navbar() {
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[min(80vw,320px)] bg-navy border-r border-gold/15 shadow-2xl">
+            <SheetContent
+              side="left"
+              className="w-[min(80vw,320px)] bg-navy border-r border-gold/15 shadow-2xl"
+            >
               {/* Gold-to-teal accent bar */}
-              <div className="absolute top-0 left-0 w-1 h-full"
-                style={{ background: "linear-gradient(to bottom, #E5C992, #33727A, #E5C992)" }} />
+              <div
+                className="absolute top-0 left-0 w-1 h-full"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, #E5C992, #33727A, #E5C992)",
+                }}
+              />
               <div className="pl-4">
                 <SheetTitle className="font-display text-white text-2xl mb-8 mt-2">
                   Costa Franca
@@ -99,11 +117,21 @@ export default function Navbar() {
                     type="button"
                     onClick={toggleLang}
                     className="flex items-center gap-2 text-sm font-bold text-white/50 hover:text-white transition-colors min-h-[44px] px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-lg"
-                    aria-label={lang === "es" ? "Switch to English" : "Cambiar a Español"}
+                    aria-label={
+                      lang === "es" ? "Switch to English" : "Cambiar a Español"
+                    }
                   >
-                    <span className={lang === "es" ? "text-gold" : "text-white/30"}>ES</span>
+                    <span
+                      className={lang === "es" ? "text-gold" : "text-white/30"}
+                    >
+                      ES
+                    </span>
                     <span className="text-white/20">|</span>
-                    <span className={lang === "en" ? "text-gold" : "text-white/30"}>EN</span>
+                    <span
+                      className={lang === "en" ? "text-gold" : "text-white/30"}
+                    >
+                      EN
+                    </span>
                   </button>
                 </div>
               </div>
@@ -114,7 +142,7 @@ export default function Navbar() {
         {/* ── Logo ── */}
         <div className="flex items-center gap-2 lg:gap-3 flex-shrink-0">
           <Link href="/" className="flex items-center gap-2 lg:gap-3 group">
-            <div className="relative w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12 transition-transform duration-300 group-hover:scale-105">
+            <div className="relative w-40 sm:w-48 lg:w-56 aspect-[2880/617] transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/logo/Logo_CostaFranca.svg"
                 alt="Costa Franca Tours"
@@ -123,9 +151,6 @@ export default function Navbar() {
                 priority
               />
             </div>
-            <span className="hidden lg:block font-display text-base xl:text-lg tracking-wide text-white/90 transition-colors duration-300 group-hover:text-gold">
-              Costa Franca Tours
-            </span>
           </Link>
         </div>
 
@@ -154,7 +179,10 @@ export default function Navbar() {
         {/* ── Right controls ── */}
         <div className="flex items-center gap-3 flex-shrink-0">
           {/* Desktop search */}
-          <form onSubmit={handleSearch} className="hidden lg:flex items-center relative w-48 xl:w-60">
+          <form
+            onSubmit={handleSearch}
+            className="hidden lg:flex items-center relative w-48 xl:w-60"
+          >
             <input
               type="search"
               value={searchQuery}
@@ -178,18 +206,37 @@ export default function Navbar() {
               type="button"
               onClick={toggleLang}
               className="hidden lg:flex items-center gap-1 text-xs font-bold border rounded-full px-3 py-2 min-h-[36px] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold border-white/20 text-white/60 hover:border-gold/50 hover:text-gold"
-              aria-label={lang === "es" ? "Switch to English" : "Cambiar a Español"}
+              aria-label={
+                lang === "es" ? "Switch to English" : "Cambiar a Español"
+              }
             >
-              <span className={lang === "es" ? "opacity-100 text-gold" : "opacity-30"}>ES</span>
+              <span
+                className={
+                  lang === "es" ? "opacity-100 text-gold" : "opacity-30"
+                }
+              >
+                ES
+              </span>
               <span className="opacity-20 mx-0.5">|</span>
-              <span className={lang === "en" ? "opacity-100 text-gold" : "opacity-30"}>EN</span>
+              <span
+                className={
+                  lang === "en" ? "opacity-100 text-gold" : "opacity-30"
+                }
+              >
+                EN
+              </span>
             </button>
           )}
 
           {/* Mobile search */}
-          <div className={`lg:hidden relative flex items-center transition-all duration-300 ${isSearchOpen ? "w-full" : "w-auto"}`}>
+          <div
+            className={`lg:hidden relative flex items-center transition-all duration-300 ${isSearchOpen ? "w-full" : "w-auto"}`}
+          >
             {isSearchOpen ? (
-              <form onSubmit={handleSearch} className="flex items-center w-full gap-1 animate-in fade-in slide-in-from-right-4 duration-200">
+              <form
+                onSubmit={handleSearch}
+                className="flex items-center w-full gap-1 animate-in fade-in slide-in-from-right-4 duration-200"
+              >
                 <input
                   type="search"
                   value={searchQuery}
@@ -203,7 +250,10 @@ export default function Navbar() {
                   type="button"
                   variant="ghost"
                   size="icon"
-                  onClick={() => { setIsSearchOpen(false); setSearchQuery(""); }}
+                  onClick={() => {
+                    setIsSearchOpen(false);
+                    setSearchQuery("");
+                  }}
                   className="w-9 h-9 flex-shrink-0 text-red-400 hover:text-red-300 rounded-full"
                 >
                   <X className="w-4 h-4" />
@@ -221,7 +271,6 @@ export default function Navbar() {
             )}
           </div>
         </div>
-
       </Container>
     </header>
   );
