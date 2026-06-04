@@ -498,65 +498,98 @@ body {
     -webkit-perspective: 1000;
 }
 
-/* ── CTA Section Blob Animations ── */
-@keyframes cta-slosh-left {
+/* ── CTA Section — Beach Shoreline Animations ── */
+
+/*
+ * Water (teal, left): wide flat mass that surges right then retreats,
+ * with a subtle vertical undulation on the leading edge to feel organic.
+ * scaleX drives the surge — the right boundary pushes into the sand and pulls back.
+ */
+@keyframes cta-shore-water {
     0% {
-        transform: translate3d(-4%, 3%, 0) rotate(-2deg) scale(1);
+        transform: translate3d(0%, 1%, 0) scaleX(1) scaleY(1);
     }
-    25% {
-        transform: translate3d(3%, -4%, 0) rotate(1deg) scale(1.06);
+    20% {
+        transform: translate3d(4%, -1%, 0) scaleX(1.07) scaleY(1.02);
     }
-    50% {
-        transform: translate3d(6%, 2%, 0) rotate(2.5deg) scale(0.97);
+    45% {
+        transform: translate3d(8%, 0%, 0) scaleX(1.13) scaleY(0.98);
     }
-    75% {
-        transform: translate3d(-2%, 5%, 0) rotate(-1deg) scale(1.04);
+    65% {
+        transform: translate3d(5%, 1.5%, 0) scaleX(1.06) scaleY(1.01);
+    }
+    80% {
+        transform: translate3d(1%, -0.5%, 0) scaleX(1.01) scaleY(1.02);
     }
     100% {
-        transform: translate3d(-4%, 3%, 0) rotate(-2deg) scale(1);
+        transform: translate3d(0%, 1%, 0) scaleX(1) scaleY(1);
     }
 }
 
-@keyframes cta-slosh-right {
+/*
+ * Sand (gold, right): mostly anchored, breathes very gently —
+ * a subtle scale pulse as the water washes over and uncovers it.
+ */
+@keyframes cta-shore-sand {
     0% {
-        transform: translate3d(5%, -2%, 0) rotate(2deg) scale(0.97);
+        transform: translate3d(0%, 0%, 0) scaleX(1) scaleY(1);
     }
-    25% {
-        transform: translate3d(-4%, 3%, 0) rotate(-1deg) scale(1.05);
+    40% {
+        transform: translate3d(-2%, 1%, 0) scaleX(0.97) scaleY(1.02);
     }
-    50% {
-        transform: translate3d(-6%, -3%, 0) rotate(-2.5deg) scale(1);
-    }
-    75% {
-        transform: translate3d(2%, 4%, 0) rotate(1deg) scale(0.98);
+    70% {
+        transform: translate3d(-1%, -1%, 0) scaleX(0.99) scaleY(0.99);
     }
     100% {
-        transform: translate3d(5%, -2%, 0) rotate(2deg) scale(0.97);
+        transform: translate3d(0%, 0%, 0) scaleX(1) scaleY(1);
     }
 }
 
+/*
+ * Water — wide flat shape, left-anchored, right edge does the wave surge.
+ * Horizontal gradient: deep navy-teal on the far left (deep water) →
+ * teal-dark mid → teal at the shoreline edge (shallow water).
+ */
 .cta-blob-left {
-    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-    filter: blur(52px);
-    -webkit-filter: blur(52px);
+    border-radius: 0% 55% 50% 0% / 0% 50% 50% 0%;
+    background: linear-gradient(
+        to right,
+        rgba(11, 23, 36, 0.95) 0%,
+        rgba(12, 81, 96, 0.80) 35%,
+        rgba(26, 95, 105, 0.65) 65%,
+        rgba(77, 154, 164, 0.45) 100%
+    );
+    filter: blur(70px);
+    -webkit-filter: blur(70px);
     will-change: transform;
-    animation: cta-slosh-left 11s ease-in-out infinite;
+    transform-origin: left center;
+    animation: cta-shore-water 9s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
     -webkit-perspective: 1000;
 }
 
+/*
+ * Sand — anchored right, soft left edge, gentle pulse.
+ * Gradient: teal-light where water meets sand → gold mid → warm gold far right.
+ */
 .cta-blob-right {
-    border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
-    filter: blur(52px);
-    -webkit-filter: blur(52px);
+    border-radius: 55% 0% 0% 50% / 50% 0% 0% 50%;
+    background: linear-gradient(
+        to right,
+        rgba(77, 154, 164, 0.25) 0%,
+        rgba(234, 202, 141, 0.30) 40%,
+        rgba(234, 202, 141, 0.45) 75%,
+        rgba(184, 155, 96, 0.35) 100%
+    );
+    filter: blur(70px);
+    -webkit-filter: blur(70px);
     will-change: transform;
-    animation: cta-slosh-right 14s ease-in-out infinite;
-    animation-delay: -4s;
+    transform-origin: right center;
+    animation: cta-shore-sand 11s ease-in-out infinite;
+    animation-delay: -2s;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-transform: translate3d(0, 0, 0);
     -webkit-perspective: 1000;
 }
 

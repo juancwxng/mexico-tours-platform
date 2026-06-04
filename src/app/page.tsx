@@ -76,15 +76,15 @@ export default async function Home() {
           }}
         />
 
-        {/* Animated Teal Liquid Aura (Left) */}
+        {/* Shore — Water (Teal, Left): deep navy far left → bright teal at shoreline */}
         <div
-          className="absolute -left-[10%] top-0 w-[60%] h-[120%] bg-[#1A5F69]/42 cta-blob-left pointer-events-none"
+          className="absolute -left-[5%] top-0 w-[58%] h-full cta-blob-left pointer-events-none"
           aria-hidden="true"
         />
 
-        {/* Animated Gold Liquid Aura (Right) */}
+        {/* Shore — Sand (Gold, Right): wet sand where water meets → warm gold far right */}
         <div
-          className="absolute -right-[10%] bottom-0 w-[50%] h-[100%] bg-[#EACA8D]/28 cta-blob-right pointer-events-none"
+          className="absolute -right-[5%] top-0 w-[55%] h-full cta-blob-right pointer-events-none"
           aria-hidden="true"
         />
 
