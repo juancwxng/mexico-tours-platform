@@ -14,16 +14,16 @@ interface TourCardProps {
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
-  paseo:    "bg-teal/15 text-teal-light",
+  paseo: "bg-teal/15 text-teal-light",
   aventura: "bg-orange-900/30 text-orange-300",
   cultural: "bg-purple-900/30 text-purple-300",
-  aereo:    "bg-sky-900/30 text-sky-300",
+  aereo: "bg-sky-900/30 text-sky-300",
 };
 const CATEGORY_LABELS: Record<string, { es: string; en: string }> = {
-  paseo:    { es: "Paseo",    en: "Maritime"  },
+  paseo: { es: "Paseo", en: "Maritime" },
   aventura: { es: "Aventura", en: "Adventure" },
-  cultural: { es: "Cultural", en: "Cultural"  },
-  aereo:    { es: "Aéreo",    en: "Aerial"    },
+  cultural: { es: "Cultural", en: "Cultural" },
+  aereo: { es: "Aéreo", en: "Aerial" },
 };
 
 function ImageWithFallback({
@@ -53,9 +53,11 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
   const t = useT();
   const { lang } = useLang();
 
-  const title       = lang === "en" ? (tour.titleEn       ?? tour.title)       : tour.title;
-  const description = lang === "en" ? (tour.descriptionEn ?? tour.description) : tour.description;
-  const schedule    = lang === "en" ? (tour.scheduleEn    ?? tour.schedule)    : tour.schedule;
+  const title = lang === "en" ? (tour.titleEn ?? tour.title) : tour.title;
+  const description =
+    lang === "en" ? (tour.descriptionEn ?? tour.description) : tour.description;
+  const schedule =
+    lang === "en" ? (tour.scheduleEn ?? tour.schedule) : tour.schedule;
 
   const initialSrc =
     tour.imageCount > 0
@@ -63,13 +65,12 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
       : "/images/placeholder.webp";
 
   const catLabel = CATEGORY_LABELS[tour.category]?.[lang] ?? tour.category;
-  const catColor =
-    CATEGORY_COLORS[tour.category] ?? "bg-gold/10 text-gold";
+  const catColor = CATEGORY_COLORS[tour.category] ?? "bg-gold/10 text-gold";
 
   return (
     <Link
       href={`/tours/${tour.slug}`}
-      className="group flex flex-col h-full rounded-2xl overflow-hidden card-lift tour-card-dark"
+      className="group flex flex-col h-full rounded-2xl overflow-hidden card-lift bg-white border border-black/8"
       style={{ boxShadow: "0 2px 20px rgba(0,0,0,0.25)" }}
     >
       {/* Image */}
@@ -97,7 +98,9 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
         )}
         {tour.price === 0 && (
           <div className="absolute top-3 right-3 price-badge px-3 py-1.5">
-            <span className="text-sm font-display text-gold">{t("tour_cotizar")}</span>
+            <span className="text-sm font-display text-gold">
+              {t("tour_cotizar")}
+            </span>
           </div>
         )}
       </div>

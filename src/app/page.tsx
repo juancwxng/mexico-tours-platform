@@ -27,19 +27,20 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col bg-navy">
-
       {/* ── Hero ── */}
       <section className="relative w-full h-[100svh] min-h-[640px] max-h-[960px] overflow-hidden">
         <HeroVideo />
       </section>
 
       {/* ── Featured Tours ── */}
-      <section className="py-20 lg:py-28 bg-navy">
+      <section className="py-20 lg:py-28 bg-[#F9F6F1]">
         <Container>
           <div className="text-center mb-12 lg:mb-16 space-y-4">
             <div className="flex justify-center">
               <span className="section-badge">
-                {lang === "en" ? "Featured Experiences" : "Experiencias Destacadas"}
+                {lang === "en"
+                  ? "Featured Experiences"
+                  : "Experiencias Destacadas"}
               </span>
             </div>
             <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-none text-balance">
@@ -96,7 +97,10 @@ export default async function Home() {
         />
 
         {/* Wave SVG decorative element */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 opacity-10" aria-hidden="true">
+        <div
+          className="absolute bottom-0 left-0 right-0 h-32 opacity-10"
+          aria-hidden="true"
+        >
           <svg
             viewBox="0 0 1440 128"
             fill="none"
@@ -146,7 +150,9 @@ export default async function Home() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
               {/* Wave CTA — gold-to-teal gradient matching the logo */}
               <Link href="/tours" className="btn-wave">
-                <span>{lang === "en" ? "Explore Tours" : "Explorar Tours"}</span>
+                <span>
+                  {lang === "en" ? "Explore Tours" : "Explorar Tours"}
+                </span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
@@ -172,9 +178,22 @@ export default async function Home() {
             {/* Trust micro-strip under CTA */}
             <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
               {[
-                { label: lang === "en" ? "Verified Operators" : "Operadores Verificados", icon: "" },
-                { label: lang === "en" ? "Instant Response" : "Respuesta Inmediata",      icon: "" },
-                { label: lang === "en" ? "Best Price"       : "Mejor Precio",             icon: "" },
+                {
+                  label:
+                    lang === "en"
+                      ? "Verified Operators"
+                      : "Operadores Verificados",
+                  icon: "",
+                },
+                {
+                  label:
+                    lang === "en" ? "Instant Response" : "Respuesta Inmediata",
+                  icon: "",
+                },
+                {
+                  label: lang === "en" ? "Best Price" : "Mejor Precio",
+                  icon: "",
+                },
               ].map(({ label, icon }) => (
                 <div
                   key={label}
@@ -196,7 +215,6 @@ export default async function Home() {
           </div>
         </Container>
       </section>
-
     </main>
   );
 }
