@@ -102,9 +102,9 @@ export default async function TourDetailPage({
       />
       <main className="pt-16 sm:pt-[4.5rem] lg:pt-20 pb-32 lg:pb-20">
         {/* Breadcrumb + back */}
-        <div className="bg-pearl-warm border-b border-gold/12 py-3">
+        <div className="bg-[#f4f1ec] border-b border-gold/12 py-3">
           <Container>
-            <div className="flex items-center gap-2 text-xs text-ink-muted font-bold uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-xs text-navy/60 font-bold uppercase tracking-wider">
               <Link
                 href="/tours"
                 className="inline-flex items-center gap-1.5 hover:text-gold transition-colors"
@@ -128,30 +128,30 @@ export default async function TourDetailPage({
                 </h1>
                 <hr className="divider-gold max-w-16" />
                 <div className="flex flex-wrap gap-2.5">
-                  <div className="flex items-center gap-2 bg-pearl-warm border border-gold/20 px-4 py-2 rounded-full text-sm font-bold text-navy">
+                  <div className="flex items-center gap-2 bg-[#f4f1ec] border border-gold/20 px-4 py-2 rounded-full text-sm font-bold text-navy">
                     <Clock className="w-3.5 h-3.5 text-gold" />
                     {duration}
                   </div>
-                  <div className="flex items-center gap-2 bg-pearl-warm border border-gold/20 px-4 py-2 rounded-full text-sm font-bold text-navy">
+                  <div className="flex items-center gap-2 bg-[#f4f1ec] border border-gold/20 px-4 py-2 rounded-full text-sm font-bold text-navy">
                     <CalendarCheck className="w-3.5 h-3.5 text-teal" />
                     {schedule}
                   </div>
                 </div>
               </div>
 
-              <div className="prose prose-lg text-ink max-w-none leading-relaxed">
+              <div className="prose prose-lg text-navy max-w-none leading-relaxed">
                 <p>{description}</p>
               </div>
 
               {/* Includes */}
               {includes.length > 0 && (
-                <div className="bg-white rounded-2xl border border-pearl-warm p-6 lg:p-8 shadow-sm">
+                <div className="bg-white rounded-2xl border border-navy/10 p-6 lg:p-8 shadow-sm">
                   <h2 className="font-display text-2xl text-navy mb-6">
                     {t("tour_includes")}
                   </h2>
                   <ul className="space-y-3">
                     {includes.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 text-ink">
+                      <li key={i} className="flex items-start gap-3 text-navy">
                         <CheckCircle2 className="w-5 h-5 text-teal flex-shrink-0 mt-0.5" />
                         <span className="leading-relaxed">{item}</span>
                       </li>
@@ -197,7 +197,7 @@ export default async function TourDetailPage({
 
             {/* ── Sidebar ── */}
             <div className="space-y-6 order-1 lg:order-2 lg:sticky lg:top-24 lg:self-start">
-              <div className="rounded-2xl overflow-hidden aspect-[4/3] bg-pearl-warm">
+              <div className="rounded-2xl overflow-hidden aspect-[4/3] bg-[#f4f1ec]">
                 <TourCarousel images={images} title={title} />
               </div>
               <div className="hidden lg:block">
