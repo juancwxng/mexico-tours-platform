@@ -67,7 +67,7 @@ export default async function Home() {
 
       {/* ── CTA Band ── */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
-        {/* Wave gradient background */}
+        {/* Wave gradient background — preserved as-is per design intent */}
         <div
           className="absolute inset-0"
           style={{
@@ -80,8 +80,8 @@ export default async function Home() {
         <div
           className="absolute inset-0 opacity-[0.07]"
           style={{
-            backgroundImage: `radial-gradient(ellipse at 20% 50%, #33727A 0%, transparent 60%),
-                              radial-gradient(ellipse at 80% 50%, #E5C992 0%, transparent 60%)`,
+            backgroundImage: `radial-gradient(ellipse at 20% 50%, #1A5F69 0%, transparent 60%),
+                              radial-gradient(ellipse at 80% 50%, #EACA8D 0%, transparent 60%)`,
           }}
         />
 
@@ -89,12 +89,12 @@ export default async function Home() {
         <div
           className="absolute inset-0 opacity-[0.025]"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #E5C992 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, #EACA8D 1px, transparent 0)`,
             backgroundSize: "40px 40px",
           }}
         />
 
-        {/* Wave SVG decorative element */}
+        {/* Wave SVG decorative element — gradient effect preserved */}
         <div
           className="absolute bottom-0 left-0 right-0 h-32 opacity-10"
           aria-hidden="true"
@@ -111,8 +111,8 @@ export default async function Home() {
             />
             <defs>
               <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#E5C992" />
-                <stop offset="100%" stopColor="#33727A" />
+                <stop offset="0%" stopColor="#EACA8D" />
+                <stop offset="100%" stopColor="#1A5F69" />
               </linearGradient>
             </defs>
           </svg>
@@ -135,7 +135,7 @@ export default async function Home() {
               className="h-px max-w-32 mx-auto"
               style={{
                 background:
-                  "linear-gradient(to right, transparent, #E5C992 30%, #33727A 70%, transparent)",
+                  "linear-gradient(to right, transparent, #EACA8D 30%, #1A5F69 70%, transparent)",
               }}
             />
 
@@ -146,7 +146,7 @@ export default async function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
-              {/* Wave CTA — gold-to-teal gradient matching the logo */}
+              {/* Wave CTA — logo-aligned gold-to-teal gradient */}
               <Link href="/tours" className="btn-wave">
                 <span>
                   {lang === "en" ? "Explore Tours" : "Explorar Tours"}
@@ -173,7 +173,7 @@ export default async function Home() {
               </Link>
             </div>
 
-            {/* Trust micro-strip under CTA */}
+            {/* PATCH 7: trust strip raised to white/60 (was white/40) */}
             <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
               {[
                 {
@@ -195,9 +195,8 @@ export default async function Home() {
               ].map(({ label, icon }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-2 text-white/40 text-xs font-bold uppercase tracking-wider"
+                  className="flex items-center gap-2 text-white/60 text-xs font-bold uppercase tracking-wider"
                 >
-                  {/* SVG icon — src intentionally empty; add your own path */}
                   <img
                     src={icon}
                     alt=""
