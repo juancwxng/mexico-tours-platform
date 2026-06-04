@@ -54,10 +54,10 @@ export default async function BlogIndexPage() {
                 <Link
                   key={post.id}
                   href={`/blog/${post.slug}`}
-                  className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-pearl-warm card-lift"
+                  className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-navy/8 card-lift"
                   style={{ boxShadow: "0 2px 20px rgba(26,58,80,0.07)" }}
                 >
-                  <div className="relative h-52 overflow-hidden bg-pearl-warm">
+                  <div className="relative h-52 overflow-hidden bg-navy/5">
                     <Image
                       src={post.ogImage}
                       alt={title}
@@ -68,7 +68,7 @@ export default async function BlogIndexPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent" />
                   </div>
                   <div className="p-6 lg:p-7 flex-1 flex flex-col gap-3">
-                    <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-wider text-ink-muted">
+                    <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-wider text-navy/60">
                       <span className="flex items-center gap-1.5">
                         <Calendar className="w-3 h-3 text-gold" />
                         {formatDate(post.date, lang)}
@@ -81,7 +81,7 @@ export default async function BlogIndexPage() {
                     <h2 className="font-display text-xl lg:text-2xl text-navy group-hover:text-gold transition-colors leading-snug">
                       {title}
                     </h2>
-                    <p className="text-ink-muted text-sm line-clamp-3 leading-relaxed flex-1">{excerpt}</p>
+                    <p className="text-navy/60 text-sm line-clamp-3 leading-relaxed flex-1">{excerpt}</p>
                     <span className="inline-flex items-center gap-2 text-navy font-bold text-xs uppercase tracking-wider group-hover:text-gold transition-colors mt-1">
                       {t("blog_read")}
                       <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
