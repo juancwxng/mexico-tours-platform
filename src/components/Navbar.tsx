@@ -91,7 +91,7 @@ export default function Navbar() {
                 className="absolute top-0 left-0 w-1 h-full"
                 style={{
                   background:
-                    "linear-gradient(to bottom, #E5C992, #33727A, #E5C992)",
+                    "linear-gradient(to bottom, #EACA8D, #1A5F69, #EACA8D)",
                 }}
               />
               <div className="pl-4">
@@ -113,6 +113,7 @@ export default function Navbar() {
                   ))}
                 </nav>
                 <div className="mt-8 pt-6 border-t border-white/10">
+                  {/* PATCH 3: mobile lang toggle — raised from white/30 to white/50 */}
                   <button
                     type="button"
                     onClick={toggleLang}
@@ -122,13 +123,14 @@ export default function Navbar() {
                     }
                   >
                     <span
-                      className={lang === "es" ? "text-gold" : "text-white/30"}
+                      className={lang === "es" ? "text-gold" : "text-white/50"}
                     >
                       ES
                     </span>
-                    <span className="text-white/20">|</span>
+                    {/* PATCH 3: separator raised from white/20 to white/35 */}
+                    <span className="text-white/35">|</span>
                     <span
-                      className={lang === "en" ? "text-gold" : "text-white/30"}
+                      className={lang === "en" ? "text-gold" : "text-white/50"}
                     >
                       EN
                     </span>
@@ -204,6 +206,7 @@ export default function Navbar() {
           </form>
 
           {/* Language toggle desktop */}
+          {/* PATCH 3: inactive labels raised from opacity-30 to opacity-50 */}
           {mounted && (
             <button
               type="button"
@@ -215,15 +218,15 @@ export default function Navbar() {
             >
               <span
                 className={
-                  lang === "es" ? "opacity-100 text-gold" : "opacity-30"
+                  lang === "es" ? "opacity-100 text-gold" : "opacity-50 text-white"
                 }
               >
                 ES
               </span>
-              <span className="opacity-20 mx-0.5">|</span>
+              <span className="opacity-35 mx-0.5">|</span>
               <span
                 className={
-                  lang === "en" ? "opacity-100 text-gold" : "opacity-30"
+                  lang === "en" ? "opacity-100 text-gold" : "opacity-50 text-white"
                 }
               >
                 EN
