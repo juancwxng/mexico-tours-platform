@@ -39,15 +39,15 @@
 
 @theme inline {
     --color-navy: #0b1724; /* Primary Dark */
-    --color-gold: #eaca8d; /* PATCH 1: aligned to logo SVG source #eaca8d (was #e5c992) */
-    --color-teal: #1a5f69; /* PATCH 1: midpoint toward logo #0c5160 (was #33727a) */
+    --color-gold: #eaca8d;
+    --color-teal: #1a5f69;
     --color-white: #ffffff; /* Text / Highlight – Crisp White */
 
     /* Derived tints & shades */
     --color-gold-light: #f5e4c3;
     --color-gold-dark: #b89b60;
     --color-teal-light: #4d9aa4;
-    --color-teal-dark: #0c5160; /* PATCH 1: aligned to logo teal dark stop */
+    --color-teal-dark: #0c5160;
     --color-navy-light: #1c2e40;
     --color-navy-mid: #0e1e2e;
 
@@ -60,7 +60,7 @@
     /* Legacy brand aliases */
     --color-central-bg: #fafafa;
     --color-central-blue: #0b1724;
-    --color-central-yellow: #eaca8d; /* PATCH 1: aligned to logo gold */
+    --color-central-yellow: #eaca8d;
 
     --font-sans: "Lato", sans-serif;
     --font-display: "Marcellus", serif;
@@ -99,12 +99,12 @@
     --secondary-foreground: #0b1724;
     --muted: #f0f2f5;
     --muted-foreground: #475569;
-    --accent: #1a5f69; /* PATCH 1: aligned to new teal token */
+    --accent: #1a5f69;
     --accent-foreground: #ffffff;
     --destructive: oklch(0.577 0.245 27.325);
     --border: rgba(11, 23, 36, 0.1);
     --input: rgba(11, 23, 36, 0.1);
-    --ring: #1a5f69; /* PATCH 1: aligned to new teal token */
+    --ring: #1a5f69;
 }
 
 html {
@@ -140,7 +140,7 @@ body {
     background: #0e1e2e;
 }
 ::-webkit-scrollbar-thumb {
-    background: #eaca8d; /* PATCH 1: aligned to logo gold */
+    background: #eaca8d;
     border-radius: 3px;
 }
 
@@ -251,7 +251,7 @@ body {
     background: linear-gradient(
         90deg,
         #eaca8d 0%,
-        /* PATCH 1: logo gold */ #f5e4c3 40%,
+        #f5e4c3 40%,
         #eaca8d 60%,
         #b89b60 100%
     );
@@ -271,7 +271,7 @@ body {
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #eaca8d; /* PATCH 1: logo gold */
+    color: #eaca8d;
     padding: 0.28rem 0.9rem;
     border: 1px solid rgba(234, 202, 141, 0.3);
     border-radius: 100px;
@@ -285,23 +285,18 @@ body {
         to right,
         transparent,
         #eaca8d 30%,
-        /* PATCH 1: logo gold */ #1a5f69 70%,
-        /* PATCH 1: new teal */ transparent
+        #1a5f69 70%,
+        transparent
     );
     border: none;
 }
 
 /* ── Wave gradient (mimics logo wave) ── */
 .gradient-wave {
-    background: linear-gradient(135deg, #eaca8d 0%, #1a5f69 100%); /* PATCH 1 */
+    background: linear-gradient(135deg, #eaca8d 0%, #1a5f69 100%);
 }
 .gradient-wave-animated {
-    background: linear-gradient(
-        270deg,
-        #eaca8d,
-        #1a5f69,
-        #eaca8d
-    ); /* PATCH 1 */
+    background: linear-gradient(270deg, #eaca8d, #1a5f69, #eaca8d);
     background-size: 300% 300%;
     animation: gradientShift 6s ease infinite;
 }
@@ -317,11 +312,7 @@ body {
     text-transform: uppercase;
     font-size: 0.82rem;
     padding: 0.9rem 2.2rem;
-    background: linear-gradient(
-        135deg,
-        #eaca8d 0%,
-        #b89b60 100%
-    ); /* PATCH 1: logo gold */
+    background: linear-gradient(135deg, #eaca8d 0%, #b89b60 100%);
     color: #0b1724;
     border-radius: 100px;
     transition:
@@ -348,7 +339,7 @@ body {
     text-transform: uppercase;
     font-size: 0.82rem;
     padding: 0.9rem 2.4rem;
-    background: linear-gradient(135deg, #eaca8d 0%, #1a5f69 100%); /* PATCH 1 */
+    background: linear-gradient(135deg, #eaca8d 0%, #1a5f69 100%);
     color: #0b1724;
     border-radius: 100px;
     transition:
@@ -364,7 +355,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #1a5f69 0%, #eaca8d 100%); /* PATCH 1 */
+    background: linear-gradient(135deg, #1a5f69 0%, #eaca8d 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
     border-radius: 100px;
@@ -394,7 +385,7 @@ body {
     padding: 0.88rem 2.2rem;
     background: transparent;
     color: #ffffff;
-    border: 1.5px solid rgba(234, 202, 141, 0.45); /* PATCH 1 */
+    border: 1.5px solid rgba(234, 202, 141, 0.45);
     border-radius: 100px;
     transition:
         background 0.25s ease,
@@ -404,7 +395,7 @@ body {
     text-decoration: none;
 }
 .btn-ghost:hover {
-    background: rgba(234, 202, 141, 0.1); /* PATCH 1 */
+    background: rgba(234, 202, 141, 0.1);
     color: #eaca8d;
     border-color: #eaca8d;
     transform: translateY(-2px);
@@ -423,7 +414,7 @@ body {
     padding: 0.88rem 2.2rem;
     background: transparent;
     color: #ffffff;
-    border: 1.5px solid rgba(26, 95, 105, 0.6); /* PATCH 1 */
+    border: 1.5px solid rgba(26, 95, 105, 0.6);
     border-radius: 100px;
     transition:
         background 0.25s ease,
@@ -433,7 +424,7 @@ body {
     text-decoration: none;
 }
 .btn-teal-ghost:hover {
-    background: rgba(26, 95, 105, 0.15); /* PATCH 1 */
+    background: rgba(26, 95, 105, 0.15);
     border-color: #1a5f69;
     transform: translateY(-2px);
 }
@@ -451,10 +442,25 @@ body {
 
 /* ── Navbar ── */
 .navbar-scrolled {
-    background: rgba(11, 23, 36, 0.92);
+    background:
+        radial-gradient(
+            circle at 100% 50%,
+            rgba(234, 202, 141, 0.12) 0%,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 75% 50%,
+            rgba(26, 95, 105, 0.35) 0%,
+            transparent 55%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(11, 23, 36, 0.95) 0%,
+            rgba(14, 30, 46, 0.9) 100%
+        );
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border-bottom: 1px solid rgba(234, 202, 141, 0.15); /* PATCH 1 */
+    border-bottom: 1px solid rgba(234, 202, 141, 0.15);
     box-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
 }
 
@@ -557,14 +563,13 @@ body {
 /* ── Tour card on dark bg ── */
 .tour-card-dark {
     background: #0e1e2e;
-    border: 1px solid rgba(234, 202, 141, 0.1); /* PATCH 1 */
+    border: 1px solid rgba(234, 202, 141, 0.1);
 }
 .tour-card-dark:hover {
-    border-color: rgba(234, 202, 141, 0.25); /* PATCH 1 */
+    border-color: rgba(234, 202, 141, 0.25);
 }
 
 /* ── Teal pill (category badge) ── */
-/* PATCH 5: dark teal text on light teal tint — ~5.8:1 contrast ratio */
 .teal-pill {
     display: inline-flex;
     align-items: center;
@@ -584,7 +589,7 @@ body {
     background: rgba(11, 23, 36, 0.75);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    color: #eaca8d; /* PATCH 1 */
+    color: #eaca8d;
     border: 1px solid rgba(234, 202, 141, 0.3);
     border-radius: 0.75rem;
 }
@@ -593,10 +598,9 @@ body {
 .cta-glow {
     box-shadow:
         0 0 80px rgba(26, 95, 105, 0.2),
-        /* PATCH 1 */ 0 0 40px rgba(234, 202, 141, 0.1); /* PATCH 1 */
+        0 0 40px rgba(234, 202, 141, 0.1);
 }
 
-/* ── Hero text shadow — PATCH 8 ── */
 /* Applied to hero subtitle for contrast over bright video frames */
 .text-hero-shadow {
     text-shadow:
@@ -605,7 +609,7 @@ body {
 }
 
 :focus-visible {
-    outline: 2px solid #eaca8d; /* PATCH 1 */
+    outline: 2px solid #eaca8d;
     outline-offset: 3px;
     border-radius: 4px;
 }
