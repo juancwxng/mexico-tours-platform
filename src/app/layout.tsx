@@ -9,12 +9,6 @@ import { cookies } from "next/headers";
 import { safeJsonLd } from "@/lib/utils";
 import WhatsAppPill from "@/components/WhatsAppPill";
 
-// ─────────────────────────────────────────────
-// Fonts are now served from /public/fonts/ as
-// local @font-face declarations in globals.css.
-// No next/font/google import needed.
-// ─────────────────────────────────────────────
-
 function getSiteUrl(): string {
   const url = process.env.NEXT_PUBLIC_SITE_URL;
   if (!url && process.env.NODE_ENV === "production") {
@@ -36,9 +30,21 @@ export const metadata: Metadata = {
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
-      { url: "/icons/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/icons/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/icons/favicon/icon-96x96.png",    sizes: "96x96", type: "image/png" },
+      {
+        url: "/icons/favicon/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: "/icons/favicon/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/icons/favicon/icon-96x96.png",
+        sizes: "96x96",
+        type: "image/png",
+      },
     ],
     shortcut: "/icons/favicon/favicon.ico",
     apple: [
@@ -124,7 +130,7 @@ export default async function RootLayout({
         />
       </head>
       <body
-        className="antialiased flex flex-col min-h-dvh bg-navy text-white"
+        className="antialiased flex flex-col min-h-dvh bg-background text-foreground"
         suppressHydrationWarning
       >
         <LangProvider initialLang={lang}>

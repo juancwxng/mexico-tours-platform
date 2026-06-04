@@ -26,7 +26,7 @@ export default async function Home() {
   const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526690000000";
 
   return (
-    <main className="flex flex-col bg-navy">
+    <main className="flex flex-col">
       {/* ── Hero ── */}
       <section className="relative w-full h-[100svh] min-h-[640px] max-h-[960px] overflow-hidden">
         <HeroVideo />
