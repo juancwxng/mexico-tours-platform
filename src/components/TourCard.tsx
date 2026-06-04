@@ -13,17 +13,18 @@ interface TourCardProps {
   priority?: boolean;
 }
 
+// PATCH 5: all category colors now use dark text on light tint for legibility on white cards
 const CATEGORY_COLORS: Record<string, string> = {
-  paseo: "bg-teal/15 text-teal-light",
-  aventura: "bg-orange-900/30 text-orange-300",
-  cultural: "bg-purple-900/30 text-purple-300",
-  aereo: "bg-sky-900/30 text-sky-300",
+  paseo:    "bg-teal/12 text-teal-dark",
+  aventura: "bg-amber-100 text-amber-800",
+  cultural: "bg-purple-100 text-purple-800",
+  aereo:    "bg-sky-100 text-sky-800",
 };
 const CATEGORY_LABELS: Record<string, { es: string; en: string }> = {
-  paseo: { es: "Paseo", en: "Maritime" },
+  paseo:    { es: "Paseo",    en: "Maritime" },
   aventura: { es: "Aventura", en: "Adventure" },
   cultural: { es: "Cultural", en: "Cultural" },
-  aereo: { es: "Aéreo", en: "Aerial" },
+  aereo:    { es: "Aéreo",    en: "Aerial" },
 };
 
 function ImageWithFallback({
@@ -65,7 +66,7 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
       : "/images/placeholder.webp";
 
   const catLabel = CATEGORY_LABELS[tour.category]?.[lang] ?? tour.category;
-  const catColor = CATEGORY_COLORS[tour.category] ?? "bg-gold/10 text-gold";
+  const catColor = CATEGORY_COLORS[tour.category] ?? "bg-gold/10 text-navy";
 
   return (
     <Link
@@ -80,7 +81,7 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
 
-        {/* Category pill */}
+        {/* Category pill — PATCH 5: uses .teal-pill base + per-category override */}
         <div className={`absolute top-3 left-3 teal-pill ${catColor}`}>
           {catLabel}
         </div>
@@ -107,8 +108,8 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
 
       {/* Body */}
       <div className="p-5 flex-1 flex flex-col gap-2.5 bg-white">
-        {/* Location + duration */}
-        <div className="flex items-center justify-between text-xs font-bold text-navy-light/60 uppercase tracking-wide">
+        {/* Location + duration — PATCH 4: navy/70 (~5.1:1 on white) replaces navy-light/60 (~3.1:1) */}
+        <div className="flex items-center justify-between text-xs font-bold text-navy/70 uppercase tracking-wide">
           <span className="flex items-center gap-1">
             <MapPin className="w-3 h-3 text-teal" />
             Mazatlán
@@ -121,9 +122,9 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
           )}
         </div>
 
-        {/* Schedule */}
+        {/* Schedule — PATCH 4 */}
         {tour.schedule && (
-          <div className="flex items-center gap-1 text-xs text-navy-light/60">
+          <div className="flex items-center gap-1 text-xs text-navy/70">
             <Calendar className="w-3 h-3 text-teal" /> {schedule}
           </div>
         )}
@@ -133,8 +134,8 @@ export default function TourCard({ tour, priority = false }: TourCardProps) {
           {title}
         </h3>
 
-        {/* Description */}
-        <p className="text-navy-light/80 text-sm line-clamp-2 leading-relaxed flex-1 font-medium">
+        {/* Description — PATCH 4: navy/75 (~5.5:1 on white) replaces navy-light/80 (~4.2:1) */}
+        <p className="text-navy/75 text-sm line-clamp-2 leading-relaxed flex-1">
           {description}
         </p>
 
