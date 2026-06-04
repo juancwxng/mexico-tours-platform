@@ -55,7 +55,8 @@ export default async function HeroVideo() {
           {t("home_hero_title")}
         </h1>
 
-        <p className="text-lg md:text-xl font-sans font-light text-white/80 max-w-xl mb-9 leading-relaxed drop-shadow animate-fade-up delay-200">
+        {/* PATCH 8: text-hero-shadow added for contrast on bright video frames */}
+        <p className="text-lg md:text-xl font-sans font-light text-white/80 max-w-xl mb-9 leading-relaxed text-hero-shadow animate-fade-up delay-200">
           {t("home_hero_subtitle")}
         </p>
 
@@ -64,15 +65,12 @@ export default async function HeroVideo() {
           <Link href="/tours" className="btn-gold text-sm">
             {t("home_hero_cta")}
           </Link>
-          <Link
-            href="/contact"
-            className="btn-ghost text-sm"
-          >
+          <Link href="/contact" className="btn-ghost text-sm">
             {lang === "en" ? "Contact Us" : "Contáctanos"}
           </Link>
         </div>
 
-        {/* Trust signals strip — SVG icons, src intentionally empty */}
+        {/* Trust signals strip */}
         <div className="flex items-center gap-6 mt-10 animate-fade-up delay-400">
           {[
             {
