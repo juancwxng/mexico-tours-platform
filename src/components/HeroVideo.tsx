@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
-import { Waves, Star } from "lucide-react";
 import VideoBackground from "./VideoBackground";
 
 export default async function HeroVideo() {
@@ -21,10 +20,10 @@ export default async function HeroVideo() {
           background: `
             linear-gradient(
               to bottom,
-              rgba(26,58,80,0.22) 0%,
-              rgba(26,58,80,0.04) 35%,
-              rgba(26,58,80,0.08) 60%,
-              rgba(26,58,80,0.68) 100%
+              rgba(11,23,36,0.28) 0%,
+              rgba(11,23,36,0.05) 35%,
+              rgba(11,23,36,0.12) 60%,
+              rgba(11,23,36,0.72) 100%
             )
           `,
         }}
@@ -34,7 +33,7 @@ export default async function HeroVideo() {
       <div
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(ellipse at center, transparent 50%, rgba(26,58,80,0.35) 100%)`,
+          background: `radial-gradient(ellipse at center, transparent 50%, rgba(11,23,36,0.4) 100%)`,
         }}
       />
 
@@ -51,12 +50,12 @@ export default async function HeroVideo() {
 
         <h1
           className="font-display text-5xl md:text-7xl lg:text-8xl xl:text-9xl leading-none mb-5 drop-shadow-xl animate-fade-up delay-100"
-          style={{ textShadow: "0 2px 40px rgba(26,58,80,0.4)" }}
+          style={{ textShadow: "0 2px 40px rgba(11,23,36,0.5)" }}
         >
           {t("home_hero_title")}
         </h1>
 
-        <p className="text-lg md:text-xl font-sans font-light text-white/85 max-w-xl mb-9 leading-relaxed drop-shadow animate-fade-up delay-200">
+        <p className="text-lg md:text-xl font-sans font-light text-white/80 max-w-xl mb-9 leading-relaxed drop-shadow animate-fade-up delay-200">
           {t("home_hero_subtitle")}
         </p>
 
@@ -68,29 +67,35 @@ export default async function HeroVideo() {
           <Link
             href="/contact"
             className="btn-ghost text-sm"
-            style={{ borderColor: "rgba(255,255,255,0.4)", color: "white" }}
           >
             {lang === "en" ? "Contact Us" : "Contáctanos"}
           </Link>
         </div>
 
-        {/* Trust signals strip */}
-        <div className="flex items-center gap-5 mt-10 animate-fade-up delay-400">
+        {/* Trust signals strip — SVG icons, src intentionally empty */}
+        <div className="flex items-center gap-6 mt-10 animate-fade-up delay-400">
           {[
             {
-              icon: Star,
+              icon: "/icons/wave.svg",
               label: lang === "en" ? "Top-rated" : "Mejor valorado",
             },
             {
-              icon: Waves,
+              icon: "/icons/boat.svg",
               label: lang === "en" ? "Pacific Coast" : "Costa Pacífico",
             },
-          ].map(({ icon: Icon, label }) => (
+          ].map(({ icon, label }) => (
             <div
               key={label}
-              className="flex items-center gap-1.5 text-white/70 text-xs font-sans font-bold tracking-wide"
+              className="flex items-center gap-2 text-white/65 text-xs font-sans font-bold tracking-wide"
             >
-              <Icon className="w-3.5 h-3.5 text-gold/80" />
+              <img
+                src={icon}
+                alt=""
+                width={14}
+                height={14}
+                aria-hidden="true"
+                className="opacity-70 brightness-0 invert"
+              />
               {label}
             </div>
           ))}
@@ -99,9 +104,9 @@ export default async function HeroVideo() {
 
       {/* Scroll indicator */}
       <div className="scroll-indicator z-10" aria-hidden="true">
-        <div className="w-6 h-9 rounded-full border-2 border-white/40 flex items-start justify-center pt-1.5">
+        <div className="w-6 h-9 rounded-full border-2 border-white/35 flex items-start justify-center pt-1.5">
           <div
-            className="w-1 h-2 bg-white/60 rounded-full"
+            className="w-1 h-2 bg-white/55 rounded-full"
             style={{ animation: "scrollBounce 2.2s ease-in-out infinite" }}
           />
         </div>
