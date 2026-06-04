@@ -67,7 +67,7 @@ export default async function Home() {
 
       {/* ── CTA Band ── */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
-        {/* Wave gradient background — preserved as-is per design intent */}
+        {/* Wave gradient background */}
         <div
           className="absolute inset-0"
           style={{
@@ -76,13 +76,16 @@ export default async function Home() {
           }}
         />
 
-        {/* Animated teal-gold diagonal accent */}
+        {/* Animated Teal Liquid Aura (Left) */}
         <div
-          className="absolute inset-0 opacity-[0.10]"
-          style={{
-            backgroundImage: `radial-gradient(ellipse at 20% 50%, #1A5F69 0%, transparent 100%),
-                                      radial-gradient(ellipse at 80% 50%, #EACA8D 0%, transparent 100%)`,
-          }}
+          className="absolute -left-[10%] top-0 w-[60%] h-[120%] bg-[#1A5F69]/20 blob-shape pointer-events-none"
+          aria-hidden="true"
+        />
+
+        {/* Animated Gold Liquid Aura (Right) */}
+        <div
+          className="absolute -right-[10%] bottom-0 w-[50%] h-[100%] bg-[#EACA8D]/15 blob-shape-reverse pointer-events-none delay-500"
+          aria-hidden="true"
         />
 
         {/* Subtle dot texture */}
@@ -94,7 +97,7 @@ export default async function Home() {
           }}
         />
 
-        {/* Wave SVG decorative element — gradient effect preserved */}
+        {/* Wave SVG decorative element */}
         <div
           className="absolute bottom-0 left-0 right-0 h-32 opacity-10"
           aria-hidden="true"
@@ -173,7 +176,6 @@ export default async function Home() {
               </Link>
             </div>
 
-            {/* PATCH 7: trust strip raised to white/60 (was white/40) */}
             <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
               {[
                 {

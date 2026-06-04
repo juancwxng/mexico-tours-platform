@@ -465,6 +465,66 @@ body {
     box-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
 }
 
+/* ── Liquid Blob GPU Animations ── */
+@keyframes liquid-spin {
+    0% {
+        transform: rotate(0deg) scale(1) translate3d(0, 0, 0);
+    }
+    33% {
+        transform: rotate(120deg) scale(1.1) translate3d(5%, 5%, 0);
+    }
+    66% {
+        transform: rotate(240deg) scale(0.9) translate3d(-5%, -2%, 0);
+    }
+    100% {
+        transform: rotate(360deg) scale(1) translate3d(0, 0, 0);
+    }
+}
+
+.blob-shape {
+    /* Asymmetrical border-radius creates the organic shape */
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    filter: blur(60px); /* Heavy blur creates the glowing aura */
+    will-change: transform;
+    animation: liquid-spin 20s linear infinite;
+}
+
+.blob-shape-reverse {
+    border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+    filter: blur(60px);
+    will-change: transform;
+    animation: liquid-spin 25s linear infinite reverse;
+}
+
+/* ── Navbar Sliding Wave GPU Animation ── */
+@keyframes slide-wave {
+    0% {
+        transform: translate3d(0%, 0, 0);
+    }
+    50% {
+        transform: translate3d(-50%, 0, 0);
+    }
+    100% {
+        transform: translate3d(0%, 0, 0);
+    }
+}
+
+.gpu-gradient-slide {
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #eaca8d,
+        #1a5f69,
+        #eaca8d,
+        #1a5f69,
+        transparent
+    );
+    width: 200%;
+    height: 100%;
+    animation: slide-wave 10s linear infinite;
+    will-change: transform;
+}
+
 /* ── WhatsApp pill ── */
 .whatsapp-pill {
     position: fixed;
