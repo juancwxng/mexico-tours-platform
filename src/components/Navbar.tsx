@@ -218,7 +218,9 @@ export default function Navbar() {
             >
               <span
                 className={
-                  lang === "es" ? "opacity-100 text-gold" : "opacity-50 text-white"
+                  lang === "es"
+                    ? "opacity-100 text-gold"
+                    : "opacity-50 text-white"
                 }
               >
                 ES
@@ -226,7 +228,9 @@ export default function Navbar() {
               <span className="opacity-35 mx-0.5">|</span>
               <span
                 className={
-                  lang === "en" ? "opacity-100 text-gold" : "opacity-50 text-white"
+                  lang === "en"
+                    ? "opacity-100 text-gold"
+                    : "opacity-50 text-white"
                 }
               >
                 EN
@@ -278,6 +282,17 @@ export default function Navbar() {
           </div>
         </div>
       </Container>
+
+      {/* ── LÍNEA GRADIENTE INFERIOR ── */}
+      <div
+        className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-500 ${
+          isScrolled ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          background:
+            "linear-gradient(to right, transparent, #EACA8D 30%, #1A5F69 70%, transparent)",
+        }}
+      />
     </header>
   );
 }
