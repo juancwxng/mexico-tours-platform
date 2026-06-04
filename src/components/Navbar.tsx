@@ -65,6 +65,16 @@ export default function Navbar() {
         transparent ? "" : "navbar-scrolled"
       }`}
     >
+      {/* ── BOTTLE SLOSH AURA (Only visible when scrolled) ── */}
+      <div
+        className={`absolute inset-0 overflow-hidden transition-opacity duration-700 pointer-events-none -z-10 ${
+          isScrolled ? "opacity-100" : "opacity-0"
+        }`}
+        aria-hidden="true"
+      >
+        <div className="navbar-slosh-layer" />
+      </div>
+
       <Container
         as="nav"
         className="h-full flex items-center justify-between gap-3"
@@ -206,7 +216,6 @@ export default function Navbar() {
           </form>
 
           {/* Language toggle desktop */}
-          {/* PATCH 3: inactive labels raised from opacity-30 to opacity-50 */}
           {mounted && (
             <button
               type="button"
@@ -283,16 +292,17 @@ export default function Navbar() {
         </div>
       </Container>
 
-      {/* ── LÍNEA GRADIENTE INFERIOR ── */}
+      {/* ── LÍNEA GRADIENTE INFERIOR ANIMADA ── */}
       <div
-        className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-500 ${
+        className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-500 overflow-hidden ${
           isScrolled ? "opacity-100" : "opacity-0"
         }`}
-        style={{
-          background:
-            "linear-gradient(to right, transparent, #EACA8D 30%, #1A5F69 70%, transparent)",
-        }}
-      />
+      >
+        <div
+          className="gpu-gradient-slide pointer-events-none"
+          aria-hidden="true"
+        />
+      </div>
     </header>
   );
 }
