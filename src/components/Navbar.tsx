@@ -48,8 +48,7 @@ export default function Navbar() {
     setIsSearchOpen(false);
   };
 
-  // Transparent on hero pages (home), glass everywhere else
-  const isHero = pathname === "/";
+  const isHero      = pathname === "/";
   const transparent = isHero && !isScrolled;
 
   return (
@@ -67,19 +66,18 @@ export default function Navbar() {
               <Button
                 variant="ghost"
                 size="icon"
-                className={`w-11 h-11 -ml-2 transition-colors ${
-                  transparent ? "text-white hover:bg-white/10" : "text-navy hover:bg-gold/10"
-                }`}
+                className="w-11 h-11 -ml-2 text-white hover:bg-white/10 transition-colors"
                 aria-label={t("nav_menu_open")}
               >
                 <Menu className="h-6 w-6" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-[min(80vw,320px)] bg-pearl border-r-0 shadow-2xl">
-              {/* Gold accent bar */}
-              <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-gold via-teal to-gold" />
+            <SheetContent side="left" className="w-[min(80vw,320px)] bg-navy border-r border-gold/15 shadow-2xl">
+              {/* Gold-to-teal accent bar */}
+              <div className="absolute top-0 left-0 w-1 h-full"
+                style={{ background: "linear-gradient(to bottom, #E5C992, #33727A, #E5C992)" }} />
               <div className="pl-4">
-                <SheetTitle className="font-display text-navy text-2xl mb-8 mt-2">
+                <SheetTitle className="font-display text-white text-2xl mb-8 mt-2">
                   Costa Franca
                 </SheetTitle>
                 <nav className="flex flex-col gap-1">
@@ -87,7 +85,7 @@ export default function Navbar() {
                     <SheetClose asChild key={link.name}>
                       <Link
                         href={link.href}
-                        className={`py-3 px-4 text-lg font-display text-navy hover:text-gold hover:bg-gold/5 rounded-xl transition-all duration-200 ${
+                        className={`py-3 px-4 text-lg font-display text-white/80 hover:text-gold hover:bg-gold/5 rounded-xl transition-all duration-200 ${
                           pathname === link.href ? "text-gold bg-gold/5" : ""
                         }`}
                       >
@@ -96,16 +94,16 @@ export default function Navbar() {
                     </SheetClose>
                   ))}
                 </nav>
-                <div className="mt-8 pt-6 border-t border-pearl-warm">
+                <div className="mt-8 pt-6 border-t border-white/10">
                   <button
                     type="button"
                     onClick={toggleLang}
-                    className="flex items-center gap-2 text-sm font-bold text-navy/60 hover:text-navy transition-colors min-h-[44px] px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-lg"
+                    className="flex items-center gap-2 text-sm font-bold text-white/50 hover:text-white transition-colors min-h-[44px] px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-lg"
                     aria-label={lang === "es" ? "Switch to English" : "Cambiar a Español"}
                   >
-                    <span className={lang === "es" ? "text-navy" : "text-navy/35"}>ES</span>
-                    <span className="text-navy/20">|</span>
-                    <span className={lang === "en" ? "text-navy" : "text-navy/35"}>EN</span>
+                    <span className={lang === "es" ? "text-gold" : "text-white/30"}>ES</span>
+                    <span className="text-white/20">|</span>
+                    <span className={lang === "en" ? "text-gold" : "text-white/30"}>EN</span>
                   </button>
                 </div>
               </div>
@@ -118,18 +116,14 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-2 lg:gap-3 group">
             <div className="relative w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12 transition-transform duration-300 group-hover:scale-105">
               <Image
-                src="/branding/logo.svg"
+                src="/logo/Logo_CostaFranca.svg"
                 alt="Costa Franca Tours"
                 fill
                 className="object-contain"
                 priority
               />
             </div>
-            <span
-              className={`hidden lg:block font-display text-base xl:text-lg tracking-wide transition-colors duration-300 ${
-                transparent ? "text-white/90" : "text-navy"
-              }`}
-            >
+            <span className="hidden lg:block font-display text-base xl:text-lg tracking-wide text-white/90 transition-colors duration-300 group-hover:text-gold">
               Costa Franca Tours
             </span>
           </Link>
@@ -141,15 +135,16 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className={`relative text-sm xl:text-[0.9rem] font-display tracking-wide whitespace-nowrap transition-colors duration-300 group ${
-                transparent ? "text-white/85 hover:text-white" : "text-navy/80 hover:text-navy"
-              } ${pathname === link.href ? (transparent ? "text-white" : "text-gold") : ""}`}
+              className={`relative text-sm xl:text-[0.9rem] font-display tracking-wide whitespace-nowrap transition-colors duration-300 group text-white/75 hover:text-white ${
+                pathname === link.href ? "text-gold hover:text-gold" : ""
+              }`}
             >
               {t(link.name)}
-              {/* Animated underline */}
               <span
-                className={`absolute -bottom-1 left-0 h-px bg-gold transition-all duration-300 ${
-                  pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
+                className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${
+                  pathname === link.href
+                    ? "w-full bg-gold"
+                    : "w-0 group-hover:w-full bg-gold/60"
                 }`}
               />
             </Link>
@@ -166,18 +161,12 @@ export default function Navbar() {
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t("nav_search")}
               maxLength={100}
-              className={`w-full h-9 rounded-full border pl-4 pr-10 text-sm focus:outline-none transition-all duration-300 ${
-                transparent
-                  ? "bg-white/15 border-white/25 text-white placeholder:text-white/50 focus:bg-white/25 focus:border-white/50"
-                  : "bg-pearl-warm border-gold/20 text-navy placeholder:text-ink-muted/50 focus:border-gold"
-              }`}
+              className="w-full h-9 rounded-full border pl-4 pr-10 text-sm focus:outline-none transition-all duration-300 bg-white/8 border-white/15 text-white placeholder:text-white/35 focus:bg-white/12 focus:border-gold/50"
             />
             <button
               type="submit"
               aria-label={t("nav_search_open")}
-              className={`absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center transition-colors ${
-                transparent ? "text-white/70 hover:text-white" : "text-navy/60 hover:text-gold"
-              }`}
+              className="absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center text-white/50 hover:text-gold transition-colors"
             >
               <Search className="w-3.5 h-3.5" />
             </button>
@@ -188,16 +177,12 @@ export default function Navbar() {
             <button
               type="button"
               onClick={toggleLang}
-              className={`hidden lg:flex items-center gap-1 text-xs font-bold border rounded-full px-3 py-2 min-h-[36px] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold ${
-                transparent
-                  ? "border-white/25 text-white/80 hover:border-white hover:text-white"
-                  : "border-gold/30 text-navy/70 hover:border-gold hover:text-gold"
-              }`}
+              className="hidden lg:flex items-center gap-1 text-xs font-bold border rounded-full px-3 py-2 min-h-[36px] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold border-white/20 text-white/60 hover:border-gold/50 hover:text-gold"
               aria-label={lang === "es" ? "Switch to English" : "Cambiar a Español"}
             >
-              <span className={lang === "es" ? "opacity-100" : "opacity-35"}>ES</span>
+              <span className={lang === "es" ? "opacity-100 text-gold" : "opacity-30"}>ES</span>
               <span className="opacity-20 mx-0.5">|</span>
-              <span className={lang === "en" ? "opacity-100" : "opacity-35"}>EN</span>
+              <span className={lang === "en" ? "opacity-100 text-gold" : "opacity-30"}>EN</span>
             </button>
           )}
 
@@ -212,14 +197,14 @@ export default function Navbar() {
                   placeholder={t("nav_search")}
                   maxLength={100}
                   autoFocus
-                  className="h-9 w-full rounded-full border border-gold/25 bg-pearl-warm px-4 text-sm text-navy placeholder:text-ink-muted/50 focus:outline-none focus:border-gold"
+                  className="h-9 w-full rounded-full border border-gold/25 bg-white/8 px-4 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-gold/50"
                 />
                 <Button
                   type="button"
                   variant="ghost"
                   size="icon"
                   onClick={() => { setIsSearchOpen(false); setSearchQuery(""); }}
-                  className="w-9 h-9 flex-shrink-0 text-red-400 hover:text-red-500 rounded-full"
+                  className="w-9 h-9 flex-shrink-0 text-red-400 hover:text-red-300 rounded-full"
                 >
                   <X className="w-4 h-4" />
                 </Button>
@@ -229,9 +214,7 @@ export default function Navbar() {
                 type="button"
                 onClick={() => setIsSearchOpen(true)}
                 aria-label={t("nav_search_open")}
-                className={`w-11 h-11 flex items-center justify-center rounded-full transition-colors ${
-                  transparent ? "text-white/80 hover:text-white" : "text-navy/70 hover:text-gold"
-                }`}
+                className="w-11 h-11 flex items-center justify-center rounded-full text-white/70 hover:text-gold transition-colors"
               >
                 <Search className="w-5 h-5" />
               </button>
