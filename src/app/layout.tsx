@@ -121,9 +121,47 @@ export default async function RootLayout({
     <html lang={lang} className="scroll-smooth">
       <head>
         <meta name="theme-color" content="#0B1724" />
+
+        {/* Hero poster — mobile */}
+        <link
+          rel="preload"
+          href="/videos/hero-mobile-poster.webp"
+          as="image"
+          // @ts-expect-error — fetchpriority is not yet in React's type defs
+          fetchpriority="high"
+        />
+        {/* Hero poster — desktop */}
+        <link
+          rel="preload"
+          href="/videos/hero-poster.webp"
+          as="image"
+          // @ts-expect-error — fetchpriority is not yet in React's type defs
+          fetchpriority="high"
+        />
+
+        {/* Display font */}
+        <link
+          rel="preload"
+          href="/fonts/Marcellus-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        {/* Body font */}
+        <link
+          rel="preload"
+          href="/fonts/Lato-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+
+        {/* ── hreflang alternates ──────────────────────────────────────── */}
         <link rel="alternate" hrefLang="es-MX" href={baseUrl} />
         <link rel="alternate" hrefLang="en-US" href={baseUrl} />
         <link rel="alternate" hrefLang="x-default" href={baseUrl} />
+
+        {/* ── Structured data ──────────────────────────────────────────── */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: safeJsonLd(orgJsonLd) }}
