@@ -192,7 +192,9 @@ export default function Navbar() {
         </nav>
 
         {/* ── Right controls ── */}
-        <div className="flex items-center gap-3 flex-shrink-0">
+        <div
+          className={`flex items-center gap-3 ${isSearchOpen ? "flex-1 min-w-0 lg:flex-shrink-0 lg:flex-none" : "flex-shrink-0"}`}
+        >
           {/* Desktop search */}
           <form
             onSubmit={handleSearch}
@@ -204,21 +206,15 @@ export default function Navbar() {
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t("nav_search")}
               maxLength={100}
-              autoFocus
-              className="h-9 w-full min-w-0 rounded-full border border-gold/25 bg-white/8 px-4 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-gold/50"
+              className="w-full h-9 rounded-full border pl-4 pr-10 text-sm focus:outline-none transition-all duration-300 bg-white/8 border-white/15 text-white placeholder:text-white/35 focus:bg-white/12 focus:border-gold/50"
             />
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              onClick={() => {
-                setIsSearchOpen(false);
-                setSearchQuery("");
-              }}
-              className="w-7 h-7 flex-shrink-0 text-red-400 hover:text-red-300 rounded-full"
+            <button
+              type="submit"
+              aria-label={t("nav_search_open")}
+              className="absolute right-1 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center text-white/50 hover:text-gold transition-colors"
             >
-              <X className="w-3.5 h-3.5" />
-            </Button>
+              <Search className="w-3.5 h-3.5" />
+            </button>
           </form>
 
           {/* Language toggle desktop */}
@@ -255,12 +251,12 @@ export default function Navbar() {
 
           {/* Mobile search */}
           <div
-            className={`lg:hidden relative flex items-center transition-all duration-300 ${isSearchOpen ? "w-full" : "w-auto"}`}
+            className={`lg:hidden relative flex items-center min-w-0 transition-all duration-300 ${isSearchOpen ? "flex-1" : "w-auto"}`}
           >
             {isSearchOpen ? (
               <form
                 onSubmit={handleSearch}
-                className="flex items-center w-full gap-1 animate-in fade-in slide-in-from-right-4 duration-200"
+                className="flex items-center w-full min-w-0 gap-1 animate-in fade-in slide-in-from-right-4 duration-200"
               >
                 <input
                   type="search"
@@ -269,7 +265,7 @@ export default function Navbar() {
                   placeholder={t("nav_search")}
                   maxLength={100}
                   autoFocus
-                  className="h-9 w-full rounded-full border border-gold/25 bg-white/8 px-4 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-gold/50"
+                  className="h-9 w-full min-w-0 rounded-full border border-gold/25 bg-white/8 px-4 text-sm text-white placeholder:text-white/35 focus:outline-none focus:border-gold/50"
                 />
                 <Button
                   type="button"
@@ -279,9 +275,9 @@ export default function Navbar() {
                     setIsSearchOpen(false);
                     setSearchQuery("");
                   }}
-                  className="w-9 h-9 flex-shrink-0 text-red-400 hover:text-red-300 rounded-full"
+                  className="w-7 h-7 flex-shrink-0 text-white/50 hover:text-gold transition-colors rounded-full"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-3.5 h-3.5" />
                 </Button>
               </form>
             ) : (
@@ -298,7 +294,7 @@ export default function Navbar() {
         </div>
       </Container>
 
-      {/* ── LÍNEA GRADIENTE INFERIOR ANIMADA ── */}
+      {/* ── Animated Gradient Line ── */}
       <div
         className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-500 overflow-hidden ${
           isScrolled ? "opacity-100" : "opacity-0"
