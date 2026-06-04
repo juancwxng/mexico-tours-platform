@@ -46,11 +46,48 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   images: {
-    unoptimized: true,
+    // Re-enabling optimization now that wrangler.jsonc already has the
+    // "images": { "binding": "IMAGES" } entry, which is what
+    // @opennextjs/cloudflare needs to route /_next/image requests through
+    // Cloudflare's image transformation pipeline instead of a Node server.
+    //
+    // What this unlocks:
+    //   • Automatic WebP/AVIF conversion on delivery
+    //   • Responsive resizing to exactly the width the device needs
+    //   • The `priority` prop on <Image> now correctly injects <link rel="preload">
+    //   • `sizes` props on TourCard and TourCarousel start doing real work
+    //
+    // If a deploy fails with an image-related error, the safe rollback is to
+    // set unoptimized: true again — it won't break the site, it just skips
+    // optimization.
+    unoptimized: false,
+
+    // Formats: prefer AVIF (better compression) with WebP as fallback.
+    // Browsers that support neither get the original WebP source.
     formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 2880, 3840],
-    remotePatterns: [],
+
+    // Device sizes map to the breakpoints where the browser requests a new
+    // image size. These are tuned to the actual rendered widths in this
+    // project (see TourCard and TourCarousel `sizes` props):
+    //
+    //   400  → card thumbnail on mobile 1x (~390px viewport)
+    //   800  → card thumbnail on mobile 2x retina / tablet 1x
+    //   1200 → card thumbnail tablet 2x / desktop sidebar 2x
+    //   2400 → lightbox full-screen retina (the "looks amazing" version)
+    //
+    // Cloudflare Images will only generate a size when it is actually
+    // requested — there's no pre-generation cost.
+    deviceSizes: [400, 800, 1200, 2400],
+
+    // imageSizes covers the sizes= values that are smaller than the smallest
+    // deviceSize. Not needed here since our smallest use is ~390px → covered
+    // by deviceSizes[0] = 400.
+    imageSizes: [],
+
+    // Cache transformed images for 7 days at the CDN edge.
     minimumCacheTTL: 60 * 60 * 24 * 7,
+
+    remotePatterns: [],
   },
 
   async headers() {

@@ -5,10 +5,6 @@ import { useEffect, useRef, useState } from "react";
 export default function VideoBackground() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile on the client. We can't use CSS media queries on <source>
-  // reliably across browsers — the media attribute is widely misimplemented.
-  // Instead we read the actual viewport width after mount and pick one source.
   useEffect(() => {
     setIsMobile(window.innerWidth < 640);
   }, []);
