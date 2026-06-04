@@ -78,10 +78,10 @@ export default async function Home() {
 
         {/* Animated teal-gold diagonal accent */}
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 opacity-[0.10]"
           style={{
-            backgroundImage: `radial-gradient(ellipse at 20% 50%, #1A5F69 0%, transparent 60%),
-                              radial-gradient(ellipse at 80% 50%, #EACA8D 0%, transparent 60%)`,
+            backgroundImage: `radial-gradient(ellipse at 20% 50%, #1A5F69 0%, transparent 100%),
+                                      radial-gradient(ellipse at 80% 50%, #EACA8D 0%, transparent 100%)`,
           }}
         />
 
