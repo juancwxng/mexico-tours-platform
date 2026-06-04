@@ -78,13 +78,13 @@ export default async function Home() {
 
         {/* Animated Teal Liquid Aura (Left) */}
         <div
-          className="absolute -left-[10%] top-0 w-[60%] h-[120%] bg-[#1A5F69]/20 blob-shape pointer-events-none"
+          className="absolute -left-[10%] top-0 w-[60%] h-[120%] bg-[#1A5F69]/42 cta-blob-left pointer-events-none"
           aria-hidden="true"
         />
 
         {/* Animated Gold Liquid Aura (Right) */}
         <div
-          className="absolute -right-[10%] bottom-0 w-[50%] h-[100%] bg-[#EACA8D]/15 blob-shape-reverse pointer-events-none delay-500"
+          className="absolute -right-[10%] bottom-0 w-[50%] h-[100%] bg-[#EACA8D]/28 cta-blob-right pointer-events-none"
           aria-hidden="true"
         />
 
