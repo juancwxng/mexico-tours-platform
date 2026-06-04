@@ -47,8 +47,8 @@ export default async function ContactPage() {
       title: t("contact_hours"),
       lines: [lang === "en" ? "Monday to Sunday" : "Lunes a Domingo", "8:00 AM – 10:00 PM"],
       href: null,
-      color: "text-ink-muted",
-      bg: "bg-pearl-warm",
+      color: "text-navy/60",
+      bg: "bg-[#f4f1ec]",
     },
   ];
 
@@ -86,25 +86,25 @@ export default async function ContactPage() {
 
             {/* Left: info cards + socials */}
             <div className="space-y-6">
-              <p className="text-ink-muted text-lg leading-relaxed">{t("contact_subtitle")}</p>
+              <p className="text-navy/60 text-lg leading-relaxed">{t("contact_subtitle")}</p>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 {contactInfo.map((item, i) => (
                   <div
                     key={i}
-                    className="bg-white p-5 rounded-2xl border border-pearl-warm shadow-sm hover:border-gold/25 transition-colors"
+                    className="bg-white p-5 rounded-2xl border border-navy/10 shadow-sm hover:border-gold/25 transition-colors"
                   >
                     <div className={`w-10 h-10 ${item.bg} rounded-xl flex items-center justify-center mb-3`}>
                       <item.icon className={`w-5 h-5 ${item.color}`} />
                     </div>
                     <h3 className="font-display text-navy mb-1 text-base">{item.title}</h3>
                     {item.href ? (
-                      <a href={item.href} className="text-ink-muted text-sm hover:text-gold transition-colors leading-relaxed">
+                      <a href={item.href} className="text-navy/60 text-sm hover:text-gold transition-colors leading-relaxed">
                         {item.lines[0]}
                       </a>
                     ) : (
                       item.lines.map((line, j) => (
-                        <p key={j} className="text-ink-muted text-sm leading-relaxed">{line}</p>
+                        <p key={j} className="text-navy/60 text-sm leading-relaxed">{line}</p>
                       ))
                     )}
                   </div>
