@@ -91,6 +91,19 @@ interface CounterRowProps {
   onIncrement: () => void;
 }
 
+function FieldError({ id, message }: { id: string; message: string }) {
+  return (
+    <p
+      id={id}
+      role="alert"
+      className="flex items-center gap-1.5 text-red-500 text-xs font-medium mt-1.5"
+    >
+      <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+      {message}
+    </p>
+  );
+}
+
 function CounterRow({
   id,
   label,
@@ -107,7 +120,8 @@ function CounterRow({
     <div className="flex justify-between items-center px-4 py-3 bg-gray-50 rounded-xl border border-gray-100">
       <div>
         <span className="text-navy font-bold block text-sm">{label}</span>
-        <span className="text-xs text-gray-400">{sublabel}</span>
+        {/* PATCH 6: gray-500 (~4.6:1 on white) replaces gray-400 (~2.9:1) */}
+        <span className="text-xs text-gray-500">{sublabel}</span>
       </div>
       <div className="flex items-center gap-2" role="group" aria-labelledby={countId}>
         <button
@@ -117,17 +131,15 @@ function CounterRow({
           aria-label={`${label} −`}
           className="w-10 h-10 rounded-xl bg-white border border-gray-200 text-navy font-bold text-lg
                      hover:bg-gold hover:border-gold hover:text-white
-                     transition-colors flex items-center justify-center
                      disabled:opacity-35 disabled:cursor-not-allowed
-                     disabled:hover:bg-white disabled:hover:border-gray-200 disabled:hover:text-navy"
+                     transition-colors flex items-center justify-center"
         >
           −
         </button>
         <span
           id={countId}
-          className="w-7 text-center text-navy font-bold text-base tabular-nums"
+          className="w-8 text-center text-navy font-bold text-base tabular-nums"
           aria-live="polite"
-          aria-atomic="true"
         >
           {value}
         </span>
@@ -138,9 +150,8 @@ function CounterRow({
           aria-label={`${label} +`}
           className="w-10 h-10 rounded-xl bg-white border border-gray-200 text-navy font-bold text-lg
                      hover:bg-gold hover:border-gold hover:text-white
-                     transition-colors flex items-center justify-center
                      disabled:opacity-35 disabled:cursor-not-allowed
-                     disabled:hover:bg-white disabled:hover:border-gray-200 disabled:hover:text-navy"
+                     transition-colors flex items-center justify-center"
         >
           +
         </button>
@@ -149,19 +160,15 @@ function CounterRow({
   );
 }
 
-function FieldError({ message, id }: { message: string; id: string }) {
-  return (
-    <p id={id} role="alert" className="flex items-center gap-1.5 text-red-500 text-xs font-medium mt-1.5">
-      <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
-      {message}
-    </p>
-  );
-}
+// ─── Main component ───────────────────────────────────────────────────────────
 
-// ─── Main component ──────────────────────────────────────────────────────────
-
-export default function BookingForm({ tourTitle, tourPrice, onSuccess }: BookingFormProps) {
+export default function BookingForm({
+  tourTitle,
+  tourPrice,
+  onSuccess,
+}: BookingFormProps) {
   const { t, lang } = useLang();
+
   const dateInputId = useId();
   const dateErrorId = useId();
 
@@ -265,8 +272,9 @@ export default function BookingForm({ tourTitle, tourPrice, onSuccess }: Booking
         <h3 className="font-display text-2xl text-navy font-bold uppercase">
           {t("booking_title")}
         </h3>
+        {/* PATCH 6: gray-500 replaces gray-400 for price hint */}
         {tourPrice > 0 && (
-          <p className="text-gray-400 text-sm mt-1">
+          <p className="text-gray-500 text-sm mt-1">
             {t("booking_from")}{" "}
             <span className="font-bold text-navy">
               ${tourPrice.toLocaleString("es-MX")} {t("tour_mxn")}
@@ -354,7 +362,8 @@ export default function BookingForm({ tourTitle, tourPrice, onSuccess }: Booking
           {t("booking_cta")}
         </Button>
 
-        <p className="text-xs text-center text-gray-400">
+        {/* PATCH 6: gray-500 replaces gray-400 for WA note */}
+        <p className="text-xs text-center text-gray-500">
           {t("booking_wa_note")}
         </p>
 
