@@ -39,15 +39,15 @@
 
 @theme inline {
     --color-navy: #0b1724; /* Primary Dark */
-    --color-gold: #e5c992; /* Accent Gold */
-    --color-teal: #33727a; /* Accent Teal */
+    --color-gold: #eaca8d; /* PATCH 1: aligned to logo SVG source #eaca8d (was #e5c992) */
+    --color-teal: #1a5f69; /* PATCH 1: midpoint toward logo #0c5160 (was #33727a) */
     --color-white: #ffffff; /* Text / Highlight – Crisp White */
 
     /* Derived tints & shades */
     --color-gold-light: #f5e4c3;
     --color-gold-dark: #b89b60;
     --color-teal-light: #4d9aa4;
-    --color-teal-dark: #235259;
+    --color-teal-dark: #0c5160; /* PATCH 1: aligned to logo teal dark stop */
     --color-navy-light: #1c2e40;
     --color-navy-mid: #0e1e2e;
 
@@ -60,7 +60,7 @@
     /* Legacy brand aliases */
     --color-central-bg: #fafafa;
     --color-central-blue: #0b1724;
-    --color-central-yellow: #e5c992;
+    --color-central-yellow: #eaca8d; /* PATCH 1: aligned to logo gold */
 
     --font-sans: "Lato", sans-serif;
     --font-display: "Marcellus", serif;
@@ -99,12 +99,12 @@
     --secondary-foreground: #0b1724;
     --muted: #f0f2f5;
     --muted-foreground: #475569;
-    --accent: #33727a;
+    --accent: #1a5f69; /* PATCH 1: aligned to new teal token */
     --accent-foreground: #ffffff;
     --destructive: oklch(0.577 0.245 27.325);
     --border: rgba(11, 23, 36, 0.1);
     --input: rgba(11, 23, 36, 0.1);
-    --ring: #33727a;
+    --ring: #1a5f69; /* PATCH 1: aligned to new teal token */
 }
 
 html {
@@ -140,7 +140,7 @@ body {
     background: #0e1e2e;
 }
 ::-webkit-scrollbar-thumb {
-    background: #e5c992;
+    background: #eaca8d; /* PATCH 1: aligned to logo gold */
     border-radius: 3px;
 }
 
@@ -250,9 +250,9 @@ body {
 .text-shimmer {
     background: linear-gradient(
         90deg,
-        #e5c992 0%,
-        #f0dab0 40%,
-        #e5c992 60%,
+        #eaca8d 0%,   /* PATCH 1: logo gold */
+        #f5e4c3 40%,
+        #eaca8d 60%,
         #b89b60 100%
     );
     background-size: 200% auto;
@@ -271,11 +271,11 @@ body {
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #e5c992;
+    color: #eaca8d; /* PATCH 1: logo gold */
     padding: 0.28rem 0.9rem;
-    border: 1px solid rgba(229, 201, 146, 0.3);
+    border: 1px solid rgba(234, 202, 141, 0.3);
     border-radius: 100px;
-    background: rgba(229, 201, 146, 0.06);
+    background: rgba(234, 202, 141, 0.06);
 }
 
 /* ── Gold rule ── */
@@ -284,8 +284,8 @@ body {
     background: linear-gradient(
         to right,
         transparent,
-        #e5c992 30%,
-        #33727a 70%,
+        #eaca8d 30%,   /* PATCH 1: logo gold */
+        #1a5f69 70%,   /* PATCH 1: new teal */
         transparent
     );
     border: none;
@@ -293,10 +293,10 @@ body {
 
 /* ── Wave gradient (mimics logo wave) ── */
 .gradient-wave {
-    background: linear-gradient(135deg, #e5c992 0%, #33727a 100%);
+    background: linear-gradient(135deg, #eaca8d 0%, #1a5f69 100%); /* PATCH 1 */
 }
 .gradient-wave-animated {
-    background: linear-gradient(270deg, #e5c992, #33727a, #e5c992);
+    background: linear-gradient(270deg, #eaca8d, #1a5f69, #eaca8d); /* PATCH 1 */
     background-size: 300% 300%;
     animation: gradientShift 6s ease infinite;
 }
@@ -312,19 +312,19 @@ body {
     text-transform: uppercase;
     font-size: 0.82rem;
     padding: 0.9rem 2.2rem;
-    background: linear-gradient(135deg, #e5c992 0%, #b89b60 100%);
+    background: linear-gradient(135deg, #eaca8d 0%, #b89b60 100%); /* PATCH 1: logo gold */
     color: #0b1724;
     border-radius: 100px;
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
         filter 0.2s ease;
-    box-shadow: 0 4px 20px rgba(229, 201, 146, 0.35);
+    box-shadow: 0 4px 20px rgba(234, 202, 141, 0.35);
     text-decoration: none;
 }
 .btn-gold:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(229, 201, 146, 0.5);
+    box-shadow: 0 8px 32px rgba(234, 202, 141, 0.5);
     filter: brightness(1.06);
 }
 
@@ -339,14 +339,14 @@ body {
     text-transform: uppercase;
     font-size: 0.82rem;
     padding: 0.9rem 2.4rem;
-    background: linear-gradient(135deg, #e5c992 0%, #33727a 100%);
+    background: linear-gradient(135deg, #eaca8d 0%, #1a5f69 100%); /* PATCH 1 */
     color: #0b1724;
     border-radius: 100px;
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
         filter 0.2s ease;
-    box-shadow: 0 4px 24px rgba(51, 114, 122, 0.4);
+    box-shadow: 0 4px 24px rgba(26, 95, 105, 0.4);
     text-decoration: none;
     position: relative;
     overflow: hidden;
@@ -355,7 +355,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #33727a 0%, #e5c992 100%);
+    background: linear-gradient(135deg, #1a5f69 0%, #eaca8d 100%); /* PATCH 1 */
     opacity: 0;
     transition: opacity 0.4s ease;
     border-radius: 100px;
@@ -365,7 +365,7 @@ body {
 }
 .btn-wave:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 36px rgba(51, 114, 122, 0.5);
+    box-shadow: 0 10px 36px rgba(26, 95, 105, 0.5);
 }
 .btn-wave > * {
     position: relative;
@@ -385,7 +385,7 @@ body {
     padding: 0.88rem 2.2rem;
     background: transparent;
     color: #ffffff;
-    border: 1.5px solid rgba(229, 201, 146, 0.45);
+    border: 1.5px solid rgba(234, 202, 141, 0.45); /* PATCH 1 */
     border-radius: 100px;
     transition:
         background 0.25s ease,
@@ -395,9 +395,9 @@ body {
     text-decoration: none;
 }
 .btn-ghost:hover {
-    background: rgba(229, 201, 146, 0.1);
-    color: #e5c992;
-    border-color: #e5c992;
+    background: rgba(234, 202, 141, 0.1); /* PATCH 1 */
+    color: #eaca8d;
+    border-color: #eaca8d;
     transform: translateY(-2px);
 }
 
@@ -414,7 +414,7 @@ body {
     padding: 0.88rem 2.2rem;
     background: transparent;
     color: #ffffff;
-    border: 1.5px solid rgba(51, 114, 122, 0.6);
+    border: 1.5px solid rgba(26, 95, 105, 0.6); /* PATCH 1 */
     border-radius: 100px;
     transition:
         background 0.25s ease,
@@ -424,8 +424,8 @@ body {
     text-decoration: none;
 }
 .btn-teal-ghost:hover {
-    background: rgba(51, 114, 122, 0.15);
-    border-color: #33727a;
+    background: rgba(26, 95, 105, 0.15); /* PATCH 1 */
+    border-color: #1a5f69;
     transform: translateY(-2px);
 }
 
@@ -445,7 +445,7 @@ body {
     background: rgba(11, 23, 36, 0.92);
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border-bottom: 1px solid rgba(229, 201, 146, 0.15);
+    border-bottom: 1px solid rgba(234, 202, 141, 0.15); /* PATCH 1 */
     box-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
 }
 
@@ -478,21 +478,11 @@ body {
 
 /* ── WhatsApp Shaking Animation ── */
 @keyframes whatsapp-shake {
-    0% {
-        transform: rotate(0deg);
-    }
-    25% {
-        transform: rotate(3deg);
-    }
-    50% {
-        transform: rotate(0deg);
-    }
-    75% {
-        transform: rotate(-3deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(3deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-3deg); }
+    100% { transform: rotate(0deg); }
 }
 .whatsapp-shake:hover img,
 .whatsapp-shake:hover svg {
@@ -501,22 +491,10 @@ body {
 
 /* ── Periodic Attention Shake ── */
 @keyframes attention-shake {
-    0%,
-    80%,
-    100% {
-        transform: scale(1) rotate(0deg);
-    }
-    82%,
-    86% {
-        transform: scale(1.08) rotate(3deg);
-    }
-    84%,
-    88% {
-        transform: scale(1.08) rotate(-3deg);
-    }
-    90% {
-        transform: scale(1) rotate(0deg);
-    }
+    0%, 80%, 100% { transform: scale(1) rotate(0deg); }
+    82%, 86% { transform: scale(1.08) rotate(3deg); }
+    84%, 88% { transform: scale(1.08) rotate(-3deg); }
+    90% { transform: scale(1) rotate(0deg); }
 }
 .animate-whatsapp-attention {
     animation: attention-shake 5s ease-in-out infinite;
@@ -548,13 +526,14 @@ body {
 /* ── Tour card on dark bg ── */
 .tour-card-dark {
     background: #0e1e2e;
-    border: 1px solid rgba(229, 201, 146, 0.1);
+    border: 1px solid rgba(234, 202, 141, 0.1); /* PATCH 1 */
 }
 .tour-card-dark:hover {
-    border-color: rgba(229, 201, 146, 0.25);
+    border-color: rgba(234, 202, 141, 0.25); /* PATCH 1 */
 }
 
 /* ── Teal pill (category badge) ── */
+/* PATCH 5: dark teal text on light teal tint — ~5.8:1 contrast ratio */
 .teal-pill {
     display: inline-flex;
     align-items: center;
@@ -563,8 +542,8 @@ body {
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #4d9aa4;
-    background: rgba(51, 114, 122, 0.18);
+    color: #0c5160;
+    background: rgba(26, 95, 105, 0.14);
     padding: 0.25rem 0.75rem;
     border-radius: 100px;
 }
@@ -574,20 +553,26 @@ body {
     background: rgba(11, 23, 36, 0.75);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    color: #e5c992;
-    border: 1px solid rgba(229, 201, 146, 0.3);
+    color: #eaca8d; /* PATCH 1 */
+    border: 1px solid rgba(234, 202, 141, 0.3);
     border-radius: 0.75rem;
 }
 
 /* ── CTA section glow ── */
 .cta-glow {
     box-shadow:
-        0 0 80px rgba(51, 114, 122, 0.2),
-        0 0 40px rgba(229, 201, 146, 0.1);
+        0 0 80px rgba(26, 95, 105, 0.2),    /* PATCH 1 */
+        0 0 40px rgba(234, 202, 141, 0.1);   /* PATCH 1 */
+}
+
+/* ── Hero text shadow — PATCH 8 ── */
+/* Applied to hero subtitle for contrast over bright video frames */
+.text-hero-shadow {
+    text-shadow: 0 1px 16px rgba(11, 23, 36, 0.7), 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 :focus-visible {
-    outline: 2px solid #e5c992;
+    outline: 2px solid #eaca8d; /* PATCH 1 */
     outline-offset: 3px;
     border-radius: 4px;
 }
