@@ -43,7 +43,18 @@ function ImageWithFallback({
       alt={alt}
       fill
       className="object-cover transition-transform duration-700 group-hover:scale-105"
+      // These sizes tell the browser (and Next.js image optimizer) exactly
+      // how wide this image will render at each breakpoint:
+      //   • Full-width on mobile (<768px) — up to ~390px on most phones
+      //   • Half the viewport on tablet (768–1200px) — up to ~600px
+      //   • One-third the viewport on desktop (>1200px, 3-col grid) — ~427px
+      //   • One-quarter on 2xl (>1536px, 4-col grid) — ~320px
+      // Next.js picks the closest deviceSize from [400, 800, 1200, 2400]
+      // and serves that. Without this prop it always serves the largest size.
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      // priority=true on the first 3 cards injects a <link rel="preload">
+      // in the document <head>, moving image discovery before HTML parsing.
+      // This only works when images.unoptimized is false.
       priority={priority}
       onError={() => setImgSrc("/images/placeholder.webp")}
     />
