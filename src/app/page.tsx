@@ -47,7 +47,7 @@ export default async function Home() {
               {t("home_featured")}
             </h2>
             <hr className="divider-gold max-w-24 mx-auto" />
-            <p className="text-navy-light/70 max-w-xl mx-auto text-lg leading-relaxed font-medium">
+            <p className="text-navy/65 max-w-xl mx-auto text-lg leading-relaxed font-medium">
               {t("home_featured_sub")}
             </p>
           </div>
