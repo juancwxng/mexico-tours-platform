@@ -145,7 +145,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2 lg:gap-3 flex-shrink-0">
           <Link
             href="/"
-            className="flex items-center gap-2 lg:gap-3 flex-shrink-0 -ml-4"
+            className="flex items-center gap-2 lg:gap-3 flex-shrink-0 lg:-ml-6"
           >
             <div className="relative w-40 sm:w-48 lg:w-56 aspect-[2880/617] transition-transform duration-300 group-hover:scale-105">
               <Image
