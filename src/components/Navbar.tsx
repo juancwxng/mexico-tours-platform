@@ -47,6 +47,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const handler = (e: MediaQueryListEvent) => {
+      if (e.matches) {
+        setIsSearchOpen(false);
+        setSearchQuery("");
+      }
+    };
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const q = searchQuery.trim();
@@ -61,7 +73,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 h-16 sm:h-[4.5rem] lg:h-20 transition-all duration-500 ${
+      className={`fixed top-0 inset-x-0 z-50 h-16 sm:h-[4.5rem] lg:h-20 overflow-hidden transition-all duration-500 ${
         transparent ? "" : "navbar-scrolled"
       }`}
     >
@@ -77,7 +89,7 @@ export default function Navbar() {
 
       <Container
         as="nav"
-        className="h-full flex items-center justify-between gap-3"
+        className="h-full flex items-center justify-between gap-3 overflow-hidden"
       >
         {/* ── Mobile hamburger ── */}
         <div className="flex items-center lg:hidden flex-shrink-0">
@@ -193,7 +205,7 @@ export default function Navbar() {
 
         {/* ── Right controls ── */}
         <div
-          className={`flex items-center gap-3 ${isSearchOpen ? "flex-1 min-w-0 lg:flex-shrink-0 lg:flex-none" : "flex-shrink-0"}`}
+          className={`flex items-center gap-3 lg:flex-shrink-0 ${isSearchOpen ? "flex-1 min-w-0" : "flex-shrink-0"}`}
         >
           {/* Desktop search */}
           <form
@@ -251,7 +263,7 @@ export default function Navbar() {
 
           {/* Mobile search */}
           <div
-            className={`lg:hidden relative flex items-center min-w-0 transition-all duration-300 ${isSearchOpen ? "flex-1" : "w-auto"}`}
+            className={`lg:hidden relative flex items-center min-w-0 transition-all duration-300 ${isSearchOpen ? "flex-1 max-w-[calc(100vw-7rem)]" : "w-auto"}`}
           >
             {isSearchOpen ? (
               <form
