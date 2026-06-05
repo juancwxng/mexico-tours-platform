@@ -65,6 +65,15 @@ export default async function Home() {
         </Container>
       </section>
 
+      {/* ── Transition: tours → beach ── */}
+      <div
+        aria-hidden="true"
+        style={{
+          height: "140px",
+          background: "linear-gradient(to bottom, #fafafa 0%, #071219 100%)",
+        }}
+      />
+
       {/* ── CTA Band ── */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
 
