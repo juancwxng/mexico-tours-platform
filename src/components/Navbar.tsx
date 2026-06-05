@@ -151,7 +151,7 @@ export default function Navbar() {
             href="/"
             className="flex items-center gap-2 lg:gap-3 flex-shrink-0 lg:-ml-6"
           >
-            <div className="relative w-40 sm:w-48 lg:w-72 aspect-[2280/697] transition-transform duration-300 group-hover:scale-105">
+            <div className="relative w-40 sm:w-48 lg:w-60 aspect-[2280/697] transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/logo/Logo_CostaFrancaTours.svg"
                 alt="Costa Franca Tours"
