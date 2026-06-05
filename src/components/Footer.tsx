@@ -40,7 +40,7 @@ export default async function Footer() {
             <Link href="/" className="inline-flex items-center gap-3 group">
               <div className="relative w-10 h-10">
                 <Image
-                  src="/logo/Icon_CostaFrancaTours"
+                  src="/logo/Icon_CostaFrancaTours.svg"
                   alt="Costa Franca Tours"
                   fill
                   className="object-contain"
