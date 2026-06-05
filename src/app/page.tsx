@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import HeroVideo from "@/components/HeroVideo";
 import TourCard from "@/components/TourCard";
 import Container from "@/components/Container";
+import RevealSection from "@/components/RevealSection";
 import { tours } from "@/lib/tours";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
 import type { Metadata } from "next";
@@ -33,7 +34,7 @@ export default async function Home() {
       </section>
 
       {/* ── Featured Tours ── */}
-      <section className="relative pt-20 lg:pt-28 pb-16 bg-transparent overflow-visible">
+      <section className="relative pt-20 lg:pt-28 pb-24 lg:pb-32 bg-transparent overflow-visible">
         <Container>
           <div className="text-center mb-12 lg:mb-16 space-y-4">
             <div className="flex justify-center">
@@ -80,7 +81,8 @@ export default async function Home() {
       </section>
 
       {/* ── CTA Band ── */}
-      <section className="relative py-24 lg:py-32 overflow-hidden -mt-14">
+      <RevealSection className="-mt-14">
+      <section className="relative py-24 lg:py-32 overflow-hidden">
 
         {/* Aerial beach — horizontal gradient: deep ocean left → shallow teal → shoreline → sand right */}
         <div
@@ -231,6 +233,7 @@ export default async function Home() {
           </div>
         </Container>
       </section>
+      </RevealSection>
     </main>
   );
 }
