@@ -77,16 +77,6 @@ export default function Navbar() {
         transparent ? "" : "navbar-scrolled"
       }`}
     >
-      {/* ── BOTTLE SLOSH AURA (Only visible when scrolled) ── */}
-      <div
-        className={`absolute inset-0 overflow-hidden transition-opacity duration-700 pointer-events-none -z-10 ${
-          isScrolled ? "opacity-100" : "opacity-0"
-        }`}
-        aria-hidden="true"
-      >
-        <div className="navbar-slosh-layer" />
-      </div>
-
       <Container
         as="nav"
         className="h-full flex items-center justify-between gap-3 overflow-hidden"
@@ -306,16 +296,13 @@ export default function Navbar() {
         </div>
       </Container>
 
-      {/* ── Animated Gradient Line ── */}
+      {/* ── Gradient line ── */}
       <div
         className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-500 overflow-hidden ${
           isScrolled ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div
-          className="gpu-gradient-slide pointer-events-none"
-          aria-hidden="true"
-        />
+        <div className="navbar-gradient-line" aria-hidden="true" />
       </div>
     </header>
   );

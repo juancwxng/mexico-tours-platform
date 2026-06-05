@@ -67,59 +67,76 @@ export default async function Home() {
 
       {/* ── CTA Band ── */}
       <section className="relative py-24 lg:py-32 overflow-hidden">
-        {/* Wave gradient background */}
+
+        {/* Aerial beach — horizontal gradient: deep ocean left → shallow teal → shoreline → sand right */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(145deg, #0E1E2E 0%, #0B1724 40%, #0C1F28 70%, #0B1724 100%)",
+              "linear-gradient(to right, #071219 0%, #0B1F2A 12%, #0C4A56 30%, #1A5F69 46%, #2E8A8A 54%, #C4A97A 64%, #D4AF7A 74%, #BF9B60 88%, #A8845A 100%)",
           }}
-        />
-
-        {/* Shore — Water (Teal, Left): deep navy far left → bright teal at shoreline */}
-        <div
-          className="absolute -left-[5%] top-0 w-[58%] h-full cta-blob-left pointer-events-none"
           aria-hidden="true"
         />
 
-        {/* Shore — Sand (Gold, Right): wet sand where water meets → warm gold far right */}
-        <div
-          className="absolute -right-[5%] top-0 w-[55%] h-full cta-blob-right pointer-events-none"
-          aria-hidden="true"
-        />
-
-        {/* Subtle dot texture */}
-        <div
-          className="absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, #EACA8D 1px, transparent 0)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-
-        {/* Wave SVG decorative element */}
-        <div
-          className="absolute bottom-0 left-0 right-0 h-32 opacity-10"
-          aria-hidden="true"
-        >
+        {/* Shoreline — diagonal band where water meets sand */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <svg
-            viewBox="0 0 1440 128"
-            fill="none"
+            viewBox="0 0 1440 600"
             preserveAspectRatio="none"
-            className="w-full h-full"
+            className="absolute inset-0 w-full h-full"
           >
-            <path
-              d="M0,64 C240,0 480,128 720,64 C960,0 1200,128 1440,64 L1440,128 L0,128 Z"
-              fill="url(#waveGrad)"
-            />
             <defs>
-              <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#EACA8D" />
-                <stop offset="100%" stopColor="#1A5F69" />
+              <linearGradient id="shorelineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#1A5F69" stopOpacity="0" />
+                <stop offset="40%" stopColor="#4D9AA4" stopOpacity="0.18" />
+                <stop offset="50%" stopColor="#ffffff" stopOpacity="0.06" />
+                <stop offset="60%" stopColor="#EACA8D" stopOpacity="0.14" />
+                <stop offset="100%" stopColor="#EACA8D" stopOpacity="0" />
+              </linearGradient>
+              {/* Foam edge — thin bright line at the break */}
+              <linearGradient id="foamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="30%" stopColor="#ffffff" stopOpacity="0" />
+                <stop offset="48%" stopColor="#ffffff" stopOpacity="0.22" />
+                <stop offset="52%" stopColor="#ffffff" stopOpacity="0.30" />
+                <stop offset="70%" stopColor="#ffffff" stopOpacity="0" />
               </linearGradient>
             </defs>
+            {/* Shoreline diagonal band */}
+            <polygon
+              points="520,0 720,0 920,600 720,600"
+              fill="url(#shorelineGrad)"
+            />
+            {/* Foam line — thin diagonal stripe at the water's edge */}
+            <polygon
+              points="600,0 640,0 840,600 800,600"
+              fill="url(#foamGrad)"
+            />
           </svg>
         </div>
+
+        {/* Sand grain texture — right half only */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(234,202,141,0.07) 1px, transparent 0)`,
+            backgroundSize: "28px 28px",
+            maskImage: "linear-gradient(to right, transparent 40%, rgba(0,0,0,0.6) 65%, rgba(0,0,0,0.6) 100%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent 40%, rgba(0,0,0,0.6) 65%, rgba(0,0,0,0.6) 100%)",
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Water depth shimmer — left half only */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 80% at 15% 50%, rgba(26,95,105,0.25) 0%, transparent 100%)",
+            maskImage: "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 50%, transparent 70%)",
+            WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 50%, transparent 70%)",
+          }}
+          aria-hidden="true"
+        />
 
         <Container size="md" className="relative z-10">
           <div className="text-center space-y-7">
@@ -127,13 +144,14 @@ export default async function Home() {
               {lang === "en" ? "Ready to explore?" : "¿Listo para explorar?"}
             </span>
 
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-none text-balance">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-none text-balance"
+              style={{ textShadow: "0 2px 24px rgba(7,18,25,0.55)" }}
+            >
               {lang === "en"
                 ? "Your Perfect Mazatlán Experience Awaits"
                 : "Tu Experiencia Perfecta en Mazatlán te Espera"}
             </h2>
 
-            {/* Gradient rule */}
             <div
               className="h-px max-w-32 mx-auto"
               style={{
@@ -142,27 +160,29 @@ export default async function Home() {
               }}
             />
 
-            <p className="text-white/60 text-lg max-w-lg mx-auto leading-relaxed">
+            <p className="text-white/70 text-lg max-w-lg mx-auto leading-relaxed"
+              style={{ textShadow: "0 1px 12px rgba(7,18,25,0.5)" }}
+            >
               {lang === "en"
                 ? "Contact us on WhatsApp and we'll help you plan every detail of your trip."
                 : "Contáctanos por WhatsApp y te ayudamos a planear cada detalle de tu viaje."}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
-              {/* Wave CTA — logo-aligned gold-to-teal gradient */}
-              <Link href="/tours" className="btn-wave">
+              {/* Primary — solid gold, high contrast against deep water background */}
+              <Link href="/tours" className="btn-gold">
                 <span>
                   {lang === "en" ? "Explore Tours" : "Explorar Tours"}
                 </span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
 
-              {/* WhatsApp secondary CTA */}
+              {/* WhatsApp — white ghost, readable across both water and sand sides */}
               <Link
                 href={`https://wa.me/${waNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-teal-ghost"
+                className="btn-ghost"
               >
                 <img
                   src="/icons/whatsapp.svg"
@@ -176,37 +196,20 @@ export default async function Home() {
               </Link>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
-              {[
-                {
-                  label:
-                    lang === "en"
-                      ? "Verified Operators"
-                      : "Operadores Verificados",
-                  icon: "",
-                },
-                {
-                  label:
-                    lang === "en" ? "Instant Response" : "Respuesta Inmediata",
-                  icon: "",
-                },
-                {
-                  label: lang === "en" ? "Best Price" : "Mejor Precio",
-                  icon: "",
-                },
-              ].map(({ label, icon }) => (
+            <div className="flex flex-wrap items-center justify-center gap-8 pt-4">
+              {(
+                [
+                  { label: lang === "en" ? "Verified Operators" : "Operadores Verificados", symbol: "✦" },
+                  { label: lang === "en" ? "Instant Response" : "Respuesta Inmediata", symbol: "✦" },
+                  { label: lang === "en" ? "Best Price" : "Mejor Precio", symbol: "✦" },
+                ] as const
+              ).map(({ label, symbol }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-2 text-white/60 text-xs font-bold uppercase tracking-wider"
+                  className="flex items-center gap-2 text-white/55 text-xs font-bold uppercase tracking-widest"
+                  style={{ textShadow: "0 1px 8px rgba(7,18,25,0.6)" }}
                 >
-                  <img
-                    src={icon}
-                    alt=""
-                    width={13}
-                    height={13}
-                    aria-hidden="true"
-                    className="opacity-50"
-                  />
+                  <span className="text-gold/60 text-[10px]">{symbol}</span>
                   {label}
                 </div>
               ))}
