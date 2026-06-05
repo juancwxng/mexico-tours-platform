@@ -33,7 +33,7 @@ export default async function Home() {
       </section>
 
       {/* ── Featured Tours ── */}
-      <section className="relative pt-20 lg:pt-28 pb-24 lg:pb-32 bg-transparent overflow-visible">
+      <section className="relative pt-20 lg:pt-28 pb-16 bg-transparent overflow-visible">
         <Container>
           <div className="text-center mb-12 lg:mb-16 space-y-4">
             <div className="flex justify-center">
