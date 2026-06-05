@@ -153,7 +153,7 @@ export default function Navbar() {
           >
             <div className="relative w-40 sm:w-48 lg:w-56 aspect-[2880/617] transition-transform duration-300 group-hover:scale-105">
               <Image
-                src="/logo/Logo_CostaFranca.svg"
+                src="/logo/Logo_CostaFrancaTours.svg"
                 alt="Costa Franca Tours"
                 fill
                 className="object-contain"

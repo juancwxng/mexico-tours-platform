@@ -14,10 +14,10 @@ export default async function Footer() {
   const footerLinks = {
     tours: [
       { label: t("footer_all_tours"), href: "/tours" },
-      { label: t("footer_catalog"),   href: "/catalog" },
+      { label: t("footer_catalog"), href: "/catalog" },
     ],
     company: [
-      { label: t("footer_blog"),    href: "/blog" },
+      { label: t("footer_blog"), href: "/blog" },
       { label: t("footer_contact"), href: "/contact" },
     ],
   };
@@ -40,7 +40,7 @@ export default async function Footer() {
             <Link href="/" className="inline-flex items-center gap-3 group">
               <div className="relative w-10 h-10">
                 <Image
-                  src="/logo/Logo_CostaFranca.svg"
+                  src="/logo/Icon_CostaFranca.svg"
                   alt="Costa Franca Tours"
                   fill
                   className="object-contain"
@@ -50,12 +50,10 @@ export default async function Footer() {
                 Costa Franca Tours
               </span>
             </Link>
-            {/* PATCH 2: white/65 (~3.2:1) replaces white/45 (~2.1:1) */}
             <p className="text-white/65 text-sm leading-relaxed max-w-xs">
               {t("footer_tagline")}
             </p>
             {/* Socials */}
-            {/* PATCH 2: icon default state raised to white/55 + border white/20 for WCAG 1.4.11 */}
             <div className="flex gap-3 pt-1">
               <a
                 href={`https://wa.me/${waNumber}`}
@@ -89,11 +87,9 @@ export default async function Footer() {
 
           {/* Tours */}
           <div className="space-y-4">
-            {/* PATCH 2: section headings raised to white/70 */}
             <h3 className="font-display text-white/70 text-sm tracking-widest uppercase">
               {t("footer_tours")}
             </h3>
-            {/* PATCH 2: links raised to white/60 */}
             <ul className="space-y-2.5">
               {footerLinks.tours.map((l) => (
                 <li key={l.href}>
@@ -148,7 +144,6 @@ export default async function Footer() {
                 className="flex-shrink-0 brightness-0 invert"
               />
             </a>
-            {/* PATCH 2: address text raised to white/55 */}
             <p className="text-white/55 text-xs leading-relaxed">
               Mazatlán, Sinaloa, México
               <br />
@@ -156,18 +151,22 @@ export default async function Footer() {
             </p>
           </div>
         </div>
-
-        {/* Bottom bar — PATCH 2: text raised to white/45, links and border updated */}
         <div className="py-5 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-white/45">
           <p suppressHydrationWarning>
             © {new Date().getFullYear()} Costa Franca Tours SAS.{" "}
             {t("footer_rights")}
           </p>
           <div className="flex gap-5">
-            <Link href="/privacidad" className="hover:text-gold transition-colors">
+            <Link
+              href="/privacidad"
+              className="hover:text-gold transition-colors"
+            >
               {t("footer_privacy")}
             </Link>
-            <Link href="/terminos" className="hover:text-gold transition-colors">
+            <Link
+              href="/terminos"
+              className="hover:text-gold transition-colors"
+            >
               {t("footer_terms")}
             </Link>
           </div>
