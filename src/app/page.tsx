@@ -33,7 +33,7 @@ export default async function Home() {
       </section>
 
       {/* ── Featured Tours ── */}
-      <section className="py-20 lg:py-28 bg-transparent">
+      <section className="relative pt-20 lg:pt-28 pb-24 lg:pb-32 bg-transparent overflow-visible">
         <Container>
           <div className="text-center mb-12 lg:mb-16 space-y-4">
             <div className="flex justify-center">
@@ -63,19 +63,24 @@ export default async function Home() {
             </Link>
           </div>
         </Container>
+
+        {/* Wave edge — white shape that laps over the dark CTA section below */}
+        <div className="section-wave-edge" aria-hidden="true">
+          <svg
+            viewBox="0 0 1440 88"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0,88 L0,52 C180,18 360,72 540,44 C720,16 900,68 1080,38 C1260,8 1380,56 1440,42 L1440,88 Z"
+              fill="#fafafa"
+            />
+          </svg>
+        </div>
       </section>
 
-      {/* ── Transition: tours → beach ── */}
-      <div
-        aria-hidden="true"
-        style={{
-          height: "140px",
-          background: "linear-gradient(to bottom, #fafafa 0%, #071219 100%)",
-        }}
-      />
-
       {/* ── CTA Band ── */}
-      <section className="relative py-24 lg:py-32 overflow-hidden">
+      <section className="relative py-24 lg:py-32 overflow-hidden -mt-14">
 
         {/* Aerial beach — horizontal gradient: deep ocean left → shallow teal → shoreline → sand right */}
         <div
