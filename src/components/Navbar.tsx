@@ -96,27 +96,20 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent
               side="left"
-              className="w-[min(80vw,320px)] bg-navy border-r border-gold/15 shadow-2xl"
+              className="w-[min(80vw,320px)] bg-navy border-r border-white/10 shadow-2xl"
             >
-              {/* Gold-to-teal accent bar */}
-              <div
-                className="absolute top-0 left-0 w-1 h-full"
-                style={{
-                  background:
-                    "linear-gradient(to bottom, #EACA8D, #1A5F69, #EACA8D)",
-                }}
-              />
               <div className="pl-4">
+                {/* Corrected Brand Name */}
                 <SheetTitle className="font-display text-white text-2xl mb-8 mt-2">
-                  Costa Franca
+                  Costa Franca Tours
                 </SheetTitle>
                 <nav className="flex flex-col gap-1">
                   {navLinks.map((link) => (
                     <SheetClose asChild key={link.name}>
                       <Link
                         href={link.href}
-                        className={`py-3 px-4 text-lg font-display text-white/80 hover:text-gold hover:bg-gold/5 rounded-xl transition-all duration-200 ${
-                          pathname === link.href ? "text-gold bg-gold/5" : ""
+                        className={`py-3 px-4 text-lg font-display text-white/80 hover:text-gold hover:bg-white/5 rounded-xl transition-all duration-200 ${
+                          pathname === link.href ? "text-gold bg-white/5" : ""
                         }`}
                       >
                         {t(link.name)}
@@ -125,7 +118,7 @@ export default function Navbar() {
                   ))}
                 </nav>
                 <div className="mt-8 pt-6 border-t border-white/10">
-                  {/* PATCH 3: mobile lang toggle — raised from white/30 to white/50 */}
+                  {/* Mobile language toggle */}
                   <button
                     type="button"
                     onClick={toggleLang}
@@ -139,7 +132,6 @@ export default function Navbar() {
                     >
                       ES
                     </span>
-                    {/* PATCH 3: separator raised from white/20 to white/35 */}
                     <span className="text-white/35">|</span>
                     <span
                       className={lang === "en" ? "text-gold" : "text-white/50"}
@@ -177,18 +169,13 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className={`relative text-sm xl:text-[0.9rem] font-display tracking-wide whitespace-nowrap transition-colors duration-300 group text-white/75 hover:text-white ${
-                pathname === link.href ? "text-gold hover:text-gold" : ""
+              className={`relative text-sm xl:text-[0.9rem] font-display tracking-wide whitespace-nowrap transition-colors duration-300 group ${
+                pathname === link.href
+                  ? "text-gold"
+                  : "text-white/75 hover:text-gold"
               }`}
             >
               {t(link.name)}
-              <span
-                className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${
-                  pathname === link.href
-                    ? "w-full bg-gold"
-                    : "w-0 group-hover:w-full bg-gold/60"
-                }`}
-              />
             </Link>
           ))}
         </nav>
@@ -219,7 +206,7 @@ export default function Navbar() {
             </button>
           </form>
 
-          {/* Language toggle desktop */}
+          {/* Desktop language toggle */}
           {mounted && (
             <button
               type="button"
@@ -295,15 +282,6 @@ export default function Navbar() {
           </div>
         </div>
       </Container>
-
-      {/* ── Gradient line ── */}
-      <div
-        className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-500 overflow-hidden ${
-          isScrolled ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <div className="navbar-gradient-line" aria-hidden="true" />
-      </div>
     </header>
   );
 }
