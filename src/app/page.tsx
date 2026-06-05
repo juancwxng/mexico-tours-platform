@@ -64,175 +64,111 @@ export default async function Home() {
             </Link>
           </div>
         </Container>
-
-        {/* Wave edge — white shape that laps over the dark CTA section below */}
-        <div className="section-wave-edge" aria-hidden="true">
-          <svg
-            viewBox="0 0 1440 88"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0,88 L0,52 C180,18 360,72 540,44 C720,16 900,68 1080,38 C1260,8 1380,56 1440,42 L1440,88 Z"
-              fill="#fafafa"
-            />
-          </svg>
-        </div>
       </section>
 
       {/* ── CTA Band ── */}
       <RevealSection className="-mt-14">
-      <section className="relative py-24 lg:py-32 overflow-hidden">
+        <section className="relative py-24 lg:py-32 bg-surface-warm overflow-hidden">
+          <Container size="md" className="relative z-10">
+            <div className="text-center space-y-7">
+              {/* Badge */}
+              <span className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] uppercase text-teal px-4 py-1.5 border border-teal/20 rounded-full bg-teal/5">
+                {lang === "en" ? "Ready to explore?" : "¿Listo para explorar?"}
+              </span>
 
-        {/* Aerial beach — horizontal gradient: deep ocean left → shallow teal → shoreline → sand right */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to right, #071219 0%, #0B1F2A 12%, #0C4A56 30%, #1A5F69 46%, #2E8A8A 54%, #C4A97A 64%, #D4AF7A 74%, #BF9B60 88%, #A8845A 100%)",
-          }}
-          aria-hidden="true"
-        />
+              {/* Heading */}
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-none text-balance">
+                {lang === "en"
+                  ? "Your Perfect Mazatlán Experience Awaits"
+                  : "Tu Experiencia Perfecta en Mazatlán te Espera"}
+              </h2>
 
-        {/* Shoreline — diagonal band where water meets sand */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <svg
-            viewBox="0 0 1440 600"
-            preserveAspectRatio="none"
-            className="absolute inset-0 w-full h-full"
-          >
-            <defs>
-              <linearGradient id="shorelineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#1A5F69" stopOpacity="0" />
-                <stop offset="40%" stopColor="#4D9AA4" stopOpacity="0.18" />
-                <stop offset="50%" stopColor="#ffffff" stopOpacity="0.06" />
-                <stop offset="60%" stopColor="#EACA8D" stopOpacity="0.14" />
-                <stop offset="100%" stopColor="#EACA8D" stopOpacity="0" />
-              </linearGradient>
-              {/* Foam edge — thin bright line at the break */}
-              <linearGradient id="foamGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="30%" stopColor="#ffffff" stopOpacity="0" />
-                <stop offset="48%" stopColor="#ffffff" stopOpacity="0.22" />
-                <stop offset="52%" stopColor="#ffffff" stopOpacity="0.30" />
-                <stop offset="70%" stopColor="#ffffff" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            {/* Shoreline diagonal band */}
-            <polygon
-              points="520,0 720,0 920,600 720,600"
-              fill="url(#shorelineGrad)"
-            />
-            {/* Foam line — thin diagonal stripe at the water's edge */}
-            <polygon
-              points="600,0 640,0 840,600 800,600"
-              fill="url(#foamGrad)"
-            />
-          </svg>
-        </div>
+              {/* Golden Separator */}
+              <div
+                className="h-px max-w-24 mx-auto"
+                style={{
+                  background:
+                    "linear-gradient(to right, transparent, #EACA8D 30%, #1A5F69 70%, transparent)",
+                }}
+              />
 
-        {/* Sand grain texture — right half only */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(234,202,141,0.07) 1px, transparent 0)`,
-            backgroundSize: "28px 28px",
-            maskImage: "linear-gradient(to right, transparent 40%, rgba(0,0,0,0.6) 65%, rgba(0,0,0,0.6) 100%)",
-            WebkitMaskImage: "linear-gradient(to right, transparent 40%, rgba(0,0,0,0.6) 65%, rgba(0,0,0,0.6) 100%)",
-          }}
-          aria-hidden="true"
-        />
+              {/* Subtitle */}
+              <p className="text-navy/70 text-lg max-w-lg mx-auto leading-relaxed font-medium">
+                {lang === "en"
+                  ? "Contact us on WhatsApp and we'll help you plan every detail of your trip."
+                  : "Contáctanos por WhatsApp y te ayudamos a planear cada detalle de tu viaje."}
+              </p>
 
-        {/* Water depth shimmer — left half only */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse 60% 80% at 15% 50%, rgba(26,95,105,0.25) 0%, transparent 100%)",
-            maskImage: "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 50%, transparent 70%)",
-            WebkitMaskImage: "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 50%, transparent 70%)",
-          }}
-          aria-hidden="true"
-        />
-
-        <Container size="md" className="relative z-10">
-          <div className="text-center space-y-7">
-            <span className="section-badge">
-              {lang === "en" ? "Ready to explore?" : "¿Listo para explorar?"}
-            </span>
-
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-none text-balance"
-              style={{ textShadow: "0 2px 24px rgba(7,18,25,0.55)" }}
-            >
-              {lang === "en"
-                ? "Your Perfect Mazatlán Experience Awaits"
-                : "Tu Experiencia Perfecta en Mazatlán te Espera"}
-            </h2>
-
-            <div
-              className="h-px max-w-32 mx-auto"
-              style={{
-                background:
-                  "linear-gradient(to right, transparent, #EACA8D 30%, #1A5F69 70%, transparent)",
-              }}
-            />
-
-            <p className="text-white/70 text-lg max-w-lg mx-auto leading-relaxed"
-              style={{ textShadow: "0 1px 12px rgba(7,18,25,0.5)" }}
-            >
-              {lang === "en"
-                ? "Contact us on WhatsApp and we'll help you plan every detail of your trip."
-                : "Contáctanos por WhatsApp y te ayudamos a planear cada detalle de tu viaje."}
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
-              {/* Primary — solid gold, high contrast against deep water background */}
-              <Link href="/tours" className="btn-gold">
-                <span>
-                  {lang === "en" ? "Explore Tours" : "Explorar Tours"}
-                </span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-
-              {/* WhatsApp — white ghost, readable across both water and sand sides */}
-              <Link
-                href={`https://wa.me/${waNumber}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-ghost"
-              >
-                <img
-                  src="/icons/whatsapp.svg"
-                  alt=""
-                  width={16}
-                  height={16}
-                  aria-hidden="true"
-                  className="opacity-80"
-                />
-                <span>WhatsApp</span>
-              </Link>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-8 pt-4">
-              {(
-                [
-                  { label: lang === "en" ? "Verified Operators" : "Operadores Verificados", symbol: "✦" },
-                  { label: lang === "en" ? "Instant Response" : "Respuesta Inmediata", symbol: "✦" },
-                  { label: lang === "en" ? "Best Price" : "Mejor Precio", symbol: "✦" },
-                ] as const
-              ).map(({ label, symbol }) => (
-                <div
-                  key={label}
-                  className="flex items-center gap-2 text-white/55 text-xs font-bold uppercase tracking-widest"
-                  style={{ textShadow: "0 1px 8px rgba(7,18,25,0.6)" }}
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-5 justify-center pt-4">
+                {/* Golden Button */}
+                <Link
+                  href="/tours"
+                  className="relative inline-flex items-center justify-center gap-2 font-display uppercase tracking-wide text-sm px-9 py-3.5 bg-gradient-to-br from-[#eaca8d] to-[#b89b60] text-navy font-bold rounded-full overflow-hidden group transition-all hover:-translate-y-1 shadow-[0_4px_20px_rgba(234,202,141,0.4)] hover:shadow-[0_8px_30px_rgba(234,202,141,0.6)]"
                 >
-                  <span className="text-gold/60 text-[10px]">{symbol}</span>
-                  {label}
-                </div>
-              ))}
+                  <span className="relative z-10 flex items-center gap-2">
+                    {lang === "en" ? "Explore Tours" : "Explorar Tours"}
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                  {/* Shine hover effect */}
+                  <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent group-hover:animate-[shimmer_1.5s_infinite] z-0" />
+                </Link>
+
+                {/* WhatsApp Button */}
+                <Link
+                  href={`https://wa.me/${waNumber}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 font-display uppercase tracking-wide text-sm px-9 py-3.5 bg-[#25D366] text-white font-bold rounded-full transition-all hover:-translate-y-1 shadow-[0_4px_20px_rgba(37,211,102,0.3)] hover:shadow-[0_8px_30px_rgba(37,211,102,0.5)] animate-whatsapp-attention"
+                >
+                  <img
+                    src="/icons/whatsapp.svg"
+                    alt=""
+                    width={18}
+                    height={18}
+                    aria-hidden="true"
+                    className="brightness-0 invert"
+                  />
+                  <span className="relative top-[1px]">WhatsApp</span>
+                </Link>
+              </div>
+
+              {/* Trust Signals */}
+              <div className="flex flex-wrap items-center justify-center gap-8 pt-6">
+                {(
+                  [
+                    {
+                      label:
+                        lang === "en"
+                          ? "Verified Operators"
+                          : "Operadores Verificados",
+                      symbol: "✦",
+                    },
+                    {
+                      label:
+                        lang === "en"
+                          ? "Instant Response"
+                          : "Respuesta Inmediata",
+                      symbol: "✦",
+                    },
+                    {
+                      label: lang === "en" ? "Best Price" : "Mejor Precio",
+                      symbol: "✦",
+                    },
+                  ] as const
+                ).map(({ label, symbol }) => (
+                  <div
+                    key={label}
+                    className="flex items-center gap-2 text-navy/60 text-xs font-bold uppercase tracking-widest"
+                  >
+                    <span className="text-gold text-[10px]">{symbol}</span>
+                    {label}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </Container>
-      </section>
+          </Container>
+        </section>
       </RevealSection>
     </main>
   );

@@ -328,50 +328,6 @@ body {
     filter: brightness(1.06);
 }
 
-/* ── Btn wave (CTA gradient – gold to teal) ── */
-.btn-wave {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: "Marcellus", serif;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 0.82rem;
-    padding: 0.9rem 2.4rem;
-    background: linear-gradient(135deg, #eaca8d 0%, #1a5f69 100%);
-    color: #0b1724;
-    border-radius: 100px;
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        filter 0.2s ease;
-    box-shadow: 0 4px 24px rgba(26, 95, 105, 0.4);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-}
-.btn-wave::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #1a5f69 0%, #eaca8d 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    border-radius: 100px;
-}
-.btn-wave:hover::before {
-    opacity: 1;
-}
-.btn-wave:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 36px rgba(26, 95, 105, 0.5);
-}
-.btn-wave > * {
-    position: relative;
-    z-index: 1;
-}
-
 /* ── Btn ghost ── */
 .btn-ghost {
     display: inline-flex;
@@ -452,23 +408,6 @@ body {
     box-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
 }
 
-/* ── Tours → CTA wave edge ── */
-.section-wave-edge {
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 88px;
-    pointer-events: none;
-    line-height: 0;
-}
-
-.section-wave-edge svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
 /* ── Scroll reveal ── */
 .reveal {
     opacity: 0;
@@ -488,34 +427,6 @@ body {
         transform: none;
         transition: opacity 400ms ease;
     }
-}
-
-/* ── CTA Section — Beach Shoreline Gradients ── */
-
-.cta-blob-left {
-    border-radius: 0% 55% 50% 0% / 0% 50% 50% 0%;
-    background: linear-gradient(
-        to right,
-        rgba(11, 23, 36, 0.95) 0%,
-        rgba(12, 81, 96, 0.80) 35%,
-        rgba(26, 95, 105, 0.65) 65%,
-        rgba(77, 154, 164, 0.45) 100%
-    );
-    filter: blur(70px);
-    -webkit-filter: blur(70px);
-}
-
-.cta-blob-right {
-    border-radius: 55% 0% 0% 50% / 50% 0% 0% 50%;
-    background: linear-gradient(
-        to right,
-        rgba(77, 154, 164, 0.25) 0%,
-        rgba(234, 202, 141, 0.30) 40%,
-        rgba(234, 202, 141, 0.45) 75%,
-        rgba(184, 155, 96, 0.35) 100%
-    );
-    filter: blur(70px);
-    -webkit-filter: blur(70px);
 }
 
 /* ── Navbar bottom gradient line ── */
@@ -659,13 +570,6 @@ body {
     color: #eaca8d;
     border: 1px solid rgba(234, 202, 141, 0.3);
     border-radius: 0.75rem;
-}
-
-/* ── CTA section glow ── */
-.cta-glow {
-    box-shadow:
-        0 0 80px rgba(26, 95, 105, 0.2),
-        0 0 40px rgba(234, 202, 141, 0.1);
 }
 
 /* Applied to hero subtitle for contrast over bright video frames */
