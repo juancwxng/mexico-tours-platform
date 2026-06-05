@@ -16,9 +16,6 @@ interface TourCarouselProps {
   title: string;
 }
 
-// Ya no necesitamos la función manual 'nextImageUrl'
-// porque usaremos el componente <Image> nativo directamente en el Lightbox.
-
 export default function TourCarousel({ images, title }: TourCarouselProps) {
   const t = useT();
   const [current, setCurrent] = useState(0);
@@ -34,13 +31,11 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
 
   const prev = () => setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
-
-  // Solo necesitamos pasar la URL original a los slides
   const slides = images.map((src) => ({ src }));
 
   return (
     <>
-      {/* Carrusel en miniatura */}
+      {/* miniature carousel */}
       <div
         className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 group cursor-zoom-in"
         onClick={() => setLightboxOpen(true)}
@@ -55,7 +50,7 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
           priority={current === 0}
         />
 
-        {/* Icono de zoom */}
+        {/* zoom icon */}
         <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
           <ZoomIn className="w-4 h-4 text-white" />
         </div>
@@ -68,7 +63,7 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
                 prev();
               }}
               aria-label="Imagen anterior"
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white flex items-center justify-center transition-colors shadow-md"
             >
               <ChevronLeft className="w-5 h-5 text-navy" />
             </button>
@@ -78,7 +73,7 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
                 next();
               }}
               aria-label="Siguiente imagen"
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white flex items-center justify-center transition-colors shadow-md"
             >
               <ChevronRight className="w-5 h-5 text-navy" />
             </button>
@@ -110,7 +105,6 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
         slides={slides}
         index={current}
         on={{ view: ({ index }) => setCurrent(index) }}
-        // Renderizamos las imágenes nativamente con Next.js <Image> en lugar de depender del srcSet automático
         render={{
           slide: ({ slide }) => (
             <div className="relative w-full h-full flex items-center justify-center">
