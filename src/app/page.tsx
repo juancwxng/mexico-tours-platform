@@ -23,7 +23,7 @@ export default async function Home() {
   const t = getT(lang);
 
   const featuredTours = tours.slice(0, 8);
-  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526690000000";
+  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526691525822";
 
   return (
     <main className="flex flex-col">

@@ -28,9 +28,9 @@ import type { Lang, DictKey } from "@/lib/i18n";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
-const MAX_ADULTS   = 20;
+const MAX_ADULTS = 20;
 const MAX_CHILDREN = 20;
-const MAX_INFANTS  = 10;
+const MAX_INFANTS = 10;
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -57,10 +57,10 @@ type ValidationError = "no_date" | "past_date" | null;
 
 /** Returns today's date as a YYYY-MM-DD string in local time. */
 function todayString(): string {
-  const now  = new Date();
+  const now = new Date();
   const yyyy = now.getFullYear();
-  const mm   = String(now.getMonth() + 1).padStart(2, "0");
-  const dd   = String(now.getDate()).padStart(2, "0");
+  const mm = String(now.getMonth() + 1).padStart(2, "0");
+  const dd = String(now.getDate()).padStart(2, "0");
   return `${yyyy}-${mm}-${dd}`;
 }
 
@@ -72,9 +72,9 @@ function todayString(): string {
 function formatBookingDate(isoDate: string, lang: Lang): string {
   return new Intl.DateTimeFormat(lang === "en" ? "en-US" : "es-MX", {
     weekday: "long",
-    year:    "numeric",
-    month:   "long",
-    day:     "numeric",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   }).format(new Date(`${isoDate}T12:00:00`));
 }
 
@@ -123,7 +123,11 @@ function CounterRow({
         {/* PATCH 6: gray-500 (~4.6:1 on white) replaces gray-400 (~2.9:1) */}
         <span className="text-xs text-gray-500">{sublabel}</span>
       </div>
-      <div className="flex items-center gap-2" role="group" aria-labelledby={countId}>
+      <div
+        className="flex items-center gap-2"
+        role="group"
+        aria-labelledby={countId}
+      >
         <button
           type="button"
           onClick={onDecrement}
@@ -172,18 +176,18 @@ export default function BookingForm({
   const dateInputId = useId();
   const dateErrorId = useId();
 
-  const [adults,    setAdults]    = useState(1);
-  const [children,  setChildren]  = useState(0);
-  const [infants,   setInfants]   = useState(0);
-  const [date,      setDate]      = useState("");
-  const [error,     setError]     = useState<ValidationError>(null);
+  const [adults, setAdults] = useState(1);
+  const [children, setChildren] = useState(0);
+  const [infants, setInfants] = useState(0);
+  const [date, setDate] = useState("");
+  const [error, setError] = useState<ValidationError>(null);
   const [submitted, setSubmitted] = useState(false);
 
   const minDate = todayString();
 
   // Only adults + children count toward price; infants are typically free
-  const totalPax       = adults + children + infants;
-  const paidPax        = adults + children;
+  const totalPax = adults + children + infants;
+  const paidPax = adults + children;
   const estimatedPrice = tourPrice > 0 ? tourPrice * paidPax : 0;
 
   // ── Validation ──────────────────────────────────────────────────────────────
@@ -214,17 +218,17 @@ export default function BookingForm({
     setError(null);
 
     const readableDate = formatBookingDate(date, lang);
-    const safeTitle    = sanitizeText(tourTitle, 200);
+    const safeTitle = sanitizeText(tourTitle, 200);
 
     const message = t("booking_wa_message")
-      .replace("{tour}",     safeTitle)
-      .replace("{date}",     readableDate)
-      .replace("{adults}",   String(adults))
+      .replace("{tour}", safeTitle)
+      .replace("{date}", readableDate)
+      .replace("{adults}", String(adults))
       .replace("{children}", String(children))
-      .replace("{infants}",  String(infants));
+      .replace("{infants}", String(infants));
 
-    const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526690000000";
-    const url   = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    const phone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526691525822";
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
     window.open(url, "_blank", "noopener,noreferrer");
     onSuccess?.();
@@ -234,31 +238,31 @@ export default function BookingForm({
 
   const paxRows: PaxRow[] = [
     {
-      id:          "adults",
-      labelKey:    "booking_adults",
+      id: "adults",
+      labelKey: "booking_adults",
       sublabelKey: "booking_adults_sub",
-      value:       adults,
-      min:         1,
-      max:         MAX_ADULTS,
-      setter:      setAdults,
+      value: adults,
+      min: 1,
+      max: MAX_ADULTS,
+      setter: setAdults,
     },
     {
-      id:          "children",
-      labelKey:    "booking_children",
+      id: "children",
+      labelKey: "booking_children",
       sublabelKey: "booking_children_sub",
-      value:       children,
-      min:         0,
-      max:         MAX_CHILDREN,
-      setter:      setChildren,
+      value: children,
+      min: 0,
+      max: MAX_CHILDREN,
+      setter: setChildren,
     },
     {
-      id:          "infants",
-      labelKey:    "booking_infants",
+      id: "infants",
+      labelKey: "booking_infants",
       sublabelKey: "booking_infants_sub",
-      value:       infants,
-      min:         0,
-      max:         MAX_INFANTS,
-      setter:      setInfants,
+      value: infants,
+      min: 0,
+      max: MAX_INFANTS,
+      setter: setInfants,
     },
   ];
 
@@ -266,7 +270,6 @@ export default function BookingForm({
 
   return (
     <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-6 lg:p-8">
-
       {/* Header */}
       <div className="text-center mb-6">
         <h3 className="font-display text-2xl text-navy font-bold uppercase">
@@ -286,7 +289,6 @@ export default function BookingForm({
       </div>
 
       <div className="space-y-3">
-
         {/* Pax counters */}
         {paxRows.map((row) => (
           <CounterRow
@@ -311,7 +313,9 @@ export default function BookingForm({
           {estimatedPrice > 0 && (
             <span className="text-navy font-bold text-sm">
               ≈ ${estimatedPrice.toLocaleString("es-MX")}{" "}
-              <span className="text-xs font-normal text-navy/60">{t("tour_mxn")}</span>
+              <span className="text-xs font-normal text-navy/60">
+                {t("tour_mxn")}
+              </span>
             </span>
           )}
         </div>
@@ -335,13 +339,18 @@ export default function BookingForm({
             aria-invalid={error !== null}
             className={`w-full p-4 rounded-xl border text-navy font-bold text-sm
                         focus:outline-none focus:ring-2 transition-all bg-white cursor-pointer
-                        ${error
-                          ? "border-red-300 focus:border-red-400 focus:ring-red-100"
-                          : "border-gray-200 focus:border-gold focus:ring-gold/20"
+                        ${
+                          error
+                            ? "border-red-300 focus:border-red-400 focus:ring-red-100"
+                            : "border-gray-200 focus:border-gold focus:ring-gold/20"
                         }`}
           />
-          {error === "no_date"   && <FieldError id={dateErrorId} message={t("booking_no_date")}   />}
-          {error === "past_date" && <FieldError id={dateErrorId} message={t("booking_past_date")} />}
+          {error === "no_date" && (
+            <FieldError id={dateErrorId} message={t("booking_no_date")} />
+          )}
+          {error === "past_date" && (
+            <FieldError id={dateErrorId} message={t("booking_past_date")} />
+          )}
           {!error && date && (
             <p className="flex items-center gap-1.5 text-emerald-600 text-xs font-medium mt-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 flex-shrink-0" />
@@ -366,7 +375,6 @@ export default function BookingForm({
         <p className="text-xs text-center text-gray-500">
           {t("booking_wa_note")}
         </p>
-
       </div>
     </div>
   );
