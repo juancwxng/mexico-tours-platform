@@ -10,12 +10,9 @@ import BookingDrawer from "@/components/BookingDrawer";
 import Container from "@/components/Container";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
 import { safeJsonLd } from "@/lib/utils";
+import { buildTourJsonLd } from "@/lib/schema";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-
-function getPriceValidUntil(): string {
-  return `${new Date().getFullYear() + 1}-12-31`;
-}
 
 export async function generateStaticParams() {
   return tours.map((tour) => ({ slug: tour.slug }));
@@ -76,23 +73,7 @@ export default async function TourDetailPage({
 
   const images = getTourImages(tour.slug, tour.imageCount);
 
-  const jsonLd = safeJsonLd({
-    "@context": "https://schema.org",
-    "@type": "Product",
-    name: tour.title,
-    ...(images.length > 0 && { image: images }),
-    description: tour.description,
-    sku: tour.id,
-    brand: { "@type": "Brand", name: "Costa Franca Tours SAS" },
-    offers: {
-      "@type": "Offer",
-      url: `${baseUrl}/tours/${tour.slug}`,
-      priceCurrency: "MXN",
-      price: tour.price,
-      priceValidUntil: getPriceValidUntil(),
-      availability: "https://schema.org/InStock",
-    },
-  });
+  const jsonLd = safeJsonLd(buildTourJsonLd(tour, baseUrl));
 
   return (
     <>

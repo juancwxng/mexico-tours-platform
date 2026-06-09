@@ -25,8 +25,7 @@ export const metadata: Metadata = {
     default: "Costa Franca Tours",
     template: "%s | Costa Franca Tours",
   },
-  description:
-    "Los mejores tours en Mazatlán y destinos costeros de México. Paseos marítimos, aventura y cultura con operadores locales seleccionados.",
+  description: "Los mejores Tours y Paseos en Mazatlán",
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [
@@ -61,24 +60,21 @@ export const metadata: Metadata = {
     "Costa Franca Tours",
   ],
   openGraph: {
+    title: "Costa Franca Tours",
+    description: "Los mejores Tours y Paseos en Mazatlán",
+    url: baseUrl,
     siteName: "Costa Franca Tours",
+    images: [
+      {
+        url: "/images/OP.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Costa Franca Tours en Mazatlán",
+      },
+    ],
     locale: "es_MX",
     alternateLocale: ["en_US"],
     type: "website",
-  },
-  twitter: { card: "summary_large_image" },
-  alternates: {
-    canonical: baseUrl,
-    languages: {
-      "es-MX": baseUrl,
-      "en-US": baseUrl,
-      "x-default": baseUrl,
-    },
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
   },
 };
 
