@@ -23,7 +23,18 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const prevRef = useRef(current);
 
-  const slides = useMemo(() => images.map((src) => ({ src })), [images]);
+  const safeTitle = title || t("tour_image_fallback") || "Tour";
+
+  const slides = useMemo(
+    () =>
+      images.map((src, i) => ({
+        src,
+        alt: `${safeTitle} — ${i + 1} / ${images.length}`,
+        width: 2160,
+        height: 1620,
+      })),
+    [images, safeTitle],
+  );
 
   useEffect(() => {
     if (images.length < 2) return;
@@ -60,8 +71,6 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
   const prev = () => setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
 
-  const safeTitle = title || t("tour_image_fallback") || "Tour";
-
   return (
     <>
       <div
@@ -91,7 +100,10 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
           />
         ))}
 
-        <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" style={{ zIndex: 2 }}>
+        <div
+          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+          style={{ zIndex: 2 }}
+        >
           <ZoomIn className="w-4 h-4 text-white" />
         </div>
 
@@ -120,7 +132,10 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
               <ChevronRight className="w-5 h-5 text-navy" />
             </button>
 
-            <div className="absolute bottom-3 inset-x-0 flex justify-center gap-1.5" style={{ zIndex: 2 }}>
+            <div
+              className="absolute bottom-3 inset-x-0 flex justify-center gap-1.5"
+              style={{ zIndex: 2 }}
+            >
               {images.map((_, i) => (
                 <button
                   key={i}
@@ -147,23 +162,6 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
         slides={slides}
         index={current}
         on={{ view: ({ index }) => setCurrent(index) }}
-        render={{
-          slide: ({ slide }) => (
-            <div
-              key={slide.src}
-              className="relative w-full h-full flex items-center justify-center"
-            >
-              <Image
-                src={slide.src}
-                alt={safeTitle}
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
-                quality={90}
-              />
-            </div>
-          ),
-        }}
         styles={{
           container: { backgroundColor: "rgba(0,0,0,0.95)" },
         }}
