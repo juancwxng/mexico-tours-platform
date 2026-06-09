@@ -59,6 +59,16 @@ const nextConfig: NextConfig = {
         source: "/(.*)",
         headers: securityHeaders,
       },
+      // Allow OG crawlers (Facebook, WhatsApp, Discord, Slack…) to fetch
+      // public images without CORS or framing restrictions.
+      {
+        source: "/images/(.*)",
+        headers: [
+          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "X-Frame-Options", value: "ALLOWALL" },
+          { key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" },
+        ],
+      },
       {
         source: "/api/og/(.*)",
         headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
