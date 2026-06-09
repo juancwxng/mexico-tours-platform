@@ -215,7 +215,7 @@ export const tours: Tour[] = [
     slug: "Speed-Boats",
     title: "Aventura en Speed Boat",
     titleEn: "Speed Boat Adventure",
-    category: "aventura",
+    category: "paseo",
     isFeatured: true,
     price: 2800,
     description:

@@ -1,7 +1,6 @@
 "use client";
 
 /**
- *
  * Provides the active language + a toggle function to all client components.
  * The provider is mounted in src/app/layout.tsx and receives `initialLang`
  * from the server (read from the LANG_COOKIE via cookies()).

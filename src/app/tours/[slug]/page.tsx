@@ -101,7 +101,6 @@ export default async function TourDetailPage({
         dangerouslySetInnerHTML={{ __html: jsonLd }}
       />
       <main className="pt-16 sm:pt-[4.5rem] lg:pt-20 pb-32 lg:pb-20">
-        {/* Breadcrumb + back */}
         <div className="bg-[#f4f1ec] border-b border-gold/12 py-3">
           <Container>
             <div className="flex items-center gap-2 text-xs text-navy/60 font-bold uppercase tracking-wider">
@@ -120,7 +119,6 @@ export default async function TourDetailPage({
 
         <Container className="mt-10 lg:mt-14">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px] gap-8 lg:gap-14 xl:gap-16 items-start">
-            {/* ── Content column ── */}
             <div className="space-y-8 lg:space-y-10 order-2 lg:order-1">
               <div className="space-y-5">
                 <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-none">
@@ -143,7 +141,6 @@ export default async function TourDetailPage({
                 <p>{description}</p>
               </div>
 
-              {/* Includes */}
               {includes.length > 0 && (
                 <div className="bg-white rounded-2xl border border-navy/10 p-6 lg:p-8 shadow-sm">
                   <h2 className="font-display text-2xl text-navy mb-6">
@@ -160,7 +157,6 @@ export default async function TourDetailPage({
                 </div>
               )}
 
-              {/* Price list */}
               {tour.priceList.length > 0 && (
                 <div className="bg-navy-section rounded-2xl p-6 lg:p-8 text-white">
                   <h2 className="font-display text-2xl text-white mb-6 pb-4 border-b border-white/12">
@@ -195,11 +191,8 @@ export default async function TourDetailPage({
               )}
             </div>
 
-            {/* ── Sidebar ── */}
             <div className="space-y-6 order-1 lg:order-2 lg:sticky lg:top-24 lg:self-start">
-              <div className="rounded-2xl overflow-hidden aspect-[4/3] bg-[#f4f1ec]">
-                <TourCarousel images={images} title={title} />
-              </div>
+              <TourCarousel images={images} title={title} />
               <div className="hidden lg:block">
                 <BookingForm tourTitle={tour.title} tourPrice={tour.price} />
               </div>
@@ -207,7 +200,6 @@ export default async function TourDetailPage({
           </div>
         </Container>
 
-        {/* Mobile booking drawer */}
         <BookingDrawer tourTitle={tour.title} tourPrice={tour.price} />
       </main>
     </>

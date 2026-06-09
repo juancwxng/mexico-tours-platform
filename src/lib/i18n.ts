@@ -207,7 +207,7 @@ const dict = {
     tour_includes: "What's included?",
     tour_prices: "Official Pricing",
     tour_since: "From",
-    tour_cotizar: "Quote",
+    tour_cotizar: "Price on Request",
     tour_mxn: "MXN",
     tour_no_images: "No images available",
     tour_prev: "Previous image",

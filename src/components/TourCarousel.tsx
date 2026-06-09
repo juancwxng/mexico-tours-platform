@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
@@ -20,9 +20,34 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
   const t = useT();
   const [current, setCurrent] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [loaded, setLoaded] = useState<Record<number, boolean>>({});
+  const prevRef = useRef(current);
 
-  // Memoize slides array to prevent recreation on every render
   const slides = useMemo(() => images.map((src) => ({ src })), [images]);
+
+  useEffect(() => {
+    if (images.length < 2) return;
+    const indices = [
+      (current + 1) % images.length,
+      (current - 1 + images.length) % images.length,
+    ];
+    const links: HTMLLinkElement[] = [];
+    indices.forEach((i) => {
+      if (loaded[i]) return;
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = images[i];
+      link.fetchPriority = "low";
+      document.head.appendChild(link);
+      links.push(link);
+    });
+    return () => links.forEach((l) => l.remove());
+  }, [current, images, loaded]);
+
+  useEffect(() => {
+    prevRef.current = current;
+  }, [current]);
 
   if (images.length === 0) {
     return (
@@ -35,12 +60,10 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
   const prev = () => setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
 
-  // Safe fallback for alt text if title is missing
   const safeTitle = title || t("tour_image_fallback") || "Tour";
 
   return (
     <>
-      {/* miniature carousel */}
       <div
         role="button"
         tabIndex={0}
@@ -54,45 +77,26 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
           }
         }}
       >
-        <Image
-          key={current}
-          src={images[current]}
-          alt={`${safeTitle} — ${current + 1} / ${images.length}`}
-          fill
-          className="object-cover"
-          sizes="(max-width: 1024px) 100vw, 420px"
-          priority={current === 0}
-        />
+        {images.map((src, i) => (
+          <Image
+            key={src}
+            src={src}
+            alt={i === current ? `${safeTitle} — ${i + 1} / ${images.length}` : ""}
+            fill
+            className="object-cover transition-opacity duration-300"
+            style={{ opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0 }}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 420px"
+            priority={i === 0}
+            onLoad={() => setLoaded((prev) => ({ ...prev, [i]: true }))}
+          />
+        ))}
 
-        {/* zoom icon */}
-        <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+        <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" style={{ zIndex: 2 }}>
           <ZoomIn className="w-4 h-4 text-white" />
         </div>
 
         {images.length > 1 && (
           <>
-            {/* Hidden preload: next image */}
-            <Image
-              key={`preload-next-${(current + 1) % images.length}`}
-              src={images[(current + 1) % images.length]}
-              alt=""
-              fill
-              className="object-cover opacity-0 pointer-events-none"
-              sizes="(max-width: 1024px) 100vw, 420px"
-              loading="eager"
-            />
-            {/* Hidden preload: previous image */}
-            <Image
-              key={`preload-prev-${(current - 1 + images.length) % images.length}`}
-              src={images[(current - 1 + images.length) % images.length]}
-              alt=""
-              fill
-              className="object-cover opacity-0 pointer-events-none"
-              sizes="(max-width: 1024px) 100vw, 420px"
-              loading="eager"
-            />
-
-            {/* Controls */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -100,6 +104,7 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
               }}
               aria-label={t("tour_prev") || "Imagen anterior"}
               className="absolute left-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white flex items-center justify-center transition-colors shadow-md focus-visible:ring-2 focus-visible:ring-navy outline-none"
+              style={{ zIndex: 2 }}
             >
               <ChevronLeft className="w-5 h-5 text-navy" />
             </button>
@@ -110,12 +115,12 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
               }}
               aria-label={t("tour_next") || "Siguiente imagen"}
               className="absolute right-3 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/80 hover:bg-white flex items-center justify-center transition-colors shadow-md focus-visible:ring-2 focus-visible:ring-navy outline-none"
+              style={{ zIndex: 2 }}
             >
               <ChevronRight className="w-5 h-5 text-navy" />
             </button>
 
-            {/* Dots */}
-            <div className="absolute bottom-3 inset-x-0 flex justify-center gap-1.5">
+            <div className="absolute bottom-3 inset-x-0 flex justify-center gap-1.5" style={{ zIndex: 2 }}>
               {images.map((_, i) => (
                 <button
                   key={i}
@@ -153,7 +158,8 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
                 alt={safeTitle}
                 fill
                 className="object-contain"
-                sizes="100vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+                quality={90}
               />
             </div>
           ),
