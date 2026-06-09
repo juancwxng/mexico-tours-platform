@@ -4,8 +4,8 @@
 #
 # Docs: https://developers.cloudflare.com/pages/configuration/redirects/
 
-# apex → www (also configure in Cloudflare DNS)
-https://costafrancatours.com/* https://www.costafrancatours.com/:splat  301
+# apex → www (handled at the Cloudflare DNS level)
+# https://costafrancatours.com/* https://www.costafrancatours.com/:splat 301
 
 # HTTP → HTTPS (handled automatically by Cloudflare, listed for documentation)
 # http://costafrancatours.com/* https://costafrancatours.com/:splat  301
