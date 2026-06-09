@@ -54,6 +54,9 @@ export const metadata: Metadata = {
   },
   keywords: [
     "tours Mazatlán",
+    "paseo isla venados",
+    "isla de la piedra",
+    "transporte aeropuerto Mazatlán",
     "paseos en lancha Mazatlán",
     "turismo Mazatlán",
     "tours México costeros",
@@ -76,6 +79,20 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US"],
     type: "website",
   },
+  twitter: { card: "summary_large_image" },
+  alternates: {
+    canonical: baseUrl,
+    languages: {
+      "es-MX": baseUrl,
+      "en-US": baseUrl,
+      "x-default": baseUrl,
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
 };
 
 const orgJsonLd = {
@@ -85,7 +102,7 @@ const orgJsonLd = {
   url: baseUrl,
   logo: `${baseUrl}/branding/logo.svg`,
   description:
-    "Agencia de turismo con sede en Mazatlán, Sinaloa. Operador intermediario entre turistas y prestadores de servicios turísticos en destinos costeros de México.",
+    "Agencia de turismo con sede en Mazatlán, Sinaloa. Operador intermediario entre turistas y prestadores de servicios turísticos en Mazatlán, Sinaloa, México.",
   address: {
     "@type": "PostalAddress",
     addressLocality: "Mazatlán",
