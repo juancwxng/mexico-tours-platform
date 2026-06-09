@@ -11,11 +11,10 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    absolute:
-      "Costa Franca Tours — Tours en Mazatlán y destinos costeros de México",
+    absolute: "Costa Franca Tours — La mejor selección de Tours en Mazatlán",
   },
   description:
-    "Descubre los mejores tours en Mazatlán: paseos en lancha, aventura y cultura. Reserva por WhatsApp con los operadores más confiables de la Perla del Pacífico.",
+    "Descubre los mejores tours en Mazatlán: Paseo Isla Venados, Paseo Isla de la Piedra, Catamarán con Banda y más.",
 };
 
 export default async function Home() {
