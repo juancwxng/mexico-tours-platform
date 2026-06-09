@@ -3,23 +3,25 @@
   "main": ".open-next/worker.js",
   "name": "mexico-tours-platform",
   "compatibility_date": "2026-04-16",
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
+  "compatibility_flags": ["nodejs_compat"],
   "assets": {
     "directory": ".open-next/assets",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
   },
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "mexico-tours-platform"
-    }
+      "service": "mexico-tours-platform",
+    },
   ],
   "images": {
-    "binding": "IMAGES"
+    "binding": "IMAGES",
   },
   "observability": {
-    "enabled": true
-  }
+    "enabled": true,
+  },
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://www.costafrancatours.com",
+    "NEXT_PUBLIC_WHATSAPP_NUMBER": "526691525822",
+  },
 }
