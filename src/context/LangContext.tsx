@@ -1,7 +1,6 @@
 "use client";
 
 /**
- * src/context/LangContext.tsx
  *
  * Provides the active language + a toggle function to all client components.
  * The provider is mounted in src/app/layout.tsx and receives `initialLang`
@@ -61,7 +60,7 @@ export function LangProvider({
       document.cookie = `${LANG_COOKIE}=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
       router.refresh();
     },
-    [router]
+    [router],
   );
 
   const toggleLang = useCallback(() => {
