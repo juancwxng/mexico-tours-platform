@@ -24,6 +24,7 @@ export interface Tour {
   isFeatured?: boolean;
   imageAlts?: string[];
   imageAltsEn?: string[];
+  showInTours?: boolean;
 }
 
 export const tours: Tour[] = [
@@ -378,7 +379,7 @@ export function filterTours(
   category?: string | null,
   query?: string | null,
 ): Tour[] {
-  let result = tours;
+  let result = tours.filter((t) => t.showInTours !== false);
 
   if (category && category !== "all") {
     result = result.filter((t) => t.category === category);
@@ -407,5 +408,9 @@ export function filterTours(
 
 /** All unique categories present in the tours array. */
 export function getCategories(): Tour["category"][] {
-  return Array.from(new Set(tours.map((t) => t.category)));
+  return Array.from(
+    new Set(
+      tours.filter((t) => t.showInTours !== false).map((t) => t.category),
+    ),
+  );
 }

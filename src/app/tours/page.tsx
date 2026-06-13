@@ -24,8 +24,9 @@ export default async function ToursPage({ searchParams }: Props) {
   const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
   const t = getT(lang);
 
-  const rawQ        = typeof params.q        === "string" ? params.q        : undefined;
-  const rawCategory = typeof params.category === "string" ? params.category : undefined;
+  const rawQ = typeof params.q === "string" ? params.q : undefined;
+  const rawCategory =
+    typeof params.category === "string" ? params.category : undefined;
 
   const activeCategory =
     rawCategory && (CATEGORY_SLUGS as readonly string[]).includes(rawCategory)
@@ -35,22 +36,21 @@ export default async function ToursPage({ searchParams }: Props) {
   const filtered = filterTours(activeCategory, rawQ);
 
   const categoryLabels: Record<string, string> = {
-    paseo:    t("catalog_maritime"),
+    paseo: t("catalog_maritime"),
     aventura: t("catalog_adventure"),
     cultural: t("catalog_cultural"),
-    aereo:    t("catalog_aerial"),
+    aereo: t("catalog_aerial"),
   };
 
   const categoryIcons: Record<string, string> = {
-    paseo:    "⛵",
+    paseo: "⛵",
     aventura: "🏄",
     cultural: "🏛️",
-    aereo:    "🪂",
+    aereo: "🪂",
   };
 
   return (
     <main className="pt-16 sm:pt-[4.5rem] lg:pt-20">
-
       {/* ── Page header band ── */}
       <div className="bg-navy-section text-white py-16 lg:py-20 relative overflow-hidden">
         {/* Dot pattern */}
@@ -64,7 +64,14 @@ export default async function ToursPage({ searchParams }: Props) {
         <Container className="relative z-10">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2 mb-4">
-              <span className="section-badge" style={{ color: "#E8D5AD", borderColor: "rgba(232,213,173,0.25)", background: "rgba(201,169,110,0.08)" }}>
+              <span
+                className="section-badge"
+                style={{
+                  color: "#E8D5AD",
+                  borderColor: "rgba(232,213,173,0.25)",
+                  background: "rgba(201,169,110,0.08)",
+                }}
+              >
                 <Anchor className="w-3 h-3" />
                 {t("tours_badge")}
               </span>
@@ -82,7 +89,6 @@ export default async function ToursPage({ searchParams }: Props) {
 
       <div className="pb-20 lg:pb-28 pt-10 lg:pt-12">
         <Container>
-
           {/* ── Filter tabs + count ── */}
           <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
             <div className="flex flex-wrap gap-2">
@@ -112,8 +118,12 @@ export default async function ToursPage({ searchParams }: Props) {
               ))}
             </div>
             <div className="text-right flex-shrink-0">
-              <p className="font-display text-2xl text-gold">{filtered.length}</p>
-              <p className="text-ink-muted text-xs font-bold uppercase tracking-wider">{t("tours_experiences")}</p>
+              <p className="font-display text-2xl text-gold">
+                {filtered.length}
+              </p>
+              <p className="text-ink-muted text-xs font-bold uppercase tracking-wider">
+                {t("tours_experiences")}
+              </p>
             </div>
           </div>
 
@@ -126,7 +136,11 @@ export default async function ToursPage({ searchParams }: Props) {
                 <strong className="text-navy">{rawQ.slice(0, 100)}</strong>
               </span>
               <a
-                href={activeCategory ? `/tours?category=${activeCategory}` : "/tours"}
+                href={
+                  activeCategory
+                    ? `/tours?category=${activeCategory}`
+                    : "/tours"
+                }
                 className="ml-auto text-gold font-bold hover:underline text-xs uppercase tracking-wide"
               >
                 {t("tours_clear")}
@@ -144,8 +158,14 @@ export default async function ToursPage({ searchParams }: Props) {
           ) : (
             <div className="text-center py-28 space-y-5">
               <div className="text-5xl">🌊</div>
-              <p className="text-ink-muted text-lg">{t("tours_no_results")}</p>
-              <a href="/tours" className="btn-ghost inline-flex">
+              <p className="text-navy/50 text-lg">{t("tours_no_results")}</p>
+
+              <a
+                href="/tours"
+                className="inline-flex items-center gap-2 font-display uppercase tracking-widest text-sm
+                           px-8 py-3.5 rounded-full border border-gold/40 text-navy
+                           hover:border-gold hover:text-gold transition-all duration-200"
+              >
                 {t("tours_clear")}
               </a>
             </div>
