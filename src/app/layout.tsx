@@ -100,7 +100,7 @@ const orgJsonLd = {
   "@type": "TravelAgency",
   name: "Costa Franca Tours SAS",
   url: baseUrl,
-  logo: `${baseUrl}/branding/logo.svg`,
+  logo: `${baseUrl}/logo/Logo_CostaFrancaTours.svg`,
   description:
     "Agencia de turismo con sede en Mazatlán, Sinaloa. Operador intermediario entre turistas y prestadores de servicios turísticos en Mazatlán, Sinaloa, México.",
   address: {
@@ -113,7 +113,7 @@ const orgJsonLd = {
     "@type": "ContactPoint",
     telephone: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER
       ? `+${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}`
-      : "+526690000000",
+      : "+526691525822",
     contactType: "customer service",
     availableLanguage: ["Spanish", "English"],
   },

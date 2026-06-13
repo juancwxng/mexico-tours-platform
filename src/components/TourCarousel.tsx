@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
@@ -14,9 +14,14 @@ const Lightbox = dynamic(() => import("yet-another-react-lightbox"), {
 interface TourCarouselProps {
   images: string[];
   title?: string;
+  imageAlts?: string[];
 }
 
-export default function TourCarousel({ images, title }: TourCarouselProps) {
+export default function TourCarousel({
+  images,
+  title,
+  imageAlts,
+}: TourCarouselProps) {
   const t = useT();
   const [current, setCurrent] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -25,15 +30,21 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
 
   const safeTitle = title || t("tour_image_fallback") || "Tour";
 
+  const getAlt = useCallback(
+    (i: number) =>
+      imageAlts?.[i]?.trim() || `${safeTitle} — ${i + 1} / ${images.length}`,
+    [imageAlts, safeTitle, images.length],
+  );
+
   const slides = useMemo(
     () =>
       images.map((src, i) => ({
         src,
-        alt: `${safeTitle} — ${i + 1} / ${images.length}`,
+        alt: getAlt(i),
         width: 2160,
         height: 1620,
       })),
-    [images, safeTitle],
+    [images, getAlt],
   );
 
   useEffect(() => {
@@ -90,10 +101,13 @@ export default function TourCarousel({ images, title }: TourCarouselProps) {
           <Image
             key={src}
             src={src}
-            alt={i === current ? `${safeTitle} — ${i + 1} / ${images.length}` : ""}
+            alt={i === current ? getAlt(i) : ""}
             fill
             className="object-cover transition-opacity duration-300"
-            style={{ opacity: i === current ? 1 : 0, zIndex: i === current ? 1 : 0 }}
+            style={{
+              opacity: i === current ? 1 : 0,
+              zIndex: i === current ? 1 : 0,
+            }}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 420px"
             priority={i === 0}
             onLoad={() => setLoaded((prev) => ({ ...prev, [i]: true }))}

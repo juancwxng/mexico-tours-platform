@@ -22,6 +22,8 @@ export interface Tour {
   scheduleEn?: string;
   priceList: PriceItem[];
   isFeatured?: boolean;
+  imageAlts?: string[];
+  imageAltsEn?: string[];
 }
 
 export const tours: Tour[] = [
@@ -38,6 +40,16 @@ export const tours: Tour[] = [
     descriptionEn:
       "Discover the charm and fun of Stone Island at your own pace! Sail across the breathtaking bay on a catamaran, discovering mystical caves and playful sea lions. Enjoy three blissful hours relaxing on the beach with a tropical open bar and a delicious oceanfront feast. Choose the **Regular Package** for ultimate relaxation, or upgrade to the **All-Inclusive Package** to add a splash of thrill to your day with horseback riding along the beach and a hilarious banana boat ride! (Children 0-4 are free, no meal included; add lunch for $120 MXN).",
     imageCount: 12,
+    imageAlts: [
+      "Catamarán navegando hacia Isla de la Piedra al amanecer en Mazatlán",
+      "Turistas relajándose en la playa de Isla de la Piedra con barra libre",
+      "Vista de la Cueva del Diablo desde el catamarán",
+    ],
+    imageAltsEn: [
+      "Catamaran sailing toward Stone Island at sunrise in Mazatlán",
+      "Tourists relaxing on Stone Island beach with open bar",
+      "View of Devil's Cave from the catamaran",
+    ],
     includes: [
       "Transporte ida y vuelta a cualquier hotel de Zona Dorada, Malecón o Cerritos",
       "Crucero de 1 hora en catamarán por la Cueva del Diablo, Cueva de la Garganta, Cueva del Pirata, Rocas Blancas y (en invierno) lobos marinos en su hábitat natural",
@@ -98,6 +110,16 @@ export const tours: Tour[] = [
     descriptionEn:
       "Embark on the ultimate Mazatlán adventure with our exclusive Deer Island Tour! Step aboard a spectacular trimaran for a 1.5-hour scenic bay cruise, soaking in breathtaking panoramic views of the Pacific coast. Upon arriving at this pristine nature reserve, dive into 3.5 hours of sun, sand, and sea with three thrilling beach activities included: snorkeling, kayaking, and a hilarious banana boat ride. Savor a delicious lunch served with fresh fruit, and keep the vacation vibes flowing with our 5-hour open bar. The perfect tropical escape awaits! *(Note: Children under 2 are not permitted. Ages 2-3 are free without food and require a signed liability waiver).* ",
     imageCount: 8,
+    imageAlts: [
+      "Catamarán navegando hacia Isla de la Piedra al amanecer en Mazatlán",
+      "Turistas relajándose en la playa de Isla de la Piedra con barra libre",
+      "Vista de la Cueva del Diablo desde el catamarán",
+    ],
+    imageAltsEn: [
+      "Catamaran sailing toward Stone Island at sunrise in Mazatlán",
+      "Tourists relaxing on Stone Island beach with open bar",
+      "View of Devil's Cave from the catamaran",
+    ],
     includes: [
       "Transporte ida y vuelta desde cualquier lugar en Zona Dorada o Cerritos",
       "Paseo escénico de 1.5 horas por la bahía a bordo de un Trimarán",
