@@ -62,6 +62,8 @@ export default async function TourDetailPage({
   const t = getT(lang);
 
   const title = lang === "en" ? (tour.titleEn ?? tour.title) : tour.title;
+  const imageAlts =
+    lang === "en" ? (tour.imageAltsEn ?? tour.imageAlts) : tour.imageAlts;
   const description =
     lang === "en" ? (tour.descriptionEn ?? tour.description) : tour.description;
   const includes =
@@ -173,7 +175,11 @@ export default async function TourDetailPage({
             </div>
 
             <div className="space-y-6 order-1 lg:order-2 lg:sticky lg:top-24 lg:self-start">
-              <TourCarousel images={images} title={title} />
+              <TourCarousel
+                images={images}
+                title={title}
+                imageAlts={imageAlts}
+              />
               <div className="hidden lg:block">
                 <BookingForm tourTitle={tour.title} tourPrice={tour.price} />
               </div>
