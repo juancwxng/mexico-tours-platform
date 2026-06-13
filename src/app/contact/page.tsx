@@ -12,12 +12,32 @@ import { cookies } from "next/headers";
 import Container from "@/components/Container";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
 import type { Metadata } from "next";
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+  </svg>
+);
 
-export const metadata: Metadata = {
-  title: "Contacto",
-  description:
-    "Contáctanos para reservar tu experiencia turística en Mazatlán. Atención por WhatsApp, correo y redes sociales.",
-};
+/*
+DYNAMIC BILINGUAL METADATA
+ */
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
+  const isEn = lang ? lang.startsWith("en") : false;
+
+  return {
+    title: isEn ? "Contact Us" : "Contacto",
+    description: isEn
+      ? "Contact us to book your tourist experience in Mazatlan. Customer service via WhatsApp, email, and social media."
+      : "Contáctanos para reservar tu experiencia turística en Mazatlán. Atención por WhatsApp, correo y redes sociales.",
+  };
+}
 
 export default async function ContactPage() {
   const cookieStore = await cookies();
@@ -73,20 +93,20 @@ export default async function ContactPage() {
     {
       label: "Instagram",
       icon: Instagram,
-      href: "https://instagram.com/costafrancatours",
+      href: "https://www.instagram.com/centraltoursmazatlan",
       color: "#C9A96E",
     },
     {
       label: "Facebook",
       icon: Facebook,
-      href: "https://facebook.com/costafrancatours",
+      href: "https://www.facebook.com/PaseosMazatlanIslaPiedraVenadosCatamaranBanda",
       color: "#A8C8D8",
     },
     {
       label: "TikTok",
-      icon: TikTok,
-      href: "https://facebook.com/costafrancatours",
-      color: "#A8C8D8",
+      icon: TikTokIcon,
+      href: "https://www.tiktok.com/@centraltoursmazatlan",
+      color: "#ffffff",
     },
   ];
 
