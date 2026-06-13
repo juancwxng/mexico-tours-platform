@@ -1,5 +1,13 @@
 import Image from "next/image";
-import { MapPin, Phone, Mail, Clock, MessageCircle, Instagram, Facebook } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  MessageCircle,
+  Instagram,
+  Facebook,
+} from "lucide-react";
 import { cookies } from "next/headers";
 import Container from "@/components/Container";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
@@ -15,14 +23,14 @@ export default async function ContactPage() {
   const cookieStore = await cookies();
   const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
   const t = getT(lang);
-  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526690000000";
+  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526691525822";
 
   const contactInfo = [
     {
       icon: Phone,
       title: t("contact_phone"),
-      lines: ["+52 669 000 0000"],
-      href: "tel:+526690000000",
+      lines: ["+52 669 152 5822"],
+      href: "tel:+526691525822",
       color: "text-teal",
       bg: "bg-teal/10",
     },
@@ -45,7 +53,10 @@ export default async function ContactPage() {
     {
       icon: Clock,
       title: t("contact_hours"),
-      lines: [lang === "en" ? "Monday to Sunday" : "Lunes a Domingo", "8:00 AM – 10:00 PM"],
+      lines: [
+        lang === "en" ? "Monday to Sunday" : "Lunes a Domingo",
+        "8:00 AM – 10:00 PM",
+      ],
       href: null,
       color: "text-navy/60",
       bg: "bg-[#f4f1ec]",
@@ -53,9 +64,30 @@ export default async function ContactPage() {
   ];
 
   const socials = [
-    { label: "WhatsApp", icon: MessageCircle, href: `https://wa.me/${waNumber}`, color: "#25D366" },
-    { label: "Instagram", icon: Instagram, href: "https://instagram.com/costafrancatours", color: "#C9A96E" },
-    { label: "Facebook",  icon: Facebook,  href: "https://facebook.com/costafrancatours", color: "#A8C8D8" },
+    {
+      label: "WhatsApp",
+      icon: MessageCircle,
+      href: `https://wa.me/${waNumber}`,
+      color: "#25D366",
+    },
+    {
+      label: "Instagram",
+      icon: Instagram,
+      href: "https://instagram.com/costafrancatours",
+      color: "#C9A96E",
+    },
+    {
+      label: "Facebook",
+      icon: Facebook,
+      href: "https://facebook.com/costafrancatours",
+      color: "#A8C8D8",
+    },
+    {
+      label: "TikTok",
+      icon: TikTok,
+      href: "https://facebook.com/costafrancatours",
+      color: "#A8C8D8",
+    },
   ];
 
   return (
@@ -70,7 +102,14 @@ export default async function ContactPage() {
           }}
         />
         <Container className="relative z-10">
-          <span className="section-badge mb-4 inline-flex" style={{ color: "#E8D5AD", borderColor: "rgba(232,213,173,0.25)", background: "rgba(201,169,110,0.08)" }}>
+          <span
+            className="section-badge mb-4 inline-flex"
+            style={{
+              color: "#E8D5AD",
+              borderColor: "rgba(232,213,173,0.25)",
+              background: "rgba(201,169,110,0.08)",
+            }}
+          >
             ✦ {lang === "en" ? "Get in Touch" : "Escríbenos"}
           </span>
           <h1 className="font-display text-5xl md:text-6xl text-white mt-3 leading-none">
@@ -83,10 +122,11 @@ export default async function ContactPage() {
       <div className="pb-20 lg:pb-28 pt-12">
         <Container size="lg">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-
             {/* Left: info cards + socials */}
             <div className="space-y-6">
-              <p className="text-navy/60 text-lg leading-relaxed">{t("contact_subtitle")}</p>
+              <p className="text-navy/60 text-lg leading-relaxed">
+                {t("contact_subtitle")}
+              </p>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 {contactInfo.map((item, i) => (
@@ -94,17 +134,29 @@ export default async function ContactPage() {
                     key={i}
                     className="bg-white p-5 rounded-2xl border border-navy/10 shadow-sm hover:border-gold/25 transition-colors"
                   >
-                    <div className={`w-10 h-10 ${item.bg} rounded-xl flex items-center justify-center mb-3`}>
+                    <div
+                      className={`w-10 h-10 ${item.bg} rounded-xl flex items-center justify-center mb-3`}
+                    >
                       <item.icon className={`w-5 h-5 ${item.color}`} />
                     </div>
-                    <h3 className="font-display text-navy mb-1 text-base">{item.title}</h3>
+                    <h3 className="font-display text-navy mb-1 text-base">
+                      {item.title}
+                    </h3>
                     {item.href ? (
-                      <a href={item.href} className="text-navy/60 text-sm hover:text-gold transition-colors leading-relaxed">
+                      <a
+                        href={item.href}
+                        className="text-navy/60 text-sm hover:text-gold transition-colors leading-relaxed"
+                      >
                         {item.lines[0]}
                       </a>
                     ) : (
                       item.lines.map((line, j) => (
-                        <p key={j} className="text-navy/60 text-sm leading-relaxed">{line}</p>
+                        <p
+                          key={j}
+                          className="text-navy/60 text-sm leading-relaxed"
+                        >
+                          {line}
+                        </p>
                       ))
                     )}
                   </div>
@@ -113,7 +165,9 @@ export default async function ContactPage() {
 
               {/* Socials */}
               <div className="bg-navy-section rounded-2xl p-7 text-center">
-                <h3 className="font-display text-xl text-white mb-5">{t("contact_follow")}</h3>
+                <h3 className="font-display text-xl text-white mb-5">
+                  {t("contact_follow")}
+                </h3>
                 <div className="flex justify-center gap-4">
                   {socials.map((s) => (
                     <a
