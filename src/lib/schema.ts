@@ -7,39 +7,42 @@ function toIsoDuration(duration: string): string {
 }
 
 export function buildTourJsonLd(tour: Tour, baseUrl: string) {
+  const tourUrl = `${baseUrl}/tours/${tour.slug}`;
+
   const images =
     tour.imageCount > 0
       ? Array.from(
           { length: tour.imageCount },
-          (_, i) => `${baseUrl}/images/tours/${tour.slug}/${i + 1}.webp`
+          (_, i) => `${baseUrl}/images/tours/${tour.slug}/${i + 1}.webp`,
         )
       : [];
 
-  const offers = tour.priceList.length > 1
-    ? tour.priceList.map((item) => ({
-        "@type": "Offer",
-        name: item.label,
-        url: `${baseUrl}/tours/${tour.slug}`,
-        priceCurrency: "MXN",
-        price: item.price,
-        priceValidUntil: `${new Date().getFullYear() + 1}-12-31`,
-        availability: "https://schema.org/InStock",
-      }))
-    : {
-        "@type": "Offer",
-        url: `${baseUrl}/tours/${tour.slug}`,
-        priceCurrency: "MXN",
-        price: tour.price,
-        priceValidUntil: `${new Date().getFullYear() + 1}-12-31`,
-        availability: "https://schema.org/InStock",
-      };
+  const offers =
+    tour.priceList.length > 1
+      ? tour.priceList.map((item) => ({
+          "@type": "Offer",
+          name: item.label,
+          url: tourUrl,
+          priceCurrency: "MXN",
+          price: item.price,
+          priceValidUntil: `${new Date().getFullYear() + 1}-12-31`,
+          availability: "https://schema.org/InStock",
+        }))
+      : {
+          "@type": "Offer",
+          url: tourUrl,
+          priceCurrency: "MXN",
+          price: tour.price,
+          priceValidUntil: `${new Date().getFullYear() + 1}-12-31`,
+          availability: "https://schema.org/InStock",
+        };
 
   return {
     "@context": "https://schema.org",
     "@type": "TouristTrip",
     name: tour.title,
     description: tour.description,
-    url: `${baseUrl}/tours/${tour.slug}`,
+    url: tourUrl,
     ...(images.length > 0 && { image: images }),
     duration: toIsoDuration(tour.duration),
     touristType: ["Families", "Couples", "Adventure Travelers"],
@@ -53,8 +56,9 @@ export function buildTourJsonLd(tour: Tour, baseUrl: string) {
     },
     provider: {
       "@type": "TravelAgency",
-      name: "Costa Franca Tours SAS",
+      name: "Costa Franca Tours",
       url: baseUrl,
+      logo: `${baseUrl}/logo/Logo_CostaFrancaTours.svg`,
       address: {
         "@type": "PostalAddress",
         addressLocality: "Mazatlán",

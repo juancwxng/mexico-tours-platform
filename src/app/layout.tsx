@@ -20,24 +20,24 @@ function getSiteUrl(): string {
 const baseUrl = getSiteUrl();
 
 /*
- * Detecta el idioma del usuario y sirve las etiquetas meta perfectas en inglés o español.
+ * Detects the user's language and serves the optimized meta tags in englisha and spanish
  */
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
   const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
   const isEn = lang ? lang.startsWith("en") : false;
 
-  // Título por defecto enriquecido con Keywords de alta conversión ("Mejores Tours" / "Best Tours")
+  // Keyword enriched title
   const titleDefault = isEn
     ? "Costa Franca Tours | Best Mazatlán Tours & Boat Excursions"
     : "Costa Franca Tours | Los Mejores Tours y Paseos en Mazatlán";
 
-  // Descripciones atractivas para humanos (mejoran CTR) y plagadas de entidades turísticas para Google
+  // Atractive descriptions
   const description = isEn
     ? "Discover the Pearl of the Pacific with Costa Franca Tours. Book top things to do in Mazatlan: Stone Island tours, Deer Island boat trips, and safe excursions."
     : "Descubre la Perla del Pacífico con Costa Franca Tours. Reserva las mejores cosas que hacer en Mazatlán: tours a la Isla de la Piedra, Isla de Venados y paseos en lancha.";
 
-  // Segmentación semántica de palabras clave por mercado
+  // Semantic segmentation of key words per market
   const keywords = isEn
     ? [
         "things to do in Mazatlan",
@@ -51,7 +51,7 @@ export async function generateMetadata(): Promise<Metadata> {
       ]
     : [
         "tours Mazatlán",
-        "que hacer en Mazatláan",
+        "que hacer en Mazatlán",
         "paseo isla venados",
         "isla de la piedra",
         "transporte aeropuerto Mazatlán",
@@ -144,6 +144,9 @@ export default async function RootLayout({
   const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
   const isEn = lang ? lang.startsWith("en") : false;
 
+  /*
+  Schema
+   */
   const orgJsonLd = {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
@@ -167,11 +170,6 @@ export default async function RootLayout({
       contactType: "customer service",
       availableLanguage: ["Spanish", "English"],
     },
-    sameAs: [
-      "https://instagram.com/costafrancatours",
-      "https://facebook.com/costafrancatours",
-      "https://tiktok.com/@costafrancatours",
-    ],
   };
 
   return (
