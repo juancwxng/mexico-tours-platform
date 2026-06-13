@@ -41,14 +41,32 @@ export const tours: Tour[] = [
       "Discover the charm and fun of Stone Island at your own pace! Sail across the breathtaking bay on a catamaran, discovering mystical caves and playful sea lions. Enjoy three blissful hours relaxing on the beach with a tropical open bar and a delicious oceanfront feast. Choose the **Regular Package** for ultimate relaxation, or upgrade to the **All-Inclusive Package** to add a splash of thrill to your day with horseback riding along the beach and a hilarious banana boat ride! (Children 0-4 are free, no meal included; add lunch for $120 MXN).",
     imageCount: 12,
     imageAlts: [
-      "Catamarán navegando hacia Isla de la Piedra al amanecer en Mazatlán",
-      "Turistas relajándose en la playa de Isla de la Piedra con barra libre",
-      "Vista de la Cueva del Diablo desde el catamarán",
+      "Catamarán Isla de la Piedra abordando turistas en el puerto de Mazatlán", // 1.webp
+      "Turistas abordando transporte turístico para la excursión a Isla de la Piedra en Mazatlán", // 2.webp
+      "Playa de Isla de la Piedra con turistas, palapas y el Faro de Mazatlán al fondo", // 3.webp
+      "Turistas disfrutando de un paseo en banana roja en las playas de Isla de la Piedra", // 4.webp
+      "Turistas en barco con chalecos salvavidas navegando hacia Isla de la Piedra", // 5.webp
+      "Paseo acuático en banana amarilla en Isla de la Piedra, Mazatlán", // 6.webp
+      "Restaurante de playa con palapas y palmeras en Isla de la Piedra, Mazatlán", // 7.webp
+      "Lobos marinos sobre las rocas vistos desde el tour a Isla de la Piedra", // 8.webp
+      "Vista elevada de la zona de playa, palmeras y restaurantes en Isla de la Piedra, Mazatlán", // 9.webp
+      "Recorrido de turistas en carreta tradicional por la playa de Isla de la Piedra", // 10.webp
+      "Vista del Faro de Mazatlán y yates desde una embarcación en el tour a Isla de la Piedra", // 11.webp
+      "Formación rocosa Piedras Blancas en el océano vista durante el recorrido turístico en Mazatlán", // 12.webp
     ],
     imageAltsEn: [
-      "Catamaran sailing toward Stone Island at sunrise in Mazatlán",
-      "Tourists relaxing on Stone Island beach with open bar",
-      "View of Devil's Cave from the catamaran",
+      "Stone Island catamaran boarding tourists at the port of Mazatlán", // 1.webp
+      "Tourists boarding tour transportation for the Stone Island excursion in Mazatlán", // 2.webp
+      "Stone Island beach with tourists, palapas, and the Mazatlán Lighthouse in the background", // 3.webp
+      "Tourists enjoying a red banana boat ride on the beaches of Stone Island", // 4.webp
+      "Tourists on a boat wearing life jackets sailing toward Stone Island", // 5.webp
+      "Yellow banana boat water ride at Stone Island, Mazatlán", // 6.webp
+      "Beachfront restaurant with palapas and palm trees at Stone Island, Mazatlán", // 7.webp
+      "Sea lions resting on rocks seen from the Stone Island tour", // 8.webp
+      "Elevated view of the beach, palm trees, and restaurants at Stone Island, Mazatlán", // 9.webp
+      "Tourists riding a traditional wagon along the beach at Stone Island", // 10.webp
+      "View of the Mazatlán Lighthouse and yachts from a boat on the Stone Island tour", // 11.webp
+      "White Rocks formation in the ocean seen during the sightseeing boat tour in Mazatlán", // 12.webp
     ],
     includes: [
       "Transporte ida y vuelta a cualquier hotel de Zona Dorada, Malecón o Cerritos",
@@ -111,14 +129,24 @@ export const tours: Tour[] = [
       "Embark on the ultimate Mazatlán adventure with our exclusive Deer Island Tour! Step aboard a spectacular trimaran for a 1.5-hour scenic bay cruise, soaking in breathtaking panoramic views of the Pacific coast. Upon arriving at this pristine nature reserve, dive into 3.5 hours of sun, sand, and sea with three thrilling beach activities included: snorkeling, kayaking, and a hilarious banana boat ride. Savor a delicious lunch served with fresh fruit, and keep the vacation vibes flowing with our 5-hour open bar. The perfect tropical escape awaits! *(Note: Children under 2 are not permitted. Ages 2-3 are free without food and require a signed liability waiver).* ",
     imageCount: 8,
     imageAlts: [
-      "Catamarán navegando hacia Isla de la Piedra al amanecer en Mazatlán",
-      "Turistas relajándose en la playa de Isla de la Piedra con barra libre",
-      "Vista de la Cueva del Diablo desde el catamarán",
+      "Vista aérea de catamarán llegando a la playa en el paseo a Isla Venados, Mazatlán", // 1.webp
+      "Turistas en embarcación observando las cuevas rocosas durante el tour a Isla Venados en Mazatlán", // 2.webp
+      "Paisaje de costa rocosa y vegetación en la reserva natural de Isla Venados, Mazatlán", // 3.webp
+      "Moto acuática en la playa de Isla Venados con vista a la zona hotelera de Mazatlán al fondo", // 4.webp
+      "Turistas divirtiéndose en el paseo en banana en las aguas tranquilas de Isla Venados, Mazatlán", // 5.webp
+      "Grupo de coatíes o tejones en su hábitat natural durante la excursión a Isla Venados, Mazatlán", // 6.webp
+      "Turista relajándose en la proa de un catamarán navegando en el tour Isla Venados, Mazatlán", // 7.webp
+      "Formación rocosa en el océano vista durante el recorrido marítimo del paseo Isla Venados, Mazatlán", // 8.webp
     ],
     imageAltsEn: [
-      "Catamaran sailing toward Stone Island at sunrise in Mazatlán",
-      "Tourists relaxing on Stone Island beach with open bar",
-      "View of Devil's Cave from the catamaran",
+      "Aerial view of a catamaran arriving at the beach on the Deer Island tour, Mazatlán", // 1.webp
+      "Tourists on a boat observing the rocky caves during the Deer Island tour in Mazatlán", // 2.webp
+      "Rocky coastline landscape and vegetation in the Deer Island nature reserve, Mazatlán", // 3.webp
+      "Jet ski on Deer Island beach with a view of the Mazatlán hotel zone skyline in the background", // 4.webp
+      "Tourists having fun on a banana boat ride in the calm waters of Deer Island, Mazatlán", // 5.webp
+      "Group of coatis in their natural habitat during the Deer Island excursion, Mazatlán", // 6.webp
+      "Tourist relaxing on the bow of a catamaran sailing on the Deer Island tour, Mazatlán", // 7.webp
+      "Rocky formation in the ocean seen during the maritime route of the Deer Island tour, Mazatlán", // 8.webp
     ],
     includes: [
       "Transporte ida y vuelta desde cualquier lugar en Zona Dorada o Cerritos",
@@ -163,7 +191,33 @@ export const tours: Tour[] = [
       "¡Siente la adrenalina y descubre la auténtica belleza rural de Sinaloa con nuestra emocionante Aventura en Cuatrimotos por Veranos! Prepárate para conquistar senderos de terracería, atravesar un espectacular puente colgante y maravillarte con paisajes increíbles mientras visitas pueblos pintorescos en un recorrido de 2 horas. Después de la acción, recarga energías con un exquisito banquete tradicional de rancho: burritos de machaca, queso fundido flameado, guacamole fresco, frijoles y tortillas hechas a mano. Para cerrar con broche de oro, sumérgete en la cultura local con un recorrido por una tequilera artesanal, donde aprenderás sobre el fascinante proceso de destilación del agave y disfrutarás de una cata guiada. ¡Una combinación perfecta de acción, gastronomía y tradición!",
     descriptionEn:
       "Feel the adrenaline and discover the rustic beauty of Sinaloa with our thrilling Veranos ATV Adventure! Gear up to conquer off-road dirt trails, cross a spectacular suspension bridge, and take in breathtaking landscapes as you visit charming local villages during a 2-hour ride. After the action, refuel with an authentic, mouth-watering ranch feast featuring machaca burritos, flambéed melted cheese, fresh guacamole, beans, and warm handmade tortillas. Top it all off by immersing yourself in local culture with a guided tour of an artisanal tequila distillery, where you'll learn about the fascinating agave distillation process and enjoy a premium tasting session. The ultimate blend of action, flavor, and tradition!",
-    imageCount: 7,
+    imageCount: 11,
+    imageAlts: [
+      "Grupo de turistas con cuatrimotos listos para el tour en Veranos, Mazatlán, Sinaloa", // 1.webp
+      "Turista conduciendo cuatrimoto en camino de terracería durante el tour extremo en Veranos, Mazatlán", // 2.webp
+      "Turistas en el mirador del tour de cuatrimotos con vista a la selva de Veranos, Sinaloa", // 3.webp
+      "Vista en primera persona de la ruta en cuatrimoto por la naturaleza de Veranos, Mazatlán", // 4.webp
+      "Caravana del tour de cuatrimotos recorriendo caminos rurales en Veranos, Mazatlán, Sinaloa", // 5.webp
+      "Inicio del recorrido turístico en cuatrimoto en el pueblo tradicional de Veranos, Mazatlán", // 6.webp
+      "Comida regional sinaloense con guacamole y salsa incluida en el tour a Veranos, Mazatlán", // 7.webp
+      "Turistas degustando comida tradicional mexicana tras la excursión de cuatrimotos en Veranos, Sinaloa", // 8.webp
+      "Aventura todoterreno en cuatrimotos por paisajes rurales de Veranos, Mazatlán", // 9.webp
+      "Transporte turístico y restaurante Verano Ranch para excursiones en Mazatlán, Sinaloa", // 10.webp
+      "Turistas divirtiéndose mientras degustan queso fundido en molcajete al finalizar el tour de cuatrimotos en Veranos, Sinaloa", // 11.webp
+    ],
+    imageAltsEn: [
+      "Group of tourists with ATVs ready for the tour in Veranos, Mazatlán, Sinaloa", // 1.webp
+      "Tourist driving an ATV on a dirt road during the extreme tour in Veranos, Mazatlán", // 2.webp
+      "Tourists at the ATV tour viewpoint overlooking the jungle in Veranos, Sinaloa", // 3.webp
+      "First-person view of the ATV route through the nature of Veranos, Mazatlán", // 4.webp
+      "ATV tour caravan riding along rural dirt roads in Veranos, Mazatlán, Sinaloa", // 5.webp
+      "Start of the sightseeing ATV ride in the traditional village of Veranos, Mazatlán", // 6.webp
+      "Regional Sinaloan food with guacamole and salsa included in the Veranos tour, Mazatlán", // 7.webp
+      "Tourists tasting traditional Mexican food after the ATV excursion in Veranos, Sinaloa", // 8.webp
+      "Off-road ATV adventure through rural landscapes of Veranos, Mazatlán", // 9.webp
+      "Tourist transportation and Verano Ranch restaurant for excursions in Mazatlán, Sinaloa", // 10.webp
+      "Tourists having fun while tasting melted cheese from a molcajete after the ATV tour in Veranos, Sinaloa", // 11.webp
+    ],
     includes: [
       "Transporte ida y vuelta desde tu hotel en Zona Dorada, Malecón o Cerritos",
       "Recorrido guiado en cuatrimoto de aproximadamente 2 horas por emocionantes rutas de terracería",
@@ -202,6 +256,24 @@ export const tours: Tour[] = [
     descriptionEn:
       "Experience the ultimate party at sea aboard the Sensation Catamaran! Set sail on a luxury two-story catamaran and take in a spectacular Mazatlán sunset while dancing to the contagious rhythm of a live Sinaloense brass band. Relax on the first deck at comfortable tables, or head up to the second-floor dance floor to soak in the vibrant atmosphere and capture stunning sunset photos. Sip from the best premium international open bar on the bay and treat yourself to a mouth-watering traditional taco bar. With top-tier service, guaranteed fun, and unbeatable views, this is an unforgettable sunset cruise you won't want to miss! *(Important note: Saturdays are strictly for guests 12 and older).* ",
     imageCount: 7,
+    imageAlts: [
+      "Turistas abordando el paseo Sensation Catamarán en la marina de Mazatlán, Sinaloa", // 1.webp
+      "Vista aérea del Sensation Catamarán navegando por el océano durante el tour en Mazatlán", // 2.webp
+      "Actividades acuáticas, kayaks y tapetes flotantes en el paseo Sensation Catamarán en Mazatlán, Sinaloa", // 3.webp
+      "Sensation Catamarán con banda en vivo esperando a los turistas en el puerto de Mazatlán", // 4.webp
+      "Banda sinaloense tocando en vivo durante el recorrido de fiesta del Sensation Catamarán en Mazatlán, Sinaloa", // 5.webp
+      "DJ animando el ambiente de fiesta a bordo del tour Sensation Catamarán en Mazatlán", // 6.webp
+      "Turistas bailando con banda en vivo en la cubierta superior del Sensation Catamarán, Mazatlán", // 7.webp
+    ],
+    imageAltsEn: [
+      "Tourists boarding the Sensation Catamaran tour at the marina in Mazatlán, Sinaloa", // 1.webp
+      "Aerial view of the Sensation Catamaran sailing through the ocean during the Mazatlán tour", // 2.webp
+      "Water activities, kayaks, and floating mats on the Sensation Catamaran tour in Mazatlán, Sinaloa", // 3.webp
+      "Sensation Catamaran with a live band waiting for tourists at the port of Mazatlán", // 4.webp
+      "Sinaloan band playing live during the Sensation Catamaran party boat tour in Mazatlán, Sinaloa", // 5.webp
+      "DJ keeping the party atmosphere alive aboard the Sensation Catamaran tour in Mazatlán", // 6.webp
+      "Tourists dancing to a live band on the top deck of the Sensation Catamaran, Mazatlán", // 7.webp
+    ],
     includes: [
       "Paseo inolvidable de 3 horas por la bahía en catamarán de lujo de 2 pisos (planta baja con mesas, planta alta con pista de baile)",
       "Música de banda sinaloense en vivo y divertidas rondas de shots",
@@ -245,6 +317,18 @@ export const tours: Tour[] = [
     descriptionEn:
       "Feel the ocean breeze and take control of your own adventure with our thrilling Speed Boat tour! Be the captain and drive your very own speedboat, racing at top speeds across the spectacular Mazatlán bay. During this electrifying 2-hour ride, you'll cruise past the iconic Three Islands while an expert guide shares the fascinating history of each. Plus, during the winter season, you'll be treated to an incredible sighting of playful sea lions in their natural habitat. The perfect dose of adrenaline, nature, and freedom out on the open water! *(Note: Minimum age to participate is 8 years).* ",
     imageCount: 4,
+    imageAlts: [
+      "Vista en primera persona de turista conduciendo en el tour de Speed Boats hacia las formaciones rocosas en Mazatlán", // 1.webp
+      "Grupo de turistas navegando en el paseo de Speed Boats frente a la zona costera y rompeolas de Mazatlán", // 2.webp
+      "Pareja de turistas divirtiéndose en su lancha rápida durante el recorrido en Speed Boats por Mazatlán", // 3.webp
+      "Turista sonriendo mientras maneja una lancha rápida en la marina durante el tour Speed Boats en Mazatlán", // 4.webp
+    ],
+    imageAltsEn: [
+      "First-person view of a tourist driving on the Speed Boats tour towards the rock formations in Mazatlán", // 1.webp
+      "Group of tourists navigating on the Speed Boats ride in front of the coastal zone and breakwater of Mazatlán", // 2.webp
+      "Tourist couple having fun in their speedboat during the Speed Boats tour in Mazatlán", // 3.webp
+      "Smiling tourist driving a speed boat in the marina during the Speed Boats tour in Mazatlán", // 4.webp
+    ],
     includes: [
       "Experiencia única de manejar tú mismo una lancha rápida (Speed Boat)",
       "Emocionante paseo a máxima velocidad por la bahía de Mazatlán",
