@@ -1,25 +1,5 @@
-// src/components/BookingForm.tsx
 "use client";
-
-/**
- * BookingForm
- *
- * Security:
- * - All inputs are controlled; no innerHTML anywhere.
- * - WhatsApp message is built from sanitized, bounded values.
- * - encodeURIComponent() applied to the full message before appending to URL.
- * - window.open() uses noopener,noreferrer.
- *
- * UX improvements over previous version:
- * - Inline field-level validation with visible error messages (no alert()).
- * - Real-time price estimate shown as counters change.
- * - Date formatted via Intl.DateTimeFormat — no hardcoded month arrays.
- * - Language read from LangContext, not from a cookie regex at submit time.
- * - "Infants" age bracket (0–3) added alongside children for complete pax info.
- * - useId() for stable, collision-free label/error associations.
- */
-
-import { useState, useId, useCallback } from "react";
+import { useState, useId, useCallback, useMemo } from "react";
 import { CalendarIcon, Users, AlertCircle, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/context/LangContext";
@@ -55,13 +35,30 @@ type ValidationError = "no_date" | "past_date" | null;
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
+function todayParts(): { year: number; month: number; day: number } {
+  const now = new Date();
+  return {
+    year: now.getFullYear(),
+    month: now.getMonth() + 1,
+    day: now.getDate(),
+  };
+}
+
 /** Returns today's date as a YYYY-MM-DD string in local time. */
 function todayString(): string {
-  const now = new Date();
-  const yyyy = now.getFullYear();
-  const mm = String(now.getMonth() + 1).padStart(2, "0");
-  const dd = String(now.getDate()).padStart(2, "0");
-  return `${yyyy}-${mm}-${dd}`;
+  const { year, month, day } = todayParts();
+  return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+/** Builds a YYYY-MM-DD string from the three select values. Returns "" if incomplete. */
+function buildIso(year: string, month: string, day: string): string {
+  if (!year || !month || !day) return "";
+  return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+}
+
+/** How many days in a given month/year. */
+function daysInMonth(year: number, month: number): number {
+  return new Date(year, month, 0).getDate();
 }
 
 /**
@@ -78,18 +75,22 @@ function formatBookingDate(isoDate: string, lang: Lang): string {
   }).format(new Date(`${isoDate}T12:00:00`));
 }
 
-// ─── Sub-components ──────────────────────────────────────────────────────────
-
-interface CounterRowProps {
-  id: string;
-  label: string;
-  sublabel: string;
-  value: number;
-  min: number;
-  max: number;
-  onDecrement: () => void;
-  onIncrement: () => void;
+/** Month names via Intl — no hardcoded arrays, respects active language. */
+function getMonthNames(lang: Lang): { value: string; label: string }[] {
+  const locale = lang === "en" ? "en-US" : "es-MX";
+  return Array.from({ length: 12 }, (_, i) => {
+    const month = i + 1;
+    const label = new Intl.DateTimeFormat(locale, { month: "long" }).format(
+      new Date(2000, i, 1),
+    );
+    return {
+      value: String(month).padStart(2, "0"),
+      label: label.charAt(0).toUpperCase() + label.slice(1),
+    };
+  });
 }
+
+// ─── Sub-components ──────────────────────────────────────────────────────────
 
 function FieldError({ id, message }: { id: string; message: string }) {
   return (
@@ -102,6 +103,17 @@ function FieldError({ id, message }: { id: string; message: string }) {
       {message}
     </p>
   );
+}
+
+interface CounterRowProps {
+  id: string;
+  label: string;
+  sublabel: string;
+  value: number;
+  min: number;
+  max: number;
+  onDecrement: () => void;
+  onIncrement: () => void;
 }
 
 function CounterRow({
@@ -120,7 +132,6 @@ function CounterRow({
     <div className="flex justify-between items-center px-4 py-3 bg-gray-50 rounded-xl border border-gray-100">
       <div>
         <span className="text-navy font-bold block text-sm">{label}</span>
-        {/* PATCH 6: gray-500 (~4.6:1 on white) replaces gray-400 (~2.9:1) */}
         <span className="text-xs text-gray-500">{sublabel}</span>
       </div>
       <div
@@ -164,6 +175,112 @@ function CounterRow({
   );
 }
 
+// ─── DateSelector ─────────────────────────────────────────────────────────────
+
+interface DateSelectorProps {
+  lang: Lang;
+  day: string;
+  month: string;
+  year: string;
+  onDayChange: (v: string) => void;
+  onMonthChange: (v: string) => void;
+  onYearChange: (v: string) => void;
+  hasError: boolean;
+  errorId: string;
+}
+
+const selectBase =
+  "flex-1 px-3 py-3.5 rounded-xl border text-navy font-bold text-sm bg-white " +
+  "focus:outline-none focus:ring-2 transition-all appearance-none cursor-pointer " +
+  "bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20fill%3D%22%230b1724%22%20d%3D%22M4%206l4%204%204-4%22%2F%3E%3C%2Fsvg%3E')] " +
+  "bg-no-repeat bg-[right_0.6rem_center] bg-[length:1rem_1rem] pr-8";
+
+const selectOk = "border-gray-200 focus:border-gold focus:ring-gold/20";
+const selectErr = "border-red-300 focus:border-red-400 focus:ring-red-100";
+
+function DateSelector({
+  lang,
+  day,
+  month,
+  year,
+  onDayChange,
+  onMonthChange,
+  onYearChange,
+  hasError,
+  errorId,
+}: DateSelectorProps) {
+  const today = todayParts();
+  const monthNames = useMemo(() => getMonthNames(lang), [lang]);
+
+  const numDays =
+    day && month && year ? daysInMonth(Number(year), Number(month)) : 31;
+
+  const dayLabel = lang === "en" ? "Day" : "Día";
+  const monthLabel = lang === "en" ? "Month" : "Mes";
+  const yearLabel = lang === "en" ? "Year" : "Año";
+
+  const stateClass = hasError ? selectErr : selectOk;
+
+  const currentYear = today.year;
+  const years = Array.from({ length: 2 }, (_, i) => currentYear + i);
+
+  return (
+    <div
+      className="flex gap-2"
+      role="group"
+      aria-describedby={hasError ? errorId : undefined}
+    >
+      {/* Day */}
+      <select
+        value={day}
+        onChange={(e) => onDayChange(e.target.value)}
+        aria-label={dayLabel}
+        className={`${selectBase} ${stateClass} w-[30%] flex-none`}
+      >
+        <option value="">{dayLabel}</option>
+        {Array.from({ length: numDays }, (_, i) => {
+          const d = String(i + 1).padStart(2, "0");
+          return (
+            <option key={d} value={d}>
+              {i + 1}
+            </option>
+          );
+        })}
+      </select>
+
+      {/* Month */}
+      <select
+        value={month}
+        onChange={(e) => onMonthChange(e.target.value)}
+        aria-label={monthLabel}
+        className={`${selectBase} ${stateClass} flex-1`}
+      >
+        <option value="">{monthLabel}</option>
+        {monthNames.map(({ value, label }) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
+      </select>
+
+      {/* Year */}
+      <select
+        value={year}
+        onChange={(e) => onYearChange(e.target.value)}
+        aria-label={yearLabel}
+        className={`${selectBase} ${stateClass} w-[30%] flex-none`}
+      >
+        <option value="">{yearLabel}</option>
+        {years.map((y) => (
+          <option key={y} value={String(y)}>
+            {y}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
+
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function BookingForm({
@@ -173,17 +290,22 @@ export default function BookingForm({
 }: BookingFormProps) {
   const { t, lang } = useLang();
 
-  const dateInputId = useId();
   const dateErrorId = useId();
 
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   const [infants, setInfants] = useState(0);
-  const [date, setDate] = useState("");
+
+  // Three-field date state
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+
   const [error, setError] = useState<ValidationError>(null);
   const [submitted, setSubmitted] = useState(false);
 
   const minDate = todayString();
+  const date = buildIso(year, month, day);
 
   // Only adults + children count toward price; infants are typically free
   const totalPax = adults + children + infants;
@@ -198,12 +320,31 @@ export default function BookingForm({
     return null;
   }, [date, minDate]);
 
-  // Progressive validation: only re-validate on change after first attempt
-  const handleDateChange = (value: string) => {
-    setDate(value);
-    if (submitted) {
-      setError(value < minDate ? "past_date" : null);
-    }
+  const revalidate = useCallback(
+    (newDate: string) => {
+      if (!submitted) return;
+      if (!newDate) setError("no_date");
+      else if (newDate < minDate) setError("past_date");
+      else setError(null);
+    },
+    [submitted, minDate],
+  );
+
+  const handleDayChange = (v: string) => {
+    setDay(v);
+    revalidate(buildIso(year, month, v));
+  };
+  const handleMonthChange = (v: string) => {
+    setMonth(v);
+    // Reset day if it exceeds days in the newly selected month
+    const maxDay = v && year ? daysInMonth(Number(year), Number(v)) : 31;
+    const safeDay = Number(day) > maxDay ? "" : day;
+    if (safeDay !== day) setDay(safeDay);
+    revalidate(buildIso(year, v, safeDay));
+  };
+  const handleYearChange = (v: string) => {
+    setYear(v);
+    revalidate(buildIso(v, month, day));
   };
 
   // ── Submit ──────────────────────────────────────────────────────────────────
@@ -275,7 +416,6 @@ export default function BookingForm({
         <h3 className="font-display text-2xl text-navy font-bold uppercase">
           {t("booking_title")}
         </h3>
-        {/* PATCH 6: gray-500 replaces gray-400 for price hint */}
         {tourPrice > 0 && (
           <p className="text-gray-500 text-sm mt-1">
             {t("booking_from")}{" "}
@@ -320,30 +460,22 @@ export default function BookingForm({
           )}
         </div>
 
-        {/* Date picker */}
+        {/* Date selector */}
         <div>
-          <label
-            htmlFor={dateInputId}
-            className="flex items-center gap-2 text-navy font-bold text-xs uppercase tracking-wider mb-1.5"
-          >
+          <div className="flex items-center gap-2 text-navy font-bold text-xs uppercase tracking-wider mb-1.5">
             <CalendarIcon className="w-4 h-4 text-gold" />
             {t("booking_date")}
-          </label>
-          <input
-            id={dateInputId}
-            type="date"
-            min={minDate}
-            value={date}
-            onChange={(e) => handleDateChange(e.target.value)}
-            aria-describedby={error ? dateErrorId : undefined}
-            aria-invalid={error !== null}
-            className={`w-full p-4 rounded-xl border text-navy font-bold text-sm
-                        focus:outline-none focus:ring-2 transition-all bg-white cursor-pointer
-                        ${
-                          error
-                            ? "border-red-300 focus:border-red-400 focus:ring-red-100"
-                            : "border-gray-200 focus:border-gold focus:ring-gold/20"
-                        }`}
+          </div>
+          <DateSelector
+            lang={lang}
+            day={day}
+            month={month}
+            year={year}
+            onDayChange={handleDayChange}
+            onMonthChange={handleMonthChange}
+            onYearChange={handleYearChange}
+            hasError={error !== null}
+            errorId={dateErrorId}
           />
           {error === "no_date" && (
             <FieldError id={dateErrorId} message={t("booking_no_date")} />
@@ -359,8 +491,6 @@ export default function BookingForm({
           )}
         </div>
 
-        {/* FIX: type="button" prevents Safari iOS from treating this as a form
-            submit, which would trigger a page reload instead of handleSubmit. */}
         <Button
           type="button"
           onClick={handleSubmit}
@@ -371,7 +501,6 @@ export default function BookingForm({
           {t("booking_cta")}
         </Button>
 
-        {/* PATCH 6: gray-500 replaces gray-400 for WA note */}
         <p className="text-xs text-center text-gray-500">
           {t("booking_wa_note")}
         </p>
