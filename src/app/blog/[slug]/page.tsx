@@ -10,6 +10,7 @@ import ReadingProgress from "@/components/ReadingProgress";
 import ShareButton from "@/components/ShareButton";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
 import { safeJsonLd } from "@/lib/utils";
+import { hreflangAlternates } from "@/lib/seo";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -26,15 +27,20 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
   if (!post) return { title: "Artículo no encontrado" };
 
+  const pageUrl = `${baseUrl}/blog/${post.slug}`;
+
   return {
     title: post.title,
     description: post.excerpt,
-    alternates: { canonical: `${baseUrl}/blog/${post.slug}` },
+    alternates: {
+      canonical: pageUrl,
+      ...hreflangAlternates(pageUrl),
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
-      url: `${baseUrl}/blog/${post.slug}`,
+      url: pageUrl,
       locale: "es_MX",
       alternateLocale: ["en_US"],
       images: [
