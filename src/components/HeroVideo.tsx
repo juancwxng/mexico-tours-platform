@@ -2,6 +2,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
 import VideoBackground from "./VideoBackground";
+import { Mail } from "lucide-react";
 
 export default async function HeroVideo() {
   const cookieStore = await cookies();
@@ -65,8 +66,12 @@ export default async function HeroVideo() {
           <Link href="/tours" className="btn-gold text-sm">
             {t("home_hero_cta")}
           </Link>
-          <Link href="/contact" className="btn-ghost text-sm">
-            {lang === "en" ? "Contact Us" : "Contáctanos"}
+          <Link
+            href="/contact"
+            className="btn-ghost text-sm backdrop-blur-md bg-white/5 hover:bg-white/10 hover:border-gold/80 transition-all duration-300 group"
+          >
+            <Mail className="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity" />
+            <span>{lang === "en" ? "Contact Us" : "Contáctanos"}</span>
           </Link>
         </div>
 
