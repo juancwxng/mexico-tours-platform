@@ -7,6 +7,7 @@ import { LangProvider } from "@/context/LangContext";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
 import { cookies } from "next/headers";
 import { safeJsonLd } from "@/lib/utils";
+import { hreflangAlternates } from "@/lib/seo";
 import WhatsAppPill from "@/components/WhatsAppPill";
 
 function getSiteUrl(): string {
@@ -20,7 +21,7 @@ function getSiteUrl(): string {
 const baseUrl = getSiteUrl();
 
 /*
- * Detects the user's language and serves the optimized meta tags in englisha and spanish
+ * Detects the user's language and serves the optimized meta tags in english and spanish
  */
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
@@ -123,11 +124,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: { card: "summary_large_image" },
     alternates: {
       canonical: baseUrl,
-      languages: {
-        "es-MX": baseUrl,
-        "en-US": baseUrl,
-        "x-default": baseUrl,
-      },
+      ...hreflangAlternates(baseUrl),
     },
     robots: {
       index: true,
@@ -210,11 +207,6 @@ export default async function RootLayout({
           type="font/woff2"
           crossOrigin="anonymous"
         />
-
-        {/* ── hreflang alternates ──────────────────────────────────────── */}
-        <link rel="alternate" hrefLang="es-MX" href={baseUrl} />
-        <link rel="alternate" hrefLang="en-US" href={baseUrl} />
-        <link rel="alternate" hrefLang="x-default" href={baseUrl} />
 
         {/* ── Structured data ──────────────────────────────────────────── */}
         <script
