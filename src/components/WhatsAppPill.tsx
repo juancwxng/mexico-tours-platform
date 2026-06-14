@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export default function WhatsAppPill({
-  number = "526690000000",
+  number = "526691525822",
 }: {
   number?: string;
 }) {
