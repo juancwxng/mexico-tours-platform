@@ -5,13 +5,29 @@ import { cookies } from "next/headers";
 import Container from "@/components/Container";
 import { posts, formatDate } from "@/lib/posts";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
+import { hreflangAlternates } from "@/lib/seo";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Blog de Viajes",
-  description:
-    "Guías, consejos e historias para disfrutar Mazatlán y los destinos costeros de México al máximo.",
-};
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
+  const isEn = lang ? lang.startsWith("en") : false;
+
+  const pageUrl = `${baseUrl}/blog`;
+
+  return {
+    title: isEn ? "Travel Blog" : "Blog de Viajes",
+    description: isEn
+      ? "Guides, tips, and stories to make the most of Mazatlán and Mexico's coastal destinations."
+      : "Guías, consejos e historias para disfrutar Mazatlán y los destinos costeros de México al máximo.",
+    alternates: {
+      canonical: pageUrl,
+      ...hreflangAlternates(pageUrl),
+    },
+  };
+}
 
 export default async function BlogIndexPage() {
   const cookieStore = await cookies();
