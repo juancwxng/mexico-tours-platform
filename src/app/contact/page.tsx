@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   MapPin,
   Phone,
@@ -7,11 +8,14 @@ import {
   MessageCircle,
   Instagram,
   Facebook,
+  ArrowRight,
+  PhoneCall,
 } from "lucide-react";
 import { cookies } from "next/headers";
 import Container from "@/components/Container";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
 import type { Metadata } from "next";
+
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +28,7 @@ const TikTokIcon = ({ className }: { className?: string }) => (
 );
 
 /*
-DYNAMIC BILINGUAL METADATA
+ * Dynamic bilingual metadata generation
  */
 export async function generateMetadata(): Promise<Metadata> {
   const cookieStore = await cookies();
@@ -34,85 +38,23 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: isEn ? "Contact Us" : "Contacto",
     description: isEn
-      ? "Contact us to book your tourist experience in Mazatlan. Customer service via WhatsApp, email, and social media."
-      : "Contáctanos para reservar tu experiencia turística en Mazatlán. Atención por WhatsApp, correo y redes sociales.",
+      ? "Contact us to book your tourist experience in Mazatlan. Customer service via WhatsApp, phone calls, email, and social media."
+      : "Contáctanos para reservar tu experiencia turística en Mazatlán. Atención por WhatsApp, llamadas, correo y redes sociales.",
   };
 }
 
 export default async function ContactPage() {
   const cookieStore = await cookies();
   const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
+  const isEn = lang ? lang.startsWith("en") : false;
   const t = getT(lang);
   const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526691525822";
 
-  const contactInfo = [
-    {
-      icon: Phone,
-      title: t("contact_phone"),
-      lines: ["+52 669 152 5822"],
-      href: "tel:+526691525822",
-      color: "text-teal",
-      bg: "bg-teal/10",
-    },
-    {
-      icon: Mail,
-      title: t("contact_email"),
-      lines: ["contacto@costafrancatours.com"],
-      href: "mailto:contacto@costafrancatours.com",
-      color: "text-gold",
-      bg: "bg-gold/10",
-    },
-    {
-      icon: MapPin,
-      title: t("contact_location"),
-      lines: ["Mazatlán, Sinaloa, México"],
-      href: null,
-      color: "text-navy",
-      bg: "bg-navy/8",
-    },
-    {
-      icon: Clock,
-      title: t("contact_hours"),
-      lines: [
-        lang === "en" ? "Monday to Sunday" : "Lunes a Domingo",
-        "8:00 AM – 10:00 PM",
-      ],
-      href: null,
-      color: "text-navy/60",
-      bg: "bg-[#f4f1ec]",
-    },
-  ];
-
-  const socials = [
-    {
-      label: "WhatsApp",
-      icon: MessageCircle,
-      href: `https://wa.me/${waNumber}`,
-      color: "#25D366",
-    },
-    {
-      label: "Instagram",
-      icon: Instagram,
-      href: "https://www.instagram.com/centraltoursmazatlan",
-      color: "#C9A96E",
-    },
-    {
-      label: "Facebook",
-      icon: Facebook,
-      href: "https://www.facebook.com/PaseosMazatlanIslaPiedraVenadosCatamaranBanda",
-      color: "#A8C8D8",
-    },
-    {
-      label: "TikTok",
-      icon: TikTokIcon,
-      href: "https://www.tiktok.com/@centraltoursmazatlan",
-      color: "#ffffff",
-    },
-  ];
-
   return (
     <main className="pt-16 sm:pt-[4.5rem] lg:pt-20">
-      {/* Header band */}
+      {/* Header band
+        Clean design with custom alignment and desaturated background gradients
+      */}
       <div className="bg-navy-section text-white py-16 lg:py-20 relative overflow-hidden">
         <div
           className="absolute inset-0 opacity-[0.04]"
@@ -130,7 +72,7 @@ export default async function ContactPage() {
               background: "rgba(201,169,110,0.08)",
             }}
           >
-            ✦ {lang === "en" ? "Get in Touch" : "Escríbenos"}
+            {isEn ? "Get in Touch" : "Escríbenos"}
           </span>
           <h1 className="font-display text-5xl md:text-6xl text-white mt-3 leading-none">
             {t("contact_title")}
@@ -142,61 +84,148 @@ export default async function ContactPage() {
       <div className="pb-20 lg:pb-28 pt-12">
         <Container size="lg">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            {/* Left: info cards + socials */}
-            <div className="space-y-6">
+            {/* Left side: Sales conversion core and secondary contact channels */}
+            <div className="space-y-8">
               <p className="text-navy/60 text-lg leading-relaxed">
                 {t("contact_subtitle")}
               </p>
 
+              {/* 1. Dual Primary CTAs (Split CTA Pattern) */}
               <div className="grid sm:grid-cols-2 gap-4">
-                {contactInfo.map((item, i) => (
-                  <div
-                    key={i}
-                    className="bg-white p-5 rounded-2xl border border-navy/10 shadow-sm hover:border-gold/25 transition-colors"
-                  >
-                    <div
-                      className={`w-10 h-10 ${item.bg} rounded-xl flex items-center justify-center mb-3`}
-                    >
-                      <item.icon className={`w-5 h-5 ${item.color}`} />
+                {/* WhatsApp Premium Interactive Card */}
+                <a
+                  href={`https://wa.me/${waNumber}?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%2C%20por%20favor.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative block rounded-2xl p-6 bg-[#25D366] text-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_24px_rgba(37,211,102,0.35)]"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                      <MessageCircle className="w-6 h-6 text-white" />
                     </div>
-                    <h3 className="font-display text-navy mb-1 text-base">
-                      {item.title}
-                    </h3>
-                    {item.href ? (
-                      <a
-                        href={item.href}
-                        className="text-navy/60 text-sm hover:text-gold transition-colors leading-relaxed"
-                      >
-                        {item.lines[0]}
-                      </a>
-                    ) : (
-                      item.lines.map((line, j) => (
-                        <p
-                          key={j}
-                          className="text-navy/60 text-sm leading-relaxed"
-                        >
-                          {line}
-                        </p>
-                      ))
-                    )}
+                    <ArrowRight className="w-5 h-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1" />
                   </div>
-                ))}
+
+                  <h3 className="font-display text-xl text-white font-bold mb-1">
+                    {isEn ? "Chat via WhatsApp" : "Chatea por WhatsApp"}
+                  </h3>
+                  <p className="text-white/85 text-xs sm:text-sm leading-snug font-medium">
+                    {isEn
+                      ? "Fast response for tour configurations and quotes."
+                      : "Respuesta rápida para armar tu paquete y cotizar."}
+                  </p>
+                </a>
+
+                {/* Direct Phone Call Premium Interactive Card */}
+                <a
+                  href={`tel:+${waNumber}`}
+                  className="group relative block rounded-2xl p-6 bg-teal text-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_24px_rgba(26,95,105,0.35)]"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
+                      <PhoneCall className="w-6 h-6 text-white" />
+                    </div>
+                    <ArrowRight className="w-5 h-5 text-white/70 transition-transform duration-300 group-hover:translate-x-1" />
+                  </div>
+
+                  <h3 className="font-display text-xl text-white font-bold mb-1">
+                    {isEn ? "Call an Expert" : "Llama a un Experto"}
+                  </h3>
+                  <p className="text-white/85 text-xs sm:text-sm leading-snug font-medium">
+                    {isEn
+                      ? "Direct cellular line for immediate offline support."
+                      : "Línea celular directa para atención personalizada."}
+                  </p>
+                </a>
               </div>
 
-              {/* Socials */}
-              <div className="bg-navy-section rounded-2xl p-7 text-center">
-                <h3 className="font-display text-xl text-white mb-5">
+              {/* 2. Secondary Information Grid */}
+              <div className="grid sm:grid-cols-3 gap-4">
+                {/* Email Interactive Card - Entire card acts as hit area */}
+                <a
+                  href="mailto:contacto@costafrancatours.com"
+                  className="group block bg-white p-5 rounded-2xl border border-navy/10 shadow-sm hover:border-gold/40 hover:shadow-md transition-all duration-200 text-left"
+                >
+                  <div className="w-9 h-9 bg-gold/10 rounded-xl flex items-center justify-center mb-3 transition-colors group-hover:bg-gold/20">
+                    <Mail className="w-4.5 h-4.5 text-gold-dark" />
+                  </div>
+                  <h4 className="font-display text-navy font-bold text-sm mb-1">
+                    {isEn ? "Send an Email" : "Envíanos un Correo"}
+                  </h4>
+                  <p className="text-navy/60 text-xs truncate">
+                    contacto@costafrancatours.com
+                  </p>
+                </a>
+
+                {/* Location Informative Card */}
+                <div className="bg-white p-5 rounded-2xl border border-navy/10 shadow-sm text-left">
+                  <div className="w-9 h-9 bg-navy/5 rounded-xl flex items-center justify-center mb-3">
+                    <MapPin className="w-4.5 h-4.5 text-navy" />
+                  </div>
+                  <h4 className="font-display text-navy font-bold text-sm mb-1">
+                    {t("contact_location")}
+                  </h4>
+                  <p className="text-navy/60 text-xs leading-relaxed">
+                    Mazatlán, Sinaloa, México
+                  </p>
+                </div>
+
+                {/* Operating Hours Informative Card */}
+                <div className="bg-white p-5 rounded-2xl border border-navy/10 shadow-sm text-left">
+                  <div className="w-9 h-9 bg-[#f4f1ec] rounded-xl flex items-center justify-center mb-3">
+                    <Clock className="w-4.5 h-4.5 text-navy/60" />
+                  </div>
+                  <h4 className="font-display text-navy font-bold text-sm mb-1">
+                    {t("contact_hours")}
+                  </h4>
+                  <p className="text-navy/60 text-xs leading-tight">
+                    {isEn ? "Mon to Sun" : "Lun a Dom"}
+                    <span className="block font-medium mt-0.5">
+                      8:00 AM – 10:00 PM
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              {/* 3. Social Media Box */}
+              <div className="bg-navy-section rounded-2xl p-6 text-center">
+                <h3 className="font-display text-lg text-white mb-4 font-medium">
                   {t("contact_follow")}
                 </h3>
                 <div className="flex justify-center gap-4">
-                  {socials.map((s) => (
+                  {[
+                    {
+                      label: "WhatsApp",
+                      icon: MessageCircle,
+                      href: `https://wa.me/${waNumber}`,
+                      color: "#25D366",
+                    },
+                    {
+                      label: "Instagram",
+                      icon: Instagram,
+                      href: "https://www.instagram.com/centraltoursmazatlan",
+                      color: "#C9A96E",
+                    },
+                    {
+                      label: "Facebook",
+                      icon: Facebook,
+                      href: "https://www.facebook.com/PaseosMazatlanIslaPiedraVenadosCatamaranBanda",
+                      color: "#A8C8D8",
+                    },
+                    {
+                      label: "TikTok",
+                      icon: TikTokIcon,
+                      href: "https://www.tiktok.com/@centraltoursmazatlan",
+                      color: "#ffffff",
+                    },
+                  ].map((s) => (
                     <a
                       key={s.label}
                       href={s.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className="w-12 h-12 bg-white/10 hover:bg-white/18 rounded-full flex items-center justify-center transition-all hover:scale-110"
+                      className="w-11 h-11 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
                       style={{ color: s.color }}
                     >
                       <s.icon className="w-5 h-5" />
@@ -206,19 +235,24 @@ export default async function ContactPage() {
               </div>
             </div>
 
-            {/* Right: photo */}
-            <div className="relative h-[460px] lg:h-[560px] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative h-[480px] lg:h-[580px] rounded-2xl overflow-hidden shadow-xl border border-navy/5">
               <Image
                 src="/images/contact/contact-hero.webp"
                 alt={t("contact_photo_alt")}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-700 hover:scale-105"
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/65 via-transparent to-transparent" />
+              {/* Soft vertical gradient to ensure high contrast against bottom metadata label overlays */}
+              <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
               <div className="absolute bottom-8 left-8 right-8 text-white space-y-1">
-                <p className="font-display text-2xl">{t("contact_city")}</p>
-                <p className="text-white/70 text-sm">{t("contact_city_sub")}</p>
+                <p className="font-display text-3xl font-medium tracking-wide">
+                  {t("contact_city")}
+                </p>
+                <p className="text-white/75 text-sm font-medium tracking-wide">
+                  {t("contact_city_sub")}
+                </p>
               </div>
             </div>
           </div>
