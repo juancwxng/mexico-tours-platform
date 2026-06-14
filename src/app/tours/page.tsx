@@ -4,13 +4,29 @@ import TourCard from "@/components/TourCard";
 import Container from "@/components/Container";
 import { tours, filterTours } from "@/lib/tours";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
+import { hreflangAlternates } from "@/lib/seo";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Catálogo de Tours",
-  description:
-    "Explora nuestra selección completa de tours en Mazatlán y destinos costeros: paseos marítimos, aventura, cultural y más.",
-};
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
+  const isEn = lang ? lang.startsWith("en") : false;
+
+  const pageUrl = `${baseUrl}/tours`;
+
+  return {
+    title: isEn ? "Mazatlan Tours Catalog" : "Catálogo de Tours",
+    description: isEn
+      ? "Browse our full selection of Mazatlan tours: boat trips, adventure, cultural, and more."
+      : "Explora nuestra selección completa de tours en Mazatlán: paseos marítimos, aventura, cultural y más.",
+    alternates: {
+      canonical: pageUrl,
+      ...hreflangAlternates(pageUrl),
+    },
+  };
+}
 
 const CATEGORY_SLUGS = ["paseo", "aventura", "cultural", "aereo"] as const;
 

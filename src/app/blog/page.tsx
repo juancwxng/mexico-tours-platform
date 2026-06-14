@@ -20,8 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: isEn ? "Travel Blog" : "Blog de Viajes",
     description: isEn
-      ? "Guides, tips, and stories to make the most of Mazatlán and Mexico's coastal destinations."
-      : "Guías, consejos e historias para disfrutar Mazatlán y los destinos costeros de México al máximo.",
+      ? "Guides, tips, and stories to make the most of Mazatlán."
+      : "Guías, consejos e historias para disfrutar Mazatlán.",
     alternates: {
       canonical: pageUrl,
       ...hreflangAlternates(pageUrl),
@@ -47,7 +47,14 @@ export default async function BlogIndexPage() {
         />
         <Container className="relative z-10">
           <div className="flex items-center gap-2 mb-4">
-            <span className="section-badge" style={{ color: "#E8D5AD", borderColor: "rgba(232,213,173,0.25)", background: "rgba(201,169,110,0.08)" }}>
+            <span
+              className="section-badge"
+              style={{
+                color: "#E8D5AD",
+                borderColor: "rgba(232,213,173,0.25)",
+                background: "rgba(201,169,110,0.08)",
+              }}
+            >
               <BookOpen className="w-3 h-3" />
               {lang === "en" ? "Travel Stories" : "Historias de Viaje"}
             </span>
@@ -63,8 +70,10 @@ export default async function BlogIndexPage() {
         <Container size="md">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
             {posts.map((post) => {
-              const title   = lang === "en" ? (post.titleEn   ?? post.title)   : post.title;
-              const excerpt = lang === "en" ? (post.excerptEn ?? post.excerpt) : post.excerpt;
+              const title =
+                lang === "en" ? (post.titleEn ?? post.title) : post.title;
+              const excerpt =
+                lang === "en" ? (post.excerptEn ?? post.excerpt) : post.excerpt;
 
               return (
                 <Link
@@ -97,7 +106,9 @@ export default async function BlogIndexPage() {
                     <h2 className="font-display text-xl lg:text-2xl text-navy group-hover:text-gold transition-colors leading-snug">
                       {title}
                     </h2>
-                    <p className="text-navy/60 text-sm line-clamp-3 leading-relaxed flex-1">{excerpt}</p>
+                    <p className="text-navy/60 text-sm line-clamp-3 leading-relaxed flex-1">
+                      {excerpt}
+                    </p>
                     <span className="inline-flex items-center gap-2 text-navy font-bold text-xs uppercase tracking-wider group-hover:text-gold transition-colors mt-1">
                       {t("blog_read")}
                       <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
