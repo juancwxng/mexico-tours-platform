@@ -3,8 +3,7 @@ import Image from "next/image";
 import { cookies } from "next/headers";
 import Container from "@/components/Container";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
-import { MessageCircle, Instagram, Facebook } from "lucide-react";
-
+import { Instagram, Facebook } from "lucide-react";
 function TikTokIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -22,7 +21,7 @@ export default async function Footer() {
   const cookieStore = await cookies();
   const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
   const t = getT(lang);
-  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526690000000";
+  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526691525822";
 
   const socialLinks = [
     {
@@ -89,15 +88,6 @@ export default async function Footer() {
             </p>
             {/* Socials */}
             <div className="flex gap-3 pt-1">
-              <a
-                href={`https://wa.me/${waNumber}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/55 hover:text-[#25D366] hover:border-[#25D366]/50 transition-colors"
-              >
-                <MessageCircle className="w-4 h-4" />
-              </a>
               {socialLinks.map(({ label, icon: Icon, href, color }) => (
                 <a
                   key={label}
