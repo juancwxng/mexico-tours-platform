@@ -11,6 +11,7 @@ import Container from "@/components/Container";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
 import { safeJsonLd } from "@/lib/utils";
 import { buildTourJsonLd } from "@/lib/schema";
+import { hreflangAlternates } from "@/lib/seo";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
@@ -27,6 +28,8 @@ export async function generateMetadata({
   const tour = getTourBySlug(slug);
   if (!tour) return { title: "Tour no encontrado" };
 
+  const pageUrl = `${baseUrl}/tours/${tour.slug}`;
+
   const ogImage =
     tour.imageCount > 0
       ? `${baseUrl}/images/tours/${tour.slug}/1.webp`
@@ -35,12 +38,15 @@ export async function generateMetadata({
   return {
     title: `${tour.title} en Mazatlán | Desde $${tour.price} MXN`,
     description: `Reserva el ${tour.title}. Duración: ${tour.duration}. La mejor experiencia turística en Mazatlán con Costa Franca Tours.`,
-    alternates: { canonical: `${baseUrl}/tours/${tour.slug}` },
+    alternates: {
+      canonical: pageUrl,
+      ...hreflangAlternates(pageUrl),
+    },
     openGraph: {
       title: tour.title,
       description: tour.description,
       type: "website",
-      url: `${baseUrl}/tours/${tour.slug}`,
+      url: pageUrl,
       images: [{ url: ogImage, width: 1200, height: 630, alt: tour.title }],
       locale: "es_MX",
       alternateLocale: ["en_US"],
