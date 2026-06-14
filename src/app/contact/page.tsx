@@ -118,7 +118,7 @@ export default async function ContactPage() {
 
                 {/* Direct Phone Call Premium Interactive Card */}
                 <a
-                  href={`tel:+${waNumber}`}
+                  href={`tel:6691525822`}
                   className="group relative block rounded-2xl p-6 bg-teal text-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_24px_rgba(26,95,105,0.35)]"
                 >
                   <div className="flex items-center justify-between mb-4">
@@ -237,8 +237,8 @@ export default async function ContactPage() {
 
             <div className="relative h-[480px] lg:h-[580px] rounded-2xl overflow-hidden shadow-xl border border-navy/5">
               <Image
-                src="/images/contact/contact-hero.webp"
-                alt={t("contact_photo_alt")}
+                src="/images/contact-hero.webp"
+                alt="Costa Franca Tours guide briefing a group of tourists before boarding an excursion van"
                 fill
                 className="object-cover transition-transform duration-700 hover:scale-105"
                 sizes="(max-width: 1024px) 100vw, 50vw"
