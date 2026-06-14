@@ -14,7 +14,10 @@ import {
 import { cookies } from "next/headers";
 import Container from "@/components/Container";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
+import { hreflangAlternates } from "@/lib/seo";
 import type { Metadata } from "next";
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 const TikTokIcon = ({ className }: { className?: string }) => (
   <svg
@@ -35,11 +38,17 @@ export async function generateMetadata(): Promise<Metadata> {
   const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
   const isEn = lang ? lang.startsWith("en") : false;
 
+  const pageUrl = `${baseUrl}/contact`;
+
   return {
     title: isEn ? "Contact Us" : "Contacto",
     description: isEn
       ? "Contact us to book your tourist experience in Mazatlan. Customer service via WhatsApp, phone calls, email, and social media."
       : "Contáctanos para reservar tu experiencia turística en Mazatlán. Atención por WhatsApp, llamadas, correo y redes sociales.",
+    alternates: {
+      canonical: pageUrl,
+      ...hreflangAlternates(pageUrl),
+    },
   };
 }
 
