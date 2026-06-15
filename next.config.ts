@@ -66,7 +66,10 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "Access-Control-Allow-Origin", value: "*" },
           { key: "X-Frame-Options", value: "ALLOWALL" },
-          { key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" },
+          {
+            key: "Cache-Control",
+            value: "public, max-age=86400, stale-while-revalidate=604800",
+          },
         ],
       },
       {
@@ -77,7 +80,14 @@ const nextConfig: NextConfig = {
   },
 
   async redirects() {
-    return [];
+    return [
+      {
+        source: "/(.*)",
+        has: [{ type: "host", value: "costafrancatours.com" }],
+        destination: "https://www.costafrancatours.com/:path*",
+        permanent: true,
+      },
+    ];
   },
 
   compiler: {
