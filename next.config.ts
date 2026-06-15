@@ -87,6 +87,32 @@ const nextConfig: NextConfig = {
         destination: "https://www.costafrancatours.com/:path*",
         permanent: true,
       },
+
+      {
+        source: "/tours/Isla-Piedra",
+        destination: "/tours/isla-piedra",
+        permanent: true,
+      },
+      {
+        source: "/tours/Isla-Venados",
+        destination: "/tours/isla-venados",
+        permanent: true,
+      },
+      {
+        source: "/tours/Cuatrimotos-Veranos",
+        destination: "/tours/cuatrimotos-veranos",
+        permanent: true,
+      },
+      {
+        source: "/tours/Catamaran-Sensation",
+        destination: "/tours/catamaran-sensation",
+        permanent: true,
+      },
+      {
+        source: "/tours/Speed-Boats",
+        destination: "/tours/speed-boats",
+        permanent: true,
+      },
     ];
   },
 
