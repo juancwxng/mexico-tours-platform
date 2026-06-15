@@ -82,19 +82,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/",
-        has: [{ type: "host", value: "costafrancatours.com" }],
-        destination: "https://www.costafrancatours.com/",
-        permanent: true,
-      },
-      {
-        source: "/:path+",
-        has: [{ type: "host", value: "costafrancatours.com" }],
-        destination: "https://www.costafrancatours.com/:path*",
-        permanent: true,
-      },
-
-      {
         source: "/tours/Isla-Piedra",
         destination: "/tours/isla-piedra",
         permanent: true,
@@ -121,7 +108,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-
   compiler: {
     removeConsole:
       process.env.NODE_ENV === "production"
