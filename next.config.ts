@@ -82,11 +82,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/(.*)",
+        source: "/:path*",
         has: [{ type: "host", value: "costafrancatours.com" }],
         destination: "https://www.costafrancatours.com/:path*",
         permanent: true,
       },
+
       {
         source: "/tours/Isla-Piedra",
         destination: "/tours/isla-piedra",
