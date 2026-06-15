@@ -2,19 +2,35 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import Container from "@/components/Container";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
+import { hreflangAlternates } from "@/lib/seo";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Catálogo de Experiencias",
-  description:
-    "Descubre todas las categorías de tours en Mazatlán: paseos marítimos, aventura, cultural y vuelos aéreos.",
-};
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
+  const isEn = lang ? lang.startsWith("en") : false;
+
+  const pageUrl = `${baseUrl}/catalog`;
+
+  return {
+    title: isEn ? "Tour Catalog" : "Catálogo de Experiencias",
+    description: isEn
+      ? "Explore all tour categories in Mazatlán: maritime excursions, adventure, cultural, and aerial experiences."
+      : "Descubre todas las categorías de tours en Mazatlán: paseos marítimos, aventura, cultural y vuelos aéreos.",
+    alternates: {
+      canonical: pageUrl,
+      ...hreflangAlternates(pageUrl),
+    },
+  };
+}
 
 const CATEGORY_EMOJIS: Record<string, string> = {
-  paseo:    "⛵",
+  paseo: "⛵",
   aventura: "🏄",
   cultural: "🏛️",
-  aereo:    "🪂",
+  aereo: "🪂",
 };
 
 export default async function CatalogPage() {
@@ -23,10 +39,33 @@ export default async function CatalogPage() {
   const t = getT(lang);
 
   const categories = [
-    { titleKey: "catalog_maritime" as const,  slug: "paseo",    available: true,  desc: { es: "Explora las aguas del Pacífico", en: "Explore Pacific waters" } },
-    { titleKey: "catalog_adventure" as const, slug: "aventura", available: true,  desc: { es: "Adrenalina y naturaleza", en: "Adrenaline and nature" } },
-    { titleKey: "catalog_cultural" as const,  slug: "cultural", available: false, desc: { es: "Historia y tradición", en: "History and tradition" } },
-    { titleKey: "catalog_aerial" as const,    slug: "aereo",    available: false, desc: { es: "Vista desde las alturas", en: "Views from above" } },
+    {
+      titleKey: "catalog_maritime" as const,
+      slug: "paseo",
+      available: true,
+      desc: {
+        es: "Explora las aguas del Pacífico",
+        en: "Explore Pacific waters",
+      },
+    },
+    {
+      titleKey: "catalog_adventure" as const,
+      slug: "aventura",
+      available: true,
+      desc: { es: "Adrenalina y naturaleza", en: "Adrenaline and nature" },
+    },
+    {
+      titleKey: "catalog_cultural" as const,
+      slug: "cultural",
+      available: false,
+      desc: { es: "Historia y tradición", en: "History and tradition" },
+    },
+    {
+      titleKey: "catalog_aerial" as const,
+      slug: "aereo",
+      available: false,
+      desc: { es: "Vista desde las alturas", en: "Views from above" },
+    },
   ];
 
   return (
@@ -41,7 +80,14 @@ export default async function CatalogPage() {
           }}
         />
         <Container className="relative z-10 text-center">
-          <span className="section-badge mb-4 inline-flex" style={{ color: "#E8D5AD", borderColor: "rgba(232,213,173,0.25)", background: "rgba(201,169,110,0.08)" }}>
+          <span
+            className="section-badge mb-4 inline-flex"
+            style={{
+              color: "#E8D5AD",
+              borderColor: "rgba(232,213,173,0.25)",
+              background: "rgba(201,169,110,0.08)",
+            }}
+          >
             ✦ {lang === "en" ? "All Categories" : "Todas las Categorías"}
           </span>
           <h1 className="font-display text-5xl md:text-6xl text-white leading-none mt-3">
@@ -60,7 +106,9 @@ export default async function CatalogPage() {
                   key={cat.slug}
                   href={`/tours?category=${cat.slug}`}
                   className="group relative h-64 rounded-2xl overflow-hidden bg-navy flex flex-col items-center justify-center p-6 hover:shadow-2xl transition-all duration-300 text-center card-lift"
-                  style={{ background: "linear-gradient(145deg, #1A3A50, #0F2538)" }}
+                  style={{
+                    background: "linear-gradient(145deg, #1A3A50, #0F2538)",
+                  }}
                 >
                   <div className="text-5xl mb-3 transition-transform duration-300 group-hover:scale-110">
                     {CATEGORY_EMOJIS[cat.slug]}
@@ -78,9 +126,14 @@ export default async function CatalogPage() {
                 <div
                   key={cat.slug}
                   className="relative h-64 rounded-2xl overflow-hidden flex flex-col items-center justify-center p-6 text-center cursor-not-allowed"
-                  style={{ background: "linear-gradient(145deg, #CBD5DB, #B8C5CC)", opacity: 0.65 }}
+                  style={{
+                    background: "linear-gradient(145deg, #CBD5DB, #B8C5CC)",
+                    opacity: 0.65,
+                  }}
                 >
-                  <div className="text-5xl mb-3 opacity-60">{CATEGORY_EMOJIS[cat.slug]}</div>
+                  <div className="text-5xl mb-3 opacity-60">
+                    {CATEGORY_EMOJIS[cat.slug]}
+                  </div>
                   <span className="text-[0.65rem] font-bold uppercase tracking-wider bg-white/25 px-3 py-1 rounded-full text-white mb-2">
                     {t("catalog_coming")}
                   </span>
@@ -88,7 +141,7 @@ export default async function CatalogPage() {
                     {t(cat.titleKey)}
                   </h2>
                 </div>
-              )
+              ),
             )}
           </div>
         </Container>
