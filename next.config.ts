@@ -82,7 +82,13 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/:path*",
+        source: "/",
+        has: [{ type: "host", value: "costafrancatours.com" }],
+        destination: "https://www.costafrancatours.com/",
+        permanent: true,
+      },
+      {
+        source: "/:path+",
         has: [{ type: "host", value: "costafrancatours.com" }],
         destination: "https://www.costafrancatours.com/:path*",
         permanent: true,
