@@ -30,7 +30,7 @@ export interface Tour {
 export const tours: Tour[] = [
   {
     id: "1",
-    slug: "Isla-Piedra",
+    slug: "isla-piedra",
     title: "Paseo Isla de la Piedra",
     titleEn: "Stone Island Tour",
     category: "paseo",
@@ -118,7 +118,7 @@ export const tours: Tour[] = [
 
   {
     id: "2",
-    slug: "Isla-Venados",
+    slug: "isla-venados",
     title: "Paseo Isla de Venados en Trimarán",
     titleEn: "Deer Island Trimaran Tour",
     category: "paseo",
@@ -182,7 +182,7 @@ export const tours: Tour[] = [
 
   {
     id: "3",
-    slug: "Cuatrimotos-Veranos",
+    slug: "cuatrimotos-veranos",
     title: "Aventura en Cuatrimotos por Veranos",
     titleEn: "Veranos ATV Adventure",
     category: "aventura",
@@ -246,7 +246,7 @@ export const tours: Tour[] = [
 
   {
     id: "4",
-    slug: "Catamaran-Sensation",
+    slug: "catamaran-sensation",
     title: "Sensation Catamaran: Fiesta con Banda Sinaloense",
     titleEn: "Sensation Catamaran: Sinaloense Band Party",
     category: "paseo",
@@ -307,7 +307,7 @@ export const tours: Tour[] = [
 
   {
     id: "5",
-    slug: "Speed-Boats",
+    slug: "speed-boats",
     title: "Aventura en Speed Boat",
     titleEn: "Speed Boat Adventure",
     category: "paseo",
