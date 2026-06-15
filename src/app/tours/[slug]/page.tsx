@@ -80,14 +80,17 @@ export default async function TourDetailPage({
     lang === "en" ? (tour.durationEn ?? tour.duration) : tour.duration;
 
   const images = getTourImages(tour.slug, tour.imageCount);
-
-  const jsonLd = safeJsonLd(buildTourJsonLd(tour, baseUrl));
+  const { touristTrip, faqPage } = buildTourJsonLd(tour, baseUrl, lang);
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonLd }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(touristTrip) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(faqPage) }}
       />
       <main className="pt-16 sm:pt-[4.5rem] lg:pt-20 pb-32 lg:pb-20">
         <div className="bg-[#f4f1ec] border-b border-gold/12 py-3">
