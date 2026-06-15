@@ -59,8 +59,6 @@ const nextConfig: NextConfig = {
         source: "/(.*)",
         headers: securityHeaders,
       },
-      // Allow OG crawlers (Facebook, WhatsApp, Discord, Slack…) to fetch
-      // public images without CORS or framing restrictions.
       {
         source: "/images/(.*)",
         headers: [
