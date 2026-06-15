@@ -45,6 +45,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   images: {
+    loader: "custom",
+    loaderFile: "./cloudflareLoader.ts",
     unoptimized: false,
     formats: ["image/avif", "image/webp"],
     deviceSizes: [400, 840, 1200, 2400],
