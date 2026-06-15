@@ -7,15 +7,31 @@ import Container from "@/components/Container";
 import RevealSection from "@/components/RevealSection";
 import { tours } from "@/lib/tours";
 import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
+import { hreflangAlternates } from "@/lib/seo";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: {
-    absolute: "Costa Franca Tours — La mejor selección de Tours en Mazatlán",
-  },
-  description:
-    "Descubre los mejores tours en Mazatlán: Paseo Isla Venados, Paseo Isla de la Piedra, Catamarán con Banda y más.",
-};
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const cookieStore = await cookies();
+  const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
+  const isEn = lang ? lang.startsWith("en") : false;
+
+  return {
+    title: {
+      absolute: isEn
+        ? "Costa Franca Tours — Best Tours & Excursions in Mazatlán"
+        : "Costa Franca Tours — La mejor selección de Tours en Mazatlán",
+    },
+    description: isEn
+      ? "Discover the best tours in Mazatlán: Deer Island, Stone Island, Catamaran with Banda, and more. Book with Costa Franca Tours."
+      : "Descubre los mejores tours en Mazatlán: Paseo Isla Venados, Paseo Isla de la Piedra, Catamarán con Banda y más.",
+    alternates: {
+      canonical: baseUrl,
+      ...hreflangAlternates(baseUrl),
+    },
+  };
+}
 
 export default async function Home() {
   const cookieStore = await cookies();
