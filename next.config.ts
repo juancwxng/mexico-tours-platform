@@ -87,7 +87,6 @@ const nextConfig: NextConfig = {
         destination: "https://www.costafrancatours.com/:path*",
         permanent: true,
       },
-
       {
         source: "/tours/Isla-Piedra",
         destination: "/tours/isla-piedra",
