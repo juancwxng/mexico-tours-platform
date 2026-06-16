@@ -4,13 +4,15 @@ import { useState } from "react";
 import { X, ChevronUp } from "lucide-react";
 import BookingForm from "@/components/BookingForm";
 import { useLang } from "@/context/LangContext";
+import type { PriceItem } from "@/lib/tours";
 
 interface BookingDrawerProps {
   tourTitle: string;
   tourPrice: number;
+  priceList?: PriceItem[];
 }
 
-export default function BookingDrawer({ tourTitle, tourPrice }: BookingDrawerProps) {
+export default function BookingDrawer({ tourTitle, tourPrice, priceList }: BookingDrawerProps) {
   const { t } = useLang();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,14 +27,8 @@ export default function BookingDrawer({ tourTitle, tourPrice }: BookingDrawerPro
         />
       )}
 
-      {/*
-        FIX: The outer container gets pointer-events-none so the invisible
-        closed panel never intercepts clicks on content below. Each interactive
-        child opts back in with pointer-events-auto explicitly.
-      */}
       <div className="lg:hidden fixed bottom-0 inset-x-0 z-50 flex flex-col-reverse pb-[env(safe-area-inset-bottom)] pointer-events-none">
- 
- 
+
         {/* Sticky bottom bar — always visible */}
         <div className="pointer-events-auto bg-white border-t border-gray-100 px-4 py-3 flex items-center justify-between gap-4 shadow-lg flex-shrink-0">
           <div>
@@ -45,7 +41,6 @@ export default function BookingDrawer({ tourTitle, tourPrice }: BookingDrawerPro
                 : t("tour_cotizar")}
             </p>
           </div>
-          {/* FIX: explicit type="button" prevents Safari iOS submit inference */}
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
@@ -75,7 +70,6 @@ export default function BookingDrawer({ tourTitle, tourPrice }: BookingDrawerPro
           {/* Drag handle + close button */}
           <div className="flex items-center justify-between px-6 pt-4 pb-2 relative flex-shrink-0">
             <div className="w-10 h-1 rounded-full bg-gray-300 mx-auto" />
-            {/* FIX: explicit type="button" */}
             <button
               type="button"
               onClick={() => setIsOpen(false)}
@@ -89,6 +83,7 @@ export default function BookingDrawer({ tourTitle, tourPrice }: BookingDrawerPro
             <BookingForm
               tourTitle={tourTitle}
               tourPrice={tourPrice}
+              priceList={priceList}
               onSuccess={() => setIsOpen(false)}
             />
           </div>
