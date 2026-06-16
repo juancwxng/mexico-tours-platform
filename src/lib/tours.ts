@@ -27,7 +27,6 @@ export interface Tour {
   imageAlts?: string[];
   imageAltsEn?: string[];
   showInTours?: boolean;
-  /** Optional step-by-step itinerary. When present, renders a numbered timeline alongside the includes list. */
   itinerary?: string[];
   itineraryEn?: string[];
 }
@@ -176,7 +175,12 @@ export const tours: Tour[] = [
     schedule: "Lun–Dom: 9:30 AM - 2:30 PM",
     scheduleEn: "Mon–Sun: 9:30 AM - 2:30 PM",
     priceList: [
-      { label: "Adulto (11+)", labelEn: "Adult (11+)", price: 1520, isPopular: true },
+      {
+        label: "Adulto (11+)",
+        labelEn: "Adult (11+)",
+        price: 1520,
+        isPopular: true,
+      },
       { label: "Niño (4-10)", labelEn: "Child (4-10)", price: 800 },
       {
         label: "Infante (2-3) - Sin comida",
@@ -260,7 +264,12 @@ export const tours: Tour[] = [
     schedule: "Lun–Dom: 9:00 AM - 1:00 PM",
     scheduleEn: "Mon–Sun: 9:00 AM - 1:00 PM",
     priceList: [
-      { label: "Adulto (11+)", labelEn: "Adult (11+)", price: 2400, isPopular: true },
+      {
+        label: "Adulto (11+)",
+        labelEn: "Adult (11+)",
+        price: 2400,
+        isPopular: true,
+      },
       { label: "Niño (4-10)", labelEn: "Child (4-10)", price: 1600 },
       { label: "Infante (0-3)", labelEn: "Infant (0-3)", price: 0 },
     ],
@@ -318,7 +327,12 @@ export const tours: Tour[] = [
     schedule: "Mié, Vie, Sáb, Dom: 4:00 PM - 7:00 PM",
     scheduleEn: "Wed, Fri, Sat, Sun: 4:00 PM - 7:00 PM",
     priceList: [
-      { label: "Adulto (12+)", labelEn: "Adult (12+)", price: 1000, isPopular: true },
+      {
+        label: "Adulto (12+)",
+        labelEn: "Adult (12+)",
+        price: 1000,
+        isPopular: true,
+      },
       {
         label: "Menor (6-11) - Excepto Sábados",
         labelEn: "Child (6-11) - Except Saturdays",
