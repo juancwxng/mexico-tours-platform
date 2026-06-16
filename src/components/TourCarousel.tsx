@@ -17,6 +17,9 @@ interface TourCarouselProps {
   imageAlts?: string[];
 }
 
+// How many thumbnails to show (images 2–5, i.e. indices 1–4)
+const THUMB_COUNT = 4;
+
 export default function TourCarousel({
   images,
   title,
@@ -82,8 +85,17 @@ export default function TourCarousel({
   const prev = () => setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
 
+  // Thumbnails: indices 1–4 (images 2–5), only when enough images exist
+  const thumbIndices = images.length > 1
+    ? Array.from(
+        { length: Math.min(THUMB_COUNT, images.length - 1) },
+        (_, i) => i + 1,
+      )
+    : [];
+
   return (
     <>
+      {/* Main carousel */}
       <div
         role="button"
         tabIndex={0}
@@ -169,6 +181,41 @@ export default function TourCarousel({
           </>
         )}
       </div>
+
+      {/* Thumbnail strip — images 2–5, clicking jumps carousel to that index */}
+      {thumbIndices.length > 0 && (
+        <div
+          className="grid gap-2 mt-2"
+          style={{ gridTemplateColumns: `repeat(${Math.min(thumbIndices.length, 3)}, 1fr)` }}
+          // On md+ show up to 4 thumbs via inline override below
+        >
+          {thumbIndices.map((imgIdx) => (
+            <button
+              key={imgIdx}
+              type="button"
+              onClick={() => setCurrent(imgIdx)}
+              aria-label={getAlt(imgIdx)}
+              className={`
+                relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-100 outline-none
+                transition-all duration-200
+                focus-visible:ring-2 focus-visible:ring-navy
+                ${current === imgIdx
+                  ? "ring-2 ring-gold ring-offset-1 opacity-100"
+                  : "opacity-60 hover:opacity-90"}
+                ${imgIdx === thumbIndices[3] ? "hidden sm:block" : ""}
+              `}
+            >
+              <Image
+                src={images[imgIdx]}
+                alt={getAlt(imgIdx)}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 33vw, 110px"
+              />
+            </button>
+          ))}
+        </div>
+      )}
 
       <Lightbox
         open={lightboxOpen}

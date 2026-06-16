@@ -81,6 +81,15 @@ const dict = {
     tour_image: "Imagen",
     tour_open_lightbox: "Abrir galería",
     tour_image_fallback: "Tour",
+    tour_rating_count: "reseñas verificadas",
+    tour_related: "También te puede gustar",
+    tour_itinerary: "Itinerario",
+    tour_popular_badge: "Más popular",
+    tour_departure: "Recogida desde Zona Dorada, Malecón y Cerritos",
+    tour_trust_verified: "Operador verificado",
+    tour_trust_whatsapp: "Respuesta en WhatsApp en menos de 1 hr",
+    tour_trust_cancel: "Cancelación flexible",
+    tour_package_label: "Selecciona tu paquete",
 
     // ── Booking ──
     booking_title: "Reserva tu lugar",
@@ -96,7 +105,7 @@ const dict = {
     booking_no_date: "Por favor selecciona una fecha.",
     booking_past_date: "La fecha seleccionada ya pasó.",
     booking_wa_message:
-      "Hola, me gustaría consultar disponibilidad para:\nTour: {tour}\nFecha: {date}\nAdultos: {adults}\nNiños: {children}\nBebés: {infants}\n¿Me pueden ayudar? ¡Gracias!",
+      "Hola, me gustaría consultar disponibilidad para:\nTour: {tour}\nPaquete: {package}\nFecha: {date}\nAdultos: {adults}\nNiños: {children}\nBebés: {infants}\n¿Me pueden ayudar? ¡Gracias!",
     booking_open: "Reservar",
     booking_close: "Cerrar reserva",
     booking_per_person: "persona",
@@ -215,6 +224,15 @@ const dict = {
     tour_image: "Image",
     tour_open_lightbox: "Open gallery",
     tour_image_fallback: "Tour",
+    tour_rating_count: "verified reviews",
+    tour_related: "You might also like",
+    tour_itinerary: "Itinerary",
+    tour_popular_badge: "Most popular",
+    tour_departure: "Pickup from Zona Dorada, Malecón & Cerritos",
+    tour_trust_verified: "Verified operator",
+    tour_trust_whatsapp: "WhatsApp response in under 1 hr",
+    tour_trust_cancel: "Free cancellation / flexible dates",
+    tour_package_label: "Select your package",
 
     // ── Booking ──
     booking_title: "Book your spot",
@@ -230,7 +248,7 @@ const dict = {
     booking_no_date: "Please select a date.",
     booking_past_date: "The selected date has already passed.",
     booking_wa_message:
-      "Hi, I'd like to check availability for:\nTour: {tour}\nDate: {date}\nAdults: {adults}\nChildren: {children}\nInfants: {infants}\nCan you help me? Thank you!",
+      "Hi, I'd like to check availability for:\nTour: {tour}\nPackage: {package}\nDate: {date}\nAdults: {adults}\nChildren: {children}\nInfants: {infants}\nCan you help me? Thank you!",
     booking_open: "Book Now",
     booking_close: "Close booking",
     booking_per_person: "person",

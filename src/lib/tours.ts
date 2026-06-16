@@ -2,6 +2,8 @@ export interface PriceItem {
   label: string;
   labelEn?: string;
   price: number;
+  /** Renders a "Más popular" badge on this tier */
+  isPopular?: boolean;
 }
 
 export interface Tour {
@@ -25,6 +27,9 @@ export interface Tour {
   imageAlts?: string[];
   imageAltsEn?: string[];
   showInTours?: boolean;
+  /** Optional step-by-step itinerary. When present, renders a numbered timeline alongside the includes list. */
+  itinerary?: string[];
+  itineraryEn?: string[];
 }
 
 export const tours: Tour[] = [
@@ -79,7 +84,7 @@ export const tours: Tour[] = [
     ],
     includesEn: [
       "Round-trip transport to any hotel in the Golden Zone, Malecón, or Cerritos",
-      "1-hour catamaran cruise past the Devil’s Cave, Throat Cave, Pirate’s Cave, White Rocks, and (in winter) sea lions in their natural habitat",
+      "1-hour catamaran cruise past the Devil's Cave, Throat Cave, Pirate's Cave, White Rocks, and (in winter) sea lions in their natural habitat",
       "3-hour stay on Stone Island",
       "3-hour open bar on the island: soda, juice, and national drinks (tequila, vodka, and rum)",
       "Lunch choice: fish, chicken, mixed grill, or hamburger",
@@ -96,6 +101,7 @@ export const tours: Tour[] = [
         label: "Adulto - Paquete Regular (11+)",
         labelEn: "Adult - Regular Package (11+)",
         price: 550,
+        isPopular: true,
       },
       {
         label: "Adulto - Todo Incluido (11+)",
@@ -170,7 +176,7 @@ export const tours: Tour[] = [
     schedule: "Lun–Dom: 9:30 AM - 2:30 PM",
     scheduleEn: "Mon–Sun: 9:30 AM - 2:30 PM",
     priceList: [
-      { label: "Adulto (11+)", labelEn: "Adult (11+)", price: 1520 },
+      { label: "Adulto (11+)", labelEn: "Adult (11+)", price: 1520, isPopular: true },
       { label: "Niño (4-10)", labelEn: "Child (4-10)", price: 800 },
       {
         label: "Infante (2-3) - Sin comida",
@@ -233,12 +239,28 @@ export const tours: Tour[] = [
       "Authentic ranch lunch: machaca burritos, flambéed melted cheese, guacamole, beans, and handmade tortillas",
       "Tequila distillery tour with an explanation of the agave distillation process and a tasting session",
     ],
+    itinerary: [
+      "Recogida en tu hotel y traslado a Veranos (aprox. 45 min)",
+      "Bienvenida, equipamiento y seguridad en cuatrimoto",
+      "Recorrido de 2 horas por senderos de terracería y puente colgante",
+      "Almuerzo tradicional de rancho sinaloense",
+      "Tour por tequilera artesanal y cata guiada",
+      "Regreso a Mazatlán",
+    ],
+    itineraryEn: [
+      "Hotel pickup and transfer to Veranos (~45 min)",
+      "Welcome briefing, ATV gear up & safety talk",
+      "2-hour off-road ride through trails and suspension bridge",
+      "Traditional Sinaloan ranch lunch",
+      "Artisanal tequila distillery tour & guided tasting",
+      "Return transfer to Mazatlán",
+    ],
     duration: "~4 Horas",
     durationEn: "~4 Hours",
     schedule: "Lun–Dom: 9:00 AM - 1:00 PM",
     scheduleEn: "Mon–Sun: 9:00 AM - 1:00 PM",
     priceList: [
-      { label: "Adulto (11+)", labelEn: "Adult (11+)", price: 2400 },
+      { label: "Adulto (11+)", labelEn: "Adult (11+)", price: 2400, isPopular: true },
       { label: "Niño (4-10)", labelEn: "Child (4-10)", price: 1600 },
       { label: "Infante (0-3)", labelEn: "Infant (0-3)", price: 0 },
     ],
@@ -296,7 +318,7 @@ export const tours: Tour[] = [
     schedule: "Mié, Vie, Sáb, Dom: 4:00 PM - 7:00 PM",
     scheduleEn: "Wed, Fri, Sat, Sun: 4:00 PM - 7:00 PM",
     priceList: [
-      { label: "Adulto (12+)", labelEn: "Adult (12+)", price: 1000 },
+      { label: "Adulto (12+)", labelEn: "Adult (12+)", price: 1000, isPopular: true },
       {
         label: "Menor (6-11) - Excepto Sábados",
         labelEn: "Child (6-11) - Except Saturdays",
@@ -356,6 +378,7 @@ export const tours: Tour[] = [
         label: "Doble (2 personas en el mismo Speed Boat)",
         labelEn: "Double (2 people in the same Speed Boat)",
         price: 3800,
+        isPopular: true,
       },
     ],
   },
@@ -386,12 +409,11 @@ export function filterTours(
   }
 
   if (query) {
-    // Normalize and sanitize: strip control chars, collapse whitespace, lowercase
     const q = query
       .replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
       .trim()
       .toLowerCase()
-      .slice(0, 100); // cap length to prevent DoS on large inputs
+      .slice(0, 100);
     if (q.length > 0) {
       result = result.filter(
         (t) =>
