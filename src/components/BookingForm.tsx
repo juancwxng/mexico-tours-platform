@@ -1,10 +1,11 @@
 "use client";
 import { useState, useId, useCallback, useMemo } from "react";
-import { CalendarIcon, Users, AlertCircle, CheckCircle2 } from "lucide-react";
+import { CalendarIcon, Users, AlertCircle, CheckCircle2, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLang } from "@/context/LangContext";
 import { sanitizeText } from "@/lib/utils";
 import type { Lang, DictKey } from "@/lib/i18n";
+import type { PriceItem } from "@/lib/tours";
 
 // ─── Constants ───────────────────────────────────────────────────────────────
 
@@ -16,8 +17,10 @@ const MAX_INFANTS = 10;
 
 export interface BookingFormProps {
   tourTitle: string;
-  /** Lowest price in MXN. 0 means "quote on request". */
+  /** Fallback price (lowest tier). 0 means "quote on request". */
   tourPrice: number;
+  /** Full price list. When length > 1 a package selector is shown. */
+  priceList?: PriceItem[];
   onSuccess?: () => void;
 }
 
@@ -44,28 +47,20 @@ function todayParts(): { year: number; month: number; day: number } {
   };
 }
 
-/** Returns today's date as a YYYY-MM-DD string in local time. */
 function todayString(): string {
   const { year, month, day } = todayParts();
   return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
 
-/** Builds a YYYY-MM-DD string from the three select values. Returns "" if incomplete. */
 function buildIso(year: string, month: string, day: string): string {
   if (!year || !month || !day) return "";
   return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
 }
 
-/** How many days in a given month/year. */
 function daysInMonth(year: number, month: number): number {
   return new Date(year, month, 0).getDate();
 }
 
-/**
- * Formats a YYYY-MM-DD string into a human-readable date using Intl.
- * T12:00:00 forces local-time parsing — avoids off-by-one-day errors
- * in UTC-negative timezones such as America/Mazatlan (UTC-7).
- */
 function formatBookingDate(isoDate: string, lang: Lang): string {
   return new Intl.DateTimeFormat(lang === "en" ? "en-US" : "es-MX", {
     weekday: "long",
@@ -75,7 +70,6 @@ function formatBookingDate(isoDate: string, lang: Lang): string {
   }).format(new Date(`${isoDate}T12:00:00`));
 }
 
-/** Month names via Intl — no hardcoded arrays, respects active language. */
 function getMonthNames(lang: Lang): { value: string; label: string }[] {
   const locale = lang === "en" ? "en-US" : "es-MX";
   return Array.from({ length: 12 }, (_, i) => {
@@ -286,6 +280,7 @@ function DateSelector({
 export default function BookingForm({
   tourTitle,
   tourPrice,
+  priceList,
   onSuccess,
 }: BookingFormProps) {
   const { t, lang } = useLang();
@@ -304,13 +299,22 @@ export default function BookingForm({
   const [error, setError] = useState<ValidationError>(null);
   const [submitted, setSubmitted] = useState(false);
 
+  // Package selector: default to first item in priceList
+  const hasPackages = (priceList?.length ?? 0) > 1;
+  const [selectedPackageIdx, setSelectedPackageIdx] = useState(0);
+
+  const selectedPackage = hasPackages ? priceList![selectedPackageIdx] : null;
+  // Use selected package price when available, otherwise fall back to tourPrice
+  const activePrice = selectedPackage
+    ? selectedPackage.price
+    : tourPrice;
+
   const minDate = todayString();
   const date = buildIso(year, month, day);
 
-  // Only adults + children count toward price; infants are typically free
   const totalPax = adults + children + infants;
   const paidPax = adults + children;
-  const estimatedPrice = tourPrice > 0 ? tourPrice * paidPax : 0;
+  const estimatedPrice = activePrice > 0 ? activePrice * paidPax : 0;
 
   // ── Validation ──────────────────────────────────────────────────────────────
 
@@ -336,7 +340,6 @@ export default function BookingForm({
   };
   const handleMonthChange = (v: string) => {
     setMonth(v);
-    // Reset day if it exceeds days in the newly selected month
     const maxDay = v && year ? daysInMonth(Number(year), Number(v)) : 31;
     const safeDay = Number(day) > maxDay ? "" : day;
     if (safeDay !== day) setDay(safeDay);
@@ -361,8 +364,14 @@ export default function BookingForm({
     const readableDate = formatBookingDate(date, lang);
     const safeTitle = sanitizeText(tourTitle, 200);
 
+    // Resolve active package label for the WA message
+    const packageLabel = selectedPackage
+      ? (lang === "en" ? (selectedPackage.labelEn ?? selectedPackage.label) : selectedPackage.label)
+      : safeTitle;
+
     const message = t("booking_wa_message")
       .replace("{tour}", safeTitle)
+      .replace("{package}", packageLabel)
       .replace("{date}", readableDate)
       .replace("{adults}", String(adults))
       .replace("{children}", String(children))
@@ -416,11 +425,11 @@ export default function BookingForm({
         <h3 className="font-display text-2xl text-navy font-bold uppercase">
           {t("booking_title")}
         </h3>
-        {tourPrice > 0 && (
+        {activePrice > 0 && (
           <p className="text-gray-500 text-sm mt-1">
             {t("booking_from")}{" "}
             <span className="font-bold text-navy">
-              ${tourPrice.toLocaleString("es-MX")} {t("tour_mxn")}
+              ${activePrice.toLocaleString("es-MX")} {t("tour_mxn")}
             </span>{" "}
             / {t("booking_per_person")}
           </p>
@@ -429,6 +438,36 @@ export default function BookingForm({
       </div>
 
       <div className="space-y-3">
+        {/* Package selector — shown only when multiple tiers exist */}
+        {hasPackages && (
+          <div>
+            <div className="flex items-center gap-2 text-navy font-bold text-xs uppercase tracking-wider mb-1.5">
+              <Tag className="w-4 h-4 text-gold" />
+              {t("tour_package_label")}
+            </div>
+            <select
+              value={selectedPackageIdx}
+              onChange={(e) => setSelectedPackageIdx(Number(e.target.value))}
+              className={`w-full ${selectBase} ${selectOk}`}
+              aria-label={t("tour_package_label")}
+            >
+              {priceList!.map((item, i) => {
+                const label =
+                  lang === "en" ? (item.labelEn ?? item.label) : item.label;
+                const priceStr =
+                  item.price > 0
+                    ? ` — $${item.price.toLocaleString("es-MX")} ${t("tour_mxn")}`
+                    : ` — ${t("tour_cotizar")}`;
+                return (
+                  <option key={i} value={i}>
+                    {label}{priceStr}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        )}
+
         {/* Pax counters */}
         {paxRows.map((row) => (
           <CounterRow
