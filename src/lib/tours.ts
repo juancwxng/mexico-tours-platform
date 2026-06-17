@@ -26,7 +26,7 @@ export interface Tour {
   descriptionEn?: string;
   imageCount: number;
   includes: string[];
-  includesEn?: string[]
+  includesEn?: string[];
   duration: string;
   durationEn?: string;
   schedule: string;
@@ -102,13 +102,32 @@ export const tours: Tour[] = [
     ],
     duration: "~5 Horas",
     durationEn: "~5 Hours",
-    schedule: "Lun–Dom: 10:00 AM - 3:00 PM, 12:00 PM - 5:00 PM, 2:00 PM - 6:30 PM",
-    scheduleEn: "Mon–Sun: 10:00 AM - 3:00 PM, 12:00 PM - 5:00 PM, 2:00 PM - 6:30 PM",
+    schedule:
+      "Lun–Dom: 10:00 AM - 3:00 PM, 12:00 PM - 5:00 PM, 2:00 PM - 6:30 PM",
+    scheduleEn:
+      "Mon–Sun: 10:00 AM - 3:00 PM, 12:00 PM - 5:00 PM, 2:00 PM - 6:30 PM",
     priceList: [
-      { label: "Adulto - Paquete Regular (11+)", labelEn: "Adult - Regular Package (11+)", price: 550, isPopular: true },
-      { label: "Adulto - Todo Incluido (11+)", labelEn: "Adult - All-Inclusive (11+)", price: 680 },
-      { label: "Niño - Paquete Regular (5-10)", labelEn: "Child - Regular Package (5-10)", price: 300 },
-      { label: "Niño - Todo Incluido (5-10)", labelEn: "Child - All-Inclusive (5-10)", price: 350 },
+      {
+        label: "Adulto - Paquete Regular (11+)",
+        labelEn: "Adult - Regular Package (11+)",
+        price: 550,
+        isPopular: true,
+      },
+      {
+        label: "Adulto - Todo Incluido (11+)",
+        labelEn: "Adult - All-Inclusive (11+)",
+        price: 680,
+      },
+      {
+        label: "Niño - Paquete Regular (5-10)",
+        labelEn: "Child - Regular Package (5-10)",
+        price: 300,
+      },
+      {
+        label: "Niño - Todo Incluido (5-10)",
+        labelEn: "Child - All-Inclusive (5-10)",
+        price: 350,
+      },
       { label: "Infante (0-4)", labelEn: "Infant (0-4)", price: 0 },
     ],
   },
@@ -167,9 +186,18 @@ export const tours: Tour[] = [
     schedule: "Lun–Dom: 9:30 AM - 2:30 PM",
     scheduleEn: "Mon–Sun: 9:30 AM - 2:30 PM",
     priceList: [
-      { label: "Adulto (11+)", labelEn: "Adult (11+)", price: 1520, isPopular: true },
+      {
+        label: "Adulto (11+)",
+        labelEn: "Adult (11+)",
+        price: 1520,
+        isPopular: true,
+      },
       { label: "Niño (4-10)", labelEn: "Child (4-10)", price: 800 },
-      { label: "Infante (2-3) - Sin comida", labelEn: "Infant (2-3) - No meal", price: 0 },
+      {
+        label: "Infante (2-3) - Sin comida",
+        labelEn: "Infant (2-3) - No meal",
+        price: 0,
+      },
     ],
   },
 
@@ -247,7 +275,12 @@ export const tours: Tour[] = [
     schedule: "Lun–Dom: 9:00 AM - 1:00 PM",
     scheduleEn: "Mon–Sun: 9:00 AM - 1:00 PM",
     priceList: [
-      { label: "Adulto (11+)", labelEn: "Adult (11+)", price: 2400, isPopular: true },
+      {
+        label: "Adulto (11+)",
+        labelEn: "Adult (11+)",
+        price: 2400,
+        isPopular: true,
+      },
       { label: "Niño (4-10)", labelEn: "Child (4-10)", price: 1600 },
       { label: "Infante (0-3)", labelEn: "Infant (0-3)", price: 0 },
     ],
@@ -305,8 +338,17 @@ export const tours: Tour[] = [
     schedule: "Mié, Vie, Sáb, Dom: 4:00 PM - 7:00 PM",
     scheduleEn: "Wed, Fri, Sat, Sun: 4:00 PM - 7:00 PM",
     priceList: [
-      { label: "Adulto (12+)", labelEn: "Adult (12+)", price: 1000, isPopular: true },
-      { label: "Menor (6-11) - Excepto Sábados", labelEn: "Child (6-11) - Except Saturdays", price: 500 },
+      {
+        label: "Adulto (12+)",
+        labelEn: "Adult (12+)",
+        price: 1000,
+        isPopular: true,
+      },
+      {
+        label: "Menor (6-11) - Excepto Sábados",
+        labelEn: "Child (6-11) - Except Saturdays",
+        price: 500,
+      },
     ],
   },
 
@@ -352,24 +394,56 @@ export const tours: Tour[] = [
     schedule: "Lun–Dom: 9:00 AM - 11:00 AM, 11:00 AM - 1:00 PM",
     scheduleEn: "Mon–Sun: 9:00 AM - 11:00 AM, 11:00 AM - 1:00 PM",
     priceList: [
-      { label: "Individual (1 persona)", labelEn: "Single (1 person)", price: 2800 },
-      { label: "Doble (2 personas en el mismo Speed Boat)", labelEn: "Double (2 people in the same Speed Boat)", price: 3800, isPopular: true },
+      {
+        label: "Individual (1 persona)",
+        labelEn: "Single (1 person)",
+        price: 2800,
+      },
+      {
+        label: "Doble (2 personas en el mismo Speed Boat)",
+        labelEn: "Double (2 people in the same Speed Boat)",
+        price: 3800,
+        isPopular: true,
+      },
     ],
   },
 ];
+
+// Media array implementation example:
+// mediaClips: [
+//   {
+//     type: "video",
+//     src: "https://YOUR_R2_HOSTNAME/tours/isla-piedra/reel-1.mp4",
+//     poster: "https://YOUR_R2_HOSTNAME/tours/isla-piedra/reel-1-poster.webp",
+//     alt: "Turistas en el catamarán rumbo a Isla de la Piedra",
+//     altEn: "Tourists on the catamaran heading to Stone Island",
+//   },
+//   {
+//     type: "image",
+//     src: "https://YOUR_R2_HOSTNAME/tours/isla-piedra/photo-vertical-1.webp",
+//     alt: "Playa de Isla de la Piedra al atardecer",
+//     altEn: "Stone Island beach at sunset",
+//   },
+// ],
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 export function getTourImages(slug: string, count: number): string[] {
   if (count === 0) return [];
-  return Array.from({ length: count }, (_, i) => `/images/tours/${slug}/${i + 1}.webp`);
+  return Array.from(
+    { length: count },
+    (_, i) => `/images/tours/${slug}/${i + 1}.webp`,
+  );
 }
 
 export function getTourBySlug(slug: string): Tour | undefined {
   return tours.find((t) => t.slug === slug);
 }
 
-export function filterTours(category?: string | null, query?: string | null): Tour[] {
+export function filterTours(
+  category?: string | null,
+  query?: string | null,
+): Tour[] {
   let result = tours.filter((t) => t.showInTours !== false);
 
   if (category && category !== "all") {
@@ -398,6 +472,8 @@ export function filterTours(category?: string | null, query?: string | null): To
 
 export function getCategories(): Tour["category"][] {
   return Array.from(
-    new Set(tours.filter((t) => t.showInTours !== false).map((t) => t.category)),
+    new Set(
+      tours.filter((t) => t.showInTours !== false).map((t) => t.category),
+    ),
   );
 }
