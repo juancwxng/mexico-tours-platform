@@ -148,118 +148,23 @@ body {
 @keyframes fadeUp {
     from {
         opacity: 0;
-        transform: translateY(28px);
+        transform: translateY(24px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-@keyframes shimmer {
-    0% {
-        background-position: -200% center;
-    }
-    100% {
-        background-position: 200% center;
-    }
-}
-@keyframes scrollBounce {
-    0%,
-    100% {
-        transform: translateX(-50%) translateY(0);
-    }
-    50% {
-        transform: translateX(-50%) translateY(7px);
-    }
-}
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.92);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-@keyframes waveFloat {
-    0%,
-    100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    33% {
-        transform: translateY(-6px) rotate(0.5deg);
-    }
-    66% {
-        transform: translateY(-3px) rotate(-0.5deg);
-    }
-}
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+.animate-fade-up {
+    animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.animate-fade-up {
-    animation: fadeUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) both;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 .animate-fade-in {
-    animation: fadeIn 0.6s ease both;
-}
-.animate-scale-in {
-    animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-
-.delay-100 {
-    animation-delay: 0.1s;
-}
-.delay-200 {
-    animation-delay: 0.2s;
-}
-.delay-300 {
-    animation-delay: 0.3s;
-}
-.delay-400 {
-    animation-delay: 0.4s;
-}
-.delay-500 {
-    animation-delay: 0.5s;
-}
-.delay-600 {
-    animation-delay: 0.6s;
-}
-.delay-700 {
-    animation-delay: 0.7s;
-}
-
-/* ── Shimmer text ── */
-.text-shimmer {
-    background: linear-gradient(
-        90deg,
-        #eaca8d 0%,
-        #f5e4c3 40%,
-        #eaca8d 60%,
-        #b89b60 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmer 5s linear infinite;
+    animation: fadeIn 0.5s ease both;
 }
 
 /* ── Section badge ── */
@@ -269,123 +174,28 @@ body {
     gap: 0.5rem;
     font-size: 0.68rem;
     font-weight: 700;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #eaca8d;
-    padding: 0.28rem 0.9rem;
-    border: 1px solid rgba(234, 202, 141, 0.3);
+    padding: 0.3rem 0.85rem;
     border-radius: 100px;
-    background: rgba(234, 202, 141, 0.06);
+    border: 1px solid;
 }
 
-/* ── Gold rule ── */
+/* ── Gold divider ── */
 .divider-gold {
     height: 1px;
     background: linear-gradient(
         to right,
         transparent,
         #eaca8d 30%,
-        #1a5f69 70%,
+        #eaca8d 70%,
         transparent
     );
     border: none;
+    width: 100%;
 }
 
-/* ── Wave gradient (mimics logo wave) ── */
-.gradient-wave {
-    background: linear-gradient(135deg, #eaca8d 0%, #1a5f69 100%);
-}
-.gradient-wave-animated {
-    background: linear-gradient(270deg, #eaca8d, #1a5f69, #eaca8d);
-    background-size: 300% 300%;
-    animation: gradientShift 6s ease infinite;
-}
-
-/* ── Btn gold ── */
-.btn-gold {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: "Marcellus", serif;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 0.82rem;
-    padding: 0.9rem 2.2rem;
-    background: linear-gradient(135deg, #eaca8d 0%, #b89b60 100%);
-    color: #0b1724;
-    border-radius: 100px;
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        filter 0.2s ease;
-    box-shadow: 0 4px 20px rgba(234, 202, 141, 0.35);
-    text-decoration: none;
-}
-.btn-gold:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(234, 202, 141, 0.5);
-    filter: brightness(1.06);
-}
-
-/* ── Btn ghost ── */
-.btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: "Marcellus", serif;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 0.82rem;
-    padding: 0.88rem 2.2rem;
-    background: transparent;
-    color: #ffffff;
-    border: 1.5px solid rgba(234, 202, 141, 0.45);
-    border-radius: 100px;
-    transition:
-        background 0.25s ease,
-        color 0.25s ease,
-        transform 0.2s ease,
-        border-color 0.25s ease;
-    text-decoration: none;
-}
-.btn-ghost:hover {
-    background: rgba(234, 202, 141, 0.1);
-    color: #eaca8d;
-    border-color: #eaca8d;
-    transform: translateY(-2px);
-}
-
-/* ── Btn teal ghost ── */
-.btn-teal-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: "Marcellus", serif;
-    font-weight: 400;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-size: 0.82rem;
-    padding: 0.88rem 2.2rem;
-    background: transparent;
-    color: #ffffff;
-    border: 1.5px solid rgba(26, 95, 105, 0.6);
-    border-radius: 100px;
-    transition:
-        background 0.25s ease,
-        color 0.25s ease,
-        transform 0.2s ease,
-        border-color 0.25s ease;
-    text-decoration: none;
-}
-.btn-teal-ghost:hover {
-    background: rgba(26, 95, 105, 0.15);
-    border-color: #1a5f69;
-    transform: translateY(-2px);
-}
-
-/* ── Card ── */
+/* ── Card hover lift ── */
 .card-lift {
     transition:
         transform 0.35s cubic-bezier(0.34, 1.1, 0.64, 1),
@@ -396,107 +206,90 @@ body {
     box-shadow: 0 28px 64px -16px rgba(0, 0, 0, 0.4);
 }
 
+/* ── Blog card image zoom on hover ── */
+.blog-card-img {
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.group:hover .blog-card-img {
+    transform: scale(1.05);
+}
+
+/* ── Blog figure / in-body images ── */
+.blog-figure-landscape {
+    /* Full bleed on mobile, rounded on sm+ */
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+@media (min-width: 640px) {
+    .blog-figure-landscape {
+        margin-left: -1.5rem;
+        margin-right: -1.5rem;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+}
+@media (min-width: 1024px) {
+    .blog-figure-landscape {
+        margin-left: -2rem;
+        margin-right: -2rem;
+    }
+}
+
+/* Portrait images: centered narrow column — ideal for Pinterest 2:3 */
+.blog-figure-portrait {
+    max-width: 22rem;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
 /* ── Navbar ── */
-.navbar-scrolled {
-    background: linear-gradient(
-        90deg,
-        rgba(11, 23, 36, 0.95) 0%,
-        rgba(12, 31, 40, 0.95) 100%
-    );
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    box-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
+.nav-link {
+    position: relative;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.2s;
+}
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: #eaca8d;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav-link:hover,
+.nav-link.active {
+    color: #eaca8d;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1);
 }
 
-/* ── Scroll reveal ── */
-.reveal {
+/* ── Reveal section ── */
+.reveal-section {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(32px);
     transition:
-        opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
-        transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-.reveal.is-visible {
+.reveal-section.revealed {
     opacity: 1;
     transform: translateY(0);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .reveal {
-        transform: none;
-        transition: opacity 400ms ease;
-    }
-}
-
-/* ── Navbar bottom gradient line ── */
-.navbar-gradient-line {
-    background: linear-gradient(
-        90deg,
-        transparent,
-        #eaca8d 30%,
-        #1a5f69 70%,
-        transparent
-    );
-    width: 100%;
-    height: 100%;
-}
-
 /* ── WhatsApp pill ── */
-.whatsapp-pill {
-    position: fixed;
-    bottom: 1.75rem;
-    right: 2rem;
-    z-index: 900;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: #25d366;
-    color: white;
-    font-weight: 700;
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
-    padding: 0.75rem 1.3rem;
-    border-radius: 100px;
-    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.42);
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-    text-decoration: none;
-}
-.whatsapp-pill:hover {
-    transform: translateY(-3px) scale(1.03);
-    box-shadow: 0 14px 36px rgba(37, 211, 102, 0.55);
-}
-
-/* ── WhatsApp Shaking Animation ── */
-@keyframes whatsapp-shake {
-    0% {
-        transform: rotate(0deg);
-    }
-    25% {
-        transform: rotate(3deg);
-    }
-    50% {
-        transform: rotate(0deg);
-    }
-    75% {
-        transform: rotate(-3deg);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
-}
-.whatsapp-shake:hover img,
-.whatsapp-shake:hover svg {
-    animation: whatsapp-shake 0.3s ease-in-out infinite;
-}
-
-/* ── Periodic Attention Shake ── */
 @keyframes attention-shake {
-    0%,
-    80%,
-    100% {
+    0%, 75%, 100% {
         transform: scale(1) rotate(0deg);
     }
     82%,
