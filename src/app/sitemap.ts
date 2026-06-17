@@ -23,7 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/catalog`,         lastModified: new Date(), changeFrequency: "weekly",  priority: 0.8 },
     { url: `${baseUrl}/blog`,            lastModified: new Date(), changeFrequency: "daily",   priority: 0.8 },
     { url: `${baseUrl}/contact`,         lastModified: new Date(), changeFrequency: "monthly", priority: 0.5 },
-    // Legal pages: indexed but low priority
     { url: `${baseUrl}/privacidad`,      lastModified: new Date(), changeFrequency: "yearly",  priority: 0.2 },
     { url: `${baseUrl}/terminos`,        lastModified: new Date(), changeFrequency: "yearly",  priority: 0.2 },
   ];
@@ -37,9 +36,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const blogRoutes: MetadataRoute.Sitemap = posts.map((p) => ({
     url: `${baseUrl}/blog/${p.slug}`,
-    lastModified: new Date(p.date),
+    // Use lastModified if available, otherwise fall back to publish date
+    lastModified: new Date(p.lastModified ?? p.date),
     changeFrequency: "monthly",
-    priority: 0.6,
+    priority: 0.7, // bumped: blog posts have rich structured data & images
   }));
 
   return [...staticRoutes, ...tourRoutes, ...blogRoutes];
