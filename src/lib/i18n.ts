@@ -90,6 +90,10 @@ const dict = {
     tour_trust_whatsapp: "Respuesta en WhatsApp en menos de 1 hr",
     tour_trust_cancel: "Cancelación flexible",
     tour_package_label: "Selecciona tu paquete",
+    tour_in_action: "En acción",
+    tour_media_unmute: "Activar sonido",
+    tour_media_mute: "Silenciar",
+    tour_booking_nudge: "¿Te animas? Reserva tu lugar",
 
     // ── Booking ──
     booking_title: "Reserva tu lugar",
@@ -233,6 +237,10 @@ const dict = {
     tour_trust_whatsapp: "WhatsApp response in under 1 hr",
     tour_trust_cancel: "Free cancellation / flexible dates",
     tour_package_label: "Select your package",
+    tour_in_action: "In action",
+    tour_media_unmute: "Unmute",
+    tour_media_mute: "Mute",
+    tour_booking_nudge: "Ready to go? Book your spot",
 
     // ── Booking ──
     booking_title: "Book your spot",
