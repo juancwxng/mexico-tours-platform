@@ -125,8 +125,15 @@ const dict = {
     blog_back: "Volver al Blog",
     blog_pin: "Guardar en Pinterest",
     blog_share: "Compartir",
+    blog_share_label: "Comparte este artículo",
+    blog_share_on: "Compartir en",
+    blog_copy_link: "Copiar enlace",
     blog_share_copied: "¡Enlace copiado!",
     blog_share_failed: "No se pudo copiar",
+    blog_reading_time: "min de lectura",
+    blog_updated: "Actualizado",
+    blog_tags: "Etiquetas",
+    blog_related: "También te puede interesar",
 
     // ── Catalog ──
     catalog_title: "Catálogo",
@@ -272,8 +279,15 @@ const dict = {
     blog_back: "Back to Blog",
     blog_pin: "Save to Pinterest",
     blog_share: "Share",
+    blog_share_label: "Share this article",
+    blog_share_on: "Share on",
+    blog_copy_link: "Copy link",
     blog_share_copied: "Link copied!",
     blog_share_failed: "Could not copy",
+    blog_reading_time: "min read",
+    blog_updated: "Updated",
+    blog_tags: "Tags",
+    blog_related: "You might also enjoy",
 
     // ── Catalog ──
     catalog_title: "Catalog",
