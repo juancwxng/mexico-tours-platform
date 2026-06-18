@@ -70,15 +70,15 @@ export const posts: BlogPost[] = [
     tagsEn: ["Mazatlan", "Water Front", "Sunsets", "Historic Center"],
 
     // Social images
-    ogImage: "/images/blog/olas-altas-og.jpg",
-    pinterestImage: "/images/blog/olas-altas-pin.jpg",
-    twitterImage: "/images/blog/olas-altas-twitter.jpg",
-    instagramImage: "/images/blog/olas-altas-square.jpg",
+    ogImage: "/images/blog/olas-altas-og.webp",
+    pinterestImage: "/images/blog/olas-altas-pin.webp",
+    twitterImage: "/images/blog/olas-altas-twitter.webp",
+    instagramImage: "/images/blog/olas-altas-square.webp",
 
     // In-body images:
     images: [
       {
-        src: "/images/blog/olas-altas-manana.jpg",
+        src: "/images/blog/olas-altas-manana.webp",
         alt: "Vista matutina de Olas Altas y el Cerro de la Nevería en Mazatlán",
         altEn: "Morning view of Olas Altas and Icebox Hill in Mazatlán",
         width: 1200,
@@ -90,7 +90,7 @@ export const posts: BlogPost[] = [
         afterParagraph: 2,
       },
       {
-        src: "/images/blog/olas-altas-atardecer.jpg",
+        src: "/images/blog/olas-altas-atardecer.webp",
         alt: "Atardecer espectacular desde el malecón de Olas Altas",
         altEn: "Spectacular sunset view from the Olas Altas malecon",
         width: 1200,
@@ -102,7 +102,7 @@ export const posts: BlogPost[] = [
         afterParagraph: 4,
       },
       {
-        src: "/images/blog/olas-altas-hoteles.jpg",
+        src: "/images/blog/olas-altas-hoteles.webp",
         alt: "Edificios históricos y restaurantes en el paseo de Olas Altas",
         altEn:
           "Historic hotels and oceanfront restaurants along the Olas Altas promenade",
