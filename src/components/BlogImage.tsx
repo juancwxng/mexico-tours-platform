@@ -26,7 +26,7 @@ export default function BlogImage({ image, lang, priority = false }: BlogImagePr
     >
       <div
         className={[
-          "overflow-hidden",
+          "overflow-hidden transform-gpu",
           isPortrait ? "rounded-2xl" : "rounded-none sm:rounded-2xl",
         ].join(" ")}
         style={{
