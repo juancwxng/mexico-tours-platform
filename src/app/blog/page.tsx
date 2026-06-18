@@ -22,8 +22,29 @@ export async function generateMetadata(): Promise<Metadata> {
     : "Blog de Viajes · Guías y Consejos para Mazatlán";
 
   const description = isEn
-    ? "Guides, tips, and stories to make the most of Mazatlán and Mexico's Pacific coast. Written by Costa Franca Tours."
-    : "Guías, consejos e historias para disfrutar Mazatlán al máximo. Escrito por Costa Franca Tours.";
+    ? "Guides, tips, and insider stories to make the most of Mazatlán and Mexico's Pacific coast. Written by Costa Franca Tours — your local experts."
+    : "Guías, consejos e historias de viaje para disfrutar Mazatlán al máximo. Escrito por Costa Franca Tours, tus expertos locales en el Pacífico mexicano.";
+
+  const heroImage =
+    posts.length > 0
+      ? {
+          url: `${baseUrl}${posts[0].ogImage}`,
+          width: 1200,
+          height: 630,
+          type: "image/webp",
+          alt: isEn
+            ? "Costa Franca Tours Travel Blog"
+            : "Blog de Viajes Costa Franca Tours",
+        }
+      : {
+          url: `${baseUrl}/images/OP.jpg`,
+          width: 1200,
+          height: 630,
+          type: "image/jpeg",
+          alt: isEn
+            ? "Costa Franca Tours Travel Blog"
+            : "Blog de Viajes Costa Franca Tours",
+        };
 
   return {
     title,
@@ -38,21 +59,13 @@ export async function generateMetadata(): Promise<Metadata> {
       url: pageUrl,
       type: "website",
       locale: isEn ? "en_US" : "es_MX",
-      images: [
-        {
-          url: `${baseUrl}/images/OP.jpg`,
-          width: 1200,
-          height: 630,
-          alt: isEn
-            ? "Costa Franca Tours Travel Blog"
-            : "Blog de Viajes Costa Franca Tours",
-        },
-      ],
+      images: [heroImage],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [heroImage.url],
     },
   };
 }
