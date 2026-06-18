@@ -6,6 +6,7 @@ export interface PostImage {
   height: number;       // intrinsic px
   caption?: string;
   captionEn?: string;
+  afterParagraph: number; // 0 = after 1st paragraph, 1 = after 2nd, etc.
 }
 
 export interface BlogPost {
@@ -73,6 +74,7 @@ export const posts: BlogPost[] = [
         height: 800,
         caption: "Más de 21 km de playas bañadas por el Pacífico",
         captionEn: "Over 21 km of beaches bathed by the Pacific",
+        afterParagraph: 0, // appears after 1st paragraph
       },
       {
         src: "/images/blog/guia-mazatlan-centro.jpg",    // 800×1200 portrait
@@ -82,6 +84,7 @@ export const posts: BlogPost[] = [
         height: 1200,
         caption: "El Centro Histórico: patrimonio vivo de la ciudad",
         captionEn: "The Historic Downtown: the city's living heritage",
+        afterParagraph: 1, // appears after 2nd paragraph
       },
       {
         src: "/images/blog/guia-mazatlan-isla-venados.jpg", // 1200×800 landscape
@@ -91,6 +94,7 @@ export const posts: BlogPost[] = [
         height: 800,
         caption: "Isla Venados, un paraíso a 20 minutos del malecón",
         captionEn: "Deer Island, a paradise 20 minutes from the malecón",
+        afterParagraph: 2, // appears after 3rd paragraph
       },
       {
         src: "/images/blog/guia-mazatlan-carnaval.jpg",   // 800×1200 portrait
@@ -100,6 +104,7 @@ export const posts: BlogPost[] = [
         height: 1200,
         caption: "El Carnaval de Mazatlán: uno de los más grandes del mundo",
         captionEn: "Mazatlán's Carnival: one of the largest in the world",
+        afterParagraph: 3, // appears after 4th paragraph
       },
     ],
 
