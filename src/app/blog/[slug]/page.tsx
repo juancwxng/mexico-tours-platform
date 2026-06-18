@@ -108,16 +108,20 @@ export default async function BlogPostPage({
   const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
   const t = getT(lang);
 
-  const title   = lang === "en" ? (post.titleEn   ?? post.title)   : post.title;
-  const excerpt = lang === "en" ? (post.excerptEn ?? post.excerpt) : post.excerpt;
-  const content = lang === "en" ? (post.contentEn ?? post.content) : post.content;
+  const displayTags = lang === "en" ? (post.tagsEn ?? post.tags) : post.tags;
+
+  const title = lang === "en" ? (post.titleEn ?? post.title) : post.title;
+  const excerpt =
+    lang === "en" ? (post.excerptEn ?? post.excerpt) : post.excerpt;
+  const content =
+    lang === "en" ? (post.contentEn ?? post.content) : post.content;
 
   const canonicalUrl = `${baseUrl}/blog/${post.slug}`;
 
   // All image URLs for Article schema — Pinterest portrait image first for richness
   const schemaImages = [
-    `${baseUrl}${post.pinterestImage}`,  // 1000×1500
-    `${baseUrl}${post.ogImage}`,          // 1200×630
+    `${baseUrl}${post.pinterestImage}`, // 1000×1500
+    `${baseUrl}${post.ogImage}`, // 1200×630
     ...(post.images ?? []).map((img) => `${baseUrl}${img.src}`),
   ];
 
@@ -133,7 +137,7 @@ export default async function BlogPostPage({
     url: canonicalUrl,
     inLanguage: "es-MX",
     author: {
-      "@type": "Organization",
+      "@type": "Person",
       name: post.author,
       url: baseUrl,
     },
@@ -146,16 +150,25 @@ export default async function BlogPostPage({
         url: `${baseUrl}/logo/Logo_CostaFrancaTours.svg`,
       },
     },
-    keywords: post.tags?.join(", "),
+    keywords: displayTags?.join(", "),
     articleSection: post.category,
     timeRequired: `PT${post.readingTimeMin}M`,
-    // BreadcrumbList for richer SERP display
     breadcrumb: {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Inicio", item: baseUrl },
-        { "@type": "ListItem", position: 2, name: "Blog", item: `${baseUrl}/blog` },
-        { "@type": "ListItem", position: 3, name: post.title, item: canonicalUrl },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blog",
+          item: `${baseUrl}/blog`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: post.title,
+          item: canonicalUrl,
+        },
       ],
     },
   });
@@ -172,7 +185,6 @@ export default async function BlogPostPage({
 
       <main className="pt-16 sm:pt-[4.5rem] lg:pt-20 pb-16">
         <Container size="sm">
-
           {/* Breadcrumb — visible + semantic */}
           <nav aria-label="Breadcrumb" className="mb-8">
             <ol className="flex items-center gap-2 text-sm text-navy/50 flex-wrap">
@@ -181,14 +193,24 @@ export default async function BlogPostPage({
                   Inicio
                 </Link>
               </li>
-              <li aria-hidden="true" className="select-none">›</li>
+              <li aria-hidden="true" className="select-none">
+                ›
+              </li>
               <li>
-                <Link href="/blog" className="hover:text-navy transition-colors">
+                <Link
+                  href="/blog"
+                  className="hover:text-navy transition-colors"
+                >
                   Blog
                 </Link>
               </li>
-              <li aria-hidden="true" className="select-none">›</li>
-              <li className="text-navy font-medium truncate max-w-[200px]" aria-current="page">
+              <li aria-hidden="true" className="select-none">
+                ›
+              </li>
+              <li
+                className="text-navy font-medium truncate max-w-[200px]"
+                aria-current="page"
+              >
                 {title}
               </li>
             </ol>
@@ -197,9 +219,12 @@ export default async function BlogPostPage({
           <article itemScope itemType="https://schema.org/Article">
             {/* Hidden machine-readable fields */}
             <meta itemProp="datePublished" content={post.date} />
-            <meta itemProp="dateModified" content={post.lastModified ?? post.date} />
+            <meta
+              itemProp="dateModified"
+              content={post.lastModified ?? post.date}
+            />
             <meta itemProp="author" content={post.author} />
-            {post.tags?.map((tag) => (
+            {displayTags?.map((tag) => (
               <meta key={tag} itemProp="keywords" content={tag} />
             ))}
 
@@ -207,7 +232,11 @@ export default async function BlogPostPage({
               {/* Category badge */}
               {post.category && (
                 <div>
-                  <span className="teal-pill">{post.category}</span>
+                  <span className="teal-pill">
+                    {lang === "en"
+                      ? (post.categoryEn ?? post.category)
+                      : post.category}
+                  </span>
                 </div>
               )}
 
@@ -218,7 +247,10 @@ export default async function BlogPostPage({
                 {title}
               </h1>
 
-              <p className="text-navy/60 text-lg leading-relaxed" itemProp="description">
+              <p
+                className="text-navy/60 text-lg leading-relaxed"
+                itemProp="description"
+              >
                 {excerpt}
               </p>
 
@@ -226,7 +258,9 @@ export default async function BlogPostPage({
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-bold uppercase tracking-wider text-navy/50 border-t border-gray-100 pt-5">
                 <span className="flex items-center gap-1.5">
                   <Calendar className="w-4 h-4 text-gold" aria-hidden="true" />
-                  <time dateTime={post.date}>{formatDate(post.date, lang)}</time>
+                  <time dateTime={post.date}>
+                    {formatDate(post.date, lang)}
+                  </time>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <User className="w-4 h-4 text-gold" aria-hidden="true" />
@@ -277,20 +311,22 @@ export default async function BlogPostPage({
                 return (
                   <div key={i}>
                     <p>{paragraph}</p>
-                    {img && <BlogImage image={img} lang={lang} priority={false} />}
+                    {img && (
+                      <BlogImage image={img} lang={lang} priority={false} />
+                    )}
                   </div>
                 );
               })}
             </div>
 
             {/* Tags */}
-            {post.tags && post.tags.length > 0 && (
+            {displayTags && displayTags.length > 0 && (
               <div className="mt-10 flex flex-wrap items-center gap-2">
                 <Tag className="w-4 h-4 text-navy/40" aria-hidden="true" />
                 <span className="text-xs font-bold uppercase tracking-wider text-navy/40 mr-1">
                   {t("blog_tags")}:
                 </span>
-                {post.tags.map((tag) => (
+                {displayTags.map((tag) => (
                   <span
                     key={tag}
                     className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-navy/5 text-navy/60 border border-navy/10"
@@ -308,7 +344,9 @@ export default async function BlogPostPage({
               description={excerpt}
               pinterestImage={`${baseUrl}${post.pinterestImage}`}
               instagramImage={
-                post.instagramImage ? `${baseUrl}${post.instagramImage}` : undefined
+                post.instagramImage
+                  ? `${baseUrl}${post.instagramImage}`
+                  : undefined
               }
             />
 

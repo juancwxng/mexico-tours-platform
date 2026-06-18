@@ -43,7 +43,9 @@ export async function generateMetadata(): Promise<Metadata> {
           url: `${baseUrl}/images/OP.jpg`,
           width: 1200,
           height: 630,
-          alt: isEn ? "Costa Franca Tours Travel Blog" : "Blog de Viajes Costa Franca Tours",
+          alt: isEn
+            ? "Costa Franca Tours Travel Blog"
+            : "Blog de Viajes Costa Franca Tours",
         },
       ],
     },
@@ -62,7 +64,6 @@ export default async function BlogIndexPage() {
 
   return (
     <main className="pt-16 sm:pt-[4.5rem] lg:pt-20">
-
       {/* Page header */}
       <div className="bg-navy-section text-white py-16 lg:py-20 relative overflow-hidden">
         <div
@@ -102,7 +103,9 @@ export default async function BlogIndexPage() {
         <Container size="md">
           {posts.length === 0 ? (
             <p className="text-center text-navy/50 py-20">
-              {lang === "en" ? "No posts yet. Check back soon!" : "Aún no hay artículos. ¡Vuelve pronto!"}
+              {lang === "en"
+                ? "No posts yet. Check back soon!"
+                : "Aún no hay artículos. ¡Vuelve pronto!"}
             </p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
@@ -110,7 +113,9 @@ export default async function BlogIndexPage() {
                 const title =
                   lang === "en" ? (post.titleEn ?? post.title) : post.title;
                 const excerpt =
-                  lang === "en" ? (post.excerptEn ?? post.excerpt) : post.excerpt;
+                  lang === "en"
+                    ? (post.excerptEn ?? post.excerpt)
+                    : post.excerpt;
 
                 return (
                   <Link
@@ -129,12 +134,17 @@ export default async function BlogIndexPage() {
                         className="object-cover blog-card-img transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent" aria-hidden="true" />
+                      <div
+                        className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent"
+                        aria-hidden="true"
+                      />
                       {/* Category overlay */}
                       {post.category && (
                         <div className="absolute top-3 left-3">
                           <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[0.65rem] font-bold uppercase tracking-wider bg-navy/70 text-gold backdrop-blur-sm">
-                            {post.category}
+                            {lang === "en"
+                              ? (post.categoryEn ?? post.category)
+                              : post.category}
                           </span>
                         </div>
                       )}
@@ -145,15 +155,26 @@ export default async function BlogIndexPage() {
                       {/* Meta row */}
                       <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-wider text-navy/50">
                         <span className="flex items-center gap-1.5">
-                          <Calendar className="w-3 h-3 text-gold" aria-hidden="true" />
-                          <time dateTime={post.date}>{formatDate(post.date, lang)}</time>
+                          <Calendar
+                            className="w-3 h-3 text-gold"
+                            aria-hidden="true"
+                          />
+                          <time dateTime={post.date}>
+                            {formatDate(post.date, lang)}
+                          </time>
                         </span>
                         <span className="flex items-center gap-1.5">
-                          <User className="w-3 h-3 text-teal" aria-hidden="true" />
+                          <User
+                            className="w-3 h-3 text-teal"
+                            aria-hidden="true"
+                          />
                           {post.author}
                         </span>
                         <span className="flex items-center gap-1.5 ml-auto">
-                          <Clock className="w-3 h-3 text-navy/30" aria-hidden="true" />
+                          <Clock
+                            className="w-3 h-3 text-navy/30"
+                            aria-hidden="true"
+                          />
                           {post.readingTimeMin} {t("blog_reading_time")}
                         </span>
                       </div>
@@ -169,7 +190,10 @@ export default async function BlogIndexPage() {
 
                       <span className="inline-flex items-center gap-2 text-navy font-bold text-xs uppercase tracking-wider group-hover:text-gold transition-colors mt-1">
                         {t("blog_read")}
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+                        <ArrowRight
+                          className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1"
+                          aria-hidden="true"
+                        />
                       </span>
                     </div>
                   </Link>

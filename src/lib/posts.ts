@@ -1,9 +1,9 @@
 export interface PostImage {
-  src: string;          // path under /public
-  alt: string;          // i18n-aware — always in post language
-  altEn?: string;       // English alt
-  width: number;        // intrinsic px
-  height: number;       // intrinsic px
+  src: string; // path under /public
+  alt: string; // i18n-aware — always in post language
+  altEn?: string; // English alt
+  width: number; // intrinsic px
+  height: number; // intrinsic px
   caption?: string;
   captionEn?: string;
   afterParagraph: number; // 0 = after 1st paragraph, 1 = after 2nd, etc.
@@ -18,15 +18,15 @@ export interface BlogPost {
   excerptEn?: string;
   content: string[];
   contentEn?: string[];
-  date: string;            // ISO 8601: "2026-01-27"
-  lastModified?: string;   // ISO 8601 — used in sitemap & Article schema
+  date: string; // ISO 8601: "2026-01-27"
+  lastModified?: string; // ISO 8601 — used in sitemap & Article schema
   author: string;
-  readingTimeMin: number;  // used in schema + UI
+  readingTimeMin: number; // used in schema + UI
 
   // ── Social images ──────────────────────────────────────────────────────────
-  ogImage: string;         // 1200×630 — Facebook / LinkedIn / Twitter card
-  pinterestImage: string;  // 1000×1500 — Pinterest 2:3
-  twitterImage?: string;   // 1200×675 — optional Twitter-specific crop
+  ogImage: string; // 1200×630 — Facebook / LinkedIn / Twitter card
+  pinterestImage: string; // 1000×1500 — Pinterest 2:3
+  twitterImage?: string; // 1200×675 — optional Twitter-specific crop
   instagramImage?: string; // 1080×1080 — optional square for IG / Threads
 
   // ── In-body images ────────────────────────────────────────────────────────
@@ -36,7 +36,9 @@ export interface BlogPost {
 
   // ── Taxonomy ──────────────────────────────────────────────────────────────
   tags?: string[];
+  tagsEn?: string[];
   category?: string;
+  categoryEn?: string;
 }
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -44,83 +46,97 @@ export interface BlogPost {
 export const posts: BlogPost[] = [
   {
     id: "1",
-    slug: "guia-mazatlan-2026",
-    title: "Guía Completa para Visitar Mazatlán en 2026",
-    titleEn: "Complete Guide to Visiting Mazatlán in 2026",
+    slug: "olas-altas-mazatlan",
+    title: "Descubre Olas Altas: El Corazón Histórico y Vibrante del Malecón",
+    titleEn:
+      "Discover Olas Altas: The Historic and Vibrant Heart of the Mazatlán Malecon",
     excerpt:
-      "Todo lo que necesitas saber para planear tu viaje a la Perla del Pacífico: cuándo ir, qué hacer y los mejores tours.",
+      "Descubre por qué Olas Altas es una parada obligatoria en el Malecón de Mazatlán. Conoce su playa, su historia, sus atardeceres y los mejores lugares para comer.",
     excerptEn:
-      "Everything you need to know to plan your trip to the Pearl of the Pacific: when to go, what to do, and the best tours.",
-    date: "2026-01-27",
-    lastModified: "2026-06-17",
-    author: "Costa Franca Tours",
-    readingTimeMin: 5,
+      "Discover why Olas Altas is a must-visit spot on the Mazatlán Malecon. Explore its famous beach, rich history, breathtaking sunsets, and top oceanfront restaurants.",
+    date: "2026-06-18",
+    lastModified: "2026-06-18",
+    author: "Juan C. Wong",
+    readingTimeMin: 4,
     category: "Guías de Viaje",
-    tags: ["Mazatlán", "guía de viaje", "playas", "tours", "Pacífico"],
+    categoryEn: "Travel Guides",
+    tags: [
+      "Mazatlán",
+      "Olas Altas",
+      "Centro Histórico",
+      "Malecón",
+      "atardeceres",
+    ],
+    tagsEn: ["Mazatlan", "Water Front", "Sunsets", "Historic Center"],
 
     // Social images
-    ogImage: "/images/blog/guia-mazatlan-og.jpg",             // 1200×630
-    pinterestImage: "/images/blog/guia-mazatlan-pin.jpg",     // 1000×1500
-    twitterImage: "/images/blog/guia-mazatlan-twitter.jpg",   // 1200×675
-    instagramImage: "/images/blog/guia-mazatlan-square.jpg",  // 1080×1080
+    ogImage: "/images/blog/olas-altas-og.jpg",
+    pinterestImage: "/images/blog/olas-altas-pin.jpg",
+    twitterImage: "/images/blog/olas-altas-twitter.jpg",
+    instagramImage: "/images/blog/olas-altas-square.jpg",
 
-    // In-body images: landscape + portrait mix
+    // In-body images:
     images: [
       {
-        src: "/images/blog/guia-mazatlan-playas.jpg",    // 1200×800 landscape
-        alt: "Vista panorámica de las playas de Mazatlán al atardecer",
-        altEn: "Panoramic view of Mazatlán beaches at sunset",
+        src: "/images/blog/olas-altas-manana.jpg",
+        alt: "Vista matutina de Olas Altas y el Cerro de la Nevería en Mazatlán",
+        altEn: "Morning view of Olas Altas and Icebox Hill in Mazatlán",
         width: 1200,
         height: 800,
-        caption: "Más de 21 km de playas bañadas por el Pacífico",
-        captionEn: "Over 21 km of beaches bathed by the Pacific",
-        afterParagraph: 0, // appears after 1st paragraph
+        caption:
+          "Las mañanas revelan el azul profundo del mar y la colorida arquitectura del Cerro de la Nevería.",
+        captionEn:
+          "Mornings reveal the deep blue sea and the colorful architecture of Icebox Hill (Cerro de la Nevería).",
+        afterParagraph: 2,
       },
       {
-        src: "/images/blog/guia-mazatlan-centro.jpg",    // 800×1200 portrait
-        alt: "Callejones históricos del Centro de Mazatlán con arquitectura porfiriana",
-        altEn: "Historic alleyways of Mazatlán's Downtown with Porfirian architecture",
-        width: 800,
-        height: 1200,
-        caption: "El Centro Histórico: patrimonio vivo de la ciudad",
-        captionEn: "The Historic Downtown: the city's living heritage",
-        afterParagraph: 1, // appears after 2nd paragraph
-      },
-      {
-        src: "/images/blog/guia-mazatlan-isla-venados.jpg", // 1200×800 landscape
-        alt: "Lancha llegando a Isla Venados con aguas turquesa",
-        altEn: "Boat arriving at Deer Island with turquoise waters",
+        src: "/images/blog/olas-altas-atardecer.jpg",
+        alt: "Atardecer espectacular desde el malecón de Olas Altas",
+        altEn: "Spectacular sunset view from the Olas Altas malecon",
         width: 1200,
         height: 800,
-        caption: "Isla Venados, un paraíso a 20 minutos del malecón",
-        captionEn: "Deer Island, a paradise 20 minutes from the malecón",
-        afterParagraph: 2, // appears after 3rd paragraph
+        caption:
+          "Los atardeceres en esta zona son un espectáculo que reúne a locales y visitantes todos los días.",
+        captionEn:
+          "Sunsets in this area are a daily spectacle that brings locals and visitors together.",
+        afterParagraph: 4,
       },
       {
-        src: "/images/blog/guia-mazatlan-carnaval.jpg",   // 800×1200 portrait
-        alt: "Desfile de Carnaval de Mazatlán con trajes de colores",
-        altEn: "Mazatlán Carnival parade with colorful costumes",
-        width: 800,
-        height: 1200,
-        caption: "El Carnaval de Mazatlán: uno de los más grandes del mundo",
-        captionEn: "Mazatlán's Carnival: one of the largest in the world",
-        afterParagraph: 3, // appears after 4th paragraph
+        src: "/images/blog/olas-altas-hoteles.jpg",
+        alt: "Edificios históricos y restaurantes en el paseo de Olas Altas",
+        altEn:
+          "Historic hotels and oceanfront restaurants along the Olas Altas promenade",
+        width: 1200,
+        height: 800,
+        caption:
+          "Joyas históricas como el Hotel Belmar y Freeman enmarcan la variada oferta gastronómica de la zona.",
+        captionEn:
+          "Historic jewels like the Belmar and Freeman hotels frame the area's diverse oceanfront dining scene.",
+        afterParagraph: 7,
       },
     ],
 
     content: [
-      "Mazatlán, conocida como la Perla del Pacífico, es uno de los destinos costeros más vibrantes de México. Con más de 21 kilómetros de playas, un malecón histórico y una gastronomía de mariscos sin igual, la ciudad ofrece experiencias para todos los viajeros.",
-      "La mejor época para visitar es de noviembre a mayo, cuando el clima es seco, las temperaturas rondan los 25–30 °C y el mar está en calma. El Carnaval de Mazatlán, celebrado en febrero o marzo, es uno de los más grandes del mundo y atrae a cientos de miles de visitantes.",
-      "Para quienes buscan aventura en el mar, los paseos en lancha hacia las Islas Lobos y Venados son imperdibles. También existe la posibilidad de hacer pesca deportiva, snorkel y kayak en aguas cristalinas del Pacífico.",
-      "El Centro Histórico de Mazatlán es Patrimonio de la Humanidad en proceso de nominación y destaca por su arquitectura porfiriana, el Teatro Ángela Peralta y los coloridos callejones de la zona de Olas Altas.",
-      "Costa Franca Tours trabaja directamente con los mejores operadores locales para garantizarte la mejor experiencia, los precios más competitivos y la seguridad que mereces en cada aventura.",
+      "Visitar la Perla del Pacífico y no recorrer Olas Altas es, casi literalmente, un pecado turístico. Esta emblemática sección del Malecón de Mazatlán es donde convergen la historia, la belleza natural y la vibrante vida social del puerto.",
+      "Conectando de manera fluida con el pintoresco Paseo Claussen, Olas Altas goza de una ubicación privilegiada justo a las puertas del Centro Histórico. Para que te des una idea de su excelente conectividad, se encuentra a tan solo cuatro cuadras de la animada Plazuela Machado y a ocho de la majestuosa Catedral de Mazatlán.",
+      "Caminar por esta zona durante la mañana y hacerlo por la tarde son experiencias totalmente diferentes, pero igualmente cautivadoras. Si decides dar un paseo matutino, te recibirá el resplandor de un mar azul profundo. Desde el malecón, podrás admirar la colorida arquitectura de las impresionantes mansiones que adornan el Cerro de la Nevería.",
+      "Además, las mañanas son el momento perfecto para bajar a la arena, refrescarte y nadar en una de las playas más populares y con más historia desde la fundación de la ciudad.",
+      "A medida que el sol comienza a bajar, la zona se transforma. Este es, sin duda, uno de los mejores puntos para apreciar el inigualable atardecer de Mazatlán. No hay nada como disfrutar de la fresca brisa del mar y escuchar cómo las olas revientan con fuerza contra las rocas mientras degustas una bebida bien fría.",
+      "Olas Altas es mucho más que un paisaje; es el corazón social del puerto. Es el lugar predilecto de los mazatlecos de todas las edades para socializar, caminar y compartir tiempo con amigos y familiares. Gracias a su encanto, también es una zona muy frecuentada por la comunidad de extranjeros residentes.",
+      "Si buscas practicar tu inglés u otros idiomas, el ambiente relajado del malecón lo convierte en el escenario ideal para hacer networking casual, conocer gente de todo el mundo y crear conexiones genuinas.",
+      "Tu visita no estaría completa sin explorar la oferta culinaria y arquitectónica de la zona. Olas Altas aloja una excelente selección de restaurantes y cafés con vista al mar, ideales para un desayuno relajado o una cena romántica.",
+      "Aquí también se erigen icónicos edificios que son verdaderas joyas históricas del puerto, destacando el Hotel Belmar y el Hotel Freeman. Estas propiedades datan casi desde la constitución de la ciudad como destino turístico y visitarlas es viajar en el tiempo a la época dorada de Mazatlán.",
     ],
     contentEn: [
-      "Mazatlán, known as the Pearl of the Pacific, is one of Mexico's most vibrant coastal destinations. With over 21 kilometers of beaches, a historic malecón, and unparalleled seafood gastronomy, the city has something for every traveler.",
-      "The best time to visit is from November to May, when the weather is dry, temperatures hover around 25–30 °C, and the sea is calm. Mazatlán's Carnival, held in February or March, is one of the largest in the world and draws hundreds of thousands of visitors.",
-      "For those seeking adventure at sea, boat tours to Lobos and Venados Islands are unmissable. Sportfishing, snorkeling, and kayaking in the crystal-clear Pacific waters are also popular options.",
-      "Mazatlán's Historic Downtown is in the process of UNESCO World Heritage nomination and is celebrated for its Porfirian architecture, the Ángela Peralta Theater, and the colorful alleyways of the Olas Altas area.",
-      "Costa Franca Tours works directly with the best local operators to guarantee you the finest experience, the most competitive prices, and the safety you deserve on every adventure.",
+      "Visiting the Pearl of the Pacific without strolling through Olas Altas is practically a tourist sin. This iconic section of the Mazatlán Malecon is where rich history, natural beauty, and the port's vibrant social life seamlessly converge.",
+      "Flowing directly into the scenic Paseo Claussen, Olas Altas boasts a prime oceanfront location right at the gates of the Historic Center (Centro Histórico). To give you an idea of its excellent connectivity, it sits just four blocks away from the lively Plazuela Machado and eight blocks from the majestic Mazatlán Cathedral.",
+      "Walking through this area in the morning versus the afternoon offers two entirely different, yet equally captivating, experiences. If you opt for a morning stroll, you'll be greeted by the sparkling deep blue sea. From the boardwalk, you can admire the colorful architecture of the stunning mansions perched on Icebox Hill (Cerro de la Nevería).",
+      "Furthermore, mornings are the perfect time to step down onto the sand, cool off, and swim in one of the most popular and historically significant beaches since the city's foundation.",
+      "As the sun begins to set, the area completely transforms. This is undoubtedly one of the best spots to witness an unparalleled Mazatlán sunset. There is nothing quite like enjoying the cool ocean breeze and listening to the crashing waves against the rocks while sipping on an ice-cold drink.",
+      "Olas Altas is much more than a beautiful landscape; it is the social heart of the port. It's the favorite gathering place for locals of all ages to socialize, walk, and spend quality time with friends and family. Thanks to its charm, it is also a highly frequented hub for the resident expat community.",
+      "If you're looking to practice your Spanish or mingle with other travelers, the relaxed atmosphere of the boardwalk makes it the ideal setting for casual networking, meeting people from all over the world, and building genuine connections.",
+      "Your visit wouldn't be complete without exploring the culinary and architectural offerings of the area. Olas Altas hosts an excellent selection of oceanfront restaurants and cafes, perfect for a laid-back breakfast or a romantic sunset dinner.",
+      "Here, you will also find iconic buildings that stand as true historical jewels of the port, most notably the Hotel Belmar and the Hotel Freeman. These properties date back to the early days of the city's establishment as a tourist destination, and visiting them is like traveling back in time to the golden age of Mazatlán.",
     ],
   },
 ];
