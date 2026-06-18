@@ -160,20 +160,7 @@ export default async function BlogPostPage({
     },
   });
 
-  // Interleave images between paragraphs — one image per section
-  // Images are distributed evenly across content paragraphs
   const images = post.images ?? [];
-  const totalParagraphs = content.length;
-
-  function getImageAfterParagraph(paragraphIndex: number): typeof images[number] | null {
-    if (!images.length) return null;
-    // Insert first image after paragraph 0, rest distributed proportionally
-    const imgIndex = images.findIndex((_, i) => {
-      const insertAfter = Math.round((i / images.length) * totalParagraphs) - 1;
-      return insertAfter === paragraphIndex;
-    });
-    return imgIndex !== -1 ? images[imgIndex] : null;
-  }
 
   return (
     <>
@@ -285,22 +272,15 @@ export default async function BlogPostPage({
                          prose-strong:text-navy prose-strong:font-bold"
               itemProp="articleBody"
             >
-              {content.map((paragraph, i) => (
-                <div key={i}>
-                  <p>{paragraph}</p>
-                  {(() => {
-                    const img = getImageAfterParagraph(i);
-                    if (!img) return null;
-                    return (
-                      <BlogImage
-                        image={img}
-                        lang={lang}
-                        priority={false}
-                      />
-                    );
-                  })()}
-                </div>
-              ))}
+              {content.map((paragraph, i) => {
+                const img = images.find((img) => img.afterParagraph === i);
+                return (
+                  <div key={i}>
+                    <p>{paragraph}</p>
+                    {img && <BlogImage image={img} lang={lang} priority={false} />}
+                  </div>
+                );
+              })}
             </div>
 
             {/* Tags */}
