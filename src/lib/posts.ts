@@ -70,49 +70,49 @@ export const posts: BlogPost[] = [
     tagsEn: ["Mazatlan", "Water Front", "Sunsets", "Historic Center"],
 
     // Social images
-    ogImage: "/images/blog/olas-altas-og.webp",
-    pinterestImage: "/images/blog/olas-altas-pin.webp",
-    twitterImage: "/images/blog/olas-altas-twitter.webp",
-    instagramImage: "/images/blog/olas-altas-square.webp",
+    ogImage: "/images/blog/olas-altas-atardecer_2.webp",
+    pinterestImage: "/images/blog/olas-altas-pin_3.webp",
+    twitterImage: "/images/blog/olas-altas-atardecer_2.webp",
+    instagramImage: "/images/blog/olas-altas-atardecer_2.webp",
 
     // In-body images:
     images: [
       {
-        src: "/images/blog/olas-altas-manana.webp",
-        alt: "Vista matutina de Olas Altas y el Cerro de la Nevería en Mazatlán",
-        altEn: "Morning view of Olas Altas and Icebox Hill in Mazatlán",
+        src: "/images/blog/olas-altas-manana_2.webp",
+        alt: "Vista matutina de la playa de Olas Altas y el Cerro de la Nevería en Mazatlán",
+        altEn: "Morning view of Olas Altas beach and Icebox Hill in Mazatlán",
         width: 1200,
         height: 800,
         caption:
-          "Las mañanas revelan el azul profundo del mar y la colorida arquitectura del Cerro de la Nevería.",
+          "Las mañanas revelan la tranquilidad de la playa y la emblemática arquitectura del Cerro de la Nevería al fondo.",
         captionEn:
-          "Mornings reveal the deep blue sea and the colorful architecture of Icebox Hill (Cerro de la Nevería).",
-        afterParagraph: 2,
+          "Mornings reveal the calm beach and the iconic architecture of Icebox Hill (Cerro de la Nevería) in the background.",
+        afterParagraph: 3,
       },
       {
-        src: "/images/blog/olas-altas-atardecer.webp",
-        alt: "Atardecer espectacular desde el malecón de Olas Altas",
-        altEn: "Spectacular sunset view from the Olas Altas malecon",
+        src: "/images/blog/olas-altas-atardecer_2.webp",
+        alt: "Atardecer espectacular con olas en el malecón de Olas Altas",
+        altEn: "Spectacular sunset with waves at the Olas Altas malecon",
         width: 1200,
         height: 800,
         caption:
-          "Los atardeceres en esta zona son un espectáculo que reúne a locales y visitantes todos los días.",
+          "Los atardeceres en esta zona son un espectáculo imperdible donde las olas acompañan la caída del sol.",
         captionEn:
-          "Sunsets in this area are a daily spectacle that brings locals and visitors together.",
-        afterParagraph: 4,
+          "Sunsets in this area are a must-see spectacle where the waves accompany the setting sun.",
+        afterParagraph: 5,
       },
       {
-        src: "/images/blog/olas-altas-hoteles.webp",
-        alt: "Edificios históricos y restaurantes en el paseo de Olas Altas",
+        src: "/images/blog/olas-altas-pin_3.webp",
+        alt: "Olas rompiendo frente a la Casa del Marino y el antiguo Colegio Pacífico en Olas Altas",
         altEn:
-          "Historic hotels and oceanfront restaurants along the Olas Altas promenade",
-        width: 1200,
-        height: 800,
+          "Waves crashing in front of the Casa del Marino and old Colegio Pacífico in Olas Altas",
+        width: 800,
+        height: 1200,
         caption:
-          "Joyas históricas como el Hotel Belmar y Freeman enmarcan la variada oferta gastronómica de la zona.",
+          "La fuerza del Pacífico choca contra las rocas blancas frente al emblemático edificio de la Casa del Marino.",
         captionEn:
-          "Historic jewels like the Belmar and Freeman hotels frame the area's diverse oceanfront dining scene.",
-        afterParagraph: 7,
+          "The force of the Pacific crashes against the white rocks in front of the iconic Casa del Marino building.",
+        afterParagraph: 8,
       },
     ],
 
