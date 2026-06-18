@@ -27,7 +27,6 @@ export interface BlogPost {
   ogImage: string; // 1200×630 — Facebook / LinkedIn / Twitter card
   pinterestImage: string; // 1000×1500 — Pinterest 2:3
   twitterImage?: string; // 1200×675 — optional Twitter-specific crop
-  instagramImage?: string; // 1080×1080 — optional square for IG / Threads
 
   // ── In-body images ────────────────────────────────────────────────────────
   // Mixed orientations: landscape (e.g. 1200×800), portrait (e.g. 800×1200).
@@ -86,10 +85,10 @@ export const posts: BlogPost[] = [
     ],
 
     // Social Images
+    // fix: twitterImage filename was "xcard-olas-altas.webp" — actual file is "x-card-olas-altas.webp"
     ogImage: "/images/blog/olas-altas/op-olas-altas.webp",
     pinterestImage: "/images/blog/olas-altas/pinterest-olas-altas.webp",
     twitterImage: "/images/blog/olas-altas/x-card-olas-altas.webp",
-    instagramImage: "/images/blog/olas-altas/instagram-olas-altas.webp",
 
     // In-body Images
     images: [
