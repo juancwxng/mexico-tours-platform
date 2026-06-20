@@ -109,8 +109,8 @@ export default async function BlogPostPage({
   const jsonLd = safeJsonLd({
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: post.title,
-    description: post.excerpt,
+    headline: title,
+    description: excerpt,
     datePublished: post.date,
     dateModified: post.lastModified ?? post.date,
     image: schemaImages,
@@ -131,7 +131,7 @@ export default async function BlogPostPage({
       itemListElement: [
         { "@type": "ListItem", position: 1, name: isEn ? "Home" : "Inicio", item: `${baseUrl}${withLang(lang, "/")}` },
         { "@type": "ListItem", position: 2, name: "Blog", item: `${baseUrl}${withLang(lang, "/blog")}` },
-        { "@type": "ListItem", position: 3, name: post.title, item: canonicalUrl },
+        { "@type": "ListItem", position: 3, name: title, item: canonicalUrl },
       ],
     },
   });
