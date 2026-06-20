@@ -1,8 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { cookies } from "next/headers";
 import Container from "@/components/Container";
-import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
+import { getT, withLang, type Lang } from "@/lib/i18n";
 import { Instagram, Facebook } from "lucide-react";
 function TikTokIcon({ className }: { className?: string }) {
   return (
@@ -17,9 +16,7 @@ function TikTokIcon({ className }: { className?: string }) {
   );
 }
 
-export default async function Footer() {
-  const cookieStore = await cookies();
-  const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
+export default function Footer({ lang }: { lang: Lang }) {
   const t = getT(lang);
   const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "526691525822";
 
@@ -46,12 +43,12 @@ export default async function Footer() {
 
   const footerLinks = {
     tours: [
-      { label: t("footer_all_tours"), href: "/tours" },
-      { label: t("footer_catalog"), href: "/catalog" },
+      { label: t("footer_all_tours"), href: withLang(lang, "/tours") },
+      { label: t("footer_catalog"), href: withLang(lang, "/catalog") },
     ],
     company: [
-      { label: t("footer_blog"), href: "/blog" },
-      { label: t("footer_contact"), href: "/contact" },
+      { label: t("footer_blog"), href: withLang(lang, "/blog") },
+      { label: t("footer_contact"), href: withLang(lang, "/contact") },
     ],
   };
 
@@ -70,7 +67,7 @@ export default async function Footer() {
         <div className="py-14 lg:py-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1 space-y-5">
-            <Link href="/" className="inline-flex items-center gap-3 group">
+            <Link href={withLang(lang, "/")} className="inline-flex items-center gap-3 group">
               <div className="relative w-10 h-10">
                 <Image
                   src="/logo/Icon_CostaFrancaTours.svg"
@@ -177,13 +174,13 @@ export default async function Footer() {
           </p>
           <div className="flex gap-5">
             <Link
-              href="/privacidad"
+              href={withLang(lang, "/privacidad")}
               className="hover:text-gold transition-colors"
             >
               {t("footer_privacy")}
             </Link>
             <Link
-              href="/terminos"
+              href={withLang(lang, "/terminos")}
               className="hover:text-gold transition-colors"
             >
               {t("footer_terms")}

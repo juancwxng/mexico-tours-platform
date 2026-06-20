@@ -1,12 +1,9 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
-import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
+import { getT, withLang, type Lang } from "@/lib/i18n";
 import VideoBackground from "./VideoBackground";
 import { Mail } from "lucide-react";
 
-export default async function HeroVideo() {
-  const cookieStore = await cookies();
-  const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
+export default function HeroVideo({ lang }: { lang: Lang }) {
   const t = getT(lang);
 
   return (
@@ -63,11 +60,11 @@ export default async function HeroVideo() {
 
         {/* CTA row */}
         <div className="flex flex-col sm:flex-row items-center gap-4 animate-fade-up delay-300">
-          <Link href="/tours" className="btn-gold text-sm">
+          <Link href={withLang(lang, "/tours")} className="btn-gold text-sm">
             {t("home_hero_cta")}
           </Link>
           <Link
-            href="/contact"
+            href={withLang(lang, "/contact")}
             className="btn-ghost text-sm backdrop-blur-md bg-white/5 hover:bg-white/10 hover:border-gold/80 transition-all duration-300 group"
           >
             <Mail className="w-4 h-4 opacity-80 group-hover:opacity-100 transition-opacity" />

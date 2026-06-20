@@ -12,7 +12,8 @@ export default function WhatsAppPill({
   const [isDocked, setIsDocked] = useState(false);
   const pathname = usePathname();
 
-  const isTourDetail = pathname.startsWith("/tours/") && pathname !== "/tours";
+  // Match both /tours/slug and /en/tours/slug
+  const isTourDetail = /^\/(en\/)?tours\/.+/.test(pathname);
 
   useEffect(() => {
     if (isTourDetail) return;
@@ -29,6 +30,7 @@ export default function WhatsAppPill({
       if (footerBtn) observer.unobserve(footerBtn);
     };
   }, [isTourDetail]);
+
   if (isTourDetail) return null;
 
   return (
@@ -45,14 +47,7 @@ export default function WhatsAppPill({
       aria-label="Contactar por WhatsApp"
     >
       <span className="hidden sm:inline">WhatsApp</span>
-
-      <Image
-        src="/icons/whatsapp.svg"
-        alt=""
-        width={18}
-        height={18}
-        className="flex-shrink-0"
-      />
+      <Image src="/icons/whatsapp.svg" alt="" width={18} height={18} className="flex-shrink-0" />
     </a>
   );
 }

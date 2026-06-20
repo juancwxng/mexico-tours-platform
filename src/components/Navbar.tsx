@@ -15,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Container from "@/components/Container";
 import { useLang } from "@/context/LangContext";
+import { withLang, stripLangPrefix } from "@/lib/i18n";
 import type { DictKey } from "@/lib/i18n";
 
 type NavLink = { name: DictKey; href: string };
@@ -30,16 +31,12 @@ const navLinks: NavLink[] = [
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const { t, lang, toggleLang } = useLang();
+  const { t, lang } = useLang();
+  const basePath = stripLangPrefix(pathname);
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const handler = () => setIsScrolled(window.scrollY > 30);
@@ -63,12 +60,12 @@ export default function Navbar() {
     e.preventDefault();
     const q = searchQuery.trim();
     if (!q) return;
-    router.push(`/tours?q=${encodeURIComponent(q)}`);
+    router.push(withLang(lang, `/tours?q=${encodeURIComponent(q)}`));
     setSearchQuery("");
     setIsSearchOpen(false);
   };
 
-  const isHero = pathname === "/";
+  const isHero = basePath === "/";
   const transparent = isHero && !isScrolled;
 
   return (
@@ -107,9 +104,9 @@ export default function Navbar() {
                   {navLinks.map((link) => (
                     <SheetClose asChild key={link.name}>
                       <Link
-                        href={link.href}
+                        href={withLang(lang, link.href)}
                         className={`py-3 px-4 text-lg font-display text-white/80 hover:text-gold hover:bg-white/5 rounded-xl transition-all duration-200 ${
-                          pathname === link.href ? "text-gold bg-white/5" : ""
+                          basePath === link.href ? "text-gold bg-white/5" : ""
                         }`}
                       >
                         {t(link.name)}
@@ -118,27 +115,32 @@ export default function Navbar() {
                   ))}
                 </nav>
                 <div className="mt-8 pt-6 border-t border-white/10">
-                  {/* Mobile language toggle */}
-                  <button
-                    type="button"
-                    onClick={toggleLang}
-                    className="flex items-center gap-2 text-sm font-bold text-white/50 hover:text-white transition-colors min-h-[44px] px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-lg"
-                    aria-label={
-                      lang === "es" ? "Switch to English" : "Cambiar a Español"
-                    }
-                  >
-                    <span
-                      className={lang === "es" ? "text-gold" : "text-white/50"}
+                  {/* Mobile language switcher — real links, crawlable */}
+                  <div className="flex items-center gap-2 text-sm font-bold min-h-[44px] px-1">
+                    <Link
+                      href={withLang("es", basePath)}
+                      aria-current={lang === "es" ? "page" : undefined}
+                      className={
+                        lang === "es"
+                          ? "text-gold"
+                          : "text-white/50 hover:text-white transition-colors"
+                      }
                     >
                       ES
-                    </span>
+                    </Link>
                     <span className="text-white/35">|</span>
-                    <span
-                      className={lang === "en" ? "text-gold" : "text-white/50"}
+                    <Link
+                      href={withLang("en", basePath)}
+                      aria-current={lang === "en" ? "page" : undefined}
+                      className={
+                        lang === "en"
+                          ? "text-gold"
+                          : "text-white/50 hover:text-white transition-colors"
+                      }
                     >
                       EN
-                    </span>
-                  </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </SheetContent>
@@ -148,7 +150,7 @@ export default function Navbar() {
         {/* ── Logo ── */}
         <div className="flex items-center gap-2 lg:gap-3 flex-shrink-0">
           <Link
-            href="/"
+            href={withLang(lang, "/")}
             className="flex items-center gap-2 lg:gap-3 flex-shrink-0 lg:-ml-6"
           >
             <div className="relative w-40 sm:w-48 lg:w-[200px] aspect-[2280/697] transition-transform duration-300 group-hover:scale-105">
@@ -168,9 +170,9 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <Link
               key={link.name}
-              href={link.href}
+              href={withLang(lang, link.href)}
               className={`relative text-sm xl:text-[0.9rem] font-display tracking-wide whitespace-nowrap transition-colors duration-300 group ${
-                pathname === link.href
+                basePath === link.href
                   ? "text-gold"
                   : "text-white/75 hover:text-gold"
               }`}
@@ -206,37 +208,32 @@ export default function Navbar() {
             </button>
           </form>
 
-          {/* Desktop language toggle */}
-          {mounted && (
-            <button
-              type="button"
-              onClick={toggleLang}
-              className="hidden lg:flex items-center gap-1 text-xs font-bold border rounded-full px-3 py-2 min-h-[36px] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold border-white/20 text-white/60 hover:border-gold/50 hover:text-gold"
-              aria-label={
-                lang === "es" ? "Switch to English" : "Cambiar a Español"
+          {/* Desktop language switcher — real links, crawlable */}
+          <div className="hidden lg:flex items-center gap-1 text-xs font-bold border rounded-full px-3 py-2 min-h-[36px] border-white/20">
+            <Link
+              href={withLang("es", basePath)}
+              aria-current={lang === "es" ? "page" : undefined}
+              className={
+                lang === "es"
+                  ? "opacity-100 text-gold"
+                  : "opacity-50 text-white hover:opacity-80 transition-opacity"
               }
             >
-              <span
-                className={
-                  lang === "es"
-                    ? "opacity-100 text-gold"
-                    : "opacity-50 text-white"
-                }
-              >
-                ES
-              </span>
-              <span className="opacity-35 mx-0.5">|</span>
-              <span
-                className={
-                  lang === "en"
-                    ? "opacity-100 text-gold"
-                    : "opacity-50 text-white"
-                }
-              >
-                EN
-              </span>
-            </button>
-          )}
+              ES
+            </Link>
+            <span className="opacity-35 mx-0.5">|</span>
+            <Link
+              href={withLang("en", basePath)}
+              aria-current={lang === "en" ? "page" : undefined}
+              className={
+                lang === "en"
+                  ? "opacity-100 text-gold"
+                  : "opacity-50 text-white hover:opacity-80 transition-opacity"
+              }
+            >
+              EN
+            </Link>
+          </div>
 
           {/* Mobile search */}
           <div
