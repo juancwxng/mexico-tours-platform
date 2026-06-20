@@ -1,30 +1,30 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
 import Container from "@/components/Container";
-import { parseLang, getT, LANG_COOKIE } from "@/lib/i18n";
 
-export default async function NotFound() {
-  const cookieStore = await cookies();
-  const lang = parseLang(cookieStore.get(LANG_COOKIE)?.value);
-  const t = getT(lang);
-
+export default function NotFound() {
   return (
-    <main className="pt-16 sm:pt-[4.5rem] lg:pt-20 pb-16 flex-1 flex items-center bg-[#fafafa]">
-      <Container>
-        <div className="text-center space-y-7 py-24">
-          <p className="font-display text-[8rem] leading-none text-shimmer select-none">404</p>
-          <h1 className="font-display text-3xl md:text-4xl text-navy">
-            {t("not_found_title")}
-          </h1>
-          <hr className="divider-gold max-w-16 mx-auto" />
-          <p className="text-navy/60 max-w-md mx-auto text-lg leading-relaxed">
-            {t("not_found_sub")}
-          </p>
-          <Link href="/" className="btn-gold inline-flex mt-2">
-            {t("not_found_back")}
-          </Link>
-        </div>
-      </Container>
-    </main>
+    <html lang="es" className="scroll-smooth">
+      <body className="antialiased flex flex-col min-h-dvh bg-background text-foreground">
+        <main className="pt-16 pb-16 flex-1 flex items-center bg-[#fafafa]">
+          <Container>
+            <div className="text-center space-y-7 py-24">
+              <p className="font-display text-[8rem] leading-none text-shimmer select-none">404</p>
+              <h1 className="font-display text-3xl md:text-4xl text-navy">
+                Página no encontrada · Page not found
+              </h1>
+              <hr className="divider-gold max-w-16 mx-auto" />
+              <p className="text-navy/60 max-w-md mx-auto text-lg leading-relaxed">
+                La página que buscas no existe o fue movida.
+                <br />
+                <span className="text-sm text-navy/45">The page you are looking for does not exist or was moved.</span>
+              </p>
+              <Link href="/" className="btn-gold inline-flex mt-2">
+                ← Inicio / Home
+              </Link>
+            </div>
+          </Container>
+        </main>
+      </body>
+    </html>
   );
 }
