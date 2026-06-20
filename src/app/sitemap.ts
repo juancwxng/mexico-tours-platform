@@ -6,7 +6,7 @@ import { withLang, SUPPORTED_LANGS } from "@/lib/i18n";
 function getSiteUrl(): string {
   const url = process.env.NEXT_PUBLIC_SITE_URL;
   if (!url && process.env.NODE_ENV === "production") {
-    return "https://costafrancatours.com";
+    return "https://www.costafrancatours.com";
   }
   return url ?? "http://localhost:3000";
 }
