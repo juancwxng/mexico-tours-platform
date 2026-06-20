@@ -1,6 +1,7 @@
 /**
  * Lightweight bilingual dictionary for Costa Franca Tours.
- * Supports: Spanish (es) — primary, English (en) — secondary.
+ * Supports: Spanish (es) — default, unprefixed URLs. English (en) — served
+ * under /en, resolved from the `[lang]` route segment (see middleware.ts).
  *
  * Usage:
  *   import { useT } from "@/lib/i18n";
@@ -15,7 +16,6 @@
 export type Lang = "es" | "en";
 export const DEFAULT_LANG: Lang = "es";
 export const SUPPORTED_LANGS: Lang[] = ["es", "en"];
-export const LANG_COOKIE = "cft_lang";
 
 // ─── Dictionary ──────────────────────────────────────────────────────────────
 
@@ -350,10 +350,26 @@ export function getT(
   };
 }
 
-/** Parse a lang cookie/header value into a supported Lang (falls back to default). */
+/** Parse a `[lang]` URL segment into a supported Lang (falls back to default). */
 export function parseLang(raw: string | undefined | null): Lang {
   if (raw && (SUPPORTED_LANGS as string[]).includes(raw)) return raw as Lang;
   return DEFAULT_LANG;
+}
+
+/**
+ * Build a locale-aware path. Spanish (default) is unprefixed, English is
+ * served under /en. `path` must start with "/" (use "/" for the homepage).
+ */
+export function withLang(lang: Lang, path: string): string {
+  const clean = path === "/" ? "" : path;
+  return lang === DEFAULT_LANG ? clean || "/" : `/en${clean}`;
+}
+
+/** Strip a leading /en prefix from a pathname, returning the base path. */
+export function stripLangPrefix(pathname: string): string {
+  if (pathname === "/en") return "/";
+  if (pathname.startsWith("/en/")) return pathname.slice(3) || "/";
+  return pathname;
 }
 
 export { dict };
