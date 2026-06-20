@@ -20,6 +20,17 @@ const LEGACY_REDIRECTS: Record<string, string> = {
 export function middleware(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
 
+  // Canonicalize host: apex → www. This can't be done with a Cloudflare
+  // Page Rule because this Worker owns the whole zone, and Cloudflare
+  // skips Page Rules entirely once a Worker is handling the route — so
+  // the redirect has to happen here, inside the app, instead.
+  const host = request.headers.get("host")?.toLowerCase();
+  if (host === "costafrancatours.com") {
+    const url = new URL(request.url);
+    url.hostname = "www.costafrancatours.com";
+    return NextResponse.redirect(url, 308);
+  }
+
   const legacyTarget = LEGACY_REDIRECTS[pathname];
   if (legacyTarget) {
     return NextResponse.redirect(new URL(legacyTarget + search, request.url), 308);
