@@ -1,5 +1,5 @@
 import type { Tour } from "@/lib/tours";
-import type { Lang } from "@/lib/i18n";
+import { withLang, type Lang } from "@/lib/i18n";
 
 function toIsoDuration(duration: string): string {
   const match = duration.match(/(\d+)/);
@@ -121,7 +121,7 @@ function buildFaqJsonLd(tour: Tour, baseUrl: string, lang: Lang) {
 // ── Main export ───────────────────────────────────────────────────────────────
 
 export function buildTourJsonLd(tour: Tour, baseUrl: string, lang: Lang = "es") {
-  const tourUrl = `${baseUrl}/tours/${tour.slug}`;
+  const tourUrl = `${baseUrl}${withLang(lang, `/tours/${tour.slug}`)}`;
 
   const images =
     tour.imageCount > 0
