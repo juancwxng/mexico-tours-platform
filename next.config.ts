@@ -4,10 +4,7 @@ const R2_PUBLIC_HOSTNAME = process.env.NEXT_PUBLIC_R2_HOSTNAME ?? "";
 
 const generateCSP = (): string => {
   const isDev = process.env.NODE_ENV === "development";
-  const scriptSrc = isDev
-    ? "'self' 'unsafe-inline' 'unsafe-eval'"
-    : "'self' 'unsafe-inline'";
-
+  const scriptSrc = isDev ? "'self' 'unsafe-inline' 'unsafe-eval'" : "'self' 'unsafe-inline'";
   const r2Origin = R2_PUBLIC_HOSTNAME ? `https://${R2_PUBLIC_HOSTNAME}` : "";
 
   return [
@@ -28,12 +25,12 @@ const generateCSP = (): string => {
 };
 
 const securityHeaders = [
-  { key: "X-Frame-Options", value: "SAMEORIGIN" },
-  { key: "X-Content-Type-Options", value: "nosniff" },
-  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=()" },
-  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
-  { key: "Content-Security-Policy", value: generateCSP() },
+  { key: "X-Frame-Options",            value: "SAMEORIGIN" },
+  { key: "X-Content-Type-Options",     value: "nosniff" },
+  { key: "Referrer-Policy",            value: "strict-origin-when-cross-origin" },
+  { key: "Permissions-Policy",         value: "camera=(), microphone=(), geolocation=(), payment=()" },
+  { key: "Strict-Transport-Security",  value: "max-age=63072000; includeSubDomains; preload" },
+  { key: "Content-Security-Policy",    value: generateCSP() },
 ];
 
 const nextConfig: NextConfig = {
@@ -44,13 +41,7 @@ const nextConfig: NextConfig = {
     imageSizes: [],
     minimumCacheTTL: 60 * 60 * 24 * 7,
     remotePatterns: R2_PUBLIC_HOSTNAME
-      ? [
-          {
-            protocol: "https",
-            hostname: R2_PUBLIC_HOSTNAME,
-            pathname: "/**",
-          },
-        ]
+      ? [{ protocol: "https", hostname: R2_PUBLIC_HOSTNAME, pathname: "/**" }]
       : [],
   },
 
@@ -61,26 +52,19 @@ const nextConfig: NextConfig = {
         source: "/images/(.*)",
         headers: [
           { key: "Access-Control-Allow-Origin", value: "*" },
-          { key: "X-Frame-Options", value: "ALLOWALL" },
-          { key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" },
+          { key: "X-Frame-Options",             value: "ALLOWALL" },
+          { key: "Cache-Control",               value: "public, max-age=86400, stale-while-revalidate=604800" },
         ],
       },
       { source: "/api/og/(.*)", headers: [{ key: "Access-Control-Allow-Origin", value: "*" }] },
     ];
   },
 
-  async redirects() {
-    return [
-      { source: "/tours/Isla-Piedra", destination: "/tours/isla-piedra", permanent: true },
-      { source: "/tours/Isla-Venados", destination: "/tours/isla-venados", permanent: true },
-      { source: "/tours/Cuatrimotos-Veranos", destination: "/tours/cuatrimotos-veranos", permanent: true },
-      { source: "/tours/Catamaran-Sensation", destination: "/tours/catamaran-sensation", permanent: true },
-      { source: "/tours/Speed-Boats", destination: "/tours/speed-boats", permanent: true },
-    ];
-  },
+  // Legacy slug redirects moved to src/middleware.ts so they run before the locale rewrite.
 
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
+    removeConsole:
+      process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false,
   },
 };
 
