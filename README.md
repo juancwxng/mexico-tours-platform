@@ -89,7 +89,7 @@ src/
 
 | Variable | Description |
 |---|---|
-| `NEXT_PUBLIC_SITE_URL` | Canonical origin (e.g. `https://costafrancatours.com`) |
+| `NEXT_PUBLIC_SITE_URL` | Canonical origin (e.g. `https://www.costafrancatours.com`) |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | WhatsApp number without `+` (e.g. `526691234567`) |
 | `NEXT_PUBLIC_R2_HOSTNAME` | Cloudflare R2 public hostname for remote images (optional) |
 
