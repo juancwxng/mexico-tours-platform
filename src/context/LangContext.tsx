@@ -1,32 +1,30 @@
 "use client";
 
 /**
- * Provides the active language + a toggle function to all client components.
- * The provider is mounted in src/app/layout.tsx and receives `initialLang`
- * from the server (read from the LANG_COOKIE via cookies()).
- *
- * Changing the language:
- *  1. Updates the cookie (persists across reloads).
- *  2. Calls router.refresh() so Server Components re-render with the new lang.
+ * Provides the active language + a navigation function to all client
+ * components. `initialLang` comes from the server, resolved from the
+ * [lang] URL segment (see src/middleware.ts). Switching language navigates
+ * to the equivalent URL in the other language rather than mutating state,
+ * so the language is always reflected in — and driven by — the URL.
  */
 
 import {
   createContext,
   useContext,
-  useState,
   useCallback,
   useMemo,
   type ReactNode,
 } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import {
   type Lang,
   type DictKey,
   type Dict,
   DEFAULT_LANG,
-  LANG_COOKIE,
   SUPPORTED_LANGS,
   getT,
+  withLang,
+  stripLangPrefix,
 } from "@/lib/i18n";
 
 // ─── Context shape ────────────────────────────────────────────────────────────
@@ -50,16 +48,15 @@ export function LangProvider({
   initialLang: Lang;
 }) {
   const router = useRouter();
-  const [lang, setLangState] = useState<Lang>(initialLang);
+  const pathname = usePathname();
+  const lang = initialLang;
 
   const setLang = useCallback(
     (newLang: Lang) => {
       if (!SUPPORTED_LANGS.includes(newLang)) return;
-      setLangState(newLang);
-      document.cookie = `${LANG_COOKIE}=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
-      router.refresh();
+      router.push(withLang(newLang, stripLangPrefix(pathname)));
     },
-    [router],
+    [router, pathname],
   );
 
   const toggleLang = useCallback(() => {
