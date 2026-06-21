@@ -9,7 +9,7 @@ import ReadingProgress from "@/components/ReadingProgress";
 import BlogImage from "@/components/BlogImage";
 import SocialShareBar from "@/components/SocialShareBar";
 import { parseLang, getT, withLang, SUPPORTED_LANGS } from "@/lib/i18n";
-import { safeJsonLd } from "@/lib/utils";
+import { safeJsonLd, parseInlineMarkdown } from "@/lib/utils";
 import { hreflangAlternates } from "@/lib/seo";
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -138,9 +138,25 @@ export default async function BlogPostPage({
 
   const images = post.images ?? [];
 
+  const faqJsonLd = post.faq?.length
+    ? safeJsonLd({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: post.faq.map((item) => ({
+          "@type": "Question",
+          name: isEn ? (item.questionEn ?? item.question) : item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: isEn ? (item.answerEn ?? item.answer) : item.answer,
+          },
+        })),
+      })
+    : null;
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd }} />}
       <ReadingProgress />
       <main className="pt-16 sm:pt-[4.5rem] lg:pt-20 pb-16">
         <Container size="sm">
@@ -219,14 +235,39 @@ export default async function BlogPostPage({
             >
               {content.map((paragraph, i) => {
                 const img = images.find((img) => img.afterParagraph === i);
+                const heading = paragraph.match(/^##\s+(.+)/);
                 return (
                   <div key={i}>
-                    <p>{paragraph}</p>
+                    {heading ? (
+                      <h2>{heading[1]}</h2>
+                    ) : (
+                      <p dangerouslySetInnerHTML={{ __html: parseInlineMarkdown(paragraph) }} />
+                    )}
                     {img && <BlogImage image={img} lang={lang} priority={false} />}
                   </div>
                 );
               })}
             </div>
+
+            {post.faq && post.faq.length > 0 && (
+              <div className="mt-12 pt-10 border-t border-gray-100">
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-navy mb-6">
+                  {isEn ? "Frequently Asked Questions" : "Preguntas Frecuentes"}
+                </h2>
+                <div className="space-y-6">
+                  {post.faq.map((item, i) => (
+                    <div key={i}>
+                      <h3 className="font-display text-lg font-bold text-navy mb-1.5">
+                        {isEn ? (item.questionEn ?? item.question) : item.question}
+                      </h3>
+                      <p className="text-navy/70 leading-relaxed">
+                        {isEn ? (item.answerEn ?? item.answer) : item.answer}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {displayTags && displayTags.length > 0 && (
               <div className="mt-10 flex flex-wrap items-center gap-2">
