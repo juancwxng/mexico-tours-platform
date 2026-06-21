@@ -16,7 +16,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export function generateStaticParams() {
   return SUPPORTED_LANGS.flatMap((lang) =>
-    posts.map((post) => ({ lang, slug: post.slug }))
+    posts.map((post) => ({ lang, slug: post.slug })),
   );
 }
 
@@ -32,14 +32,26 @@ export async function generateMetadata({
 
   const isEn = lang === "en";
   const path = `/blog/${post.slug}`;
-  const title   = isEn ? (post.titleEn   ?? post.title)   : post.title;
+  const title = isEn ? (post.titleEn ?? post.title) : post.title;
   const excerpt = isEn ? (post.excerptEn ?? post.excerpt) : post.excerpt;
 
   const ogImages = [
-    { url: `${baseUrl}${post.ogImage}`, width: 1200, height: 630, type: "image/webp", alt: title },
+    {
+      url: `${baseUrl}${post.ogImage}`,
+      width: 1200,
+      height: 630,
+      type: "image/webp",
+      alt: title,
+    },
     ...(post.images ?? [])
       .filter((img) => img.width >= img.height)
-      .map((img) => ({ url: `${baseUrl}${img.src}`, width: img.width, height: img.height, type: "image/webp", alt: isEn ? (img.altEn ?? img.alt) : img.alt })),
+      .map((img) => ({
+        url: `${baseUrl}${img.src}`,
+        width: img.width,
+        height: img.height,
+        type: "image/webp",
+        alt: isEn ? (img.altEn ?? img.alt) : img.alt,
+      })),
   ];
 
   return {
@@ -67,7 +79,9 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description: excerpt,
-      images: [{ url: `${baseUrl}${post.twitterImage ?? post.ogImage}`, alt: title }],
+      images: [
+        { url: `${baseUrl}${post.twitterImage ?? post.ogImage}`, alt: title },
+      ],
     },
     other: {
       "og:type": "article",
@@ -93,10 +107,10 @@ export default async function BlogPostPage({
   const t = getT(lang);
   const isEn = lang === "en";
 
-  const title       = isEn ? (post.titleEn   ?? post.title)   : post.title;
-  const excerpt     = isEn ? (post.excerptEn ?? post.excerpt) : post.excerpt;
-  const content     = isEn ? (post.contentEn ?? post.content) : post.content;
-  const displayTags = isEn ? (post.tagsEn    ?? post.tags)    : post.tags;
+  const title = isEn ? (post.titleEn ?? post.title) : post.title;
+  const excerpt = isEn ? (post.excerptEn ?? post.excerpt) : post.excerpt;
+  const content = isEn ? (post.contentEn ?? post.content) : post.content;
+  const displayTags = isEn ? (post.tagsEn ?? post.tags) : post.tags;
 
   const canonicalUrl = `${baseUrl}${withLang(lang, `/blog/${post.slug}`)}`;
 
@@ -121,7 +135,10 @@ export default async function BlogPostPage({
       "@type": "Organization",
       name: "Costa Franca Tours SAS",
       url: baseUrl,
-      logo: { "@type": "ImageObject", url: `${baseUrl}/logo/Logo_CostaFrancaTours.svg` },
+      logo: {
+        "@type": "ImageObject",
+        url: `${baseUrl}/logo/Logo_CostaFrancaTours.svg`,
+      },
     },
     keywords: displayTags?.join(", "),
     articleSection: post.category,
@@ -129,8 +146,18 @@ export default async function BlogPostPage({
     breadcrumb: {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: isEn ? "Home" : "Inicio", item: `${baseUrl}${withLang(lang, "/")}` },
-        { "@type": "ListItem", position: 2, name: "Blog", item: `${baseUrl}${withLang(lang, "/blog")}` },
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: isEn ? "Home" : "Inicio",
+          item: `${baseUrl}${withLang(lang, "/")}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Blog",
+          item: `${baseUrl}${withLang(lang, "/blog")}`,
+        },
         { "@type": "ListItem", position: 3, name: title, item: canonicalUrl },
       ],
     },
@@ -155,26 +182,47 @@ export default async function BlogPostPage({
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
-      {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: faqJsonLd }} />}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: jsonLd }}
+      />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: faqJsonLd }}
+        />
+      )}
       <ReadingProgress />
       <main className="pt-16 sm:pt-[4.5rem] lg:pt-20 pb-16">
         <Container size="sm">
           <nav aria-label="Breadcrumb" className="mb-8">
             <ol className="flex items-center gap-2 text-sm text-navy/50 flex-wrap">
               <li>
-                <Link href={withLang(lang, "/")} className="hover:text-navy transition-colors">
+                <Link
+                  href={withLang(lang, "/")}
+                  className="hover:text-navy transition-colors"
+                >
                   {isEn ? "Home" : "Inicio"}
                 </Link>
               </li>
-              <li aria-hidden="true" className="select-none">›</li>
+              <li aria-hidden="true" className="select-none">
+                ›
+              </li>
               <li>
-                <Link href={withLang(lang, "/blog")} className="hover:text-navy transition-colors">
+                <Link
+                  href={withLang(lang, "/blog")}
+                  className="hover:text-navy transition-colors"
+                >
                   Blog
                 </Link>
               </li>
-              <li aria-hidden="true" className="select-none">›</li>
-              <li className="text-navy font-medium truncate max-w-[200px]" aria-current="page">
+              <li aria-hidden="true" className="select-none">
+                ›
+              </li>
+              <li
+                className="text-navy font-medium truncate max-w-[200px]"
+                aria-current="page"
+              >
                 {title}
               </li>
             </ol>
@@ -182,9 +230,14 @@ export default async function BlogPostPage({
 
           <article itemScope itemType="https://schema.org/Article">
             <meta itemProp="datePublished" content={post.date} />
-            <meta itemProp="dateModified"  content={post.lastModified ?? post.date} />
-            <meta itemProp="author"        content={post.author} />
-            {displayTags?.map((tag) => <meta key={tag} itemProp="keywords" content={tag} />)}
+            <meta
+              itemProp="dateModified"
+              content={post.lastModified ?? post.date}
+            />
+            <meta itemProp="author" content={post.author} />
+            {displayTags?.map((tag) => (
+              <meta key={tag} itemProp="keywords" content={tag} />
+            ))}
 
             <header className="mb-10 lg:mb-14 space-y-5">
               {post.category && (
@@ -194,14 +247,24 @@ export default async function BlogPostPage({
                   </span>
                 </div>
               )}
-              <h1 itemProp="headline" className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-navy leading-tight">
+              <h1
+                itemProp="headline"
+                className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-navy leading-tight"
+              >
                 {title}
               </h1>
-              <p className="text-navy/60 text-lg leading-relaxed" itemProp="description">{excerpt}</p>
+              <p
+                className="text-navy/60 text-lg leading-relaxed"
+                itemProp="description"
+              >
+                {excerpt}
+              </p>
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-bold uppercase tracking-wider text-navy/50 border-t border-gray-100 pt-5">
                 <span className="flex items-center gap-1.5">
                   <Calendar className="w-4 h-4 text-gold" aria-hidden="true" />
-                  <time dateTime={post.date}>{formatDate(post.date, lang)}</time>
+                  <time dateTime={post.date}>
+                    {formatDate(post.date, lang)}
+                  </time>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <User className="w-4 h-4 text-gold" aria-hidden="true" />
@@ -220,13 +283,22 @@ export default async function BlogPostPage({
             </header>
 
             <div
-              className="relative -mx-4 sm:-mx-6 lg:-mx-8 mb-12 rounded-none sm:rounded-2xl overflow-hidden aspect-[16/9]"
-              itemProp="image" itemScope itemType="https://schema.org/ImageObject"
+              className="relative mx-0 sm:-mx-6 lg:-mx-8 mb-12 rounded-2xl overflow-hidden aspect-[16/9]"
+              itemProp="image"
+              itemScope
+              itemType="https://schema.org/ImageObject"
             >
-              <meta itemProp="url"    content={`${baseUrl}${post.ogImage}`} />
-              <meta itemProp="width"  content="1200" />
+              <meta itemProp="url" content={`${baseUrl}${post.ogImage}`} />
+              <meta itemProp="width" content="1200" />
               <meta itemProp="height" content="630" />
-              <Image src={post.ogImage} alt={title} fill className="object-cover" priority sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 800px" />
+              <Image
+                src={post.ogImage}
+                alt={title}
+                fill
+                className="object-cover rounded-2xl"
+                priority
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 800px"
+              />
             </div>
 
             <div
@@ -241,9 +313,15 @@ export default async function BlogPostPage({
                     {heading ? (
                       <h2>{heading[1]}</h2>
                     ) : (
-                      <p dangerouslySetInnerHTML={{ __html: parseInlineMarkdown(paragraph) }} />
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: parseInlineMarkdown(paragraph),
+                        }}
+                      />
                     )}
-                    {img && <BlogImage image={img} lang={lang} priority={false} />}
+                    {img && (
+                      <BlogImage image={img} lang={lang} priority={false} />
+                    )}
                   </div>
                 );
               })}
@@ -258,7 +336,9 @@ export default async function BlogPostPage({
                   {post.faq.map((item, i) => (
                     <div key={i}>
                       <h3 className="font-display text-lg font-bold text-navy mb-1.5">
-                        {isEn ? (item.questionEn ?? item.question) : item.question}
+                        {isEn
+                          ? (item.questionEn ?? item.question)
+                          : item.question}
                       </h3>
                       <p className="text-navy/70 leading-relaxed">
                         {isEn ? (item.answerEn ?? item.answer) : item.answer}
@@ -272,19 +352,32 @@ export default async function BlogPostPage({
             {displayTags && displayTags.length > 0 && (
               <div className="mt-10 flex flex-wrap items-center gap-2">
                 <Tag className="w-4 h-4 text-navy/40" aria-hidden="true" />
-                <span className="text-xs font-bold uppercase tracking-wider text-navy/40 mr-1">{t("blog_tags")}:</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-navy/40 mr-1">
+                  {t("blog_tags")}:
+                </span>
                 {displayTags.map((tag) => (
-                  <span key={tag} className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-navy/5 text-navy/60 border border-navy/10">
+                  <span
+                    key={tag}
+                    className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-navy/5 text-navy/60 border border-navy/10"
+                  >
                     {tag}
                   </span>
                 ))}
               </div>
             )}
 
-            <SocialShareBar url={canonicalUrl} title={title} description={excerpt} pinterestImage={`${baseUrl}${post.pinterestImage}`} />
+            <SocialShareBar
+              url={canonicalUrl}
+              title={title}
+              description={excerpt}
+              pinterestImage={`${baseUrl}${post.pinterestImage}`}
+            />
 
             <div className="mt-8 pt-6 border-t border-gray-100">
-              <Link href={withLang(lang, "/blog")} className="inline-flex items-center gap-2 text-navy/60 hover:text-navy transition-colors font-semibold text-sm">
+              <Link
+                href={withLang(lang, "/blog")}
+                className="inline-flex items-center gap-2 text-navy/60 hover:text-navy transition-colors font-semibold text-sm"
+              >
                 <ArrowLeft className="w-4 h-4" aria-hidden="true" />
                 {t("blog_back")}
               </Link>
