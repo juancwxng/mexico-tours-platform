@@ -132,8 +132,8 @@ export const posts: BlogPost[] = [
         alt: "Vista vertical del oleaje rompiendo en las rocas frente al antiguo Colegio Pacífico en Mazatlán",
         altEn:
           "Vertical view of Pacific waves crashing on the rocks in front of the historic Colegio Pacífico building in Mazatlán",
-        width: 800,
-        height: 1200,
+        width: 1000,
+        height: 1500,
         caption:
           "La fuerza del Pacífico choca contra las rocas frente al emblemático edificio del antiguo Colegio Pacífico.",
         captionEn:
