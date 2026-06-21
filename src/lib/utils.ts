@@ -35,3 +35,21 @@ export function safeJsonLd(data: unknown): string {
     .replace(/>/g, "\\u003e")
     .replace(/&/g, "\\u0026");
 }
+
+/**
+ * Minimal inline markdown for blog body copy: **bold** and [text](url) links.
+ * Escapes the source text first so any literal < or & in the prose can't
+ * break the HTML, then applies the two supported patterns. Output is meant
+ * for dangerouslySetInnerHTML on content the team authors directly in code,
+ * not on user-submitted input.
+ */
+export function parseInlineMarkdown(text: string): string {
+  const escaped = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  return escaped
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
+}
